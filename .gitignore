@@ -1,0 +1,75 @@
+#dbconnection
+.vscode
+
+#Package
+client/package-lock.json
+
+#folder
+build/
+
+#Client
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+client/node_modules/
+client/.pnp
+client/.pnp.js
+
+# testing
+client/coverage
+
+# production
+client/build
+
+# misc
+client/.DS_Store
+client/.env.local
+client/.env.development.local
+client.env.test.local
+client.env.production.local
+
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+
+#server
+server/server/HELP.md
+server/target/
+server/!.mvn/wrapper/maven-wrapper.jar
+server/!**/src/main/**/target/
+server/!**/src/test/**/target/
+
+### STS ###
+server/.apt_generated
+server/.classpath
+server/.factorypath
+server/.project
+server/.settings
+server/.springBeans
+server/.sts4-cache
+
+### IntelliJ IDEA ###
+server/.idea
+server/*.iws
+server/*.iml
+server/*.ipr
+
+### NetBeans ###
+server/nbproject/private/
+server/nbbuild/
+server/dist/
+server/nbdist/
+server/.nb-gradle/
+server/build/
+server/!**/src/main/**/build/
+server/!**/src/test/**/build/
+
+### VS Code ###
+server/.vscode/
+
+
+## Required ignore file
+client/src/config
+server/src/main/resources/.env
+.vscode/
