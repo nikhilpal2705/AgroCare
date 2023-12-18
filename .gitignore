@@ -73,3 +73,4 @@ server/.vscode/
 client/src/config
 server/src/main/resources/.env
 .vscode/
+.env
