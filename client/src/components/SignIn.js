@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+
+const SignIn = ({ onSignIn }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        onSignIn({ email, password });
+    };
+
+    return (
+        <Container className="h-100">
+            <Row className="justify-content-sm-center h-100">
+                <Col xs={12} lg={5}>
+                    <div className="text-center my-5">
+                        {/* <img src="asset/img/logo.png" alt="logo" width="80" /> */}
+                    </div>
+                    <div className="card shadow-lg">
+                        <div className="card-body p-5">
+                            <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
+                            <Form noValidate autoComplete="off">
+                                <Form.Group className="mb-3" controlId="email">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Enter email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="password">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
+                                </Form.Group>
+
+                                <div className="d-flex align-items-center">
+                                    <div className="form-check">
+                                        <Form.Check
+                                            type="checkbox"
+                                            label="Remember Me"
+                                            id="remember"
+                                        />
+                                    </div>
+                                </div>
+                                <p className="form-text text-muted mb-3"></p>
+
+                                <div className="form-group m-0">
+                                    <Button variant="primary" onClick={handleSignIn}>
+                                        Login
+                                    </Button>
+                                </div>
+                            </Form>
+                        </div>
+                        <div className="card-footer py-3 border-0">
+                            <div className="text-center">
+                                Don't have an account? <Link to="/" className="text-dark">Create One</Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-center mt-5 text-muted">
+                        Copyright &copy; 2023-24 &mdash; AgroCare
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
+
+export default SignIn;

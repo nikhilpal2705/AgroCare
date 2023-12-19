@@ -1,22 +1,17 @@
-import api from "./api/Api"
-import { useEffect } from 'react'
+import Register from './components/Register'
+import SignIn from './components/SignIn'
 
-async function getUser(data = null) {
-  return await api.get('/getUser')
-}
-function App() {
-  useEffect(() => {
-    return async () => {
-      let response = await getUser();
-      console.log(`😱 😓 😒 ~ file: App.js:13 ~ return ~ response:`, response)
-    }
-  }, [])
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+const App = () => {
   return (
-    <div>
-      <h1>Response from client</h1>
-    </div>
-  );
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<SignIn />} />
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;
