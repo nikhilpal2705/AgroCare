@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import logo from '../asset/images/logo.png';
@@ -10,8 +10,19 @@ const Home = ({ onHome }) => {
     <Container className="h-100">
       <Row className="justify-content-sm-center h-100">
         <Col xs={12} lg={5}>
-        <Link to="/login" className="text-dark">Login</Link>
-        <Link to="/register" className="text-dark">Register</Link>
+          <div className="text-center my-2">
+            <img src={logo} alt="logo" width="50%" />
+          </div>
+
+
+          <div className="text-center my-2">
+            <Link to="/register" className="text-dark">Register</Link>
+          </div>
+
+          <div className="text-center my-2">
+            <Link to="/login" className="text-dark">Login</Link>
+          </div>
+
         </Col>
       </Row>
     </Container>
