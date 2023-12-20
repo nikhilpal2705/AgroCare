@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import logo from '../asset/images/logo.png';
 
 const SignIn = ({ onSignIn }) => {
     const [email, setEmail] = useState('');
@@ -16,8 +17,8 @@ const SignIn = ({ onSignIn }) => {
         <Container className="h-100">
             <Row className="justify-content-sm-center h-100">
                 <Col xs={12} lg={5}>
-                    <div className="text-center my-5">
-                        {/* <img src="asset/img/logo.png" alt="logo" width="80" /> */}
+                    <div className="text-center my-2">
+                        <img src={logo} alt="logo" width="50%" />
                     </div>
                     <div className="card shadow-lg">
                         <div className="card-body p-5">
@@ -43,7 +44,8 @@ const SignIn = ({ onSignIn }) => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
-                                    />
+                                    />Already have an account? Login
+
                                     <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
                                 </Form.Group>
 
@@ -67,7 +69,7 @@ const SignIn = ({ onSignIn }) => {
                         </div>
                         <div className="card-footer py-3 border-0">
                             <div className="text-center">
-                                Don't have an account? <Link to="/" className="text-dark">Create One</Link>
+                                Don't have an account? <Link to="/register" className="text-dark">Create One</Link>
                             </div>
                         </div>
                     </div>

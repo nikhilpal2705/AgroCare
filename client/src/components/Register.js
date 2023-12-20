@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import logo from '../asset/images/logo.png';
 
 const Register = ({ onRegister }) => {
   const [name, setName] = useState('');
@@ -17,8 +18,8 @@ const Register = ({ onRegister }) => {
     <Container className="h-100">
       <Row className="justify-content-sm-center h-100">
         <Col xs={12} lg={5}>
-          <div className="text-center my-5">
-            {/* <img src="asset/img/logo.png" alt="logo" width="80" /> */}
+          <div className="text-center my-2">
+            <img src={logo} alt="logo" width="50%" />
           </div>
           <div className="card shadow-lg">
             <div className="card-body p-5">
