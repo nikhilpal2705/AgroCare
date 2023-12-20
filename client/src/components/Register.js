@@ -1,7 +1,7 @@
 import React, { useId, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "../api/Api";
+import api from "../api/Api";
 import { Link } from "react-router-dom";
 import logo from "../asset/images/logo.png";
 
@@ -27,15 +27,15 @@ const Register = ({ onRegister }) => {
         ...data,
         [name]: type === "checkbox" ? checked : value,
       };
-    })
+    }) 
 
   }
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+  async function handleRegister (event) {
+    event.preventDefault();
     console.log("🙈 🙉 🙊 Line 35 ~ Submit :  ", formData);
 
-    const response = axios.post("/register", formData)
+    const response = await api.post("/register", formData);
 
     console.log(`🙈 🙉 🙊 ~ file: Register.js:39 ~ handleRegister ~ response : `, response)
 
