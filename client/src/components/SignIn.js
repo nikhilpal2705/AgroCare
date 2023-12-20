@@ -5,12 +5,18 @@ import { Link } from 'react-router-dom';
 import logo from '../asset/images/logo.png';
 
 const SignIn = ({ onSignIn }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
+    let [validated, setValidated] = useState(false);
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        onSignIn({ email, password });
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+        setValidated(true);
+        // onSignIn({ email, password });
     };
 
     return (
@@ -23,7 +29,7 @@ const SignIn = ({ onSignIn }) => {
                     <div className="card shadow-lg">
                         <div className="card-body p-5">
                             <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
-                            <Form noValidate autoComplete="off">
+                            <Form noValidate validated={validated} autoComplete="off">
                                 <Form.Group className="mb-3" controlId="email">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
@@ -44,24 +50,20 @@ const SignIn = ({ onSignIn }) => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
-                                    />Already have an account? Login
+                                    />
 
                                     <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className="d-flex align-items-center">
-                                    <div className="form-check">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label="Remember Me"
-                                            id="remember"
-                                        />
-                                    </div>
-                                </div>
-                                <p className="form-text text-muted mb-3"></p>
+                                <Form.Group className="mb-3 d-flex align-items-center" controlId="remember">
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="Remember Me"
+                                    />
+                                </Form.Group>
 
                                 <div className="form-group m-0">
-                                    <Button variant="primary" onClick={handleSignIn}>
+                                    <Button variant="primary" type="submit" onClick={handleSignIn}>
                                         Login
                                     </Button>
                                 </div>
