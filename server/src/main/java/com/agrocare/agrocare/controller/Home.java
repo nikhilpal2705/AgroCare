@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.agrocare.agrocare.model.User;
 import com.agrocare.agrocare.repository.UserRepository;
@@ -28,4 +29,15 @@ public class Home {
         }
     }
 
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> register() {
+        try {
+            System.out.println("Registering user");
+            return new ResponseEntity<String>("Response From Server",HttpStatus.OK);
+        } catch (Exception err) {
+            // Log the error for debugging purposes
+            err.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
