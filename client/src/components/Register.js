@@ -17,6 +17,8 @@ const Register = ({ onRegister }) => {
     agree: false,
   });
 
+  let [validated, setValidated] = useState(false);
+
   // Update form data as per fields . . . 
   function updateFormData(event) {
     const { name, value, type, checked } = event.target;
@@ -33,6 +35,11 @@ const Register = ({ onRegister }) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    }
+    setValidated(true);
     console.log("🙈 🙉 🙊 Line 35 ~ Submit :  ", formData);
 
     const response = axios.post("/register", formData)
@@ -51,7 +58,7 @@ const Register = ({ onRegister }) => {
           <div className="card shadow-lg">
             <div className="card-body p-5">
               <h1 className="fs-4 card-title fw-bold mb-4">Register</h1>
-              <Form noValidate autoComplete="off" onSubmit={handleRegister}>
+              <Form noValidate validated={validated} autoComplete="off" onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId={ id + "name" }>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -98,10 +105,9 @@ const Register = ({ onRegister }) => {
                     name="agree"
                     checked={formData.agree}
                     onChange={updateFormData}
-                    // isInvalid={!formData.agree}
-                    feedback="You must agree to the terms and conditions"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">You must agree to the terms and conditions</Form.Control.Feedback>
                 </Form.Group>
 
                 <div className="form-group m-0">
