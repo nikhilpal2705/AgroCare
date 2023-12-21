@@ -35,12 +35,13 @@ const Register = ({ onRegister }) => {
 
   async function handleRegister (event) {
     event.preventDefault();
+    console.log("🙈 🙉 🙊 Line 35 ~ Submit :  ", formData);
+    
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
     setValidated(true);
-    console.log("🙈 🙉 🙊 Line 35 ~ Submit :  ", formData);
 
     const response = await api.post("/register", formData);
 
