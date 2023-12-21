@@ -1,9 +1,8 @@
 import React, { useId, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "../api/Api";
 import { Link } from "react-router-dom";
-import logo from "../asset/images/logo.png";
+import logo from "../assets/images/logo.png";
 
 const Register = ({ onRegister }) => {
 
@@ -55,11 +54,11 @@ const Register = ({ onRegister }) => {
           <div className="text-center my-2">
             <img src={logo} alt="logo" width="50%" />
           </div>
-          <div className="card shadow-lg">
+          <div className="card shadow-lg mb-5">
             <div className="card-body p-5">
               <h1 className="fs-4 card-title fw-bold mb-4">Register</h1>
               <Form noValidate validated={validated} autoComplete="off" onSubmit={handleRegister}>
-                <Form.Group className="mb-3" controlId={ id + "name" }>
+                <Form.Group className="mb-3" controlId={id + "name"}>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
@@ -72,7 +71,7 @@ const Register = ({ onRegister }) => {
                   <Form.Control.Feedback type="invalid">Name is required</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId={ id + "email" }>
+                <Form.Group className="mb-3" controlId={id + "email"}>
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
@@ -85,7 +84,7 @@ const Register = ({ onRegister }) => {
                   <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId={ id + "password" }>
+                <Form.Group className="mb-3" controlId={id + "password"}>
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
@@ -98,7 +97,7 @@ const Register = ({ onRegister }) => {
                   <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId={ id + "agree" }>
+                <Form.Group className="mb-3" controlId={id + "agree"}>
                   <Form.Check
                     type="checkbox"
                     label="By registering you agree with our terms and condition."
@@ -122,9 +121,6 @@ const Register = ({ onRegister }) => {
                 Already have an account? <Link to="/login" className="text-dark">Login</Link>
               </div>
             </div>
-          </div>
-          <div className="text-center mt-5 text-muted">
-            Copyright &copy; 2023-24 &mdash; AgroCare
           </div>
         </Col>
       </Row>
