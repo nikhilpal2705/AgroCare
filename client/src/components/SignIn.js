@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import logo from '../asset/images/logo.png';
+import logo from '../assets/images/logo.png';
 
 const SignIn = ({ onSignIn }) => {
     let [email, setEmail] = useState('');
@@ -26,7 +25,7 @@ const SignIn = ({ onSignIn }) => {
                     <div className="text-center my-2">
                         <img src={logo} alt="logo" width="50%" />
                     </div>
-                    <div className="card shadow-lg">
+                    <div className="card shadow-lg mb-5">
                         <div className="card-body p-5">
                             <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
                             <Form noValidate validated={validated} autoComplete="off">
@@ -75,9 +74,9 @@ const SignIn = ({ onSignIn }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="text-center mt-5 text-muted">
+                    {/* <div className="text-center mt-5 text-muted">
                         Copyright &copy; 2023-24 &mdash; AgroCare
-                    </div>
+                    </div> */}
                 </Col>
             </Row>
         </Container>
