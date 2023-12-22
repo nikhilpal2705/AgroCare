@@ -310,7 +310,11 @@
 
 .pro-sidebar .pro-menu a {
   text-decoration: none;
-  color: #adadad;
+  color: #ffffff;
+}
+
+.pro-item-content .active, .pro-icon .active {
+  color: #ffd331 !important;
 }
 
 .pro-sidebar .pro-menu a:before {

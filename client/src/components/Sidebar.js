@@ -1,9 +1,8 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   ProSidebar,
   Menu,
   MenuItem,
-  // SubMenu,
   SidebarHeader,
   SidebarFooter,
   SidebarContent
@@ -14,7 +13,6 @@ import {
   FaAngleDoubleRight,
   FaTachometerAlt,
   FaGem,
-  // FaRegLaughWink
 } from 'react-icons/fa';
 import sidebarBg from '../assets/images/bg1.jpg';
 import logo from '../assets/images/logo.png';
@@ -26,6 +24,7 @@ const Sidebar = ({
   handleToggleSidebar,
   handleCollapsedChange
 }) => {
+  const isNavLinkActive = (path) => window.location.pathname === path;
   return (
     <ProSidebar
       image={image ? sidebarBg : false}
@@ -65,37 +64,21 @@ const Sidebar = ({
       {/* Content */}
       <SidebarContent>
         <Menu iconShape="circle">
-          <MenuItem icon={<FaTachometerAlt />}
-          // suffix={<span className="badge red">NEW</span>}
-          >
-            Dashboard
-            <NavLink to="/dashboard" />
+          <MenuItem icon={<FaTachometerAlt className={isNavLinkActive('/dashboard') ? 'active' : ''} />}>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaGem />}> Crop Monitoring
-            <Link to="/crop-monitoring" />
+          <MenuItem icon={<FaGem className={isNavLinkActive('/crop-monitoring') ? 'active' : ''} />}>
+            <NavLink to="/crop-monitoring">Crop Monitoring</NavLink>
           </MenuItem>
-          {/* <SubMenu
-            suffix={<span className="badge yellow">3</span>} // prefix={<span className="badge gray">3</span>}
-            title={'With Suffix'}
-            icon={<FaRegLaughWink />}
-          >
-            <MenuItem>Submenu 1</MenuItem>
-            <MenuItem>Submenu 2</MenuItem>
-            <MenuItem>Submenu 3</MenuItem>
-          </SubMenu> */}
         </Menu>
       </SidebarContent>
       {/* Footer */}
       <SidebarFooter style={{ textAlign: 'center' }}>
         <div className="sidebar-btn-wrapper" style={{ padding: '16px' }}>
-          <Link
-            className="sidebar-btn"
-            style={{ cursor: 'pointer' }}
-            to="/profile"
-          >
+          <NavLink className="sidebar-btn" style={{ cursor: 'pointer' }} to="/profile">
             <FaUser />
             <span>My Account</span>
-          </Link>
+          </NavLink>
         </div>
       </SidebarFooter>
     </ProSidebar>
