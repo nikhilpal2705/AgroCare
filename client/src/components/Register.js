@@ -1,8 +1,8 @@
 import React, { useId, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import axios from "../api/Api";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import api from "../api/Api";
 
 const Register = ({ onRegister }) => {
 
