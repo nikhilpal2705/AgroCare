@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../../assets/images/logo.png';
 
 const Home = ({ onHome }) => {
 
