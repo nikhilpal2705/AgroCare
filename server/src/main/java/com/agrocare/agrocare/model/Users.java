@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 import java.time.Instant;
-import java.util.Date;
 
 @Entity
 @Data
@@ -18,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +35,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @JsonProperty("agree")
-    @Column(name = "agree", nullable = false)
-    private boolean agree;
+    @JsonProperty("role")
+    @Column(name = "role", nullable = false)
+    private int role;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)

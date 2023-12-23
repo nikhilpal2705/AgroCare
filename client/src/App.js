@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import Register from './components/Register'
-import SignIn from './components/SignIn'
-import Home from './components/Home'
-import Sidebar from './components/Sidebar'
-import Footer from './components/Footer'
+import Register from './components/Common/Register'
+import SignIn from './components/Common/SignIn'
+import Home from './components/Common/Home'
+import Sidebar from './components/Common/Sidebar'
+import Footer from './components/Common/Footer'
 import { FaBars } from 'react-icons/fa';
 import './styles.css';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, useLocation } from 'react-router-dom';
 

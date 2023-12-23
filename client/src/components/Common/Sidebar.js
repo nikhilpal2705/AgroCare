@@ -14,8 +14,8 @@ import {
   FaTachometerAlt,
   FaGem,
 } from 'react-icons/fa';
-import sidebarBg from '../assets/images/bg1.jpg';
-import logo from '../assets/images/logo.png';
+import sidebarBg from '../../assets/images/bg1.jpg';
+import logo from '../../assets/images/logo.png';
 
 const Sidebar = ({
   image,
