@@ -37,7 +37,7 @@ public class Users {
 
     @JsonProperty("role")
     @Column(name = "role", nullable = false)
-    private int role;
+    private String role;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)

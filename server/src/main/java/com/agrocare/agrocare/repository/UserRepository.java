@@ -6,5 +6,6 @@ import com.agrocare.agrocare.model.Users;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Integer> {
-    
+
+    public Users findByEmail(String email);
 }
