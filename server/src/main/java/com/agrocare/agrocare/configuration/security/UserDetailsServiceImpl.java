@@ -2,6 +2,7 @@ package com.agrocare.agrocare.configuration.security;
 
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.AuthService;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,12 @@ public class UserDetailsServiceImpl extends AuthService implements UserDetailsSe
         if (user == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
-        return new CustomUserDetails(user);
+//        return new CustomUserDetails(user);
+        return User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .disabled(false)
+                .roles(user.getRole()) // Add roles as needed
+                .build();
     }
 }

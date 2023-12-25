@@ -33,20 +33,20 @@ public class SecurityConfig  {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        
-//        return new UserDetailsServiceImpl();
 
-        UserDetails adminUser = User.withUsername("admin@agrocare.com")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
+        return new UserDetailsServiceImpl();
 
-        UserDetails normalUser = User.withUsername("user@agrocare.com")
-                .password(passwordEncoder().encode("user"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(adminUser, normalUser);
+//        UserDetails adminUser = User.withUsername("admin@agrocare.com")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        UserDetails normalUser = User.withUsername("user@agrocare.com")
+//                .password(passwordEncoder().encode("user"))
+//                .roles("USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(adminUser, normalUser);
     }
 
     @Bean
