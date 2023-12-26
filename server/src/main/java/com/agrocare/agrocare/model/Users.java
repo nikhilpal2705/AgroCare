@@ -28,7 +28,7 @@ public class Users {
     private String name;
 
     @JsonProperty("email")
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @JsonProperty("password")

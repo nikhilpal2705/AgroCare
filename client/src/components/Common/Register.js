@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import api from "../../api/Api";
+import * as constant from "../../helper/constant"
 
 const Register = ({ onRegister }) => {
 
@@ -28,25 +29,36 @@ const Register = ({ onRegister }) => {
         ...data,
         [name]: type === "checkbox" ? checked : value,
       };
-    }) 
+    })
 
   }
 
-  async function handleRegister (event) {
+  async function handleRegister(event) {
     event.preventDefault();
-    console.log("🙈 🙉 🙊 Line 35 ~ Submit :  ", formData);
-    
+
     const form = event.currentTarget;
+
+    // If the form is not valid, stop the propagation.
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      setValidated(true);
+    } else {
+      // If the form is valid, proceed with the registration.
+
+      try {
+        formData.role = constant.Role.USER;
+        formData.status = constant.Status.ACTIVE;
+        const response = await api.post("/registerUser", formData);
+        console.log(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === constant.HttpStatus.BAD_REQUEST) {
+          alert(error.response.data);
+        } else {
+          console.error("Error registering user:", error);
+        }
+      }
     }
-    setValidated(true);
-
-    const response = await api.post("/register", formData);
-
-    console.log(`🙈 🙉 🙊 ~ file: Register.js:39 ~ handleRegister ~ response : `, response)
-
-  };
+  }
 
   return (
     <Container className="h-100">
