@@ -8,4 +8,5 @@ import com.agrocare.agrocare.model.Users;
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
     public Users findByEmail(String email);
+    boolean existsByEmail(String email);
 }
