@@ -44,17 +44,13 @@ public class Users {
     private int status;
 
     @CreatedDate
+    @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)
     private String createdAt = Instant.now().toString();
 
     @LastModifiedDate
+    @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt;
 
-//    @PrePersist
-//    public void prePersist() {
-//        if (status == 0) {
-//            status = 5;
-//        }
-//    }
 }

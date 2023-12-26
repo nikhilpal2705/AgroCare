@@ -9,6 +9,7 @@ import './styles.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, useLocation } from 'react-router-dom';
+import CropMonitor from './components/CropMonitor';
 
 // AuthLayout Component
 const AuthLayout = ({ children }) => {
@@ -65,7 +66,7 @@ function App() {
           <Route path="/login" element={<AuthLayout><SignIn /></AuthLayout>} />
           <Route path="/register" element={<AuthLayout><Register /></AuthLayout>} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/crop-monitoring" element={<Dashboard />} />
+          <Route path="/crop-monitoring" element={<CropMonitor />} />
           <Route path="/profile" element={<Dashboard />} />
         </Routes>
         <Footer />
