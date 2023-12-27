@@ -1,12 +1,13 @@
 import React, { useId, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import api from "../../api/Api";
 import * as constant from "../../helper/constant"
+import { toast } from 'react-toastify';
 
 const Register = ({ onRegister }) => {
-
+  const navigate = useNavigate()
   const id = useId();
 
   // Handling register data . . . 
@@ -48,11 +49,12 @@ const Register = ({ onRegister }) => {
       try {
         formData.role = constant.Role.USER;
         formData.status = constant.Status.ACTIVE;
-        const response = await api.post("/registerUser", formData);
-        console.log(response.data);
+        await api.post("/registerUser", formData);
+        toast.success("Registration successful! Please log in.");
+        navigate("/login");
       } catch (error) {
         if (error.response && error.response.status === constant.HttpStatus.BAD_REQUEST) {
-          alert(error.response.data);
+          toast.error(error.response.data);
         } else {
           console.error("Error registering user:", error);
         }
