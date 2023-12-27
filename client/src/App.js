@@ -10,6 +10,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, useLocation } from 'react-router-dom';
 import CropMonitor from './components/CropMonitor';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 // AuthLayout Component
 const AuthLayout = ({ children }) => {
@@ -69,6 +71,7 @@ function App() {
           <Route path="/crop-monitoring" element={<CropMonitor />} />
           <Route path="/profile" element={<Dashboard />} />
         </Routes>
+        <ToastContainer />
         <Footer />
       </main>
     </div>
