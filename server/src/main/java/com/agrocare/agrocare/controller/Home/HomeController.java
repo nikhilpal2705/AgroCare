@@ -1,6 +1,5 @@
 package com.agrocare.agrocare.controller.Home;
 
-import com.agrocare.agrocare.exception.DuplicateEmailException;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.helper.Messages;
 
 import java.util.List;
 
@@ -24,17 +25,14 @@ public class HomeController {
         try {
             // Check for duplicate email
             if (homeService.existsByEmail(user.getEmail())) {
-                throw new DuplicateEmailException("Email already in use");
+                return new ResponseEntity<>(Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
             }
-            
+
             Users savedUser = homeService.registerUser(user);
-            return new ResponseEntity<>(savedUser, HttpStatus.OK);
-        } catch (DuplicateEmailException e) {
-            // Handle the duplicate email exception and return a custom error response
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Messages.REGISTRATION_SUCCESS_MESSAGE, HttpStatus.OK);
         } catch (Exception err) {
             err.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(Messages.INTERNAL_SERVER_ERROR_MESSAGE, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
