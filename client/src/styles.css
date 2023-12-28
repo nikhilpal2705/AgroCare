@@ -313,7 +313,7 @@
   color: #ffffff;
 }
 
-.pro-item-content .active, .pro-icon .active {
+.pro-item-content .active, .pro-icon .active, .sidebar-btn-wrapper .active {
   color: #ffd331 !important;
 }
 

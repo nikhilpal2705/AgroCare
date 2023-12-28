@@ -49,15 +49,11 @@ const Register = ({ onRegister }) => {
       try {
         formData.role = constant.Role.USER;
         formData.status = constant.Status.ACTIVE;
-        await api.post("/registerUser", formData);
-        toast.success("Registration successful! Please log in.");
+        const response = await api.post("/registerUser", formData);
+        toast.success(response.data);
         navigate("/login");
       } catch (error) {
-        if (error.response && error.response.status === constant.HttpStatus.BAD_REQUEST) {
-          toast.error(error.response.data);
-        } else {
-          console.error("Error registering user:", error);
-        }
+        toast.error(error.response.data);
       }
     }
   }
