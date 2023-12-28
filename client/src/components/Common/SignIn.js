@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
+import api from "../../api/Api";
+import * as constant from "../../helper/constant"
+import { toast } from 'react-toastify';
 
 const SignIn = ({ onSignIn }) => {
     const navigate = useNavigate()
@@ -9,15 +12,33 @@ const SignIn = ({ onSignIn }) => {
     let [password, setPassword] = useState('');
     let [validated, setValidated] = useState(false);
 
-    const handleSignIn = (e) => {
+    // const handleSignIn = (e) => {
+    //     e.preventDefault();
+    //     const form = e.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //         e.stopPropagation();
+    //     }
+    //     setValidated(true);
+    //     // onSignIn({ email, password });
+    // };
+
+    async function handleSignIn (e) {
         e.preventDefault();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
+        try {
+            await api.post("/login", {
+                username: email,
+                password: password
+            });
+            toast.success("Login successful!");
+            navigate("/dashboard");
+        } catch (error) {
+            if (error.response && error.response.status === constant.HttpStatus.BAD_REQUEST) {
+                toast.error(error.response.data);
+            } else {
+                console.error("Error logging in user:", error);
+            }
         }
-        setValidated(true);
-        // onSignIn({ email, password });
-    };
+    }
 
     return (
         <Container className="h-100">
