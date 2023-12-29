@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.configuration.security;
+package com.agrocare.agrocare.configuration.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.configuration.security;
+package com.agrocare.agrocare.configuration.jwt;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

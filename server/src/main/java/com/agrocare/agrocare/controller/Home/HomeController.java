@@ -1,16 +1,14 @@
 package com.agrocare.agrocare.controller.Home;
 
 import com.agrocare.agrocare.model.Users;
-import com.agrocare.agrocare.service.HomeService;
+import com.agrocare.agrocare.service.common.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.helper.Messages;
 
 import java.security.Principal;

@@ -1,5 +1,7 @@
 package com.agrocare.agrocare.configuration.security;
 
+import com.agrocare.agrocare.configuration.jwt.JwtAuthenticationEntryPoint;
+import com.agrocare.agrocare.configuration.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

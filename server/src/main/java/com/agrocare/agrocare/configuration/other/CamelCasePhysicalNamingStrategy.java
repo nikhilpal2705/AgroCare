@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.configuration;
+package com.agrocare.agrocare.configuration.other;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
