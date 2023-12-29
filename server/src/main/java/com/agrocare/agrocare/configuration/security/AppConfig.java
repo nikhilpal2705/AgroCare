@@ -18,21 +18,22 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
     }
-    @Bean
-    public UserDetailsService userDetailsService() {
 
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("user"))
-                .roles("ADMIN").build();
-
-        UserDetails userSecond = User.builder()
-                .username("jiten")
-                .password(passwordEncoder().encode("jiten"))
-                .roles("ADMIN").build();
-
-        return new InMemoryUserDetailsManager(user,userSecond);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password(passwordEncoder().encode("user"))
+//                .roles("ADMIN").build();
+//
+//        UserDetails userSecond = User.builder()
+//                .username("jiten")
+//                .password(passwordEncoder().encode("jiten"))
+//                .roles("ADMIN").build();
+//
+//        return new InMemoryUserDetailsManager(user,userSecond);
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {

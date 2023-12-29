@@ -12,7 +12,7 @@ public class AuthService {
     private UserRepository userRepository;
 
     public Users findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found"));
     }
 
 }

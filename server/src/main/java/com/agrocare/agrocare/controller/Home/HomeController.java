@@ -5,6 +5,7 @@ import com.agrocare.agrocare.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,12 +25,12 @@ public class HomeController {
     @PostMapping(value = "/registerUser")
     public ResponseEntity<?> registerUser(@RequestBody Users user) {
         try {
+            System.out.println("User :::::- > " + user);
             // Check for duplicate email
             if (homeService.existsByEmail(user.getEmail())) {
                 return new ResponseEntity<>(Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
             }
-
-            Users savedUser = homeService.registerUser(user);
+            homeService.registerUser(user);
             return new ResponseEntity<>(Messages.REGISTRATION_SUCCESS_MESSAGE, HttpStatus.OK);
         } catch (Exception err) {
             err.printStackTrace();
@@ -49,7 +50,7 @@ public class HomeController {
     }
 
     @GetMapping(value = "/check-login-user")
-    public ResponseEntity<String> getLoginUser(Principal principal){
+    public ResponseEntity<String> getLoginUser(Principal principal) {
         return new ResponseEntity<>(principal.getName(), HttpStatus.OK);
     }
 
