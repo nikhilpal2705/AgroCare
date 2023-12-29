@@ -36,7 +36,7 @@ public class Crops {
     private String plantingDate;
 
     @JsonProperty("harvestDate")
-    @Column(name = "harvestDate", nullable = true)
+    @Column(name = "harvestDate")
     private String harvestDate;
 
     @JsonProperty("status")

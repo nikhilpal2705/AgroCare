@@ -1,8 +1,8 @@
 package com.agrocare.agrocare.controller.Authentication;
 
-import com.agrocare.agrocare.configuration.security.JwtHelper;
-import com.agrocare.agrocare.configuration.security.JwtRequest;
-import com.agrocare.agrocare.configuration.security.JwtResponse;
+import com.agrocare.agrocare.configuration.jwt.JwtHelper;
+import com.agrocare.agrocare.configuration.jwt_pojo.JwtRequest;
+import com.agrocare.agrocare.configuration.jwt_pojo.JwtResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

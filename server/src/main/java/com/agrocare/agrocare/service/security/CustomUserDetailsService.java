@@ -1,6 +1,5 @@
-package com.agrocare.agrocare.service;
+package com.agrocare.agrocare.service.security;
 
-import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

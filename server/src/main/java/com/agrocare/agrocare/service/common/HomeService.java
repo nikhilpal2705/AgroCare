@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.service;
+package com.agrocare.agrocare.service.common;
 
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.repository.UserRepository;

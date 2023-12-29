@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.configuration.security;
+package com.agrocare.agrocare.configuration.jwt_pojo;
 
 import lombok.*;
 
