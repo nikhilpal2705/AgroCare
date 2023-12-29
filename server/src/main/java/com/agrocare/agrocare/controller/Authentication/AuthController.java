@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.controller.Auth;
+package com.agrocare.agrocare.controller.Authentication;
 
 import com.agrocare.agrocare.configuration.security.JwtHelper;
 import com.agrocare.agrocare.configuration.security.JwtRequest;

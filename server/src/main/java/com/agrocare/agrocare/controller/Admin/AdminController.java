@@ -30,13 +30,4 @@ public class AdminController extends AdminService {
         return ResponseEntity.ok("Hello Admin Dashboard");
     }
 
-    @GetMapping(value = "/fetch-users")
-    public ResponseEntity<List<Users>> fetchUserList() {
-        try {
-            return new ResponseEntity<>(this.userService.fetchUser(), HttpStatus.OK);
-        } catch (Exception err) {
-            err.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }
