@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.helper.Messages;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -47,7 +48,12 @@ public class HomeController {
         }
     }
 
-//    @GetMapping(value = "/login", produces = "application/json")
+    @GetMapping(value = "/check-login-user")
+    public ResponseEntity<String> getLoginUser(Principal principal){
+        return new ResponseEntity<>(principal.getName(), HttpStatus.OK);
+    }
+
+//    @GetMapping(value = "/auth/login", produces = "application/json")
 //    public ResponseEntity<Users> login(@RequestBody Users user) {
 //        try {
 //            System.out.println("Login page . . .");
