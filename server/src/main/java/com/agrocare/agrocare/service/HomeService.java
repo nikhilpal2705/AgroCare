@@ -19,7 +19,7 @@ public class HomeService {
     private PasswordEncoder passwordEncoder;
 
     public void registerUser(Users user) {
-        user.setUpdatedAt(Instant.now().toString());
+//        user.setUpdatedAt(Instant.now().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }

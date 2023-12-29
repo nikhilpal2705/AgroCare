@@ -46,6 +46,22 @@ public class Users implements UserDetails {
     @Column(name = "status", nullable = false)
     private int status;
 
+    @JsonProperty("accountNonExpired")
+    @Column(name = "accountNonExpired", nullable = false)
+    private boolean accountNonExpired = true;
+
+    @JsonProperty("accountNonLocked")
+    @Column(name = "accountNonLocked", nullable = false)
+    private boolean accountNonLocked = true;
+
+    @JsonProperty("credentialsNonExpired")
+    @Column(name = "credentialsNonExpired", nullable = false)
+    private boolean credentialsNonExpired = true;
+
+    @JsonProperty("enabled")
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
+
     @CreatedDate
     @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)
@@ -54,15 +70,24 @@ public class Users implements UserDetails {
     @LastModifiedDate
     @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
-    private String updatedAt;
+    private String updatedAt = Instant.now().toString();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.role);
         ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
-        list.add(simpleGrantedAuthority);
+        list.add(new SimpleGrantedAuthority(this.role));
         return list;
     }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return List.of(new SimpleGrantedAuthority(this.role));
+//    }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Collections.singletonList(new SimpleGrantedAuthority(this.role));
+//    }
 
     @Override
     public String getUsername() {
@@ -71,21 +96,21 @@ public class Users implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 }
