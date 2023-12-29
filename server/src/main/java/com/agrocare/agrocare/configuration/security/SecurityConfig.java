@@ -3,102 +3,46 @@ package com.agrocare.agrocare.configuration.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfig  {
+public class SecurityConfig {
 
-//    @Autowired
-//    private UserDetailsServiceImpl userDetailsService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-//        return new PasswordEncoder() {
-//
-//            @Override
-//            public String encode(CharSequence charSequence) {
-//                return charSequence.toString();
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence charSequence, String s) {
-//                return charSequence.toString().equals(s);
-//            }
-//        };
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private JwtAuthenticationEntryPoint point;
+
+    @Autowired
+    private JwtAuthenticationFilter filter;
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return new UserDetailsServiceImpl();
+        // Configuration
+        http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/admin/**").authenticated()
+                        .requestMatchers("/auth/login").permitAll()
+                        .anyRequest().permitAll())
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-//        UserDetails adminUser = User.withUsername("admin@agrocare.com")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        UserDetails normalUser = User.withUsername("user@agrocare.com")
-//                .password(passwordEncoder().encode("user"))
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(adminUser, normalUser);
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
+
+//        http.csrf(csrf -> csrf.disable())
+//                .authorizeRequests().
+//                requestMatchers("/test").authenticated().requestMatchers("/auth/login").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and().exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/user/**").hasRole("USER")
-                                .anyRequest().permitAll()
-                )
-                .formLogin(formLogin ->
-//                    formLogin.defaultSuccessUrl("/user/", true)
-                        formLogin.loginProcessingUrl("/login").defaultSuccessUrl("/user/")
-                ).csrf().disable();
-
-
-//        httpSecurity
-//                .authorizeHttpRequests(authorizeRequests ->
-//                        authorizeRequests
-//                                .requestMatchers("/home/admin").hasRole("ADMIN")
-//                                .requestMatchers("/home/normal").hasRole("NORMAL")
-//                                .requestMatchers("/home/public").permitAll()
-//                                .requestMatchers("/home/registerUser").permitAll()
-//                                .requestMatchers("/home/test").permitAll()
-//                                .anyRequest().authenticated()
-//                )
-//                .formLogin(formLogin ->
-//                        formLogin
-//                                .loginPage("/login")
-//                                .permitAll()
-//                )
-//                .logout(logout ->
-//                        logout
-//                                .logoutUrl("/logout")
-//                                .permitAll()
-//                );
-
-
-        return httpSecurity.build();
-    }
-
-
-
-//    protected SecurityConfig(AuthenticationManagerBuilder auth) throws Exception {
-//        System.out.println("iuytrfghjkhgfd");
-//        auth.userDetailsService(userDetailsService);
-//    }
 
 }
