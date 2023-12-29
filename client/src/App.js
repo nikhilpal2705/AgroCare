@@ -9,7 +9,7 @@ import './styles.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, useLocation } from 'react-router-dom';
-import CropMonitor from './components/CropMonitor';
+import CropMonitoring from './components/CropMonitoring/CropMonitoring';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
@@ -68,7 +68,7 @@ function App() {
           <Route path="/login" element={<AuthLayout><SignIn /></AuthLayout>} />
           <Route path="/register" element={<AuthLayout><Register /></AuthLayout>} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/crop-monitoring" element={<CropMonitor />} />
+          <Route path="/crop-monitoring" element={<CropMonitoring />} />
           <Route path="/profile" element={<Dashboard />} />
         </Routes>
         <ToastContainer />
