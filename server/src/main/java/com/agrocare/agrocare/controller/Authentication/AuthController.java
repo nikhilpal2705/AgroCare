@@ -3,6 +3,7 @@ package com.agrocare.agrocare.controller.Authentication;
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtRequest;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtResponse;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
+
+    Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -45,7 +48,7 @@ public class AuthController {
 
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
-                .username(userDetails.getUsername()).build();
+                .authorities(userDetails.getAuthorities().stream().findFirst().get().toString()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -66,4 +69,5 @@ public class AuthController {
     public String exceptionHandler() {
         return "Credentials Invalid !!";
     }
+
 }

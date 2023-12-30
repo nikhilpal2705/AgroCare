@@ -38,9 +38,9 @@ public class Users implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @JsonProperty("role")
-    @Column(name = "role", nullable = false)
-    private String role;
+    @JsonProperty("authorities")
+    @Column(name = "authorities", nullable = false)
+    private String authorities;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
@@ -75,7 +75,7 @@ public class Users implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority(this.role));
+        list.add(new SimpleGrantedAuthority(this.authorities));
         return list;
     }
 

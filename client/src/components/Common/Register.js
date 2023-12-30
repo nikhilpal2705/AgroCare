@@ -44,7 +44,7 @@ const Register = () => {
     } else {
       // If the form is valid, proceed with the registration.
       try {
-        formData.role = constant.Role.USER;
+        formData.authorities = constant.Authorities.USER;
         formData.status = constant.Status.ACTIVE;
         const response = await api.post("/registerUser", formData);
         toast.success(response.data);
