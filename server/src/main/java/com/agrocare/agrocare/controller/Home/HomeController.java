@@ -1,5 +1,6 @@
 package com.agrocare.agrocare.controller.Home;
 
+import com.agrocare.agrocare.helper.Messages;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.common.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.agrocare.agrocare.helper.Messages;
 
 import java.security.Principal;
 import java.util.List;
@@ -51,16 +51,5 @@ public class HomeController {
     public ResponseEntity<String> getLoginUser(Principal principal) {
         return new ResponseEntity<>(principal.getName(), HttpStatus.OK);
     }
-
-//    @GetMapping(value = "/auth/login", produces = "application/json")
-//    public ResponseEntity<Users> login(@RequestBody Users user) {
-//        try {
-//            System.out.println("Login page . . .");
-//            return new ResponseEntity<>(new Users(), HttpStatus.OK);
-//        } catch (Exception err) {
-//            err.printStackTrace();
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
 }
