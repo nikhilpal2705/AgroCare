@@ -8,7 +8,6 @@ export const Status = {
 }
 
 export const HttpStatus = {
-
     OK:200,
     UNAUTHORIZED:401,
     SERVER_ERROR:500,

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import api from "../../api/Api";
+import api from "../../utils/api";
 import { toast } from 'react-toastify';
 
 const SignIn = () => {

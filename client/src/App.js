@@ -5,7 +5,7 @@ import Home from './components/Common/Home'
 import Sidebar from './components/Common/Sidebar'
 import Footer from './components/Common/Footer'
 import { FaBars } from 'react-icons/fa';
-import './styles.css';
+import './assets/styles/sidebar.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, useLocation } from 'react-router-dom';
