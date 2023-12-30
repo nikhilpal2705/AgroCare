@@ -9,10 +9,7 @@ const CropMonitoring = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCrop, setSelectedCrop] = useState(null);
 
-  const handleClose = () => {
-    setShowModal(false);
-    setSelectedCrop({});
-  };
+  const handleClose = () => setShowModal(false);
 
   const handleShow = () => setShowModal(true);
 
@@ -69,7 +66,7 @@ const CropMonitoring = () => {
         <tbody>
           {crops.length === 0 ? (
             <tr>
-              <td colSpan="4" className="text-center">No Data Found</td>
+              <td colSpan="7" className="text-center">No Data Found</td>
             </tr>
           ) : (
             crops.map((crop) => (

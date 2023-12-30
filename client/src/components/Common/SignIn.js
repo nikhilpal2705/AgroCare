@@ -3,39 +3,32 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import api from "../../api/Api";
-import * as constant from "../../helper/constant"
 import { toast } from 'react-toastify';
 
-const SignIn = ({ onSignIn }) => {
+const SignIn = () => {
     const navigate = useNavigate()
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
     let [validated, setValidated] = useState(false);
 
-    // const handleSignIn = (e) => {
-    //     e.preventDefault();
-    //     const form = e.currentTarget;
-    //     if (form.checkValidity() === false) {
-    //         e.stopPropagation();
-    //     }
-    //     setValidated(true);
-    //     // onSignIn({ email, password });
-    // };
-
-    async function handleSignIn (e) {
+    async function handleSignIn(e) {
         e.preventDefault();
-        try {
-            await api.post("/login", {
-                username: email,
-                password: password
-            });
-            toast.success("Login successful!");
-            navigate("/dashboard");
-        } catch (error) {
-            if (error.response && error.response.status === constant.HttpStatus.BAD_REQUEST) {
+        const form = e.currentTarget;
+        // If the form is not valid, stop the propagation.
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            setValidated(true);
+        } else {
+            // If the form is valid, proceed with the registration.
+            try {
+                const request = await api.post("/auth/login", {
+                    email: email,
+                    password: password
+                });
+                console.log(`😱 😓 😒 ~ file: SignIn.js:38 ~ handleSignIn ~ request:`, request)
+                navigate("/dashboard");
+            } catch (error) {
                 toast.error(error.response.data);
-            } else {
-                console.error("Error logging in user:", error);
             }
         }
     }

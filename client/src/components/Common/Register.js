@@ -6,7 +6,7 @@ import api from "../../api/Api";
 import * as constant from "../../helper/constant"
 import { toast } from 'react-toastify';
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const navigate = useNavigate()
   const id = useId();
 
@@ -34,18 +34,15 @@ const Register = ({ onRegister }) => {
 
   }
 
-  async function handleRegister(event) {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-
+  async function handleRegister(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
     // If the form is not valid, stop the propagation.
     if (form.checkValidity() === false) {
-      event.stopPropagation();
+      e.stopPropagation();
       setValidated(true);
     } else {
       // If the form is valid, proceed with the registration.
-
       try {
         formData.role = constant.Role.USER;
         formData.status = constant.Status.ACTIVE;

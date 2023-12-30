@@ -52,15 +52,4 @@ public class HomeController {
         return new ResponseEntity<>(principal.getName(), HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/auth/login", produces = "application/json")
-//    public ResponseEntity<Users> login(@RequestBody Users user) {
-//        try {
-//            System.out.println("Login page . . .");
-//            return new ResponseEntity<>(new Users(), HttpStatus.OK);
-//        } catch (Exception err) {
-//            err.printStackTrace();
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
 }
