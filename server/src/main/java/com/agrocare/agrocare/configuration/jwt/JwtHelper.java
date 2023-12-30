@@ -1,5 +1,6 @@
 package com.agrocare.agrocare.configuration.jwt;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,11 +15,14 @@ import java.util.function.Function;
 @Component
 public class JwtHelper {
 
+    //Fetching env file . . .
+    Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
+
     //requirement :
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     //    public static final long JWT_TOKEN_VALIDITY =  60;
-    private String secret = "afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf";
+    private String secret = dotenv.get("JWT_SECRET");
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
