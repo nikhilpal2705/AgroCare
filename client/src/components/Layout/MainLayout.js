@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
           <Header />
           <Content
             style={{
-              margin: '40px auto 30px',
+              // margin: '40px auto 30px',
               overflow: 'initial',
               width: '100%',
               padding: '0 25px',
@@ -33,7 +33,7 @@ const MainLayout = ({ children }) => {
           <Header />
           <Content
             style={{
-              margin: '40px auto 30px',
+              // margin: '40px auto 30px',
               overflow: 'initial',
               width: '100%',
               padding: '0 25px',

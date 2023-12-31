@@ -4,7 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
  * "Not Found" aka "Error 404" view
  */
 const NotFoundView = () => {
-  document.title = "Page Not Found";
+  // document.title = "Page Not Found";
   const location = useLocation();
   return (
     <div>
