@@ -7,10 +7,24 @@ import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const navigate = useNavigate()
-    let [email, setEmail] = useState('');
-    let [password, setPassword] = useState('');
     let [validated, setValidated] = useState(false);
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
 
+    // Update form data as per fields . . . 
+    function updateFormData(event) {
+        const { name, value } = event.target;
+        // Update data as per fields requirment . . .
+        setFormData((data) => {
+            return {
+                ...data,
+                [name]: value,
+            };
+        })
+
+    }
     async function handleSignIn(e) {
         e.preventDefault();
         const form = e.currentTarget;
@@ -21,11 +35,10 @@ const SignIn = () => {
         } else {
             // If the form is valid, proceed with the registration.
             try {
-                const request = await api.post("/auth/login", {
-                    email: email,
-                    password: password
-                });
-                console.log(`😱 😓 😒 ~ file: SignIn.js:38 ~ handleSignIn ~ request:`, request)
+                const response = await api.post("/auth/login", formData);
+                console.log(`😱 😓 😒 ~ file: SignIn.js:38 ~ handleSignIn ~ response:`, response)
+                const { jwtToken } = response.data;
+                localStorage.setItem("jwtToken", jwtToken);
                 navigate("/dashboard");
             } catch (error) {
                 toast.error(error.response.data);
@@ -43,14 +56,15 @@ const SignIn = () => {
                     <div className="card shadow-lg mb-5">
                         <div className="card-body p-5">
                             <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
-                            <Form noValidate validated={validated} autoComplete="off">
+                            <Form noValidate validated={validated} autoComplete="on" onSubmit={handleSignIn}>
                                 <Form.Group className="mb-3" controlId="email">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
                                         type="email"
                                         placeholder="Enter email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={updateFormData}
                                         required
                                     />
                                     <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
@@ -61,8 +75,9 @@ const SignIn = () => {
                                     <Form.Control
                                         type="password"
                                         placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={updateFormData}
                                         required
                                     />
 
@@ -77,7 +92,7 @@ const SignIn = () => {
                                 </Form.Group>
 
                                 <div className="form-group m-0">
-                                    <Button variant="primary" type="submit" onClick={handleSignIn}>
+                                    <Button variant="primary" type="submit">
                                         Login
                                     </Button>
                                 </div>
@@ -89,9 +104,6 @@ const SignIn = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="text-center mt-5 text-muted">
-                        Copyright &copy; 2023-24 &mdash; AgroCare
-                    </div> */}
                 </Col>
             </Row>
         </Container>
