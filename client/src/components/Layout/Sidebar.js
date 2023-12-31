@@ -1,88 +1,138 @@
-import { NavLink } from 'react-router-dom';
-import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarContent
-} from 'react-pro-sidebar';
-import {
-  FaUser,
-  FaAngleDoubleLeft,
-  FaAngleDoubleRight,
-  FaTachometerAlt,
-  FaGem,
-} from 'react-icons/fa';
-import sidebarBg from '../../assets/images/bg1.jpg';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Button, Drawer, Layout, Menu } from 'antd';
 import logo from '../../assets/images/logo.png';
+import {
+  SettingOutlined,
+  CustomerServiceOutlined,
+  ContainerOutlined,
+  DashboardOutlined,
+  TagOutlined,
+  UserOutlined,
+  CreditCardOutlined,
+  FileOutlined,
+  ShopOutlined,
+  FilterOutlined,
+  MenuOutlined,
+} from '@ant-design/icons';
+import useResponsive from '../../hooks/useResponsive';
 
-const Sidebar = ({
-  image,
-  collapsed,
-  toggled,
-  handleToggleSidebar,
-  handleCollapsedChange
-}) => {
-  const isNavLinkActive = (path) => window.location.pathname === path;
+const { Sider } = Layout;
+export default function Navigation() {
+  const { isMobile } = useResponsive();
+
+  return isMobile ? <MobileSidebar /> : <Sidebar collapsible={false} />;
+}
+function Sidebar({ collapsible, isMobile = false }) {
+  const location = useLocation();
+  const isNavMenuClose = false
+  const [currentPath, setCurrentPath] = useState(location.pathname.slice(1));
+
+  useEffect(() => {
+    if (location)
+      if (currentPath !== location.pathname) {
+        setCurrentPath(location.pathname.slice(1));
+      }
+  }, [location, currentPath]);
+
+  const items = [
+    {
+      key: 'dashboard',
+      icon: <DashboardOutlined />,
+      label: <Link to={'/dashboard'}>Dashboard</Link>,
+    },
+    {
+      key: 'crop-monitoring',
+      icon: <FilterOutlined />,
+      label: <Link to={'/crop-monitoring'}>Crop Monitoring</Link>,
+    },
+    // {
+    //   key: 'customer',
+    //   icon: <CustomerServiceOutlined />,
+    //   label: <Link to={'/customer'}>Customer</Link>,
+    // },
+    // {
+    //   key: 'people',
+    //   icon: <UserOutlined />,
+    //   label: <Link to={'/people'}>People</Link>,
+    // },
+    // {
+    //   key: 'payment',
+    //   icon: <CreditCardOutlined />,
+    //   label: <Link to={'/payment'}>Payment</Link>,
+    // },
+    {
+      key: 'settings',
+      icon: <SettingOutlined />,
+      label: <Link to={'/settings'}>Settings</Link>,
+    },
+  ];
   return (
-    <ProSidebar
-      image={image ? sidebarBg : false}
-      collapsed={collapsed}
-      toggled={toggled}
-      onToggle={handleToggleSidebar}
-      breakPoint="md"
+    <Sider
+      collapsible={collapsible}
+      collapsed={collapsible ? isNavMenuClose : collapsible}
+      className="navigation"
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        ...(!isMobile && {
+          border: 'none',
+          borderRadius: '8px',
+        }),
+      }}
+      theme={'light'}
     >
-      {/* Header */}
-      <SidebarHeader>
-        <Menu iconShape="circle">
-          {collapsed ? (
-            <MenuItem
-              icon={<FaAngleDoubleRight />}
-              onClick={handleCollapsedChange}
-            ></MenuItem>
-          ) : (
-            <MenuItem
-              suffix={<FaAngleDoubleLeft />}
-              onClick={handleCollapsedChange}
-            >
-              <div
-                style={{
-                  padding: '9px',
-                  textTransform: 'uppercase',
-                  fontWeight: 'bold',
-                  fontSize: 15,
-                  letterSpacing: '1px'
-                }}
-              >
-                <img src={logo} alt="AgroCare" width="100%" />
-              </div>
-            </MenuItem>
-          )}
-        </Menu>
-      </SidebarHeader>
-      {/* Content */}
-      <SidebarContent>
-        <Menu iconShape="circle">
-          <MenuItem icon={<FaTachometerAlt className={isNavLinkActive('/dashboard') ? 'active' : ''} />}>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </MenuItem>
-          <MenuItem icon={<FaGem className={isNavLinkActive('/crop-monitoring') ? 'active' : ''} />}>
-            <NavLink to="/crop-monitoring">Crop Monitoring</NavLink>
-          </MenuItem>
-        </Menu>
-      </SidebarContent>
-      {/* Footer */}
-      <SidebarFooter style={{ textAlign: 'center' }}>
-        <div className="sidebar-btn-wrapper" style={{ padding: '16px' }}>
-          <NavLink className="sidebar-btn" style={{ cursor: 'pointer' }} to="/profile">
-            <FaUser />
-            <span>My Account</span>
-          </NavLink>
-        </div>
-      </SidebarFooter>
-    </ProSidebar>
+      <div className="logo">
+        <img src={logo} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
+      </div>
+      <Menu
+        items={items}
+        mode="inline"
+        theme={'light'}
+        selectedKeys={[currentPath]}
+        style={{
+          background: 'none',
+          border: 'none',
+        }}
+      />
+    </Sider>
   );
 };
 
-export default Sidebar;
+
+function MobileSidebar() {
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+  return (
+    <>
+      <Button
+        type="text"
+        size="large"
+        onClick={showDrawer}
+        className="mobile-sidebar-btn"
+        style={{ marginLeft: 25 }}
+      >
+        <MenuOutlined style={{ fontSize: 18 }} />
+      </Button>
+      <Drawer
+        width={250}
+        contentWrapperStyle={{
+          boxShadow: 'none',
+        }}
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        open={visible}
+      >
+        <Sidebar collapsible={false} isMobile={true} />
+      </Drawer>
+    </>
+  );
+}
