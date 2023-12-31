@@ -7,7 +7,7 @@ import AdminRoutes from './AdminRoutes';
  * @component AppRoutes
  */
 const AppRoutes = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const isAdmin = false;
   return isAuthenticated ? (isAdmin ? <AdminRoutes /> : <PrivateRoutes />) : <PublicRoutes />;
 };
