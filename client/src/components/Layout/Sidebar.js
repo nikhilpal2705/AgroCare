@@ -4,14 +4,7 @@ import { Button, Drawer, Layout, Menu } from 'antd';
 import logo from '../../assets/images/logo.png';
 import {
   SettingOutlined,
-  CustomerServiceOutlined,
-  ContainerOutlined,
   DashboardOutlined,
-  TagOutlined,
-  UserOutlined,
-  CreditCardOutlined,
-  FileOutlined,
-  ShopOutlined,
   FilterOutlined,
   MenuOutlined,
 } from '@ant-design/icons';
@@ -46,21 +39,6 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <FilterOutlined />,
       label: <Link to={'/crop-monitoring'}>Crop Monitoring</Link>,
     },
-    // {
-    //   key: 'customer',
-    //   icon: <CustomerServiceOutlined />,
-    //   label: <Link to={'/customer'}>Customer</Link>,
-    // },
-    // {
-    //   key: 'people',
-    //   icon: <UserOutlined />,
-    //   label: <Link to={'/people'}>People</Link>,
-    // },
-    // {
-    //   key: 'payment',
-    //   icon: <CreditCardOutlined />,
-    //   label: <Link to={'/payment'}>Payment</Link>,
-    // },
     {
       key: 'settings',
       icon: <SettingOutlined />,
@@ -69,6 +47,7 @@ function Sidebar({ collapsible, isMobile = false }) {
   ];
   return (
     <Sider
+      width={220}
       collapsible={collapsible}
       collapsed={collapsible ? isNavMenuClose : collapsible}
       className="navigation"
@@ -84,7 +63,7 @@ function Sidebar({ collapsible, isMobile = false }) {
       theme={'light'}
     >
       <div className="logo">
-        <img src={logo} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
+        <img src={logo} alt="Logo" style={{ marginTop: '3px', marginLeft: '20px', height: '50px' }} />
       </div>
       <Menu
         items={items}
