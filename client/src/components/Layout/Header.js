@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Layout } from 'antd';
-import { SettingOutlined, LogoutOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Header = () => {
@@ -43,7 +43,7 @@ const Header = () => {
       type: 'divider',
     },
     {
-      icon: <SettingOutlined />,
+      icon: <UserOutlined />,
       key: 'settingProfile',
       label: (
         <Link to={'/profile'}>
