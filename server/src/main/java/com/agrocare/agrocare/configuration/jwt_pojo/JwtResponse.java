@@ -1,5 +1,6 @@
 package com.agrocare.agrocare.configuration.jwt_pojo;
 
+import com.agrocare.agrocare.model.Users;
 import lombok.*;
 
 @Getter
@@ -10,5 +11,5 @@ import lombok.*;
 @Builder
 public class JwtResponse {
     private String jwtToken;
-    private String authorities;
+    private UserResponse user;
 }

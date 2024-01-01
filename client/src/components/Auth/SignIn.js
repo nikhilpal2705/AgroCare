@@ -16,7 +16,7 @@ const SignIn = () => {
     // Update form data as per fields . . . 
     function updateFormData(event) {
         const { name, value } = event.target;
-        // Update data as per fields requirment . . .
+        // Update data as per fields requirement . . .
         setFormData((data) => {
             return {
                 ...data,
