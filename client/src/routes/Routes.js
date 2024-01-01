@@ -1,14 +1,16 @@
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import AdminRoutes from './AdminRoutes';
+import { useAuth } from '../contexts/AuthContext';
 
 /**
  * Renders Application routes depending on Logged or Anonymous users
  * @component AppRoutes
  */
+
 const AppRoutes = () => {
-  const isAuthenticated = false;
-  const isAdmin = false;
+  const { isAuthenticated, isAdmin } = useAuth();
+  
   return isAuthenticated ? (isAdmin ? <AdminRoutes /> : <PrivateRoutes />) : <PublicRoutes />;
 };
 

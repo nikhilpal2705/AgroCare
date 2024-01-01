@@ -2,9 +2,7 @@ import React, { useId, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import api from "../../utils/api";
-import * as constant from "../../helper/constant"
-import { toast } from 'react-toastify';
+import * as authService from './AuthService';
 
 const Register = () => {
   const navigate = useNavigate()
@@ -43,14 +41,9 @@ const Register = () => {
       setValidated(true);
     } else {
       // If the form is valid, proceed with the registration.
-      try {
-        formData.authorities = constant.Authorities.USER;
-        formData.status = constant.Status.ACTIVE;
-        const response = await api.post("/registerUser", formData);
-        toast.success(response.data);
-        navigate("/login");
-      } catch (error) {
-        toast.error(error.response.data);
+      const data = await authService.register({ registerData: formData })
+      if (data?.success) {
+        navigate('/login');
       }
     }
   }

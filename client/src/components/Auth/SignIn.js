@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import api from "../../utils/api";
-import { toast } from 'react-toastify';
+import * as authService from './AuthService';
+import { useAuth } from '../../contexts/AuthContext';
 
 const SignIn = () => {
     const navigate = useNavigate()
+    const { login } = useAuth();
+
     let [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+
 
     // Update form data as per fields . . . 
     function updateFormData(event) {
@@ -34,14 +37,10 @@ const SignIn = () => {
             setValidated(true);
         } else {
             // If the form is valid, proceed with the registration.
-            try {
-                const response = await api.post("/auth/login", formData);
-                console.log(`😱 😓 😒 ~ file: SignIn.js:38 ~ handleSignIn ~ response:`, response)
-                const { jwtToken } = response.data;
-                localStorage.setItem("jwtToken", jwtToken);
-                navigate("/dashboard");
-            } catch (error) {
-                toast.error(error.response.data);
+            const data = await authService.login({ loginData: formData })
+            if (data?.jwtToken) {
+                navigate('/dashboard');
+                login(data?.isAdmin, data?.jwtToken);
             }
         }
     }
