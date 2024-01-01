@@ -3,7 +3,7 @@ import Home from '../components/Auth/Home'
 import SignIn from '../components/Auth/SignIn';
 import Register from '../components/Auth/Register';
 import Footer from '../components/Layout/Footer';
-import NotFoundView from '../components/Common/NotFoundView';
+import NotFound from '../components/Common/NotFound';
 
 const PublicRoutes = () => {
   return (
@@ -13,7 +13,7 @@ const PublicRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFoundView />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <div className="text-center text-muted">
