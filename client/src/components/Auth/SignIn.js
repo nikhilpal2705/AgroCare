@@ -40,7 +40,7 @@ const SignIn = () => {
             const data = await authService.login({ loginData: formData })
             if (data?.jwtToken) {
                 navigate('/dashboard');
-                login(data?.isAdmin, data?.jwtToken);
+                login(data);
             }
         }
     }
