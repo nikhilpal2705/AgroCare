@@ -1,13 +1,14 @@
 import { Avatar, Dropdown, Layout } from 'antd';
 import { SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Header = () => {
   const currentAdmin = {
-    name: 'Nikhil',
-    email: 'nikhil@gmail.com',
+    name: `${Cookies.get('name')}`,
+    email: `${Cookies.get('email')}`,
   }
-  
+
   const { Header } = Layout;
   const ProfileDropdown = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Header = () => {
       </div>
     );
   };
-  
+
   const DropdownMenu = ({ text }) => {
     return <span style={{}}>{text}</span>;
   };

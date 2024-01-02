@@ -8,10 +8,14 @@ import api from "../../utils/api";
 export const login = async ({ loginData }) => {
     try {
         const response = await api.post("/auth/login", loginData);
-
+        let responseData = response.data
         const data = {
-            ...response.data,
-            isAdmin: false
+            jwtToken: responseData.jwtToken,
+            isAdmin: false,
+            name: responseData.user.name,
+            email: responseData.user.email,
+            userId: responseData.user.id,
+            authority: responseData.user.authorities[0]?.authority
         }
         return data
     } catch (error) {
@@ -28,7 +32,7 @@ export const register = async ({ registerData }) => {
         successHandler(response, {
             notifyOnSuccess: true,
             notifyOnFailed: true,
-          })
+        })
         return { success: true }
         // toast.success(response.data);
     } catch (error) {

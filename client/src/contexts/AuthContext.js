@@ -14,33 +14,42 @@ export const AuthProvider = ({ children }) => {
     const [isAdmin, setIsAdmin] = useState(
         () => Cookies.get('isAdmin') === 'true' // Initial value based on cookies
     );
-    const [jwtToken, setJwtToken] = useState(localStorage.getItem('jwtToken'));
 
-    const login = (isAdmin, jwtToken) => {
+    const login = (userData) => {
         setIsAuthenticated(true);
-        setIsAdmin(localStorage.getItem('isAdmin') === 'true');
-        setJwtToken(jwtToken)
-        Cookies.set('jwtToken', jwtToken, { expires: 5 / 24 });
-        Cookies.set('isAdmin', isAdmin, { expires: 5 / 24 });
+        setIsAdmin(Cookies.get('isAdmin') === 'true');
+        Cookies.set('jwtToken', userData.jwtToken, { expires: 5 / 24 });
+        Cookies.set('isAdmin', userData.isAdmin, { expires: 5 / 24 });
+        Cookies.set('email', userData.email, { expires: 5 / 24 });
+        Cookies.set('name', userData.name, { expires: 5 / 24 });
+        Cookies.set('userId', userData.id, { expires: 5 / 24 });
+        Cookies.set('authority', userData.authority, { expires: 5 / 24 });
     };
 
     const logout = () => {
         setIsAuthenticated(false);
         setIsAdmin(false);
-        Cookies.remove('jwtToken');
-        Cookies.remove('isAdmin');
+        Object.keys(Cookies.get()).forEach(function (cookieName) {
+            var neededAttributes = {
+                // Here you pass the same attributes that were used when the cookie was created
+                // and are required when removing the cookie
+            };
+            Cookies.remove(cookieName, neededAttributes);
+        });
     };
 
     useEffect(() => {
-        // Listen for changes to isAuthenticated and update local storage
-        if (isAuthenticated) {
-            Cookies.set('jwtToken', jwtToken, { expires: 5 / 24 }); // Store token
-            Cookies.set('isAdmin', isAdmin, { expires: 5 / 24 }); // Store isAdmin flag
-        } else {
-            Cookies.remove('jwtToken'); // Remove token
-            Cookies.remove('isAdmin'); // Remove isAdmin flag
+        // Listen for changes to isAuthenticated and remove local storage
+        if (!isAuthenticated) {
+            Object.keys(Cookies.get()).forEach(function (cookieName) {
+                var neededAttributes = {
+                    // Here you pass the same attributes that were used when the cookie was created
+                    // and are required when removing the cookie
+                };
+                Cookies.remove(cookieName, neededAttributes);
+            }); // Remove token
         }
-    }, [isAuthenticated, isAdmin, jwtToken]);
+    }, [isAuthenticated]);
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, isAdmin, login, logout }}>
