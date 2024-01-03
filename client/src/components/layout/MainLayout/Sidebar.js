@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
-import logo from '../../assets/images/logo.png';
+import logo from 'assets/images/logo.png';
 import {
   SettingOutlined,
   DashboardOutlined,
   FilterOutlined,
   MenuOutlined,
 } from '@ant-design/icons';
-import useResponsive from '../../hooks/useResponsive';
+import useResponsive from 'hooks/useResponsive';
 
 const { Sider } = Layout;
 export default function Navigation() {
@@ -40,6 +40,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/crop-monitoring'}>Crop Monitoring</Link>,
     },
     {
+      key: 'pest-control',
+      icon: <FilterOutlined />,
+      label: <Link to={'/pest-control'}>Pest Control</Link>,
+    },
+    {
       key: 'settings',
       icon: <SettingOutlined />,
       label: <Link to={'/settings'}>Settings</Link>,
@@ -47,7 +52,6 @@ function Sidebar({ collapsible, isMobile = false }) {
   ];
   return (
     <Sider
-      width={220}
       collapsible={collapsible}
       collapsed={collapsible ? isNavMenuClose : collapsible}
       className="navigation"
@@ -55,15 +59,19 @@ function Sidebar({ collapsible, isMobile = false }) {
         overflow: 'auto',
         height: '100vh',
         position: 'fixed',
+        bottom: '10px',
         ...(!isMobile && {
+          // background: 'none',
           border: 'none',
+          left: '10px',
+          top: '10px',
           borderRadius: '8px',
         }),
       }}
       theme={'light'}
     >
-      <div className="logo">
-        <img src={logo} alt="Logo" style={{ marginTop: '3px', marginLeft: '20px', height: '50px' }} />
+      <div className="logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50px' }}>
+        <img src={logo} alt="Logo" style={{ height: '50px' }} />
       </div>
       <Menu
         items={items}

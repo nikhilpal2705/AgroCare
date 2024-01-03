@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from '../components/Auth/Home'
-import SignIn from '../components/Auth/SignIn';
-import Register from '../components/Auth/Register';
-import Footer from '../components/Layout/Footer';
-import NotFound from '../components/Common/NotFound';
+import Home from 'components/auth/Home'
+import SignIn from 'components/auth/SignIn';
+import Register from 'components/auth/Register';
+import Footer from 'components/layout/MainLayout/Footer';
+import NotFound from 'components/common/NotFound';
 
 const PublicRoutes = () => {
   return (
