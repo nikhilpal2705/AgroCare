@@ -1,10 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import Dashboard from '../components/Dashboard/Dashboard';
-import CropMonitoring from '../components/CropMonitoring/CropMonitoring';
-import Layout from '../components/Layout/MainLayout';
-import NotFound from '../components/Common/NotFound';
-import Logout from '../components/Auth/Logout';
-
+import Dashboard from 'components/pages/Dashboard/Dashboard';
+import CropMonitoring from 'components/pages/CropMonitoring/CropMonitoring';
+import Layout from 'components/layout/MainLayout/MainLayout';
+import NotFound from 'components/common/NotFound';
+import Logout from 'components/auth/Logout';
+import PestControl from 'components/pages/PestControl/PestControl';
 function AppRouter() {
   let element = useRoutes([
     {
@@ -30,6 +30,10 @@ function AppRouter() {
     {
       path: '/crop-monitoring',
       element: <CropMonitoring />,
+    },
+    {
+      path: '/pest-control',
+      element: <PestControl />,
     },
     {
       path: '/profile',

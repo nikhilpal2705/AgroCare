@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PageLoader from '../Common/PageLoader';
-import { useAuth } from '../../contexts/AuthContext';
+import PageLoader from 'components/common/PageLoader';
+import { useAuth } from 'contexts/AuthContext';
 
 const Logout = () => {
     const navigate = useNavigate();

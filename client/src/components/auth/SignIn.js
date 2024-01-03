@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/logo.png';
+import logo from 'assets/images/logo.png';
 import * as authService from './AuthService';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
 const SignIn = () => {
     const navigate = useNavigate()

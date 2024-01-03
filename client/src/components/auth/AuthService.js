@@ -1,7 +1,7 @@
-import errorHandler from "../../helper/errorHandler";
-import successHandler from "../../helper/successHandler";
-import * as constant from "../../helper/constant";
-import api from "../../utils/api";
+import errorHandler from "helper/errorHandler";
+import successHandler from "helper/successHandler";
+import * as constant from "helper/constant";
+import api from "utils/api";
 // import { toast } from 'react-toastify';
 
 

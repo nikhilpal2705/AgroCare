@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import isBrowser from '../utils/isBrowser';
+import isBrowser from 'utils/isBrowser';
 const subscribers = new Set();
 let info;
 let responsiveConfig = {

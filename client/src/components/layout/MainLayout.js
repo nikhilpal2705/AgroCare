@@ -2,8 +2,8 @@
 import React from 'react';
 import { Layout } from 'antd';
 import Sidebar from './Sidebar';
-import Header from './Header';
-import useResponsive from '../../hooks/useResponsive';
+import Header from './MainLayout/Header';
+import useResponsive from 'hooks/useResponsive';
 
 
 const MainLayout = ({ children }) => {
@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
           <Header />
           <Content
             style={{
-              // margin: '40px auto 30px',
+              margin: '5px auto 30px',
               overflow: 'initial',
               width: '100%',
               padding: '0 25px',
@@ -33,7 +33,7 @@ const MainLayout = ({ children }) => {
           <Header />
           <Content
             style={{
-              // margin: '40px auto 30px',
+              margin: '5px auto 30px',
               overflow: 'initial',
               width: '100%',
               padding: '0 25px',
