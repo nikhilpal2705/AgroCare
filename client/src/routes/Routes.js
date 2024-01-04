@@ -1,7 +1,7 @@
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import AdminRoutes from './AdminRoutes';
-import { useAuth } from 'contexts/AuthContext';
+import { useAuth } from 'contexts/auth/AuthContext';
 
 /**
  * Renders Application routes depending on Logged or Anonymous users

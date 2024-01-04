@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CropFormModal from './CropFormModal';
 
 const CropMonitoring = () => {
@@ -47,7 +45,6 @@ const CropMonitoring = () => {
     <div className="container mt-5">
       <div className="d-flex justify-content-end mb-3">
         <Button variant="primary" onClick={handleShow}>
-          <FontAwesomeIcon icon={faPlus} className="me-2" />
           Add Crop
         </Button>
       </div>
@@ -80,11 +77,9 @@ const CropMonitoring = () => {
                 <td>{crop.harvestDate}</td>
                 <td>
                   <Button variant="info" className="me-2" onClick={() => handleEdit(crop)}>
-                    <FontAwesomeIcon icon={faEdit} className="me-2" />
                     Edit
                   </Button>
                   <Button variant="danger" onClick={() => handleDelete(crop.id)}>
-                    <FontAwesomeIcon icon={faTrash} className="me-2" />
                     Delete
                   </Button>
                 </td>
