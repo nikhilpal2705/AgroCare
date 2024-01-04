@@ -1,10 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import Dashboard from 'components/pages/Dashboard/Dashboard';
-import CropMonitoring from 'components/pages/CropMonitoring/CropMonitoring';
-import Layout from 'components/layout/MainLayout/MainLayout';
+import Dashboard from 'components/pages/dashboard/Dashboard';
+import CropMonitoring from 'components/pages/crop/CropMonitoring';
+import Layout from 'components/layout/main/MainLayout';
 import NotFound from 'components/common/NotFound';
 import Logout from 'components/auth/Logout';
-import PestControl from 'components/pages/PestControl/PestControl';
+import PestControl from 'components/pages/pest/PestControl';
 function AppRouter() {
   let element = useRoutes([
     {
