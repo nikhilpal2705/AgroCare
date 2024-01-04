@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.set('isAdmin', userData.isAdmin, { expires: 5 / 24 });
         Cookies.set('email', userData.email, { expires: 5 / 24 });
         Cookies.set('name', userData.name, { expires: 5 / 24 });
-        Cookies.set('userId', userData.id, { expires: 5 / 24 });
+        Cookies.set('userId', userData.userId, { expires: 5 / 24 });
         Cookies.set('authority', userData.authority, { expires: 5 / 24 });
     };
 
