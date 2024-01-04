@@ -27,27 +27,45 @@ public class Crops {
     @Column(name = "userId", nullable = false)
     private int userId;
 
-    @JsonProperty("cropName")
-    @Column(name = "cropName", nullable = false)
-    private String cropName;
+    @JsonProperty("name")
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @JsonProperty("cropType")
+    @Column(name = "cropType", nullable = false)
+    private String cropType;
+
+    @JsonProperty("cropVariety")
+    @Column(name = "cropVariety", nullable = false)
+    private String cropVariety;
+
+    @JsonProperty("fieldName")
+    @Column(name = "fieldName", nullable = false)
+    private String fieldName;
+
+    @JsonProperty("fieldSize")
+    @Column(name = "fieldSize", nullable = false)
+    private String fieldSize;
+
+    @JsonProperty("status")
+    @Column(name = "status", nullable = false)
+    private int status = 1;
 
     @JsonProperty("plantingDate")
     @Column(name = "plantingDate", nullable = false)
     private String plantingDate;
 
     @JsonProperty("harvestDate")
-    @Column(name = "harvestDate")
+    @Column(name = "harvestDate", nullable = false)
     private String harvestDate;
 
-    @JsonProperty("status")
-    @Column(name = "status", nullable = false)
-    private int status;
-
     @CreatedDate
+    @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)
     private String createdAt = Instant.now().toString();
 
     @LastModifiedDate
+    @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
-    private String updatedAt;
+    private String updatedAt = Instant.now().toString();
 }

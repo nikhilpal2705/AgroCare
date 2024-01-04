@@ -3,6 +3,8 @@ import { Table, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CropFormModal from './CropFormModal';
+import Api from '../../../utils/api';
+import Cookies from 'js-cookie';
 
 const CropMonitoring = () => {
   const [crops, setCrops] = useState([]);
@@ -13,7 +15,7 @@ const CropMonitoring = () => {
 
   const handleShow = () => setShowModal(true);
 
-  const handleSubmit = (e, formData) => {
+  const handleSubmit = async (e, formData) => {
     e.preventDefault();
     if (selectedCrop && selectedCrop.id) {
       const updatedCrops = crops.map((crop) =>
@@ -22,13 +24,24 @@ const CropMonitoring = () => {
       // API to update crop details
       setCrops(updatedCrops);
     } else {
-      const newCrop = {
-        id: Date.now(),
-        ...formData,
-      };
+      formData.userId = parseInt(Cookies.get('userId'));
+      formData.status = 1;
+
+      try {
+
+        let response = await Api.post('/user/crop', formData, {
+          headers: {
+            "Authorization": "Bearer " + Cookies.get('jwtToken'),
+          }
+        });
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:35 ~ handleSubmit ~ data : `, response.data)
+        setCrops([...crops, { key: response.data.id, ...response.data }]);
+      } catch (error) {
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:31 ~ handleSubmit ~ error`, error)
+      }
 
       // API to add crop details
-      setCrops([...crops, newCrop]);
+      // setCrops([...crops, { key: Date.now(), ...formData }]);
     }
     handleClose();
   };

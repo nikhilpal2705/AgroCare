@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 
 const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
   const [formData, setFormData] = useState(initialData || {});
+  const id = useId();
 
   useEffect(() => {
     setFormData(initialData || {});
@@ -23,7 +24,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={(e) => handleSubmit(e, formData)}>
-          <Form.Group controlId="name">
+          <Form.Group controlId={id + "-name"}>
             <Form.Label>Crop Name</Form.Label>
             <Form.Control
               type="text"
@@ -35,7 +36,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
           </Form.Group>
           <Row>
             <Col>
-              <Form.Group controlId="cropType">
+              <Form.Group controlId={id + "-cropType"}>
                 <Form.Label>Crop Type</Form.Label>
                 <Form.Control
                   type="text"
@@ -46,7 +47,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group controlId="cropVariety">
+              <Form.Group controlId={id + "-cropVariety"}>
                 <Form.Label>Crop Variety</Form.Label>
                 <Form.Control
                   type="text"
@@ -59,7 +60,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
           </Row>
           <Row>
             <Col>
-              <Form.Group controlId="fieldName">
+              <Form.Group controlId={id + "-fieldName"}>
                 <Form.Label>Field Name</Form.Label>
                 <Form.Control
                   type="text"
@@ -70,7 +71,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group controlId="fieldSize">
+              <Form.Group controlId={id + "-fieldSize"}>
                 <Form.Label>Field Size</Form.Label>
                 <Form.Control
                   type="text"
@@ -83,7 +84,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
           </Row>
           <Row>
             <Col>
-              <Form.Group controlId="plantingDate">
+              <Form.Group controlId={id + "-plantingDate"}>
                 <Form.Label>Planting Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -95,7 +96,7 @@ const CropFormModal = ({ show, handleClose, handleSubmit, initialData }) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group controlId="harvestDate">
+              <Form.Group controlId={id + "-harvestDate"}>
                 <Form.Label>Harvest Date</Form.Label>
                 <Form.Control
                   type="date"
