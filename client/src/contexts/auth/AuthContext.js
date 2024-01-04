@@ -17,15 +17,6 @@ export const AuthProvider = ({ children }) => {
 
     const login = (userData) => {
         setIsAuthenticated(true);
-<<<<<<< HEAD:client/src/contexts/AuthContext.js
-        setIsAdmin(Cookies.get('isAdmin') === 'true');
-        Cookies.set('jwtToken', userData.jwtToken, { expires: 5 / 24 });
-        Cookies.set('isAdmin', userData.isAdmin, { expires: 5 / 24 });
-        Cookies.set('email', userData.email, { expires: 5 / 24 });
-        Cookies.set('name', userData.name, { expires: 5 / 24 });
-        Cookies.set('userId', userData.userId, { expires: 5 / 24 });
-        Cookies.set('authority', userData.authority, { expires: 5 / 24 });
-=======
         setIsAdmin(userData.isAdmin === 'true');
         Cookies.set('jwtToken', userData.jwtToken, { expires: 5 / 24, secure: true, sameSite: 'lax' });
         Cookies.set('isAdmin', userData.isAdmin, { expires: 5 / 24, secure: true, sameSite: 'lax' });
@@ -33,7 +24,6 @@ export const AuthProvider = ({ children }) => {
         Cookies.set('name', userData.name, { expires: 5 / 24, secure: true, sameSite: 'lax' });
         Cookies.set('userId', userData.userId, { expires: 5 / 24, secure: true, sameSite: 'lax' });
         Cookies.set('authority', userData.authority, { expires: 5 / 24, secure: true, sameSite: 'lax' });
->>>>>>> d84af61a81338a9a2937b02033f7e4edaaa5b3e2:client/src/contexts/auth/AuthContext.js
     };
 
     const logout = () => {
