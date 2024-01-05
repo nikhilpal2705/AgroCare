@@ -1,10 +1,14 @@
+import { useCallback, useState } from 'react';
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Table } from 'antd';
+import { useCrudContext } from 'contexts/crud';
+import { dataForTable } from './TableStructure';
 
 
 export default function DataTable({ config }) {
-  let { columns, dataSource } = config;
-
+  let { dataSource, fields } = config;
+  const { crudContextAction } = useCrudContext();
+  const { panel, modal, readBox, editBox } = crudContextAction;
   const items = [
     {
       label: 'View',
@@ -27,13 +31,20 @@ export default function DataTable({ config }) {
   ];
 
   const handleRead = (record) => {
-  };
+    readBox.open();
+    panel.open();
+  }
+
   function handleEdit(record) {
-
+    editBox.open();
+    panel.open();
   }
+
   function handleDelete(record) {
+    modal.open();
   }
 
+  let columns = [...dataForTable({ fields })]
   let dataTableColumns = [
     ...columns,
     {
@@ -71,16 +82,36 @@ export default function DataTable({ config }) {
       ),
     },
   ];
+  const [, setTableData] = useState(dataSource);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: dataSource.length,
+    showSizeChanger: false,
+    // pageSizeOptions: ['10', '20', '30', '40'],
+  });
+
+
+  const handleDataTableLoad = useCallback((pagination) => {
+    // Implement data loading logic here based on pagination
+    const { current, pageSize } = pagination;
+    const start = (current - 1) * pageSize;
+    const end = start + pageSize;
+    setTableData(dataSource.slice(start, end));
+
+    // Update the total count if necessary
+    setPagination({ ...pagination, total: dataSource.length });
+  }, [dataSource]);
 
   return (
     <>
       <Table
         columns={dataTableColumns}
-        rowKey={(item) => item._id}
+        rowKey={(item) => item.id}
         dataSource={dataSource}
-        // pagination={pagination}
+        pagination={pagination}
         loading={false}
-        onChange={false}
+        onChange={handleDataTableLoad}
         scroll={{ x: true }}
       />
     </>
