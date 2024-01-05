@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from 'components/layout/main/MainLayout';
+import Layout from 'layout/main/MainLayout';
 import NotFound from 'components/common/NotFound';
 
 const PrivateRoutes = () => {

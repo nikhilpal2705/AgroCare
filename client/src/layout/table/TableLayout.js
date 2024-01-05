@@ -3,7 +3,7 @@ import { PageHeader } from '@ant-design/pro-layout';
 import { generate as uniqueId } from 'shortid';
 import DataTable from './DataTable';
 import { CrudContextProvider, useCrudContext } from 'contexts/crud';
-import CrudLayout from 'components/layout/crud/CrudLayout';
+import CrudLayout from 'layout/crud/CrudLayout';
 const { Content } = Layout;
 
 

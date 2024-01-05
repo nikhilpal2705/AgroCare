@@ -1,5 +1,5 @@
 import React from 'react'
-import CrudModule from 'components/layout/table/TableLayout';
+import CrudModule from 'layout/table/TableLayout';
 const PestControl = () => {
   const columns = [
     {

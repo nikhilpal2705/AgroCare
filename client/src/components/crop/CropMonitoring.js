@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import CropFormModal from './CropFormModal';
-import Api from '../../../utils/api';
+import Api from '../../utils/api';
 import Cookies from 'js-cookie';
 
 const CropMonitoring = () => {
