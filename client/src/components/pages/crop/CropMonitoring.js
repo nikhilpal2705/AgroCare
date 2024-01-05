@@ -24,6 +24,7 @@ const CropMonitoring = () => {
     } else {
       formData.userId = parseInt(Cookies.get('userId'));
       formData.status = 1;
+      console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:27 ~ handleSubmit ~ formData : `, formData)
 
       try {
 
