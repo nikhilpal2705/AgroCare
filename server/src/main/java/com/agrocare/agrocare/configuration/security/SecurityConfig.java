@@ -9,11 +9,16 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig {
@@ -36,9 +41,8 @@ public class SecurityConfig {
 
         // Configuration
         http.csrf(csrf -> csrf.disable())
-//                .cors(cros-> cros.disable())
-//                .cors().and()
-                .cors(Customizer.withDefaults())
+//                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(configurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/user/**").hasAnyAuthority("USER")
@@ -47,16 +51,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-
-
-//        http.csrf(csrf -> csrf.disable())
-//                .authorizeRequests().
-//                requestMatchers("/test").authenticated().requestMatchers("/auth/login").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and().exceptionHandling(ex -> ex.authenticationEntryPoint(point))
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -69,5 +63,31 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         return daoAuthenticationProvider;
     }
+
+    @Bean
+    CorsConfigurationSource configurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Allowed origins (replace with your actual origins):
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3003"));
+
+        // Allowed methods:
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        // Allow credentials (cookies):
+        configuration.setAllowCredentials(true);
+
+        // Allowed headers:
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+
+        // Exposed headers:
+        configuration.setExposedHeaders(Arrays.asList("X-Custom-Header"));
+
+        // Max age:
+        configuration.setMaxAge(3600L);
+
+        return (request) -> configuration;
+    }
+
 
 }
