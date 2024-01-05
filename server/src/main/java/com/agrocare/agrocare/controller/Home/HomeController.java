@@ -1,6 +1,6 @@
 package com.agrocare.agrocare.controller.Home;
 
-import com.agrocare.agrocare.helper.Messages;
+import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.common.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,13 @@ public class HomeController {
             System.out.println("User :::::- > " + user);
             // Check for duplicate email
             if (homeService.existsByEmail(user.getEmail())) {
-                return new ResponseEntity<>(Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(Constants.Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
             }
             homeService.registerUser(user);
-            return new ResponseEntity<>(Messages.REGISTRATION_SUCCESS_MESSAGE, HttpStatus.OK);
+            return new ResponseEntity<>(Constants.Messages.REGISTRATION_SUCCESS_MESSAGE, HttpStatus.OK);
         } catch (Exception err) {
             err.printStackTrace();
-            return new ResponseEntity<>(Messages.INTERNAL_SERVER_ERROR_MESSAGE, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

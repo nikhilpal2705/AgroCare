@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import CropFormModal from './CropFormModal';
 import Api from '../../utils/api';
 import Cookies from 'js-cookie';
+import successHandler from "helper/successHandler";
+import * as constant from "helper/constant";
 
 const CropMonitoring = () => {
   const [crops, setCrops] = useState([]);
@@ -13,6 +15,29 @@ const CropMonitoring = () => {
 
   const handleShow = () => setShowModal(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let response = await Api.get('/user/crop', {
+          headers: {
+            "Authorization": "Bearer " + Cookies.get('jwtToken'),
+          }
+        });
+        if (!response.status === constant.HttpStatus.OK) {
+          throw new Error('Network response was not ok');
+        }
+        console.log("🙈 🙉 🙊 Line 24 ~ response :  ", response);
+        setCrops([...response.data]);
+      } catch (error) {
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:27 ~ fetchData ~ error : `, error)
+      } finally {
+        console.log("🙈 🙉 🙊 Line 29 ~  :  ");
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSubmit = async (e, formData) => {
     e.preventDefault();
     if (selectedCrop && selectedCrop.id) {
@@ -22,25 +47,57 @@ const CropMonitoring = () => {
       // API to update crop details
       setCrops(updatedCrops);
     } else {
-      formData.userId = parseInt(Cookies.get('userId'));
-      formData.status = 1;
-      console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:27 ~ handleSubmit ~ formData : `, formData)
-
       try {
+
+        //~ Fetch list of crops . . .
+        // let data = await Api.get('/user/crop', {
+        //   headers: {
+        //     "Authorization": "Bearer " + Cookies.get('jwtToken'),
+        //   }
+        // });
+        // console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:33 ~ handleSubmit ~ data : `, data)
+
+
+        //~ Fetch a single crop by id . . .
+        // let res = await Api.get('/user/crop/' + 1111, {
+        //   headers: {
+        //     "Authorization": "Bearer " + Cookies.get('jwtToken'),
+        //   }
+        // });
+        // console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:33 ~ handleSubmit ~ res : `, res.data)
+
+        //~ Update a single crop by id . . .
+        // let res = await Api.put('/user/crop/' + 1111, formData, {
+        //   headers: {
+        //     "Authorization": "Bearer " + Cookies.get('jwtToken'),
+        //   }
+        // });
+        // console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:33 ~ handleSubmit ~ res : `, res.data)
+
+
+        formData.userId = parseInt(Cookies.get('userId'));
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:27 ~ handleSubmit ~ formData : `, formData)
 
         let response = await Api.post('/user/crop', formData, {
           headers: {
             "Authorization": "Bearer " + Cookies.get('jwtToken'),
           }
         });
-        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:35 ~ handleSubmit ~ data : `, response.data)
+        successHandler(response, {
+          notifyOnSuccess: true,
+          notifyOnFailed: true,
+        })
+
         setCrops([...crops, { key: response.data.id, ...response.data }]);
+
       } catch (error) {
-        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:31 ~ handleSubmit ~ error`, error)
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:70 ~ handleSubmit ~ error : `, error)
+        successHandler(error.response, {
+          notifyOnSuccess: true,
+          notifyOnFailed: true,
+        })
       }
 
-      // API to add crop details
-      // setCrops([...crops, { key: Date.now(), ...formData }]);
     }
     handleClose();
   };
@@ -50,9 +107,30 @@ const CropMonitoring = () => {
     setShowModal(true);
   };
 
-  const handleDelete = (id) => {
-    const updatedCrops = crops.filter((crop) => crop.id !== id);
-    setCrops(updatedCrops);
+  const handleDelete = async (id) => {
+    console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:51 ~ handleDelete ~ id : `, id)
+
+    try {
+
+      let response = await Api.delete('/user/crop/' + id, {
+        headers: {
+          "Authorization": "Bearer " + Cookies.get('jwtToken'),
+        }
+      });
+      console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:35 ~ handleSubmit ~ data : `, response.data)
+
+      successHandler(response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      })
+    } catch (error) {
+      console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:75 ~ handleDelete ~ error : `, error.response.data)
+      successHandler(error.response, {
+        notifyOnSuccess: true,
+        notifyOnFailed: true,
+      })
+    }
+
   };
 
   return (
