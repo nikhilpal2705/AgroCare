@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import Home from 'components/auth/Home'
 import SignIn from 'components/auth/SignIn';
 import Register from 'components/auth/Register';
-import Footer from 'components/layout/main/Footer';
+import Footer from 'layout/main/Footer';
 import NotFound from 'components/common/NotFound';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const PublicRoutes = () => {
   return (

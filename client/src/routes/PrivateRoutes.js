@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import Dashboard from 'components/pages/dashboard/Dashboard';
-import CropMonitoring from 'components/pages/crop/CropMonitoring';
-import Layout from 'components/layout/main/MainLayout';
+import Dashboard from 'components/dashboard/Dashboard';
+import CropMonitoring from 'components/crop/CropMonitoring';
+import Layout from 'layout/main/MainLayout';
 import NotFound from 'components/common/NotFound';
 import Logout from 'components/auth/Logout';
 import PestControl from 'components/pages/pest/PestControl';
