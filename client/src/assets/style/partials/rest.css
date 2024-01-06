@@ -22,6 +22,7 @@ body {
 }
 
 .ant-menu-title-content a,
-.ant-dropdown-menu-title-content a {
+.ant-dropdown-menu-title-content a,
+.ant-tooltip-inner a {
   text-decoration: none;
 }
