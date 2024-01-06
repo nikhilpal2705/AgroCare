@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageLoader from 'components/common/PageLoader';
-import { useAuth } from 'contexts/auth/AuthContext';
+import { useAuthContext } from 'contexts/auth';
 
 const Logout = () => {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { authContextAction } = useAuthContext();
+    const { auth } = authContextAction;
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const asyncLogout = async () => {
-            await logout();
+            auth.logout();
             setLoading(false);
             navigate('/login');
         };
         setTimeout(asyncLogout, 500);
-    }, [navigate, logout]);
+    }, [navigate, auth]);
 
     if (loading) {
         return <PageLoader />;
