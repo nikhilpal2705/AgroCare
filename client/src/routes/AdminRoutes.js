@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from 'layout/main/MainLayout';
 import NotFound from 'components/common/NotFound';
 
-const PrivateRoutes = () => {
+const AdminRoutes = () => {
   return (
     <Layout>
       <Routes>
@@ -12,4 +12,4 @@ const PrivateRoutes = () => {
   );
 };
 
-export default PrivateRoutes;
+export default AdminRoutes;

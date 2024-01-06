@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useMemo } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { authReducer, initialState } from './reducer';
 import contextActions from './actions';
 
@@ -6,9 +6,8 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
-    const value = useMemo(() => ({ state, dispatch })); // Use an object instead of an array
     return (
-        <AuthContext.Provider value={value}>
+        <AuthContext.Provider value={{ state, dispatch }}>
             {children}
         </AuthContext.Provider>
     );
