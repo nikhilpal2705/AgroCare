@@ -15,13 +15,23 @@ public class Constants {
         String INCORRECT_PASSWORD_MESSAGE = "Password is incorrect.";
         String REGISTRATION_SUCCESS_MESSAGE = "Registration successful! Please log in.";
         String INTERNAL_SERVER_ERROR_MESSAGE = "Internal Server Error";
+        String SOME_ERROR_OCCURRED = "Some error occurred";
         String CROP_ADDED_SUCCESS_MESSAGE = "Crop added successfully";
         String CROP_ADDED_ERROR_MESSAGE = "Error while adding crop";
         String CROP_DELETED_SUCCESS_MESSAGE = "Crop deleted successfully";
         String CROP_DELETED_ERROR_MESSAGE = "Error while deleting crop";
-        String SOME_ERROR_OCCURED = "Some error occured";
         String CROP_FETCH_ERROR_MESSAGE = "Error while fetching crops";
         String CROP_UPDATED_SUCCESS_MESSAGE = "Crop updated successfully";
+        String CROP_UPDATING_ERROR_MESSAGE = "Error while updating crop";
+        String CROP_NOT_FOUND = "Crop not found !! ";
+        String PEST_FETCH_ERROR_MESSAGE = "Error while fetching pests";
+        String PEST_ADDED_ERROR_MESSAGE = "Error while adding pest";
+        String PEST_ADDED_SUCCESS_MESSAGE = "Pest added successfully";
+        String PEST_DELETED_ERROR_MESSAGE = "Error while deleting pest";
+        String PEST_DELETED_SUCCESS_MESSAGE = "Pest deleted successfully";
+        String PEST_UPDATED_SUCCESS_MESSAGE = "Pest updated successfully";
+        String PEST_UPDATING_ERROR_MESSAGE = "Error while updating pest";
+        String PEST_NOT_FOUND = "Pest not found !! ";
     }
 
 }

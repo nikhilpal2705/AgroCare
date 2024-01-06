@@ -8,16 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import java.time.Instant;
 import com.agrocare.agrocare.helper.Constants;
+
+import java.time.Instant;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "crops")
-public class Crops {
+@Table(name = "pests")
+public class Pests {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,37 +29,29 @@ public class Crops {
     @Column(name = "userId", nullable = false)
     private int userId;
 
+    @JsonProperty("cropId")
+    @Column(name = "cropId", nullable = false)
+    private int cropId;
+
     @JsonProperty("name")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @JsonProperty("cropType")
-    @Column(name = "cropType", nullable = false)
-    private String cropType;
-
-    @JsonProperty("cropVariety")
-    @Column(name = "cropVariety", nullable = false)
-    private String cropVariety;
-
-    @JsonProperty("fieldName")
-    @Column(name = "fieldName", nullable = false)
-    private String fieldName;
-
-    @JsonProperty("fieldSize")
-    @Column(name = "fieldSize", nullable = false)
-    private String fieldSize;
+    @JsonProperty("pestiside")
+    @Column(name = "pestiside", nullable = false)
+    private String pestiside;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
     private int status = Constants.Status.ACTIVE;
 
-    @JsonProperty("plantingDate")
-    @Column(name = "plantingDate", nullable = false)
-    private String plantingDate;
+    @JsonProperty("state")
+    @Column(name = "state", nullable = false)
+    private int state;
 
-    @JsonProperty("harvestDate")
-    @Column(name = "harvestDate", nullable = false)
-    private String harvestDate;
+    @JsonProperty("date")
+    @Column(name = "date", nullable = false)
+    private String date;
 
     @CreatedDate
     @JsonProperty("createdAt")

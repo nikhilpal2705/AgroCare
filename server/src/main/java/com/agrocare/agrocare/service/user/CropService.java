@@ -15,13 +15,13 @@ public class CropService {
     private CropRepository cropRepository;
 
     public String saveCrop(Crops crop) {
-        crop.setStatus(Constants.Status.ACTIVE);
         this.cropRepository.save(crop);
         return Constants.Messages.CROP_ADDED_SUCCESS_MESSAGE;
     }
 
     public String deleteCrop(int cropId) {
-//        Crops crop = this.cropRepository.findById(cropId).get();
+//        Crops crop = this.cropRepository.findById(cropId).orElseThrow(() ->
+//                new RuntimeException(Constants.Messages.CROP_NOT_FOUND + cropId)));
 //        crop.setStatus(Constants.Status.DELETE);
 //        this.cropRepository.save(crop);
         this.cropRepository.deleteById(cropId);
@@ -34,7 +34,7 @@ public class CropService {
 
     public Crops getCrop(int cropId) {
         return this.cropRepository.findById(cropId).orElseThrow(() ->
-                new RuntimeException("Crop not found with id: " + cropId));
+                new RuntimeException(Constants.Messages.CROP_NOT_FOUND + cropId));
     }
 
     public String updateCrop(int cropId, Crops crops) {
@@ -43,7 +43,7 @@ public class CropService {
             this.cropRepository.save(crops);
             return Constants.Messages.CROP_UPDATED_SUCCESS_MESSAGE;
         } else {
-            return Constants.Messages.SOME_ERROR_OCCURED;
+            return Constants.Messages.SOME_ERROR_OCCURRED;
         }
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.agrocare.agrocare.helper.Constants;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Users implements UserDetails {
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
-    private int status;
+    private int status = Constants.Status.ACTIVE;
 
     @JsonProperty("accountNonExpired")
     @Column(name = "accountNonExpired", nullable = false)
