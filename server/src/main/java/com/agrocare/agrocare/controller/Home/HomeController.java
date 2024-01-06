@@ -20,7 +20,7 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
 
-    @PostMapping(value = "/registerUser")
+    @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(@RequestBody Users user) {
         try {
             System.out.println("User :::::- > " + user);
