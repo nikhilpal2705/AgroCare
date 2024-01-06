@@ -20,7 +20,7 @@ const errorHandler = (error) => {
       maxCount: 2,
     });
     notification.error({
-      message: `Request error ${status}`,
+      message: `Error`,
       description: message,
     });
     return response.data;

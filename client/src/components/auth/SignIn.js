@@ -14,17 +14,18 @@ const SignIn = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        remember: false,
     });
 
 
     // Update form data as per fields . . . 
     function updateFormData(event) {
-        const { name, value } = event.target;
+        const { name, value, type, checked } = event.target;
         // Update data as per fields requirement . . .
         setFormData((data) => {
             return {
                 ...data,
-                [name]: value,
+                [name]: type === "checkbox" ? checked : value,
             };
         })
 
@@ -39,9 +40,10 @@ const SignIn = () => {
         } else {
             // If the form is valid, proceed with the registration.
             const data = await authService.login({ loginData: formData })
+            console.log(`😱 😓 😒 ~ file: SignIn.js:42 ~ handleSignIn ~ formData:`, formData)
             if (data?.jwtToken) {
                 navigate('/dashboard');
-                auth.login(data);
+                auth.login(data, formData.remember);
             }
         }
     }
@@ -88,6 +90,9 @@ const SignIn = () => {
                                     <Form.Check
                                         type="checkbox"
                                         label="Remember Me"
+                                        name="remember"
+                                        value={formData.remember}
+                                        onChange={updateFormData}
                                     />
                                 </Form.Group>
 

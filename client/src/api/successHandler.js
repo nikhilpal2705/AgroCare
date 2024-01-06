@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import * as constant from "./constant";
+import * as constant from "../helper/constant";
 
 const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFailed: true }) => {
   if (response.status === constant.HttpStatus.OK) {
@@ -11,7 +11,7 @@ const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFa
         maxCount: 2,
       });
       notification.success({
-        message: `Request success`,
+        message: `Success`,
         description: successText,
       });
     }
@@ -23,7 +23,7 @@ const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFa
         maxCount: 2,
       });
       notification.error({
-        message: `Request error ${response.status}`,
+        message: `Error`,
         description: errorText,
       });
     }

@@ -1,10 +1,10 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from 'components/auth/Home'
-import SignIn from 'components/auth/SignIn';
-import Register from 'components/auth/Register';
-import Footer from 'layout/main/Footer';
-import NotFound from 'components/common/NotFound';
-import "bootstrap/dist/css/bootstrap.min.css";
+const Home = lazy(() => import('components/auth/Home'));
+const SignIn = lazy(() => import('components/auth/SignIn'));
+const Register = lazy(() => import('components/auth/Register'));
+const Footer = lazy(() => import('layout/main/Footer'));
+const NotFound = lazy(() => import('components/common/NotFound'));
 
 const PublicRoutes = () => {
   return (

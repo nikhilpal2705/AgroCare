@@ -1,7 +1,7 @@
-import errorHandler from "helper/errorHandler";
-import successHandler from "helper/successHandler";
+import errorHandler from "api/errorHandler";
+import successHandler from "api/successHandler";
 import * as constant from "helper/constant";
-import api from "utils/api";
+import api from "api/api";
 // import { toast } from 'react-toastify';
 
 
@@ -28,7 +28,7 @@ export const register = async ({ registerData }) => {
     try {
         registerData.authorities = constant.Authorities.USER;
         registerData.status = constant.Status.ACTIVE;
-        const response = await api.post("/registerUser", registerData);
+        const response = await api.post("/register", registerData);
         successHandler(response, {
             notifyOnSuccess: true,
             notifyOnFailed: true,
