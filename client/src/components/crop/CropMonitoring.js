@@ -5,6 +5,7 @@ import Api from '../../utils/api';
 import Cookies from 'js-cookie';
 import successHandler from "helper/successHandler";
 import * as constant from "helper/constant";
+import errorHandler from 'helper/errorHandler';
 
 const CropMonitoring = () => {
   const [crops, setCrops] = useState([]);
@@ -83,19 +84,17 @@ const CropMonitoring = () => {
             "Authorization": "Bearer " + Cookies.get('jwtToken'),
           }
         });
+
+        console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:86 ~ handleSubmit ~ response : `, response)
         successHandler(response, {
           notifyOnSuccess: true,
-          notifyOnFailed: true,
         })
 
-        setCrops([...crops, { key: response.data.id, ...response.data }]);
+        // setCrops([...crops, { key: response.data.id, ...response.data }]);
 
       } catch (error) {
         console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:70 ~ handleSubmit ~ error : `, error)
-        successHandler(error.response, {
-          notifyOnSuccess: true,
-          notifyOnFailed: true,
-        })
+        errorHandler(error)
       }
 
     }
@@ -121,14 +120,10 @@ const CropMonitoring = () => {
 
       successHandler(response, {
         notifyOnSuccess: true,
-        notifyOnFailed: true,
       })
     } catch (error) {
       console.log(`🙈 🙉 🙊 ~ file: CropMonitoring.js:75 ~ handleDelete ~ error : `, error.response.data)
-      successHandler(error.response, {
-        notifyOnSuccess: true,
-        notifyOnFailed: true,
-      })
+      errorHandler(error)
     }
 
   };

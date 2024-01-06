@@ -88,10 +88,10 @@ export default function DataTable({ config }) {
   const [, setTableData] = useState(dataSource);
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
     total: dataSource.length,
-    showSizeChanger: false,
-    // pageSizeOptions: ['10', '20', '30', '40'],
+    showSizeChanger: true,
+    pageSizeOptions: ['5', '10', '20', '30', '40'],
   });
 
 
