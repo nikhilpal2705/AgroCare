@@ -3,11 +3,12 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from 'assets/images/logo.png';
 import * as authService from './AuthService';
-import { useAuth } from 'contexts/auth/AuthContext';
+import { useAuthContext } from 'contexts/auth';
 
 const SignIn = () => {
     const navigate = useNavigate()
-    const { login } = useAuth();
+    const { authContextAction } = useAuthContext();
+    const { auth } = authContextAction;
 
     let [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ const SignIn = () => {
             const data = await authService.login({ loginData: formData })
             if (data?.jwtToken) {
                 navigate('/dashboard');
-                login(data);
+                auth.login(data);
             }
         }
     }
