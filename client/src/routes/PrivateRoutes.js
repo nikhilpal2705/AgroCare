@@ -1,11 +1,14 @@
+import PageLoader from 'components/common/PageLoader';
+import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import Dashboard from 'components/dashboard/Dashboard';
-import CropMonitoring from 'components/crop/CropMonitoring';
-import Layout from 'layout/main/MainLayout';
-import NotFound from 'components/common/NotFound';
-import Logout from 'components/auth/Logout';
-import PestControl from 'components/pest/PestControl';
-function AppRouter() {
+const Dashboard = lazy(() => import('components/dashboard/Dashboard'));
+const CropMonitoring = lazy(() => import('components/crop/CropMonitoring'));
+const Layout = lazy(() => import('layout/main/MainLayout'));
+const NotFound = lazy(() => import('components/common/NotFound'));
+const Logout = lazy(() => import('components/auth/Logout'));
+const PestControl = lazy(() => import('components/pest/PestControl'));
+
+function PrivateAppRoutes() {
   let element = useRoutes([
     {
       path: '/',
@@ -51,7 +54,9 @@ function AppRouter() {
 const PrivateRoutes = () => {
   return (
     <Layout>
-      <AppRouter />
+      <Suspense fallback={<PageLoader />}>
+        <PrivateAppRoutes />
+      </Suspense>
     </Layout>
   );
 };

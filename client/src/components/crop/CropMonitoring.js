@@ -11,7 +11,6 @@ const CropMonitoring = () => {
   const [crops, setCrops] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedCrop, setSelectedCrop] = useState(null);
-
   const handleClose = () => setShowModal(false);
 
   const handleShow = () => setShowModal(true);
