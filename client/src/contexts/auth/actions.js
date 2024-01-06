@@ -4,24 +4,39 @@ import Cookies from 'js-cookie';
 const contextActions = (dispatch) => {
     return {
         auth: {
-            login: (userData) => {
+            login: (userData, remember) => {
                 dispatch({
                     type: actionTypes.LOGIN,
                     payload: userData,
                 });
-                Cookies.set('jwtToken', userData.jwtToken, { expires: 5 / 24, secure: true, sameSite: 'strict' });
-                Cookies.set('isAdmin', userData.isAdmin, { expires: 5 / 24, secure: true, sameSite: 'strict' });
-                Cookies.set('email', userData.email, { expires: 5 / 24, secure: true, sameSite: 'strict' });
-                Cookies.set('name', userData.name, { expires: 5 / 24, secure: true, sameSite: 'strict' });
-                Cookies.set('userId', userData.userId, { expires: 5 / 24, secure: true, sameSite: 'strict' });
-                Cookies.set('authority', userData.authority, { expires: 5 / 24, secure: true, sameSite: 'strict' });
+                let cookieOptions = {
+                    expires: remember ? new Date(Date.now() + 5 * 60 * 60 * 1000) : null, // if remember then cookies will valid for 5 hours else it will valid for current session
+                    secure: true,
+                    sameSite: 'Lax',
+                    httpOnly: false,
+                    domain: window.location.hostname,
+                    path: '/',
+                };
+                Cookies.set('jwtToken', userData.jwtToken, cookieOptions);
+                Object.keys(userData).forEach(key => {
+                    if (key !== 'jwtToken') {
+                        Cookies.set(key, userData[key], cookieOptions);
+                    }
+                });
             },
             logout: () => {
                 dispatch({
                     type: actionTypes.LOGOUT,
                 });
-                Object.keys(Cookies.get()).forEach(function (cookieName) {
-                    Cookies.remove(cookieName, { secure: true, sameSite: 'strict' });
+                let cookieOptions = {
+                    secure: true,
+                    sameSite: 'Lax',
+                    httpOnly: false,
+                    domain: window.location.hostname,
+                    path: '/',
+                }
+                Object.keys(Cookies.get()).forEach(key => {
+                    Cookies.remove(key, cookieOptions);
                 });
             }
         }
