@@ -14,10 +14,10 @@ public class CropService {
     @Autowired
     private CropRepository cropRepository;
 
-    public Crops saveCrop(Crops crop) {
+    public String saveCrop(Crops crop) {
         crop.setStatus(Constants.Status.ACTIVE);
-        return this.cropRepository.save(crop);
-//        return Constants.Messages.CROP_ADDED_SUCCESS_MESSAGE;
+        this.cropRepository.save(crop);
+        return Constants.Messages.CROP_ADDED_SUCCESS_MESSAGE;
     }
 
     public String deleteCrop(int cropId) {
