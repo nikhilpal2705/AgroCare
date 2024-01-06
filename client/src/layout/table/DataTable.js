@@ -31,16 +31,19 @@ export default function DataTable({ config }) {
   ];
 
   const handleRead = (record) => {
+    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:34 ~ handleRead ~ record : `, record)
     readBox.open();
     panel.open();
   }
 
   function handleEdit(record) {
+    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:40 ~ handleEdit ~ record : `, record)
     editBox.open();
     panel.open();
   }
 
   function handleDelete(record) {
+    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:46 ~ handleDelete ~ record : `, record)
     modal.open();
   }
 

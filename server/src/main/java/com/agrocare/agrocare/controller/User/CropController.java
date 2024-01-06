@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequestMapping(value = "/user")
 public class CropController extends UserService {
 
-    private Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
 
     @Autowired
     private CropService cropService;
