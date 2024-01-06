@@ -56,7 +56,7 @@ public class CropController extends UserService {
 
     //Delete a crop . . .
     @DeleteMapping(value = "/crop/{cropId}")
-    public ResponseEntity<?> createCrop(@PathVariable("cropId") int cropId) {
+    public ResponseEntity<?> deleteCrop(@PathVariable("cropId") int cropId) {
         try {
             return new ResponseEntity<>(cropService.deleteCrop(cropId), HttpStatus.OK);
         } catch (Exception err) {
@@ -72,7 +72,7 @@ public class CropController extends UserService {
             return new ResponseEntity<>(cropService.updateCrop(cropId, crops), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(Constants.Messages.CROP_ADDED_ERROR_MESSAGE, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Constants.Messages.CROP_UPDATING_ERROR_MESSAGE, HttpStatus.BAD_REQUEST);
         }
     }
 
