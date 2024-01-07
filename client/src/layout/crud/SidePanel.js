@@ -13,7 +13,7 @@ export default function SidePanel({ config, children }) {
 
   return (
     <Drawer
-      title={config.PANEL_TITLE}
+      title={config.ENTITY_TITLE}
       placement="right"
       onClose={collapsePanel}
       open={!isPanelClose}

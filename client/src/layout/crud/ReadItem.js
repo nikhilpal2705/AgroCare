@@ -23,19 +23,14 @@ export default function ReadItem({ config }) {
   let { fields, readColumns } = config;
   const [listState, setListState] = useState([]);
   if (fields) readColumns = [...dataForRead({ fields: fields })];
-  console.log(`😱 😓 😒 ~ file: ReadItem.js:23 ~ ReadItem ~ readColumns:`, readColumns)
 
   useEffect(() => {
-    const list = [];
-    readColumns.map((props) => {
-      const propsKey = props.dataIndex;
-      const propsTitle = props.title;
-      const isDate = props.isDate || false;
-      let value = ''
-      // let value = valueByString(currentResult, propsKey);
-      value = isDate ? dayjs(value).format('DD-MM-YYYY') : value;
-      list.push({ propsKey, label: propsTitle, value: value });
-    });
+    const list = readColumns.map((props) => ({
+      propsKey: props.dataIndex,
+      label: props.title,
+      // value: props.isDate ? dayjs(valueByString(currentResult, props.dataIndex)).format('DD-MM-YYYY') : '',
+    }));
+
     setListState(list);
   }, []);
 
