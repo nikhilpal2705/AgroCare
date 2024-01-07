@@ -3,25 +3,17 @@ import { notification } from 'antd';
 const errorHandler = (error) => {
   const { response } = error;
 
-  // Handle JWT expired case
-  // if (response.data && response.data.jwtExpired) {
-  //   const result = Cookies.get('jwtToken');
-  //   if (result) {
-  //     window.location.href = '/logout';
-  //   }
-  // }
-
   if (response && response.status) {
-    const message = response.data;
-
+    const message = response.data && response.data.message;
+    const errorText = message
     const { status } = response;
     notification.config({
       duration: 4,
       maxCount: 2,
     });
     notification.error({
-      message: `Error`,
-      description: message,
+      message: `Request error ${status}`,
+      description: errorText,
     });
     return response.data;
   } else {

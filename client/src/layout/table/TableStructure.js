@@ -3,10 +3,8 @@ import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from 'helper/countryList';
 import { generate as uniqueId } from 'shortid';
-import getLabel from 'helper/getLabel';
 
-export function dataForTable({ fields }) {
-  const translate = getLabel();
+export function dataForTable({ fields, translate, dateFormat = 'DD/MM/YYYY' }) {
   let columns = [];
 
   Object.keys(fields).forEach((key) => {
@@ -36,7 +34,7 @@ export function dataForTable({ fields }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const date = dayjs(record[key]).format('DD/MM/YYYY');
+          const date = dayjs(record[key]).format(dateFormat);
           return (
             <Tag bordered={false} color={field.color}>
               {date}
@@ -55,7 +53,6 @@ export function dataForTable({ fields }) {
           );
         },
       },
-
       stringWithColor: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
