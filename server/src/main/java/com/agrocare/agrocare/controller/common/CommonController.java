@@ -1,8 +1,8 @@
-package com.agrocare.agrocare.controller.Home;
+package com.agrocare.agrocare.controller.common;
 
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Users;
-import com.agrocare.agrocare.service.common.HomeService;
+import com.agrocare.agrocare.service.common.CommonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +18,22 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-public class HomeController {
+public class CommonController {
 
     private static final Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
 
     @Autowired
-    private HomeService homeService;
+    private CommonService commonService;
 
     @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(@RequestBody Users user) {
         try {
             System.out.println("User :::::- > " + user);
             // Check for duplicate email
-            if (homeService.existsByEmail(user.getEmail())) {
+            if (commonService.existsByEmail(user.getEmail())) {
                 return new ResponseEntity<>(Constants.Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
             }
-            return new ResponseEntity<>(homeService.registerUser(user), HttpStatus.OK);
+            return new ResponseEntity<>(commonService.registerUser(user), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,7 +43,7 @@ public class HomeController {
     @GetMapping(value = "/getUser", produces = "application/json")
     public ResponseEntity<List<Users>> getUser() {
         try {
-            List<Users> userList = homeService.getAllUsers();
+            List<Users> userList = commonService.getAllUsers();
             return new ResponseEntity<>(userList, HttpStatus.OK);
         } catch (Exception err) {
             err.printStackTrace();

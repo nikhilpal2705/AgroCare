@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.controller.Admin;
+package com.agrocare.agrocare.controller.admin;
 
 import com.agrocare.agrocare.service.admin.AdminService;
 import org.springframework.http.ResponseEntity;
