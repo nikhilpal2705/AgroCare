@@ -28,9 +28,9 @@ public class Crops {
     @Column(name = "userId", nullable = false)
     private int userId;
 
-    @JsonProperty("name")
-    @Column(name = "name", nullable = false)
-    private String name;
+    @JsonProperty("cropName")
+    @Column(name = "cropName", nullable = false)
+    private String cropName;
 
     @JsonProperty("cropType")
     @Column(name = "cropType", nullable = false)

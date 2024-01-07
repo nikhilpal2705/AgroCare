@@ -23,7 +23,7 @@ const api = {
     },
     read: async ({ entity, id }) => {
         try {
-            const response = await axios.get(ACCESS_URL + entity + '/' + id);
+            const response = await axios.get(ACCESS_URL + `${entity}/${id}`);
             successHandler(response, {
                 notifyOnSuccess: false,
                 notifyOnFailed: true,
@@ -35,7 +35,7 @@ const api = {
     },
     update: async ({ entity, id, jsonData }) => {
         try {
-            const response = await axios.patch(ACCESS_URL + entity + '/' + id, jsonData);
+            const response = await axios.patch(ACCESS_URL + `${entity}/${id}`, jsonData);
             successHandler(response, {
                 notifyOnSuccess: true,
                 notifyOnFailed: true,
@@ -47,7 +47,7 @@ const api = {
     },
     delete: async ({ entity, id }) => {
         try {
-            const response = await axios.delete(ACCESS_URL + entity + '/' + id);
+            const response = await axios.delete(ACCESS_URL + `${entity}/${id}`);
             successHandler(response, {
                 notifyOnSuccess: true,
                 notifyOnFailed: true,
@@ -73,6 +73,7 @@ const api = {
     listAll: async ({ entity }) => {
         try {
             const response = await axios.get(ACCESS_URL + entity);
+            console.log(`😱 😓 😒 ~ file: api.js:76 ~ listAll: ~ response:`, response)
 
             successHandler(response, {
                 notifyOnSuccess: false,

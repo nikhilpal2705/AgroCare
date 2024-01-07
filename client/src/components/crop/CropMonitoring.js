@@ -4,23 +4,33 @@ import CrudLayout from 'layout/crud/CrudLayout';
 
 const CropMonitoring = () => {
   const fields = {
-    name: {
+    cropName: {
       type: 'string',
+      label: 'Crop Name',
+      required: true,
     },
     cropType: {
       type: 'string',
+      label: 'Crop Type',
+      required: true,
     },
     cropVariety: {
       type: 'string',
+      label: 'Crop Variety',
+      required: true,
     },
     fieldName: {
       type: 'string',
+      label: 'Field Name',
     },
     fieldSize: {
       type: 'string',
     },
     plantingDate: {
       type: 'date',
+      label: 'Planting Date',
+      required: true,
+      hasFeedback: true,
     },
     harvestDate: {
       type: 'date',
@@ -29,7 +39,7 @@ const CropMonitoring = () => {
   };
   let config = {
     fields,
-    routeEntity: 'crop',
+    entity: 'crop',
     ENTITY_TITLE: 'Crop',
     dataSource: [],
   }

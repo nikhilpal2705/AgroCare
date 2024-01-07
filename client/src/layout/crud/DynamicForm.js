@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { DatePicker, Input, Form, Select, InputNumber, Switch, Tag } from 'antd';
 
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
-import translate from 'helper/toTitleCase'
+import getLabel from 'helper/getLabel';
+import SelectAsync from 'components/common/SelectAsync';
 import { generate as uniqueId } from 'shortid';
 
 import { countryList } from 'helper/countryList';
@@ -31,6 +32,7 @@ export default function DynamicForm({ fields, isUpdateForm = false }) {
 }
 
 function FormElement({ field, setFeedback }) {
+  const translate = getLabel();
   const { TextArea } = Input;
 
   const compunedComponent = {
@@ -174,6 +176,23 @@ function FormElement({ field, setFeedback }) {
         ))}
       </Select>
     ),
+    async: (
+      <SelectAsync
+        entity={field.entity}
+        displayLabels={field.displayLabels}
+        outputValue={field.outputValue}
+        loadDefault={field.loadDefault}
+      ></SelectAsync>
+    ),
+    currency: (
+      <InputNumber
+        className="moneyInput"
+        min={0}
+        controls={false}
+        addonAfter={undefined}
+        addonBefore={'$'}
+      />
+    ),
   };
 
   const filedType = {
@@ -204,6 +223,7 @@ function FormElement({ field, setFeedback }) {
         {
           required: field.required || false,
           type: filedType[field.type] ?? 'any',
+          message: `Please enter ${field.label}`
         },
       ]}
       valuePropName={field.type === 'boolean' ? 'checked' : 'value'}
