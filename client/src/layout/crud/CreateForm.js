@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useCrudContext } from 'contexts/crud';
 import { Button, Form } from 'antd';
+import api from 'api/api';
 
 export default function CreateForm({ config, formElements, withUpload = false }) {
   const { crudContextAction } = useCrudContext();
   const { panel, addBox } = crudContextAction;
+  const { routeEntity } = config
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
-    // Manually trim values before submission
+    // Trim values before submission
 
     if (fieldsValue.file && withUpload) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
@@ -17,7 +19,8 @@ export default function CreateForm({ config, formElements, withUpload = false })
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
-    // API for create
+    let data = api.create({ entity: routeEntity, jsonData: addObj, withUpload })
+    console.log(`😱 😓 😒 ~ file: CreateForm.js:23 ~ onSubmit ~ data:`, data)
   };
 
   // useEffect(() => {

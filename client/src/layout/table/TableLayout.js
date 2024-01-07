@@ -9,7 +9,7 @@ const { Content } = Layout;
 function AddNewItem({ config }) {
   const { crudContextAction } = useCrudContext();
   const { panel, addBox } = crudContextAction;
-  const { ADD_NEW_ENTITY } = config;
+  const { ENTITY_TITLE } = config;
 
   const handelClick = () => {
     addBox.open();
@@ -18,13 +18,13 @@ function AddNewItem({ config }) {
 
   return (
     <Button onClick={handelClick} type="primary">
-      {ADD_NEW_ENTITY}
+      {'Add ' + ENTITY_TITLE}
     </Button>
   );
 }
 
 function TableLayout({ config }) {
-  let { DATATABLE_TITLE } = config;
+  let { ENTITY_TITLE } = config;
   return (
     <Content
       className="whiteBox shadow layoutPadding"
@@ -37,7 +37,7 @@ function TableLayout({ config }) {
     >
       <PageHeader
         onBack={() => window.history.back()}
-        title={DATATABLE_TITLE}
+        title={ENTITY_TITLE + ' List'}
         ghost={false}
         extra={[
           <AddNewItem key={`${uniqueId()}`} config={config} />,

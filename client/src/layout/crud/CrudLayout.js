@@ -10,9 +10,6 @@ import UpdateForm from "./UpdateForm";
 function CrudForm({ config, createForm, updateForm, withUpload }) {
     const { state } = useCrudContext();
     const { isAddBoxOpen, isEditBoxOpen, isReadBoxOpen } = state;
-    console.log(`😱 😓 😒 ~ file: CrudLayout.js:13 ~ CrudForm ~ isReadBoxOpen:`, isReadBoxOpen)
-    console.log(`😱 😓 😒 ~ file: CrudLayout.js:13 ~ CrudForm ~ isEditBoxOpen:`, isEditBoxOpen)
-    console.log(`😱 😓 😒 ~ file: CrudLayout.js:13 ~ CrudForm ~ isAddBoxOpen:`, isAddBoxOpen)
 
     return (
         isAddBoxOpen ? <CreateForm config={config} formElements={createForm} withUpload={withUpload} />

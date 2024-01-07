@@ -3,10 +3,11 @@ import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@an
 import { Dropdown, Table } from 'antd';
 import { useCrudContext } from 'contexts/crud';
 import { dataForTable } from './TableStructure';
+import api from 'api/api';
 
 
 export default function DataTable({ config }) {
-  let { dataSource, fields } = config;
+  let { dataSource, fields, routeEntity } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, modal, readBox, editBox } = crudContextAction;
   const items = [
@@ -31,19 +32,16 @@ export default function DataTable({ config }) {
   ];
 
   const handleRead = (record) => {
-    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:34 ~ handleRead ~ record : `, record)
     readBox.open();
     panel.open();
   }
 
   function handleEdit(record) {
-    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:40 ~ handleEdit ~ record : `, record)
     editBox.open();
     panel.open();
   }
 
   function handleDelete(record) {
-    console.log(`🙈 🙉 🙊 ~ file: DataTable.js:46 ~ handleDelete ~ record : `, record)
     modal.open();
   }
 
@@ -90,8 +88,8 @@ export default function DataTable({ config }) {
     current: 1,
     pageSize: 5,
     total: dataSource.length,
-    showSizeChanger: true,
-    pageSizeOptions: ['5', '10', '20', '30', '40'],
+    showSizeChanger: false,
+    pageSizeOptions: ['10', '20', '30', '40'],
   });
 
 

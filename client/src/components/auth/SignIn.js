@@ -40,7 +40,6 @@ const SignIn = () => {
         } else {
             // If the form is valid, proceed with the registration.
             const data = await authService.login({ loginData: formData })
-            console.log(`😱 😓 😒 ~ file: SignIn.js:42 ~ handleSignIn ~ formData:`, formData)
             if (data?.jwtToken) {
                 navigate('/dashboard');
                 auth.login(data, formData.remember);
