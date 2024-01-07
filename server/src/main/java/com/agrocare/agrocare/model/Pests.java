@@ -33,9 +33,9 @@ public class Pests {
     @Column(name = "cropId", nullable = false)
     private int cropId;
 
-    @JsonProperty("name")
-    @Column(name = "name", nullable = false)
-    private String name;
+    @JsonProperty("pestName")
+    @Column(name = "pestName", nullable = false)
+    private String pestName;
 
     @JsonProperty("pestiside")
     @Column(name = "pestiside", nullable = false)

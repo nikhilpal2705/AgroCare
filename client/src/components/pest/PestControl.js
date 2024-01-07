@@ -1,43 +1,33 @@
 import DynamicForm from 'layout/crud/DynamicForm';
 import CrudLayout from 'layout/crud/CrudLayout';
 const PestControl = () => {
-  const dataSource = [
-    {
-      key: '1',
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@example.com',
-      age: 30,
-    },
-  ];
 
   const fields = {
-    firstName: {
+    pestName: {
+      label: 'Pest Name',
       type: 'string',
-      disableForForm: false,
-      disableForTable: false,
+      required: true,
     },
-    lastName: {
+    cropId: {
+      type: 'async',
+      label: 'Crop Name',
+      displayLabels: ['cropName', 'name'],
+      dataIndex: ['cropName', 'name'],
+      entity: 'crop',
+      required: true,
+    },
+    pestiside: {
       type: 'string',
     },
-    phone: {
-      type: 'phone',
-      disableForForm: true,
-      disableForTable: true,
+    date: {
+      type: 'date',
     },
-    email: {
-      type: 'email',
-    },
-    age: {
-      type: 'number',
-    },
-
   };
   let config = {
     fields,
-    routeEntity: 'pest',
+    entity: 'pest',
     ENTITY_TITLE: 'Pest',
-    dataSource: dataSource,
+    dataSource: [],
   }
   return (
     <>

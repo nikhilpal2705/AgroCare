@@ -6,7 +6,7 @@ import api from 'api/api';
 export default function CreateForm({ config, formElements, withUpload = false }) {
   const { crudContextAction } = useCrudContext();
   const { panel, addBox } = crudContextAction;
-  const { routeEntity } = config
+  const { entity } = config
   const [form] = Form.useForm();
   const onSubmit = (fieldsValue) => {
     // Trim values before submission
@@ -19,8 +19,7 @@ export default function CreateForm({ config, formElements, withUpload = false })
       acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
       return acc;
     }, {});
-    let data = api.create({ entity: routeEntity, jsonData: addObj, withUpload })
-    console.log(`😱 😓 😒 ~ file: CreateForm.js:23 ~ onSubmit ~ data:`, data)
+    let data = api.create({ entity, jsonData: addObj, withUpload })
   };
 
   // useEffect(() => {

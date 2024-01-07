@@ -1,6 +1,6 @@
-const toTitleCase = (str) => {
+const convertLabel = (key) => {
     // Replace underscores (_) with spaces
-    let spacedStr = str.replace(/_/g, ' ');
+    let spacedStr = key.replace(/_/g, ' ');
 
     // Convert camelCase to title case
     return spacedStr.replace(
@@ -16,4 +16,9 @@ const toTitleCase = (str) => {
     );
 }
 
-export default toTitleCase
+const getLabel = () => {
+    const translate = (value) => convertLabel(value);
+    return translate;
+};
+
+export default getLabel;

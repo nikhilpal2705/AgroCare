@@ -3,9 +3,10 @@ import { Switch, Tag } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from 'helper/countryList';
 import { generate as uniqueId } from 'shortid';
-import translate from 'helper/toTitleCase';
+import getLabel from 'helper/getLabel';
 
 export function dataForTable({ fields }) {
+  const translate = getLabel();
   let columns = [];
 
   Object.keys(fields).forEach((key) => {

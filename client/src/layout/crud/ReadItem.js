@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'antd';
 import dayjs from 'dayjs';
-import translate from 'helper/toTitleCase'
-
+import getLabel from 'helper/getLabel'
+const translate = getLabel();
 
 const dataForRead = ({ fields }) => {
   let columns = [];
