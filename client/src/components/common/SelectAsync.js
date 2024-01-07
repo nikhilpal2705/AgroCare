@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from 'api/api';
 import useFetch from 'hooks/useFetch';
-import { Select, Tag } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Select } from 'antd';
 import { generate as uniqueId } from 'shortid';
 
 const SelectAsync = ({
@@ -14,9 +13,6 @@ const SelectAsync = ({
 }) => {
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
-
-  const navigate = useNavigate();
-
   const asyncList = () => {
     return api.list({ entity });
   };
