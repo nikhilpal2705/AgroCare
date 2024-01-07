@@ -4,7 +4,7 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { countryList } from 'helper/countryList';
 import { generate as uniqueId } from 'shortid';
 
-export function dataForTable({ fields, translate, dateFormat = 'DD/MM/YYYY' }) {
+export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
   let columns = [];
 
   Object.keys(fields).forEach((key) => {

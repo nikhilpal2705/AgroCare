@@ -6,63 +6,54 @@ import { generate as uniqueId } from 'shortid';
 
 const SelectAsync = ({
   entity,
-  displayLabels = ['name'],
+  displayLabels,
   outputValue = 'id',
   value,
   onChange,
 }) => {
   const [selectOptions, setOptions] = useState([]);
   const [currentValue, setCurrentValue] = useState(undefined);
-  const asyncList = () => {
-    return api.list({ entity });
-  };
-  const { result, isLoading: fetchIsLoading, isSuccess } = useFetch(asyncList);
-  useEffect(() => {
-    isSuccess && result && setOptions(result);
-  }, [isSuccess, result]);
 
-  const labels = (optionField) => {
-    return displayLabels.map((x) => optionField[x]).join(' ');
-  };
+  const asyncList = () => api.list({ entity });
+  const { result, isLoading } = useFetch(asyncList);
+
+  useEffect(() => {
+    if (result) setOptions(result);
+  }, [result]);
+
   useEffect(() => {
     if (value) {
-      const val = value[outputValue] ?? value;
+      const val = value[outputValue] || value;
       setCurrentValue(val);
       onChange(val);
     }
   }, [value]);
 
+  const labels = (optionField) => displayLabels.map((x) => optionField[x]).join(' ');
+
   const handleSelectChange = (newValue) => {
-    const val = newValue[outputValue] ?? newValue;
+    const val = newValue[outputValue] || newValue;
     setCurrentValue(newValue);
     onChange(val);
   };
 
-  const optionsList = () => {
-    const list = [];
-    selectOptions.map((optionField) => {
-      const value = optionField[outputValue] ?? optionField;
-      const label = labels(optionField);
-      list.push({ value, label });
-    });
-
-    return list;
-  };
+  const optionsList = selectOptions.map((optionField) => ({
+    value: optionField[outputValue] || optionField,
+    label: labels(optionField),
+  }));
 
   return (
     <Select
-      loading={fetchIsLoading}
-      disabled={fetchIsLoading}
+      loading={isLoading}
+      disabled={isLoading}
       value={currentValue}
       onChange={handleSelectChange}
     >
-      {optionsList()?.map((option) => {
-        return (
-          <Select.Option key={`${uniqueId()}`} value={option.value}>
-            {option.label}
-          </Select.Option>
-        );
-      })}
+      {optionsList.map((option) => (
+        <Select.Option key={uniqueId()} value={option.value}>
+          {option.label}
+        </Select.Option>
+      ))}
     </Select>
   );
 };

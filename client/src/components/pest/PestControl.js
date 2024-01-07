@@ -11,8 +11,9 @@ const PestControl = () => {
     cropId: {
       type: 'async',
       label: 'Crop Name',
-      displayLabels: ['cropName', 'name'],
-      dataIndex: ['cropName', 'name'],
+      displayLabels: ['cropName'], // will be displayed on dropdown list
+      outputValue: ['id'], // will be used to filter on database table
+      dataIndex: ['cropName'], // will be displayed on table
       entity: 'crop',
       required: true,
     },

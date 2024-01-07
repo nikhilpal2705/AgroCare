@@ -14,18 +14,13 @@ public class PestService {
     @Autowired
     private PestRepository pestRepository;
 
-    public String savePest(Pests pest) {
-        this.pestRepository.save(pest);
-        return Constants.Messages.PEST_ADDED_SUCCESS_MESSAGE;
+    public Pests savePest(Pests pest) {
+        return this.pestRepository.save(pest);
     }
 
-    public String deletePest(int pestId) {
-//        Pests pests = this.pestRepository.findById(pestId).orElseThrow(() ->
-//                new RuntimeException(Constants.Messages.PEST_NOT_FOUND + pestId));
-//        pests.setStatus(Constants.Status.DELETE);
-//        this.pestRepository.save(pests);
+    public Pests deletePest(int pestId) {
         this.pestRepository.deleteById(pestId);
-        return Constants.Messages.PEST_DELETED_SUCCESS_MESSAGE;
+        return null;
     }
 
     public List<Pests> getPests() {
@@ -33,17 +28,16 @@ public class PestService {
     }
 
     public Pests getPest(int pestId) {
-        return this.pestRepository.findById(pestId).orElseThrow(() ->
-                new RuntimeException(Constants.Messages.PEST_NOT_FOUND + pestId));
+        return this.pestRepository.findById(pestId)
+                .orElseThrow(() -> new RuntimeException(Constants.Messages.PEST_NOT_FOUND + pestId));
     }
 
-    public String updatePest(int pestId, Pests pest) {
+    public Pests updatePest(int pestId, Pests pest) {
         if (this.getPest(pestId) != null && pest != null) {
             pest.setId(pestId);
-            this.pestRepository.save(pest);
-            return Constants.Messages.PEST_UPDATED_SUCCESS_MESSAGE;
+            return this.pestRepository.save(pest);
         } else {
-            return Constants.Messages.SOME_ERROR_OCCURRED;
+            return null;
         }
     }
 }
