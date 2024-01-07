@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.controller.User;
+package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Crops;
