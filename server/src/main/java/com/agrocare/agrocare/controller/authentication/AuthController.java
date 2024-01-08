@@ -1,5 +1,7 @@
 package com.agrocare.agrocare.controller.authentication;
 
+import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.helper.CustomResponse;
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtRequest;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtResponse;
@@ -40,21 +42,32 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-        this.doAuthenticate(request.getEmail(), request.getPassword());
+    public ResponseEntity<?> login(@RequestBody JwtRequest request) {
+        CustomResponse response = new CustomResponse();
+        try {
+            this.doAuthenticate(request.getEmail(), request.getPassword());
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
-        Users users = userService.findByEmail(request.getEmail()).orElseThrow(() ->
-                new UsernameNotFoundException("User Not Found with username: " + request.getEmail()));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+            Users users = userService.findByEmail(request.getEmail()).orElseThrow(() ->
+                    new UsernameNotFoundException("User Not Found with username: " + request.getEmail()));
 
-        UserResponse userResponse = new UserResponse(users.getId(), users.getName(), users.getEmail(), users.getAuthorities(), users.getStatus());
-        String token = this.helper.generateToken(userDetails);
+            UserResponse userResponse = new UserResponse(users.getId(), users.getName(), users.getEmail(), users.getAuthorities(), users.getStatus());
+            String token = this.helper.generateToken(userDetails);
 
-        JwtResponse response = JwtResponse.builder()
-                .jwtToken(token)
-                .user(userResponse)
-                .build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+            response.setSuccess(true);
+            response.setResult(new JwtResponse(token, userResponse));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (BadCredentialsException e) {
+            logger.info("Error: " + e.getMessage());
+            response.setSuccess(false);
+            response.setMessage("Invalid Username or Password!!");
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            logger.info("Error: " + e.getMessage());
+            response.setSuccess(false);
+            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     private void doAuthenticate(String email, String password) {

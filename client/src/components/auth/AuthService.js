@@ -8,7 +8,7 @@ export const login = async ({ loginData }) => {
     try {
         const response = await axios.post(
             AUTH_BASE_URL + "login", loginData);
-        let responseData = response.data
+        let responseData = response.data.result
         const data = {
             jwtToken: responseData.jwtToken,
             isAdmin: false,

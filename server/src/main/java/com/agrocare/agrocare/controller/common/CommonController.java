@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.controller.common;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.helper.CustomResponse;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.common.CommonService;
 import org.slf4j.Logger;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 public class CommonController {
@@ -26,34 +26,48 @@ public class CommonController {
     private CommonService commonService;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> registerUser(@RequestBody Users user) {
+    public ResponseEntity<CustomResponse> registerUser(@RequestBody Users user) {
+        CustomResponse response = new CustomResponse();
         try {
-            System.out.println("User :::::- > " + user);
-            // Check for duplicate email
             if (commonService.existsByEmail(user.getEmail())) {
-                return new ResponseEntity<>(Constants.Messages.DUPLICATE_EMAIL_MESSAGE, HttpStatus.BAD_REQUEST);
+                response.setSuccess(false);
+                response.setResult(null);
+                response.setMessage(Constants.Messages.DUPLICATE_EMAIL_MESSAGE);
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
-            return new ResponseEntity<>(commonService.registerUser(user), HttpStatus.OK);
+            response.setSuccess(true);
+            response.setResult(commonService.registerUser(user));
+            response.setMessage(Constants.Messages.REGISTRATION_SUCCESS_MESSAGE);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setSuccess(false);
+            response.setResult(null);
+            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value = "/getUser", produces = "application/json")
-    public ResponseEntity<List<Users>> getUser() {
+    public ResponseEntity<CustomResponse> getUser() {
+        CustomResponse response = new CustomResponse();
         try {
-            List<Users> userList = commonService.getAllUsers();
-            return new ResponseEntity<>(userList, HttpStatus.OK);
+            response.setSuccess(true);
+            response.setResult(commonService.getAllUsers());
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
-            err.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.info("Error: " + err.getMessage());
+            response.setSuccess(false);
+            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value = "/check-login-user")
-    public ResponseEntity<String> getLoginUser(Principal principal) {
-        return new ResponseEntity<>(principal.getName(), HttpStatus.OK);
+    public ResponseEntity<CustomResponse> getLoginUser(Principal principal) {
+        CustomResponse response = new CustomResponse();
+        response.setSuccess(true);
+        response.setResult(principal.getName());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 }

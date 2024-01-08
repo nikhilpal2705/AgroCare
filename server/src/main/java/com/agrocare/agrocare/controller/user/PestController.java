@@ -1,9 +1,10 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.helper.CustomResponse;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.service.user.PestService;
-import com.agrocare.utils.CustomResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

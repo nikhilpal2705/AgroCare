@@ -1,10 +1,10 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.helper.CustomResponse;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.service.user.CropService;
 import com.agrocare.agrocare.service.user.UserService;
-import com.agrocare.utils.CustomResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
