@@ -42,8 +42,7 @@ function FormElement({ field, setFeedback, feedback }) {
     boolean: <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />,
     date: <DatePicker placeholder={translate('select_date')} style={{ width: '100%' }} format={'DD-MM-YYYY'} />,
     select: renderSelect(field.options, commonSelectProps, translate),
-    selectWithTranslation: renderSelect(field.options, commonSelectProps, translate, true),
-    selectwithfeedback: renderSelect(field.options, commonSelectProps, translate, false, setFeedback),
+    selectwithfeedback: renderSelect(field.options, commonSelectProps, translate, setFeedback),
     color: renderSelect(field.options, commonSelectProps, translate),
     tag: renderSelect(field.options, commonSelectProps, translate, true),
     array: renderSelect(field.options, { ...commonSelectProps, mode: 'multiple' }, translate),
@@ -82,12 +81,12 @@ function FormElement({ field, setFeedback, feedback }) {
   );
 }
 
-function renderSelect(options, props, translate, withTag = false, onChange = null) {
+function renderSelect(options, props, translate, onChange = null) {
   return (
     <Select {...props} onChange={onChange}>
       {options?.map(option => (
         <Select.Option key={uniqueId()} value={option.value}>
-          {withTag ? <Tag color={option.color}>{translate(option.label)}</Tag> : translate(option.label)}
+          {translate(option.label)}
         </Select.Option>
       ))}
     </Select>
