@@ -1,6 +1,5 @@
 package com.agrocare.agrocare.configuration.jwt_pojo;
 
-import com.agrocare.agrocare.model.Users;
 import lombok.*;
 
 @Getter

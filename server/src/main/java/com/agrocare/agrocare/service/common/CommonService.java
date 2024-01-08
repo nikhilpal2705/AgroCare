@@ -1,6 +1,5 @@
 package com.agrocare.agrocare.service.common;
 
-import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,11 @@ public class CommonService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String registerUser(Users user) {
+    public Users registerUser(Users user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepo.save(user);
-        return Constants.Messages.REGISTRATION_SUCCESS_MESSAGE;
+        return userRepo.save(user);
     }
-    
+
     public boolean existsByEmail(String email) {
         return userRepo.existsByEmail(email);
     }
