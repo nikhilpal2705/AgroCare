@@ -25,8 +25,8 @@ public class CropService {
         return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS_MESSAGE);
     }
 
-    public CustomResponse getCrops() {
-        return new CustomResponse(true, this.cropRepository.findAll());
+    public CustomResponse getCrops(int userId) {
+        return new CustomResponse(true, this.cropRepository.findAllByUserId(userId));
     }
 
     public CustomResponse getCrop(int cropId) {
