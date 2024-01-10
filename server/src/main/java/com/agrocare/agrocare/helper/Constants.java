@@ -35,6 +35,7 @@ public class Constants {
         String USER_ID_NOT_AVAILABLE = "User id not available";
         String INVALID_USERNAME_PASSWORD = "Invalid Username or Password !!";
         String USER_NOT_FOUND_BY_USERNAME = "User Not Found with username !! ";
+        String INVALID_USER_ID = "Invalid User Id !!";
     }
 
     public interface NullCheck {

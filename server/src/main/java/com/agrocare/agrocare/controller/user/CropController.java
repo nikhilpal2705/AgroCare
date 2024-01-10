@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -26,23 +27,24 @@ public class CropController extends UserService {
     @Autowired
     private CropService cropService;
 
+    @Autowired
+    private UserService userService;
+
     // Fetch all crops . . .
     @GetMapping(value = "/crop")
-    public ResponseEntity<?> getCrops(@RequestBody CustomRequest customRequest) {
+    public ResponseEntity<?> getCrops(@RequestParam(name = "userId") int userId) {
         try {
-            System.out.println("customRequest : " + customRequest.getData());
-            // Assuming data is a Map<String, Object>
-//            Map<String, Object> requestData = (Map<String, Object>) customRequest.getData();
-//
-//            // Extract individual fields
-//            String first = (String) requestData.get("first");
-//            System.out.println("first : " + first);
-//            String second = (String) requestData.get("second");
-//            System.out.println("second : " + second);
-//            String other = (String) requestData.get("Other");
-//            System.out.println("other : " + other);
+            System.out.println("userId 111111111111111: " + userId);
+            if (userId == Constants.NullCheck.INT) {
+                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID), HttpStatus.BAD_REQUEST);
+            }
 
-            return new ResponseEntity<>(cropService.getCrops(), HttpStatus.OK);
+            userService.checkUserByUserId(userId);
+
+            return new ResponseEntity<>(cropService.getCrops(userId), HttpStatus.OK);
+        } catch (UsernameNotFoundException err) {
+            logger.info("Error: " + err.getMessage());
+            return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_FETCH_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
