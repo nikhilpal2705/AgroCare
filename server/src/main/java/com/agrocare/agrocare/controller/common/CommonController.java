@@ -1,7 +1,7 @@
 package com.agrocare.agrocare.controller.common;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.helper.CustomResponse;
+import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.common.CommonService;
 import org.slf4j.Logger;

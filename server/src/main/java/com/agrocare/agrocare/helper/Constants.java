@@ -32,6 +32,13 @@ public class Constants {
         String PEST_UPDATED_SUCCESS_MESSAGE = "Pest updated successfully";
         String PEST_UPDATING_ERROR_MESSAGE = "Error while updating pest";
         String PEST_NOT_FOUND = "Pest not found !! ";
+        String USER_ID_NOT_AVAILABLE = "User id not available";
+        String INVALID_USERNAME_PASSWORD = "Invalid Username or Password !!";
+        String USER_NOT_FOUND_BY_USERNAME = "User Not Found with username !! ";
+    }
+
+    public interface NullCheck {
+        int INT = 0;
     }
 
 }
