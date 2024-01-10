@@ -1,7 +1,7 @@
 package com.agrocare.agrocare.controller.authentication;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.helper.CustomResponse;
+import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtRequest;
 import com.agrocare.agrocare.configuration.jwt_pojo.JwtResponse;
@@ -43,30 +43,23 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody JwtRequest request) {
-        CustomResponse response = new CustomResponse();
         try {
             this.doAuthenticate(request.getEmail(), request.getPassword());
-
             UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+
             Users users = userService.findByEmail(request.getEmail()).orElseThrow(() ->
-                    new UsernameNotFoundException("User Not Found with username: " + request.getEmail()));
+                    new UsernameNotFoundException(Constants.Messages.USER_NOT_FOUND_BY_USERNAME + request.getEmail()));
 
             UserResponse userResponse = new UserResponse(users.getId(), users.getName(), users.getEmail(), users.getAuthorities(), users.getStatus());
             String token = this.helper.generateToken(userDetails);
 
-            response.setSuccess(true);
-            response.setResult(new JwtResponse(token, userResponse));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(new CustomResponse(true, new JwtResponse(token, userResponse)), HttpStatus.OK);
         } catch (BadCredentialsException e) {
-            logger.info("Error: " + e.getMessage());
-            response.setSuccess(false);
-            response.setMessage("Invalid Username or Password!!");
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+            logger.info("Error : " + e.getMessage());
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USERNAME_PASSWORD), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
-            logger.info("Error: " + e.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.info("Error : " + e.getMessage());
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -76,12 +69,12 @@ public class AuthController {
             manager.authenticate(authentication);
         } catch (BadCredentialsException e) {
             logger.info("Error: " + e.getMessage());
-            throw new BadCredentialsException("Invalid Username or Password!!");
+            throw new BadCredentialsException(Constants.Messages.INVALID_USERNAME_PASSWORD);
         }
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<String> exceptionHandler(BadCredentialsException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<?> exceptionHandler(BadCredentialsException e) {
+        return new ResponseEntity<>(new CustomResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 }

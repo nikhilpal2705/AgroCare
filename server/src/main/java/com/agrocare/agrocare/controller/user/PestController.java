@@ -1,7 +1,7 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.helper.CustomResponse;
+import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.service.user.PestService;
 

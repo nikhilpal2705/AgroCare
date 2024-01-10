@@ -1,5 +1,6 @@
 package com.agrocare.agrocare.service.security;
 
+import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("username : " + username);
-        return userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_NOT_FOUND_BY_USERNAME));
     }
 }
