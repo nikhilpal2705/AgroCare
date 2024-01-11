@@ -32,18 +32,18 @@ public class CommonController {
             if (commonService.existsByEmail(user.getEmail())) {
                 response.setSuccess(false);
                 response.setResult(null);
-                response.setMessage(Constants.Messages.DUPLICATE_EMAIL_MESSAGE);
+                response.setMessage(Constants.Messages.DUPLICATE_EMAIL);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
             response.setSuccess(true);
             response.setResult(commonService.registerUser(user));
-            response.setMessage(Constants.Messages.REGISTRATION_SUCCESS_MESSAGE);
+            response.setMessage(Constants.Messages.REGISTRATION_SUCCESS);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
             response.setResult(null);
-            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -58,7 +58,7 @@ public class CommonController {
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

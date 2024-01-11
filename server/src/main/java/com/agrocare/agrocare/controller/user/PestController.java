@@ -33,7 +33,7 @@ public class PestController {
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_FETCH_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_FETCH_ERROR);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -49,7 +49,7 @@ public class PestController {
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_FETCH_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_FETCH_ERROR);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -61,12 +61,12 @@ public class PestController {
         try {
             response.setSuccess(true);
             response.setResult(pestService.savePest(pests));
-            response.setMessage(Constants.Messages.PEST_ADDED_SUCCESS_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_ADDED_SUCCESS);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_ADDED_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_ADDED_ERROR);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -78,12 +78,12 @@ public class PestController {
         try {
             response.setSuccess(true);
             response.setResult(pestService.deletePest(pestId));
-            response.setMessage(Constants.Messages.PEST_DELETED_SUCCESS_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_DELETED_SUCCESS);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_DELETED_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_DELETED_ERROR);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -95,12 +95,12 @@ public class PestController {
         try {
             response.setSuccess(true);
             response.setResult(pestService.updatePest(pestId, pest));
-            response.setMessage(Constants.Messages.PEST_UPDATED_SUCCESS_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_UPDATED_SUCCESS);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_UPDATING_ERROR_MESSAGE);
+            response.setMessage(Constants.Messages.PEST_UPDATING_ERROR);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }

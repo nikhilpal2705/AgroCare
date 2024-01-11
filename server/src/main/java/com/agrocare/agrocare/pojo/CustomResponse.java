@@ -4,31 +4,33 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
 public class CustomResponse {
-    private boolean success = false;
-    private Object result = null;
+    private boolean success;
+    private Object result;
     private String message;
 
-    public CustomResponse(String message) {
+    // for AllArgsConstructor
+    public CustomResponse(boolean success, Object result, String message) {
+        this.success = success;
+        this.result = result;
         this.message = message;
     }
 
-    public CustomResponse(Object result) {
-        this.result = result;
-    }
-
-    public CustomResponse(boolean success, Object result) {
-        this.success = success;
-        this.result = result;
-    }
-
+    // For POST/PUT/DELETE requests
     public CustomResponse(boolean success, String message) {
-        this.success = success;
-        this.message = message;
+        this(success, null, message);
     }
 
+    // For GET requests
+    public CustomResponse(Object result) {
+        this(true, result, null);
+    }
+
+    // For ERROR
+    public CustomResponse(String message) {
+        this(false, null, message);
+    }
 }
