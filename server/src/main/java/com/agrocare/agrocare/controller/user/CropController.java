@@ -1,7 +1,6 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.pojo.CustomRequest;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.service.user.CropService;
@@ -15,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -36,7 +33,8 @@ public class CropController extends UserService {
         try {
             System.out.println("userId 111111111111111: " + userId);
             if (userId == Constants.NullCheck.INT) {
-                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
+                        HttpStatus.BAD_REQUEST);
             }
 
             userService.checkUserByUserId(userId);
@@ -47,7 +45,8 @@ public class CropController extends UserService {
             return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_FETCH_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_FETCH_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -58,7 +57,8 @@ public class CropController extends UserService {
             return new ResponseEntity<>(cropService.getCrop(cropId), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_FETCH_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_FETCH_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -69,7 +69,8 @@ public class CropController extends UserService {
             return new ResponseEntity<>(cropService.saveCrop(crops), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_ADDED_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_ADDED_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -80,7 +81,8 @@ public class CropController extends UserService {
             return new ResponseEntity<>(cropService.deleteCrop(cropId), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_DELETED_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_DELETED_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -91,7 +93,8 @@ public class CropController extends UserService {
             return new ResponseEntity<>(cropService.updateCrop(cropId, crops), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_UPDATING_ERROR_MESSAGE), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_UPDATING_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 }
