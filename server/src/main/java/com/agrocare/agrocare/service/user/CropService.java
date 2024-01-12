@@ -37,11 +37,8 @@ public class CropService {
     }
 
     public CustomResponse updateCrop(int cropId, Crops crops) {
-        if (this.getCrop(cropId).getResult() != null) {
-            crops.setId(cropId);
-            return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS);
-        } else {
-            return new CustomResponse(true, Constants.Messages.CROP_UPDATING_ERROR);
-        }
+        this.getCrop(cropId);
+        crops.setId(cropId);
+        return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS);
     }
 }
