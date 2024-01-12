@@ -4,12 +4,14 @@ import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.service.user.PestService;
+import com.agrocare.agrocare.service.user.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,86 +24,77 @@ public class PestController {
     @Autowired
     private PestService pestService;
 
-    //Fetch all pests . . .
+    @Autowired
+    private UserService userService;
+
+    // Fetch all pests . . .
     @GetMapping(value = "/pest")
-    public ResponseEntity<?> getPests() {
-        CustomResponse response = new CustomResponse();
+    public ResponseEntity<?> getPests(@RequestParam(name = "userId") int userId) {
         try {
-            response.setSuccess(true);
-            response.setResult(pestService.getPests());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            if (userId == Constants.NullCheck.INT) {
+                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
+                        HttpStatus.BAD_REQUEST);
+            }
+
+            userService.checkUserByUserId(userId);
+
+            return new ResponseEntity<>(pestService.getPests(userId), HttpStatus.OK);
+        } catch (UsernameNotFoundException err) {
+            logger.info("Error: " + err.getMessage());
+            return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_FETCH_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_FETCH_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
-    //Fetch a pest . . .
+    // Fetch a pest . . .
     @GetMapping(value = "/pest/{pestId}")
     public ResponseEntity<?> getPest(@PathVariable("pestId") int pestId) {
-        CustomResponse response = new CustomResponse();
         try {
-            response.setSuccess(true);
-            response.setResult(pestService.getPest(pestId));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(pestService.getPest(pestId), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_FETCH_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_FETCH_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
-    //Add a pest . . .
+    // Add a pest . . .
     @PostMapping(value = "/pest")
     public ResponseEntity<?> createPest(@RequestBody Pests pests) {
-        CustomResponse response = new CustomResponse();
         try {
-            response.setSuccess(true);
-            response.setResult(pestService.savePest(pests));
-            response.setMessage(Constants.Messages.PEST_ADDED_SUCCESS);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(pestService.savePest(pests), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_ADDED_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_ADDED_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
-    //Delete a pest . . .
+    // Delete a pest . . .
     @DeleteMapping(value = "/pest/{pestId}")
     public ResponseEntity<?> deletePest(@PathVariable("pestId") int pestId) {
-        CustomResponse response = new CustomResponse();
         try {
-            response.setSuccess(true);
-            response.setResult(pestService.deletePest(pestId));
-            response.setMessage(Constants.Messages.PEST_DELETED_SUCCESS);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(pestService.deletePest(pestId), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_DELETED_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_DELETED_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
-    //Update a pest . . .
+    // Update a pest . . .
     @PutMapping(value = "/pest/{pestId}")
     public ResponseEntity<?> updatePest(@PathVariable("pestId") int pestId, @RequestBody Pests pest) {
-        CustomResponse response = new CustomResponse();
         try {
-            response.setSuccess(true);
-            response.setResult(pestService.updatePest(pestId, pest));
-            response.setMessage(Constants.Messages.PEST_UPDATED_SUCCESS);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(pestService.updatePest(pestId, pest), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.PEST_UPDATING_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_UPDATING_ERROR),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 }
