@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import { BASE_URL, ACCESS_TOKEN_NAME, USER_BASE_URL } from './config';
 import errorHandler from './errorHandler';
 import successHandler from './successHandler';
-
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.common['Authorization'] = ACCESS_TOKEN_NAME + Cookies.get('jwtToken');
 const ACCESS_URL = USER_BASE_URL
@@ -21,9 +20,9 @@ const api = {
             return errorHandler(error);
         }
     },
-    read: async ({ entity, id }) => {
+    read: async ({ entity, id, params = {} }) => {
         try {
-            const response = await axios.get(ACCESS_URL + `${entity}/${id}`);
+            const response = await axios.get(ACCESS_URL + `${entity}/${id}`, { params: params });
             successHandler(response, {
                 notifyOnSuccess: false,
                 notifyOnFailed: true,
@@ -35,7 +34,7 @@ const api = {
     },
     update: async ({ entity, id, jsonData }) => {
         try {
-            const response = await axios.patch(ACCESS_URL + `${entity}/${id}`, jsonData);
+            const response = await axios.put(ACCESS_URL + `${entity}/${id}`, jsonData);
             successHandler(response, {
                 notifyOnSuccess: true,
                 notifyOnFailed: true,
@@ -45,9 +44,9 @@ const api = {
             return errorHandler(error);
         }
     },
-    delete: async ({ entity, id }) => {
+    delete: async ({ entity, id, params = {} }) => {
         try {
-            const response = await axios.delete(ACCESS_URL + `${entity}/${id}`);
+            const response = await axios.delete(ACCESS_URL + `${entity}/${id}`, { params: params });
             successHandler(response, {
                 notifyOnSuccess: true,
                 notifyOnFailed: true,
@@ -57,23 +56,9 @@ const api = {
             return errorHandler(error);
         }
     },
-    list: async ({ entity, options = {} }) => {
+    list: async ({ entity, options = {}, params = {} }) => {
         try {
-            const response = await axios.get(ACCESS_URL + entity);
-
-            successHandler(response, {
-                notifyOnSuccess: false,
-                notifyOnFailed: false,
-            });
-            return response.data;
-        } catch (error) {
-            return errorHandler(error);
-        }
-    },
-    listAll: async ({ entity }) => {
-        try {
-            const response = await axios.get(ACCESS_URL + entity);
-            console.log(`😱 😓 😒 ~ file: api.js:76 ~ listAll: ~ response:`, response)
+            const response = await axios.get(ACCESS_URL + entity, { params: params });
 
             successHandler(response, {
                 notifyOnSuccess: false,

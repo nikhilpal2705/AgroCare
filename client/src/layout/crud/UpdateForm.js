@@ -21,7 +21,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       const dateFields = ['plantingDate', 'harvestDate', 'date'];
       const dateFormat = dateFields.reduce((acc, field) => {
         if (newValues[field]) {
-          acc[field] = dayjs(newValues[field]).format('DD-MM-YYYY');
+          acc[field] = dayjs(newValues[field]);
           delete newValues[field];
         }
         return acc;
@@ -33,7 +33,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       let newValues = handleDateFormats({ ...current });
       delete newValues['updatedAt'];
       delete newValues['createdAt'];
-      
+
       form.resetFields();
       form.setFieldsValue(newValues);
     }

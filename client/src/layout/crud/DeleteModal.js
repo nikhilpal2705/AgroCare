@@ -3,6 +3,7 @@ import { useCrudContext } from 'contexts/crud';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDeletedItem } from '../../redux/crud/selectors';
 import { crud } from '../../redux/crud/actions';
+import { useEffect } from 'react';
 
 export default function DeleteModal({ config }) {
   const {
@@ -21,10 +22,16 @@ export default function DeleteModal({ config }) {
   const handleOk = () => {
     if (current && current.id) {
       dispatch(crud.delete({ entity, id: current.id }));
-      modal.close();
-      dispatch(crud.list({ entity }));
     }
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      modal.close();
+      dispatch(crud.resetAction({ actionType: 'delete' }));
+      dispatch(crud.list({ entity }));
+    }
+  }, [isLoading]);
 
   const handleCancel = () => {
     if (!isLoading) {
@@ -35,7 +42,7 @@ export default function DeleteModal({ config }) {
   return (
     <Modal
       title={modalTitle}
-      visible={isModalOpen}
+      open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
