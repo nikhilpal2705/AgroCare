@@ -22,7 +22,7 @@ public class JwtHelper {
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     //    public static final long JWT_TOKEN_VALIDITY =  60;
-    private String secret = dotenv.get("JWT_SECRET");
+    private final String  secret = dotenv.get("JWT_SECRET");
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
@@ -39,7 +39,7 @@ public class JwtHelper {
         return claimsResolver.apply(claims);
     }
 
-    //for retrieveing any information from token we will need the secret key
+    //for retrieving any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
