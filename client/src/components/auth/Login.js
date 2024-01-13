@@ -5,7 +5,7 @@ import logo from 'assets/images/logo.png';
 import * as authService from './AuthService';
 import { useAuthContext } from 'contexts/auth';
 
-const SignIn = () => {
+const Login = () => {
     const navigate = useNavigate()
     const { authContextAction } = useAuthContext();
     const { auth } = authContextAction;
@@ -30,7 +30,7 @@ const SignIn = () => {
         })
 
     }
-    async function handleSignIn(e) {
+    async function handleLogin(e) {
         e.preventDefault();
         const form = e.currentTarget;
         // If the form is not valid, stop the propagation.
@@ -57,7 +57,7 @@ const SignIn = () => {
                     <div className="card shadow-lg mb-5">
                         <div className="card-body p-5">
                             <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
-                            <Form noValidate validated={validated} autoComplete="on" onSubmit={handleSignIn}>
+                            <Form noValidate validated={validated} autoComplete="on" onSubmit={handleLogin}>
                                 <Form.Group className="mb-3" controlId="email">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
@@ -114,4 +114,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default Login;
