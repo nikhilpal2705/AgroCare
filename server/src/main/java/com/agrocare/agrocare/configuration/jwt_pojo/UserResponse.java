@@ -14,6 +14,6 @@ public class UserResponse {
     private int id;
     private String name;
     private String email;
-    private Collection authorities;
+    private Collection<?> authorities;
     private int status;
 }
