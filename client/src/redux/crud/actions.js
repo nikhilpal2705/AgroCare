@@ -187,8 +187,8 @@ export const crud = {
             payload: data.result,
           });
           dispatch({
-            type: actionTypes.RESET_ACTION,
-            keyState: 'delete',
+            type: actionTypes.CURRENT_ITEM,
+            payload: data.result,
           });
         } else {
           dispatch({
