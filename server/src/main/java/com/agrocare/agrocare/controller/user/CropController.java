@@ -29,7 +29,7 @@ public class CropController extends UserService {
 
     // Fetch all crops . . .
     @GetMapping(value = "/crop")
-    public ResponseEntity<?> getCrops(@RequestParam(name = "userId") int userId) {
+    public ResponseEntity<CustomResponse> getCrops(@RequestParam(name = "userId") int userId) {
         try {
             System.out.println("userId 111111111111111: " + userId);
             if (userId == Constants.NullCheck.INT) {
@@ -50,7 +50,7 @@ public class CropController extends UserService {
 
     // Fetch a crop . . .
     @GetMapping(value = "/crop/{cropId}")
-    public ResponseEntity<?> getCrop(@PathVariable("cropId") int cropId) {
+    public ResponseEntity<CustomResponse> getCrop(@PathVariable("cropId") int cropId) {
         try {
             return new ResponseEntity<>(cropService.getCrop(cropId), HttpStatus.OK);
         } catch (Exception err) {
@@ -62,7 +62,7 @@ public class CropController extends UserService {
 
     // Add a crop . . .
     @PostMapping(value = "/crop")
-    public ResponseEntity<?> createCrop(@RequestBody Crops crops) {
+    public ResponseEntity<CustomResponse> createCrop(@RequestBody Crops crops) {
         try {
             return new ResponseEntity<>(cropService.saveCrop(crops), HttpStatus.OK);
         } catch (Exception err) {
@@ -74,7 +74,7 @@ public class CropController extends UserService {
 
     // Delete a crop . . .
     @DeleteMapping(value = "/crop/{cropId}")
-    public ResponseEntity<?> deleteCrop(@PathVariable("cropId") int cropId) {
+    public ResponseEntity<CustomResponse> deleteCrop(@PathVariable("cropId") int cropId) {
         try {
             return new ResponseEntity<>(cropService.deleteCrop(cropId), HttpStatus.OK);
         } catch (Exception err) {
@@ -86,7 +86,7 @@ public class CropController extends UserService {
 
     // Update a crop . . .
     @PutMapping(value = "/crop/{cropId}")
-    public ResponseEntity<?> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops) {
+    public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops) {
         try {
             return new ResponseEntity<>(cropService.updateCrop(cropId, crops), HttpStatus.OK);
         } catch (Exception err) {

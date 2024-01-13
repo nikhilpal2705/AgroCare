@@ -24,10 +24,6 @@ public class CustomResponse {
         this(success, null, message);
     }
 
-    public CustomResponse(boolean success, Object result) {
-        this(success, result, null);
-    }
-
     // For GET requests
     public CustomResponse(Object result) {
         this(true, result, null);
