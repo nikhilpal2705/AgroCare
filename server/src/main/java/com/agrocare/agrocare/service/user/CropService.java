@@ -17,30 +17,28 @@ public class CropService {
         if (crop.getUserId() == Constants.NullCheck.INT) {
             throw new RuntimeException(Constants.Messages.USER_ID_NOT_AVAILABLE);
         }
-        return new CustomResponse(true, cropRepository.save(crop), Constants.Messages.CROP_ADDED_SUCCESS_MESSAGE);
+        cropRepository.save(crop);
+        return new CustomResponse(true, Constants.Messages.CROP_ADDED_SUCCESS);
     }
 
     public CustomResponse deleteCrop(int cropId) {
         this.cropRepository.deleteById(cropId);
-        return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS_MESSAGE);
+        return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS);
     }
 
     public CustomResponse getCrops(int userId) {
-        return new CustomResponse(true, this.cropRepository.findAllByUserId(userId));
+        return new CustomResponse(this.cropRepository.findAllByUserId(userId));
     }
 
     public CustomResponse getCrop(int cropId) {
         Crops crop = this.cropRepository.findById(cropId)
                 .orElseThrow(() -> new RuntimeException(Constants.Messages.CROP_NOT_FOUND + cropId));
-        return new CustomResponse(true, crop);
+        return new CustomResponse(crop);
     }
 
     public CustomResponse updateCrop(int cropId, Crops crops) {
-        if (this.getCrop(cropId).getResult() != null) {
-            crops.setId(cropId);
-            return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS_MESSAGE);
-        } else {
-            return new CustomResponse(true, Constants.Messages.CROP_UPDATING_ERROR_MESSAGE);
-        }
+        this.getCrop(cropId);
+        crops.setId(cropId);
+        return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS);
     }
 }
