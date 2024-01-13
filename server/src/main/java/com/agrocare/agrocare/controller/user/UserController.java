@@ -34,7 +34,8 @@ public class UserController {
     public ResponseEntity<CustomResponse> getLoginUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
-            return new ResponseEntity<>(userService.getUserByEmailAddress(this.jwtHelper.getUsernameFromToken(token)), HttpStatus.OK);
+            return new ResponseEntity<>(userService.getUserByEmailAddress(this.jwtHelper.getUsernameFromToken(token)),
+                    HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),
@@ -46,7 +47,8 @@ public class UserController {
     public ResponseEntity<CustomResponse> getLoginUserEmail(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
-            return new ResponseEntity<>(new CustomResponse(true, (Object) this.jwtHelper.getUsernameFromToken(token)), HttpStatus.OK);
+            return new ResponseEntity<>(new CustomResponse((Object) this.jwtHelper.getUsernameFromToken(token)),
+                    HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),
@@ -60,11 +62,12 @@ public class UserController {
             String token = request.getHeader("Authorization").substring(7);
             Date expirationDateFromToken = this.jwtHelper.getExpirationDateFromToken(token);
 
-            return new ResponseEntity<>(new CustomResponse(true,
+            return new ResponseEntity<>(new CustomResponse(
                     Map.of("Date", expirationDateFromToken,
-                            "localDate", expirationDateFromToken.toLocaleString(),
+                            // "localDate", expirationDateFromToken.toLocaleString(),
                             "dateString", expirationDateFromToken.toString(),
-                            "dateISO", expirationDateFromToken.toInstant())), HttpStatus.OK);
+                            "dateISO", expirationDateFromToken.toInstant())),
+                    HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),

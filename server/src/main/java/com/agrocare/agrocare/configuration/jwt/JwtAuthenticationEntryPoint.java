@@ -21,10 +21,11 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
+            AuthenticationException authException) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         PrintWriter writer = response.getWriter();
-        String jsonResponse = objectMapper.writeValueAsString(new CustomResponse("Access Denied !! " + authException.getMessage()));
+        String jsonResponse = objectMapper
+                .writeValueAsString(new CustomResponse("Access Denied !! " + authException.getMessage()));
         writer.println(jsonResponse);
     }
 }
