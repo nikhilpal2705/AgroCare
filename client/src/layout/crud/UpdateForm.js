@@ -37,7 +37,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       form.resetFields();
       form.setFieldsValue(newValues);
     }
-  }, [current]);
+  }, [current, form]);
 
   const onSubmit = (fieldsValue) => {
     if (withUpload && fieldsValue.file) {
@@ -62,7 +62,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       dispatch(crud.resetAction({ actionType: 'update' }));
       dispatch(crud.list({ entity }));
     }
-  }, [isSuccess]);
+  }, [isSuccess, dispatch, editBox, entity, form, panel]);
 
   const handleCancel = () => {
     panel.close();

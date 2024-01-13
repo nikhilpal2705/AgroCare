@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +19,6 @@ import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig {
-
 
     @Autowired
     private JwtAuthenticationEntryPoint point;
@@ -41,7 +37,7 @@ public class SecurityConfig {
 
         // Configuration
         http.csrf(csrf -> csrf.disable())
-//                .cors(Customizer.withDefaults())
+                // .cors(Customizer.withDefaults())
                 .cors(cors -> cors.configurationSource(configurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
@@ -54,7 +50,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -88,6 +83,5 @@ public class SecurityConfig {
 
         return (request) -> configuration;
     }
-
 
 }
