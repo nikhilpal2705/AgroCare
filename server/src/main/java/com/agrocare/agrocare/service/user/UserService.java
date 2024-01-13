@@ -21,10 +21,12 @@ public class UserService {
     }
 
     public Users checkUserByUserId(int userId) {
-        return this.userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
+        return this.userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
     }
 
     public CustomResponse getUserByEmailAddress(String email) {
-        return new CustomResponse(true, this.userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE)));
+        return new CustomResponse(this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE)));
     }
 }

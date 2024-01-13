@@ -42,7 +42,7 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody JwtRequest request) {
+    public ResponseEntity<CustomResponse> login(@RequestBody JwtRequest request) {
         try {
             this.doAuthenticate(request.getEmail(), request.getPassword());
             UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
@@ -77,7 +77,7 @@ public class AuthController {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<?> exceptionHandler(BadCredentialsException e) {
+    public ResponseEntity<CustomResponse> exceptionHandler(BadCredentialsException e) {
         return new ResponseEntity<>(new CustomResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 }

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.security.Principal;
-
 @RestController
 public class CommonController {
 
@@ -29,12 +27,14 @@ public class CommonController {
     public ResponseEntity<CustomResponse> registerUser(@RequestBody Users user) {
         try {
             if (commonService.existsByEmail(user.getEmail())) {
-                return new ResponseEntity<>(new CustomResponse(Constants.Messages.DUPLICATE_EMAIL), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(new CustomResponse(Constants.Messages.DUPLICATE_EMAIL),
+                        HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>(commonService.registerUser(user), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,14 +44,8 @@ public class CommonController {
             return new ResponseEntity<>(commonService.getAllUsers(), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // This will not work . . .
-//    @GetMapping(value = "/check-login-user")
-//    public ResponseEntity<CustomResponse> getLoginUser(Principal principal) {
-//        System.out.println("Principal: " + principal.getName());
-//        return new ResponseEntity<>(new CustomResponse(true,(Object) principal.getName()), HttpStatus.OK);
-//    }
 }

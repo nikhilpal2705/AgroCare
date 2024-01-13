@@ -29,7 +29,7 @@ public class PestController {
 
     // Fetch all pests . . .
     @GetMapping(value = "/pest")
-    public ResponseEntity<?> getPests(@RequestParam(name = "userId") int userId) {
+    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId) {
         try {
             if (userId == Constants.NullCheck.INT) {
                 return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
@@ -52,7 +52,7 @@ public class PestController {
 
     // Fetch a pest . . .
     @GetMapping(value = "/pest/{pestId}")
-    public ResponseEntity<?> getPest(@PathVariable("pestId") int pestId) {
+    public ResponseEntity<CustomResponse> getPest(@PathVariable("pestId") int pestId) {
         try {
             return new ResponseEntity<>(pestService.getPest(pestId), HttpStatus.OK);
         } catch (Exception err) {
@@ -64,7 +64,7 @@ public class PestController {
 
     // Add a pest . . .
     @PostMapping(value = "/pest")
-    public ResponseEntity<?> createPest(@RequestBody Pests pests) {
+    public ResponseEntity<CustomResponse> createPest(@RequestBody Pests pests) {
         try {
             return new ResponseEntity<>(pestService.savePest(pests), HttpStatus.OK);
         } catch (Exception err) {
@@ -76,7 +76,7 @@ public class PestController {
 
     // Delete a pest . . .
     @DeleteMapping(value = "/pest/{pestId}")
-    public ResponseEntity<?> deletePest(@PathVariable("pestId") int pestId) {
+    public ResponseEntity<CustomResponse> deletePest(@PathVariable("pestId") int pestId) {
         try {
             return new ResponseEntity<>(pestService.deletePest(pestId), HttpStatus.OK);
         } catch (Exception err) {
@@ -88,7 +88,7 @@ public class PestController {
 
     // Update a pest . . .
     @PutMapping(value = "/pest/{pestId}")
-    public ResponseEntity<?> updatePest(@PathVariable("pestId") int pestId, @RequestBody Pests pest) {
+    public ResponseEntity<CustomResponse> updatePest(@PathVariable("pestId") int pestId, @RequestBody Pests pest) {
         try {
             return new ResponseEntity<>(pestService.updatePest(pestId, pest), HttpStatus.OK);
         } catch (Exception err) {
