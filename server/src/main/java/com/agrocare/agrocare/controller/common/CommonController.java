@@ -27,47 +27,31 @@ public class CommonController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<CustomResponse> registerUser(@RequestBody Users user) {
-        CustomResponse response = new CustomResponse();
         try {
             if (commonService.existsByEmail(user.getEmail())) {
-                response.setSuccess(false);
-                response.setResult(null);
-                response.setMessage(Constants.Messages.DUPLICATE_EMAIL);
-                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(new CustomResponse(Constants.Messages.DUPLICATE_EMAIL), HttpStatus.BAD_REQUEST);
             }
-            response.setSuccess(true);
-            response.setResult(commonService.registerUser(user));
-            response.setMessage(Constants.Messages.REGISTRATION_SUCCESS);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(commonService.registerUser(user), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setResult(null);
-            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value = "/getUser", produces = "application/json")
     public ResponseEntity<CustomResponse> getUser() {
-        CustomResponse response = new CustomResponse();
         try {
-            response.setSuccess(true);
-            response.setResult(commonService.getAllUsers());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(commonService.getAllUsers(), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            response.setSuccess(false);
-            response.setMessage(Constants.Messages.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping(value = "/check-login-user")
-    public ResponseEntity<CustomResponse> getLoginUser(Principal principal) {
-        CustomResponse response = new CustomResponse();
-        response.setSuccess(true);
-        response.setResult(principal.getName());
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+    // This will not work . . .
+//    @GetMapping(value = "/check-login-user")
+//    public ResponseEntity<CustomResponse> getLoginUser(Principal principal) {
+//        System.out.println("Principal: " + principal.getName());
+//        return new ResponseEntity<>(new CustomResponse(true,(Object) principal.getName()), HttpStatus.OK);
+//    }
 }
