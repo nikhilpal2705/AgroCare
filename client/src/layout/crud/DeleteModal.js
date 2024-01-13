@@ -17,7 +17,7 @@ export default function DeleteModal({ config }) {
   const { modal } = crudContextAction;
 
   const dispatch = useDispatch();
-  const { current, isLoading } = useSelector(selectDeletedItem);
+  const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
 
   const handleOk = () => {
     if (current && current.id) {
@@ -26,12 +26,12 @@ export default function DeleteModal({ config }) {
   };
 
   useEffect(() => {
-    if (!isLoading) {
+    if (isSuccess) {
       modal.close();
       dispatch(crud.resetAction({ actionType: 'delete' }));
       dispatch(crud.list({ entity }));
     }
-  }, [isLoading]);
+  }, [isSuccess, dispatch, entity, modal]);
 
   const handleCancel = () => {
     if (!isLoading) {
