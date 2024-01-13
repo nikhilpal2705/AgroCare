@@ -1,5 +1,6 @@
 package com.agrocare.agrocare.model;
 
+import com.agrocare.agrocare.helper.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,8 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import java.time.Instant;
-import com.agrocare.agrocare.helper.Constants;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -63,10 +64,10 @@ public class Crops {
     @CreatedDate
     @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)
-    private String createdAt = Instant.now().toString();
+    private String createdAt = String.valueOf(new Date().toInstant());
 
     @LastModifiedDate
     @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
-    private String updatedAt = Instant.now().toString();
+    private String updatedAt = String.valueOf(new Date().toInstant());
 }
