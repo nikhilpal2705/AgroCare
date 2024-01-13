@@ -83,15 +83,15 @@ public class Users implements UserDetails {
         return list;
     }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of(new SimpleGrantedAuthority(this.role));
-//    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    // return List.of(new SimpleGrantedAuthority(this.role));
+    // }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return Collections.singletonList(new SimpleGrantedAuthority(this.role));
-//    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    // return Collections.singletonList(new SimpleGrantedAuthority(this.role));
+    // }
 
     @Override
     public String getUsername() {

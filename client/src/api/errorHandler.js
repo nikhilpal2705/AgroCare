@@ -1,4 +1,5 @@
 import { notification } from 'antd';
+import * as constant from "helper/constant";
 
 const errorHandler = (error) => {
   const { response } = error;
@@ -15,6 +16,10 @@ const errorHandler = (error) => {
       message: `Request error ${status}`,
       description: errorText,
     });
+
+    if (status === constant.HttpStatus.UNAUTHORIZED) {
+      // window.location.href = '/logout';
+    }
     return response.data;
   } else {
     notification.config({
