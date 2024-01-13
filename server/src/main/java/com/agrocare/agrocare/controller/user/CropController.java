@@ -36,9 +36,7 @@ public class CropController extends UserService {
                 return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
                         HttpStatus.BAD_REQUEST);
             }
-
             userService.checkUserByUserId(userId);
-
             return new ResponseEntity<>(cropService.getCrops(userId), HttpStatus.OK);
         } catch (UsernameNotFoundException err) {
             logger.info("Error: " + err.getMessage());

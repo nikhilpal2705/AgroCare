@@ -19,10 +19,6 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<Users[]> fetchUserDetails(String email) {
-        return userRepository.findByUsername(email);
-    }
-
     public Users checkUserByUserId(int userId) {
         return this.userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
     }
