@@ -2,6 +2,13 @@ import api from 'api/api';
 import * as actionTypes from './types';
 import * as authService from 'api/AuthService';
 import Cookies from 'js-cookie';
+const cookieOptions = {
+  secure: process.env.NODE_ENV === 'production', // Adjust based on environment
+  sameSite: 'Lax',
+  httpOnly: false,
+  domain: window.location.hostname,
+  path: '/',
+};
 
 export const auth = {
   resetAction: () => async (dispatch) => {
@@ -23,14 +30,9 @@ export const auth = {
           authority: data.result.user.authorities[0]?.authority
         };
 
-        let cookieOptions = {
-          expires: loginData.remember ? new Date(Date.now() + 5 * 60 * 60 * 1000) : null,
-          secure: process.env.NODE_ENV === 'production', // Adjust based on environment
-          sameSite: 'Lax',
-          httpOnly: false,
-          domain: window.location.hostname,
-          path: '/',
-        };
+        if (loginData.remember) {
+          cookieOptions.expires = new Date(Date.now() + 5 * 60 * 60 * 1000);
+        }
 
         Cookies.set('jwtToken', userData.jwtToken, cookieOptions);
 
@@ -82,14 +84,6 @@ export const auth = {
           payload: data.result,
         });
       } else {
-        let cookieOptions = {
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'Lax',
-          httpOnly: false,
-          domain: window.location.hostname,
-          path: '/',
-        };
-
         Object.keys(Cookies.get()).forEach(key => {
           Cookies.remove(key, cookieOptions);
         });
@@ -100,7 +94,7 @@ export const auth = {
   },
 
   updateProfile: ({ entity, jsonData }) => async (dispatch) => {
-    let data = await api.update({ entity, id: '', jsonData });
+    let data = await api.put({ entity, jsonData });
 
     if (data.success === true) {
       dispatch({
@@ -114,14 +108,6 @@ export const auth = {
         email: data.result.user.email,
         userId: data.result.user.id,
         authority: data.result.user.authorities[0]?.authority
-      };
-
-      let cookieOptions = {
-        secure: process.env.NODE_ENV === 'production', // Adjust based on environment
-        sameSite: 'Lax',
-        httpOnly: false,
-        domain: window.location.hostname,
-        path: '/',
       };
 
       Cookies.set('jwtToken', userData.jwtToken, cookieOptions);

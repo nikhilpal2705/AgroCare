@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useCrudContext } from 'contexts/crud';
 import { Button, Form } from 'antd';
+import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import Loader from 'components/common/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '../../redux/crud/actions';
@@ -48,10 +49,10 @@ export default function CreateForm({ config, formElements, withUpload = false })
       <Form form={form} layout="vertical" onFinish={onSubmit}>
         {formElements}
         <Form.Item style={{ display: 'inline-block', paddingRight: '5px' }}>
-          <Button type="primary" htmlType="submit">Submit</Button>
+          <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>Submit</Button>
         </Form.Item>
         <Form.Item style={{ display: 'inline-block', paddingLeft: '5px' }}>
-          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleCancel} icon={<CloseCircleOutlined />}>Cancel</Button>
         </Form.Item>
       </Form>
     </Loader>

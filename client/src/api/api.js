@@ -90,7 +90,7 @@ const api = {
         try {
             const response = await axios.get(entity);
             successHandler(response, {
-                notifyOnSuccess: true,
+                notifyOnSuccess: false,
                 notifyOnFailed: true,
             });
             return response.data;

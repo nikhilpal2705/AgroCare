@@ -7,15 +7,14 @@ const AUTH_INITIAL_STATE = {
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,
-  };
-
+};
 
 const current = Cookies.get('jwtToken')
   ? Object.keys(Cookies.get()).reduce((acc, key) => {
     acc[key] = Cookies.get(key);
     return acc;
   }, {}) : null
-  
+
 const userData = current ? {
   current: current,
   isLoggedIn: true,

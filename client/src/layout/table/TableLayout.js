@@ -1,4 +1,5 @@
 import { Layout, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { PageHeader } from '@ant-design/pro-layout';
 import { generate as uniqueId } from 'shortid';
 import DataTable from './DataTable';
@@ -17,7 +18,11 @@ function AddNewItem({ config }) {
   };
 
   return (
-    <Button onClick={handelClick} type="primary">
+    <Button 
+    onClick={handelClick} 
+    type="primary"
+    icon={<PlusOutlined />}
+    >
       {'Add ' + ENTITY_TITLE}
     </Button>
   );
