@@ -37,20 +37,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Authorization
         String requestHeader = request.getHeader("Authorization");
-        // Bearer 2352345235sdfrsfgsdfsdf
         logger.info(" Header :  {}", requestHeader);
         String username = null;
         String token = null;
-        System.out.println("requestHeader : " + requestHeader);
         if (requestHeader != null && requestHeader.startsWith("Bearer")) {
-            System.out.println("Inside main checker");
-            // looking good
             token = requestHeader.substring(7);
-            System.out.println("token : " + token);
             try {
-
                 username = this.jwtHelper.getUsernameFromToken(token);
-                System.out.println("username : " + username);
 
             } catch (IllegalArgumentException e) {
                 logger.info("Illegal Argument while fetching the username !!");
@@ -62,8 +55,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.info("Some changed has done in token !! Invalid Token");
                 e.printStackTrace();
             } catch (Exception e) {
-                System.out.println("Exception----- : " + e);
-                System.out.println("Exception : " + e.getMessage());
                 e.printStackTrace();
 
             }
