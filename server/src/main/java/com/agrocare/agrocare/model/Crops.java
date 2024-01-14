@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.model;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,9 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +31,10 @@ public class Crops {
     @JsonProperty("userId")
     @Column(name = "userId", nullable = false)
     private int userId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cropId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Pests> pests = new ArrayList<>();
 
     @JsonProperty("cropName")
     @Column(name = "cropName", nullable = false)
@@ -70,4 +77,5 @@ public class Crops {
     @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
+
 }

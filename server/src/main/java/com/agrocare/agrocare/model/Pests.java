@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.model;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,9 +30,10 @@ public class Pests {
     @Column(name = "userId", nullable = false)
     private int userId;
 
-    @JsonProperty("cropId")
-    @Column(name = "cropId", nullable = false)
-    private int cropId;
+    @ManyToOne
+    @JoinColumn(name = "cropId")
+    @JsonIgnore
+    private Crops cropId;
 
     @JsonProperty("pestName")
     @Column(name = "pestName", nullable = false)
