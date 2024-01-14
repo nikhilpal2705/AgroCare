@@ -41,4 +41,9 @@ public class CropService {
         crops.setId(cropId);
         return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS);
     }
+
+    public Crops getCropById(int cropId) {
+        return this.cropRepository.findById(cropId)
+                .orElseThrow(() -> new RuntimeException(Constants.Messages.CROP_NOT_FOUND + cropId));
+    }
 }
