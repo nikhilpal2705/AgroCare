@@ -33,7 +33,7 @@ public class Crops {
     private int userId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cropId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cropId", orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Pests> pests = new ArrayList<>();
 
     @JsonProperty("cropName")

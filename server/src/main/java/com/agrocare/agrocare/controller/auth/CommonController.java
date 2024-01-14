@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CommonController {
@@ -104,35 +105,34 @@ public class CommonController {
 //            Crops save = cropRepository.save(crops);
 //            System.out.println("save 11111111111111: " + save);
 
-            Crops crop = cropRepository.findById(1).get();
-            List<Pests> pests = crop.getPests();
-
-
-            System.out.println("all 11111111111111: "+crop.getCropName());
-            System.out.println(pests.size());
-
-            for (Pests pest : pests) {
-                System.out.println("pest 11111111111111: " + pest.getPestName());
-            }
-
-
+//            Crops crop = cropRepository.findById(1).get();
+//            List<Pests> pests = crop.getPests();
+//
+//
+//            System.out.println("all 11111111111111: "+crop.getCropName());
+//            System.out.println(pests.size());
+//
+//            for (Pests pest : pests) {
+//                System.out.println("pest 11111111111111: " + pest.getPestName());
+//            }
+//
+//
 //            Pests pests1 = pestRepository.findById(1).get();
 //            System.out.println("pests1 11111111111111: " + pests1.getPestName());
 //            System.out.println("pests1 11111111111111: " + pests1.getCropId().getCropName());
 
+//            return new ResponseEntity<>(new CustomResponse(commonService.getCorpAndPestFromCrop(crop)),
+//                    HttpStatus.OK);
 
-            if (crop != null) {
-                System.out.println("crop 11111111111111: " + crop.getCropName());
-            } else {
-                System.out.println("crop 22222222222222: " + crop.getCropName());
-            }
+//            pestRepository.deleteById(1);
+            cropRepository.deleteById(1);
 
-
-            return ResponseEntity.ok(crop);
+            return new ResponseEntity<>(new CustomResponse("Test to delete"),
+                    HttpStatus.OK);
 
         } catch (Exception err) {
             logger.info("Error: 999999999999999999999999 " + err.getMessage());
-            return new ResponseEntity<>(Constants.Messages.INTERNAL_SERVER_ERROR,
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.REGISTRATION_SUCCESS),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
