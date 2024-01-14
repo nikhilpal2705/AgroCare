@@ -39,10 +39,10 @@ const Login = () => {
         if (form.checkValidity() === false) {
             e.stopPropagation();
             setValidated(true);
-        } else {
-            // If the form is valid, proceed with the registration.
-            dispatch(auth.login({ loginData: formData }));
+            return;
         }
+        // If the form is valid, proceed with the registration.
+        dispatch(auth.login({ loginData: formData }));
     }
 
     useEffect(() => {

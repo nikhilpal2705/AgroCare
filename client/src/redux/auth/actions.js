@@ -1,6 +1,6 @@
-import api from 'api/api';
+import api, { setHeader } from 'api/api';
 import * as actionTypes from './types';
-import * as authService from 'api/AuthService';
+import * as authService from 'api/auth.service';
 import Cookies from 'js-cookie';
 const cookieOptions = {
   secure: process.env.NODE_ENV === 'production', // Adjust based on environment
@@ -42,7 +42,7 @@ export const auth = {
           }
         });
 
-        await api.setHeader({ jwtToken: userData.jwtToken })
+        await setHeader({ jwtToken: userData.jwtToken })
 
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
