@@ -4,10 +4,15 @@ import { BASE_URL, ACCESS_TOKEN_NAME, USER_BASE_URL } from './config';
 import errorHandler from './errorHandler';
 import successHandler from './successHandler';
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.headers.common['Authorization'] = ACCESS_TOKEN_NAME + Cookies.get('jwtToken');
-const ACCESS_URL = USER_BASE_URL
+const ACCESS_URL = USER_BASE_URL;
+const jwtToken = Cookies.get('jwtToken')
+
 
 const api = {
+    setHeader: async ({ jwtToken }) => {
+        axios.defaults.headers.common['Authorization'] = ACCESS_TOKEN_NAME + jwtToken;
+        return;
+    },
     create: async ({ entity, jsonData }) => {
         try {
             const response = await axios.post(ACCESS_URL + entity, jsonData);
@@ -106,4 +111,6 @@ const api = {
         }
     },
 };
+
+jwtToken && api.setHeader({ jwtToken: jwtToken })
 export default api;

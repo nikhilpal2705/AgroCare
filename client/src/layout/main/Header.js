@@ -1,13 +1,11 @@
 import { Avatar, Dropdown, Layout } from 'antd';
 import { LogoutOutlined, UserOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/auth/selectors';
 
 const Header = () => {
-  const currentUser = {
-    name: `${Cookies.get('name')}`,
-    email: `${Cookies.get('email')}`,
-  }
+  const currentUser = useSelector(selectCurrentUser);
 
   const { Header } = Layout;
   const ProfileDropdown = () => {

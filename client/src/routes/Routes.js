@@ -1,7 +1,8 @@
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import AdminRoutes from './AdminRoutes';
-import { useAuthContext } from 'contexts/auth';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../redux/auth/selectors';
 
 /**
  * Renders Application routes depending on Logged or Anonymous users
@@ -9,9 +10,8 @@ import { useAuthContext } from 'contexts/auth';
  */
 
 const AppRoutes = () => {
-  const { state } = useAuthContext();
-  const { isAuthenticated, isAdmin } = state;
-  return isAuthenticated ? (isAdmin ? <AdminRoutes /> : <PrivateRoutes />) : <PublicRoutes />;
+  const { isLoggedIn, isAdmin } = useSelector(selectAuth);
+  return isLoggedIn ? (isAdmin ? <AdminRoutes /> : <PrivateRoutes />) : <PublicRoutes />;
 };
 
 export default AppRoutes;
