@@ -8,16 +8,8 @@ export const login = async ({ loginData }) => {
     try {
         const response = await axios.post(
             AUTH_BASE_URL + "login", loginData);
-        let responseData = response.data.result
-        const data = {
-            jwtToken: responseData.jwtToken,
-            isAdmin: false,
-            name: responseData.user.name,
-            email: responseData.user.email,
-            userId: responseData.user.id,
-            authority: responseData.user.authorities[0]?.authority
-        }
-        return data
+
+        return response.data
     } catch (error) {
         return errorHandler(error);
     }
@@ -40,5 +32,5 @@ export const register = async ({ registerData }) => {
 };
 
 export const logout = async () => {
-
+    return {}
 };

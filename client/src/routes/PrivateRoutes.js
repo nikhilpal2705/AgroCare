@@ -1,6 +1,7 @@
 import PageLoader from 'components/common/PageLoader';
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+const Profile =  lazy(() => import('components/profile/Profile'));
 const Dashboard = lazy(() => import('components/dashboard/Dashboard'));
 const CropMonitoring = lazy(() => import('components/crop/CropMonitoring'));
 const Layout = lazy(() => import('layout/main/MainLayout'));
@@ -40,7 +41,7 @@ function PrivateAppRoutes() {
     },
     {
       path: '/profile',
-      element: <Dashboard />,
+      element: <Profile />,
     },
     {
       path: '*',

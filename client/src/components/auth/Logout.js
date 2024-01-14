@@ -1,16 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageLoader from 'components/common/PageLoader';
-import { useAuthContext } from 'contexts/auth';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../redux/auth/actions';
+import { crud } from '../../redux/crud/actions';
 
 const Logout = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { authContextAction } = useAuthContext();
-    const { auth } = authContextAction;
-    useEffect(() => {
-        auth.logout();
+
+    useLayoutEffect(() => {
+        dispatch(crud.resetState());
+    }, [dispatch]);
+
+    const asyncLogout = useCallback(async () => {
+        await dispatch(auth.logout());
         navigate('/login');
-    }, [navigate, auth]);
+    }, [dispatch, navigate]);
+
+    useEffect(() => {
+        asyncLogout();
+    }, [asyncLogout]);
 
     return <PageLoader />;
 };
