@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 import logo from 'assets/images/logo.png';
 import {
-  SettingOutlined,
   DashboardOutlined,
   FilterOutlined,
   MenuOutlined,
@@ -43,11 +42,6 @@ function Sidebar({ collapsible, isMobile = false }) {
       key: 'pest-control',
       icon: <FilterOutlined />,
       label: <Link to={'/pest-control'}>Pest Control</Link>,
-    },
-    {
-      key: 'settings',
-      icon: <SettingOutlined />,
-      label: <Link to={'/settings'}>Settings</Link>,
     },
   ];
   return (

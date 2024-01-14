@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.controller.authentication;
+package com.agrocare.agrocare.controller.auth;
 
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.pojo.CustomResponse;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/auth")
-public class AuthController {
+public class LoginController {
     Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
 
     @Autowired
@@ -39,7 +39,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @PostMapping("/login")
     public ResponseEntity<CustomResponse> login(@RequestBody JwtRequest request) {

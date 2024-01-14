@@ -1,4 +1,4 @@
-package com.agrocare.agrocare.controller.common;
+package com.agrocare.agrocare.controller.auth;
 
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Crops;

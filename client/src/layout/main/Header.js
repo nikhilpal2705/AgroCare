@@ -1,13 +1,11 @@
 import { Avatar, Dropdown, Layout } from 'antd';
-import { SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/auth/selectors';
 
 const Header = () => {
-  const currentAdmin = {
-    name: `${Cookies.get('name')}`,
-    email: `${Cookies.get('email')}`,
-  }
+  const currentUser = useSelector(selectCurrentUser);
 
   const { Header } = Layout;
   const ProfileDropdown = () => {
@@ -20,13 +18,13 @@ const Header = () => {
           src={null}
           style={{ color: '#f56a00', backgroundColor: '#f9fafc' }}
         >
-          {currentAdmin?.name?.charAt(0)?.toUpperCase()}
+          {currentUser?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
         <div className="profileDropdownInfo">
           <p>
-            {currentAdmin?.name}
+            {currentUser?.name}
           </p>
-          <p>{currentAdmin?.email}</p>
+          <p>{currentUser?.email}</p>
         </div>
       </div>
     );
@@ -53,9 +51,9 @@ const Header = () => {
       ),
     },
     {
-      icon: <SettingOutlined />,
-      key: 'settingApp',
-      label: <Link to={'/settings'}>Settings</Link>,
+      icon: <CustomerServiceOutlined />,
+      key: 'contact',
+      label: <Link to={'/contact-us'}>Coutact Us</Link>,
     },
 
     {
@@ -98,7 +96,7 @@ const Header = () => {
           }}
           size="large"
         >
-          {currentAdmin?.name?.charAt(0)?.toUpperCase()}
+          {currentUser?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
       </Dropdown>
 
