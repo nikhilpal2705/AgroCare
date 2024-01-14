@@ -31,7 +31,6 @@ public class CropController extends UserService {
     @GetMapping(value = "/crop")
     public ResponseEntity<CustomResponse> getCrops(@RequestParam(name = "userId") int userId) {
         try {
-            System.out.println("userId 111111111111111: " + userId);
             if (userId == Constants.NullCheck.INT) {
                 return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
                         HttpStatus.BAD_REQUEST);

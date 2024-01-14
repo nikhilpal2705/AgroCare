@@ -18,7 +18,7 @@ const PasswordModal = () => {
   const { onFetch } = useOnFetch();
 
   const handelSubmit = (fieldsValue) => {
-    const entity = 'common/password/';
+    const entity = 'common/password';
     const updateFn = async () => {
       return await api.put({ entity, jsonData: fieldsValue });
     };
