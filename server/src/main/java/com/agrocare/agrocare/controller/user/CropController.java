@@ -35,18 +35,21 @@ public class CropController extends UserService {
 
     // Fetch all crops . . .
     @GetMapping(value = "/crop")
-    public ResponseEntity<CustomResponse> getCrops(@RequestParam(name = "userId") int userId, HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> getCrops(HttpServletRequest request) {
         try {
             Users userFromHeader = commonService.getUserFromHeader(request);
-            if (userId == Constants.NullCheck.INT) {
-                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
-                        HttpStatus.BAD_REQUEST);
-            }
-            if (userFromHeader.getId() != userId) {
-                throw new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE);
-            }
-            userService.checkUserByUserId(userId);
-            return new ResponseEntity<>(cropService.getCrops(userId), HttpStatus.OK);
+            // if (userId == Constants.NullCheck.INT) {
+            // return new ResponseEntity<>(new
+            // CustomResponse(Constants.Messages.INVALID_USER_ID),
+            // HttpStatus.BAD_REQUEST);
+            // }
+            // if (userFromHeader.getId() != userId) {
+            // throw new
+            // UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE);
+            // }
+
+            userService.checkUserByUserId(userFromHeader.getId());
+            return new ResponseEntity<>(cropService.getCrops(userFromHeader.getId()), HttpStatus.OK);
         } catch (UsernameNotFoundException err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);
@@ -95,7 +98,8 @@ public class CropController extends UserService {
 
     // Update a crop . . .
     @PutMapping(value = "/crop/{cropId}")
-    public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops, HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops,
+            HttpServletRequest request) {
         try {
             return new ResponseEntity<>(cropService.updateCrop(cropId, crops, request), HttpStatus.OK);
         } catch (Exception err) {

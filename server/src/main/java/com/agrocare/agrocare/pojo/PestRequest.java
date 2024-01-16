@@ -1,8 +1,6 @@
 package com.agrocare.agrocare.pojo;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.model.Crops;
-import com.agrocare.agrocare.model.Users;
 import lombok.*;
 
 @Getter

@@ -62,7 +62,7 @@ const api = {
             return errorHandler(error);
         }
     },
-    list: async ({ entity, options = {}, params = {} }) => {
+    list: async ({ entity, params = {} }) => {
         try {
             const response = await axios.get(ACCESS_URL + entity, { params: params });
 

@@ -21,7 +21,8 @@ public class PestResponse {
     private String createdAt;
     private String updatedAt;
 
-    public PestResponse(int id, Users user, String pestName, String pestiside, int status, int state, String date, String createdAt, String updatedAt) {
+    public PestResponse(int id, Users user, String pestName, String pestiside, int status, int state, String date,
+            String createdAt, String updatedAt) {
         this.id = id;
         this.user = user;
         this.pestName = pestName;

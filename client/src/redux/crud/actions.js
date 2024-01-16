@@ -47,7 +47,6 @@ export const crud = {
         });
 
         let data = await api.list({ entity, options, params });
-        console.log(`🙈 🙉 🙊 ~ data : `, data)
 
         if (data.success === true) {
           const result = {

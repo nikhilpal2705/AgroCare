@@ -47,7 +47,7 @@ function FormElement({ field, setFeedback, feedback }) {
     tag: renderSelect(field.options, commonSelectProps, translate, true),
     array: renderSelect(field.options, { ...commonSelectProps, mode: 'multiple' }, translate),
     country: renderSelect(countryList.map(item => ({ value: item.value, label: translate(item.label) })), commonSelectProps, translate),
-    async: <SelectAsync entity={field.entity} displayLabels={field.displayLabels} outputValue={field.outputValue} loadDefault={field.loadDefault} />,
+    async: <SelectAsync entity={field.entity} displayLabels={field.displayLabels} outputValue={field.outputValue} />,
     currency: <InputNumber className="moneyInput" min={0} controls={false} addonBefore={'$'} />
   };
 

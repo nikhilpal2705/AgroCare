@@ -1,6 +1,5 @@
 package com.agrocare.agrocare.service.user;
 
-import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.repository.CropRepository;

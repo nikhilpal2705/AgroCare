@@ -19,12 +19,10 @@ export default function CreateForm({ config, formElements, withUpload = false })
     if (withUpload && fieldsValue.file) {
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
-    const addObj = Object.fromEntries(
-      Object.entries(fieldsValue).map(([key, value]) => [
-        key,
-        typeof value === 'string' ? value.trim() : value,
-      ])
-    );
+    const addObj = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
     dispatch(crud.create({ entity, jsonData: addObj, withUpload }));
   };
 
