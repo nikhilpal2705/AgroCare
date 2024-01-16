@@ -28,7 +28,6 @@ public class PestService {
     private CropService cropService;
 
     public CustomResponse savePest(PestRequest pest, HttpServletRequest request) {
-        System.out.println("Pest: 111 " + pest);
         Pests newPest = new Pests(commonService.getUserFromHeader(request),
                 cropService.findCropById(pest.getCropId()),
                 pest.getPestName(), pest.getPestiside(), pest.getStatus(),
