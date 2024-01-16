@@ -1,11 +1,14 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Pests;
+import com.agrocare.agrocare.service.common.CommonService;
 import com.agrocare.agrocare.service.user.PestService;
 import com.agrocare.agrocare.service.user.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +30,21 @@ public class PestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CommonService commonService;
+
     // Fetch all pests . . .
     @GetMapping(value = "/pest")
-    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId) {
+    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId , HttpServletRequest request) {
         try {
+            Users userFromHeader = commonService.getUserFromHeader(request);
             if (userId == Constants.NullCheck.INT) {
                 return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
                         HttpStatus.BAD_REQUEST);
             }
-
-            userService.checkUserByUserId(userId);
-
+            if (userFromHeader.getId() != userId) {
+                throw new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE);
+            }
             return new ResponseEntity<>(pestService.getPests(userId), HttpStatus.OK);
         } catch (UsernameNotFoundException err) {
             logger.info("Error: " + err.getMessage());
@@ -64,9 +71,9 @@ public class PestController {
 
     // Add a pest . . .
     @PostMapping(value = "/pest")
-    public ResponseEntity<CustomResponse> createPest(@RequestBody Pests pests) {
+    public ResponseEntity<CustomResponse> createPest(@RequestBody Pests pests, HttpServletRequest request) {
         try {
-            return new ResponseEntity<>(pestService.savePest(pests), HttpStatus.OK);
+            return new ResponseEntity<>(pestService.savePest(pests, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_ADDED_ERROR),
