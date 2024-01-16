@@ -45,12 +45,10 @@ export default function UpdateForm({ config, formElements, withUpload = false })
       fieldsValue.file = fieldsValue.file[0].originFileObj;
     }
 
-    const updateObj = Object.fromEntries(
-      Object.entries(fieldsValue).map(([key, value]) => [
-        key,
-        typeof value === 'string' ? value.trim() : value,
-      ])
-    );
+    const updateObj = Object.keys(fieldsValue).reduce((acc, key) => {
+      acc[key] = typeof fieldsValue[key] === 'string' ? fieldsValue[key].trim() : fieldsValue[key];
+      return acc;
+    }, {});
 
     dispatch(crud.update({ entity, id: current.id, jsonData: updateObj, withUpload }));
   };

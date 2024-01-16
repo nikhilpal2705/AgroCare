@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CommonService {
@@ -73,7 +72,8 @@ public class CommonService {
     public Users getUserFromHeader(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         String userEmail = jwtHelper.getUsernameFromToken(token);
-        return userRepo.findByEmail(userEmail).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
+        return userRepo.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
     }
 
     public List<PestResponse> pestListCustomResponse(List<Pests> pests) {

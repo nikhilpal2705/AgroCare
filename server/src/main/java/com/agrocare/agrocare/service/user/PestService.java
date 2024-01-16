@@ -1,9 +1,7 @@
 package com.agrocare.agrocare.service.user;
 
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
-import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.pojo.PestRequest;
 import com.agrocare.agrocare.pojo.PestResponse;
@@ -42,7 +40,8 @@ public class PestService {
     }
 
     public CustomResponse getPests(int userId) {
-        List<PestResponse> pestResponses = this.commonService.pestListCustomResponse(this.pestRepository.findAllByUserId(userId));
+        List<PestResponse> pestResponses = this.commonService
+                .pestListCustomResponse(this.pestRepository.findAllByUserId(userId));
         return new CustomResponse(pestResponses);
     }
 
@@ -59,7 +58,7 @@ public class PestService {
 
     public CustomResponse updatePest(int pestId, PestRequest pestRequest, HttpServletRequest request) {
         this.findPestById(pestId);
-        Pests updatePest = new Pests(pestId,commonService.getUserFromHeader(request),
+        Pests updatePest = new Pests(pestId, commonService.getUserFromHeader(request),
                 cropService.findCropById(pestRequest.getCropId()),
                 pestRequest.getPestName(), pestRequest.getPestiside(), pestRequest.getStatus(),
                 pestRequest.getState(), pestRequest.getDate());

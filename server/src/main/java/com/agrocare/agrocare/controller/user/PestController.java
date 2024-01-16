@@ -3,11 +3,9 @@ package com.agrocare.agrocare.controller.user;
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
-import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.pojo.PestRequest;
 import com.agrocare.agrocare.service.common.CommonService;
 import com.agrocare.agrocare.service.user.PestService;
-import com.agrocare.agrocare.service.user.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -29,14 +27,12 @@ public class PestController {
     private PestService pestService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private CommonService commonService;
 
     // Fetch all pests . . .
     @GetMapping(value = "/pest")
-    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId , HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId,
+            HttpServletRequest request) {
         try {
             Users userFromHeader = commonService.getUserFromHeader(request);
             if (userId == Constants.NullCheck.INT) {
@@ -96,7 +92,8 @@ public class PestController {
 
     // Update a pest . . .
     @PutMapping(value = "/pest/{pestId}")
-    public ResponseEntity<CustomResponse> updatePest(@PathVariable("pestId") int pestId, @RequestBody PestRequest pest, HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> updatePest(@PathVariable("pestId") int pestId, @RequestBody PestRequest pest,
+            HttpServletRequest request) {
         try {
             return new ResponseEntity<>(pestService.updatePest(pestId, pest, request), HttpStatus.OK);
         } catch (Exception err) {

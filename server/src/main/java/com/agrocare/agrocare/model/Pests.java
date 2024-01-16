@@ -27,12 +27,12 @@ public class Pests {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "userId")
     @JsonIgnore
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name = "crop")
+    @JoinColumn(name = "cropId")
     @JsonIgnore
     private Crops crop;
 
@@ -76,7 +76,8 @@ public class Pests {
         this.date = date;
     }
 
-    public Pests(int id, Users user, Crops crop, String pestName, String pestiside, int status, int state, String date) {
+    public Pests(int id, Users user, Crops crop, String pestName, String pestiside, int status, int state,
+            String date) {
         this.id = id;
         this.user = user;
         this.crop = crop;

@@ -2,12 +2,8 @@ package com.agrocare.agrocare.controller.common;
 
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.model.Crops;
-import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
-import com.agrocare.agrocare.repository.CropRepository;
-import com.agrocare.agrocare.service.user.CropService;
 import com.agrocare.agrocare.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @RestController
