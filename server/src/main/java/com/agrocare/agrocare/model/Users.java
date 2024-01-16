@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.model;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -65,6 +67,8 @@ public class Users implements UserDetails {
     @JsonProperty("enabled")
     @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
+
+
 
     @CreatedDate
     @JsonProperty("createdAt")

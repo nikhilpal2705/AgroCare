@@ -31,9 +31,9 @@ public class Pests {
     private int userId;
 
     @ManyToOne
-    @JoinColumn(name = "cropId")
+    @JoinColumn(name = "crop")
     @JsonIgnore
-    private Crops cropId;
+    private Crops crop;
 
     @JsonProperty("pestName")
     @Column(name = "pestName", nullable = false)
