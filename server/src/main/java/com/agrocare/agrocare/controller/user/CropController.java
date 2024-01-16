@@ -1,11 +1,14 @@
 package com.agrocare.agrocare.controller.user;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Crops;
+import com.agrocare.agrocare.service.common.CommonService;
 import com.agrocare.agrocare.service.user.CropService;
 import com.agrocare.agrocare.service.user.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +30,20 @@ public class CropController extends UserService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CommonService commonService;
+
     // Fetch all crops . . .
     @GetMapping(value = "/crop")
-    public ResponseEntity<CustomResponse> getCrops(@RequestParam(name = "userId") int userId) {
+    public ResponseEntity<CustomResponse> getCrops(@RequestParam(name = "userId") int userId, HttpServletRequest request) {
         try {
+            Users userFromHeader = commonService.getUserFromHeader(request);
             if (userId == Constants.NullCheck.INT) {
                 return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
                         HttpStatus.BAD_REQUEST);
+            }
+            if (userFromHeader.getId() != userId) {
+                throw new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE);
             }
             userService.checkUserByUserId(userId);
             return new ResponseEntity<>(cropService.getCrops(userId), HttpStatus.OK);
@@ -61,9 +71,9 @@ public class CropController extends UserService {
 
     // Add a crop . . .
     @PostMapping(value = "/crop")
-    public ResponseEntity<CustomResponse> createCrop(@RequestBody Crops crops) {
+    public ResponseEntity<CustomResponse> createCrop(@RequestBody Crops crops, HttpServletRequest request) {
         try {
-            return new ResponseEntity<>(cropService.saveCrop(crops), HttpStatus.OK);
+            return new ResponseEntity<>(cropService.saveCrop(crops, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_ADDED_ERROR),
@@ -85,9 +95,9 @@ public class CropController extends UserService {
 
     // Update a crop . . .
     @PutMapping(value = "/crop/{cropId}")
-    public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops) {
+    public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops, HttpServletRequest request) {
         try {
-            return new ResponseEntity<>(cropService.updateCrop(cropId, crops), HttpStatus.OK);
+            return new ResponseEntity<>(cropService.updateCrop(cropId, crops, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_UPDATING_ERROR),

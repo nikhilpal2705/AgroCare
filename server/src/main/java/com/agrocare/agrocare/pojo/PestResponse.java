@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.pojo;
 
 import com.agrocare.agrocare.model.Crops;
+import com.agrocare.agrocare.model.Users;
 import lombok.*;
 
 @Getter
@@ -10,7 +11,7 @@ import lombok.*;
 @ToString
 public class PestResponse {
     private int id;
-    private int userId;
+    private Users user;
     private Crops crop;
     private String pestName;
     private String pestiside;

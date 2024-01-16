@@ -26,9 +26,10 @@ public class Pests {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("userId")
-    @Column(name = "userId", nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    @JsonIgnore
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "crop")

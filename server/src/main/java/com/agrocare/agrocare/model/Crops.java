@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,9 +29,10 @@ public class Crops {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("userId")
-    @Column(name = "userId", nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    @JsonIgnore
+    private Users user;
 
     @JsonIgnore
     @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
