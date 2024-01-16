@@ -1,8 +1,11 @@
 package com.agrocare.agrocare.service.user;
 
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
+import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
+import com.agrocare.agrocare.pojo.PestRequest;
 import com.agrocare.agrocare.pojo.PestResponse;
 import com.agrocare.agrocare.repository.PestRepository;
 import com.agrocare.agrocare.service.common.CommonService;
@@ -21,10 +24,16 @@ public class PestService {
     @Autowired
     private CommonService commonService;
 
-    public CustomResponse savePest(Pests pest, HttpServletRequest request) {
-        System.out.println("Pest: " + pest);
-        pest.setUser(commonService.getUserFromHeader(request));
-        pestRepository.save(pest); // Need to save crop before adding pests . . .
+    @Autowired
+    private CropService cropService;
+
+    public CustomResponse savePest(PestRequest pest, HttpServletRequest request) {
+        System.out.println("Pest: 111 " + pest);
+        Pests newPest = new Pests(commonService.getUserFromHeader(request),
+                cropService.findCropById(pest.getCropId()),
+                pest.getPestName(), pest.getPestiside(), pest.getStatus(),
+                pest.getState(), pest.getDate());
+        pestRepository.save(newPest);
         return new CustomResponse(true, Constants.Messages.PEST_ADDED_SUCCESS);
     }
 
