@@ -65,4 +65,14 @@ public class Pests {
     @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
+
+    public Pests(Users user, Crops crop, String pestName, String pestiside, int status, int state, String date) {
+        this.user = user;
+        this.crop = crop;
+        this.pestName = pestName;
+        this.pestiside = pestiside;
+        this.status = status;
+        this.state = state;
+        this.date = date;
+    }
 }
