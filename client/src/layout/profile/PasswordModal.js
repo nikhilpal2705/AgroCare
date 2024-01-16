@@ -4,6 +4,7 @@ import api from 'api/api';
 import { Form, Input, Modal } from 'antd';
 
 import useLanguage from 'helper/getLabel';
+import { COMMON_BASE_URL } from 'api/config';
 
 const PasswordModal = () => {
   const translate = useLanguage();
@@ -18,7 +19,7 @@ const PasswordModal = () => {
   const { onFetch } = useOnFetch();
 
   const handelSubmit = (fieldsValue) => {
-    const entity = 'common/password';
+    const entity = COMMON_BASE_URL + 'password';
     const updateFn = async () => {
       return await api.put({ entity, jsonData: fieldsValue });
     };

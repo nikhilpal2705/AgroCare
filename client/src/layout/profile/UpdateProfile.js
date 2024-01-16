@@ -9,6 +9,7 @@ import { auth } from '../../redux/auth/actions';
 import { selectCurrentUser } from '../../redux/auth/selectors';
 import useLanguage from 'helper/getLabel';
 import { useProfileContext } from 'contexts/profile';
+import { COMMON_BASE_URL } from 'api/config';
 
 const UpdateProfile = ({ config }) => {
   const translate = useLanguage();
@@ -16,6 +17,7 @@ const UpdateProfile = ({ config }) => {
   const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
+  const entity = COMMON_BASE_URL + 'password';
 
   const currentUser = useSelector(selectCurrentUser);
   const [form] = Form.useForm();
@@ -37,7 +39,7 @@ const UpdateProfile = ({ config }) => {
       return acc;
     }, {});
 
-    dispatch(auth.updateProfile({ entity: 'common/profile', jsonData: trimmedValues }));
+    dispatch(auth.updateProfile({ entity, jsonData: trimmedValues }));
   };
 
   return (
