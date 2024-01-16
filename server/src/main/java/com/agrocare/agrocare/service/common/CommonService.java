@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,4 +76,15 @@ public class CommonService {
         return userRepo.findByEmail(userEmail).orElseThrow(() -> new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE));
     }
 
+    public List<PestResponse> pestListCustomResponse(List<Pests> pests) {
+        List<PestResponse> pestResponseList = new ArrayList<>();
+        for (Pests pest : pests) {
+            pestResponseList.add(new PestResponse(pest.getId(), pest.getUser(),
+                    pest.getCrop(), pest.getPestName(),
+                    pest.getPestiside(), pest.getStatus(),
+                    pest.getState(), pest.getDate(),
+                    pest.getCreatedAt(), pest.getUpdatedAt()));
+        }
+        return pestResponseList;
+    }
 }

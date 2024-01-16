@@ -3,9 +3,14 @@ package com.agrocare.agrocare.service.user;
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.pojo.CustomResponse;
+import com.agrocare.agrocare.pojo.PestResponse;
 import com.agrocare.agrocare.repository.PestRepository;
+import com.agrocare.agrocare.service.common.CommonService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PestService {
@@ -13,11 +18,13 @@ public class PestService {
     @Autowired
     private PestRepository pestRepository;
 
-    public CustomResponse savePest(Pests pest) {
-//        if (pest.getUserId() == Constants.NullCheck.INT) {
-//            throw new RuntimeException(Constants.Messages.USER_ID_NOT_AVAILABLE);
-//        }
-        pestRepository.save(pest);
+    @Autowired
+    private CommonService commonService;
+
+    public CustomResponse savePest(Pests pest, HttpServletRequest request) {
+        System.out.println("Pest: " + pest);
+        pest.setUser(commonService.getUserFromHeader(request));
+        pestRepository.save(pest); // Need to save crop before adding pests . . .
         return new CustomResponse(true, Constants.Messages.PEST_ADDED_SUCCESS);
     }
 
@@ -27,7 +34,8 @@ public class PestService {
     }
 
     public CustomResponse getPests(int userId) {
-        return new CustomResponse(this.pestRepository.findAllByUserId(userId));
+        List<PestResponse> pestResponses = this.commonService.pestListCustomResponse(this.pestRepository.findAllByUserId(userId));
+        return new CustomResponse(pestResponses);
     }
 
     public CustomResponse getPest(int pestId) {
