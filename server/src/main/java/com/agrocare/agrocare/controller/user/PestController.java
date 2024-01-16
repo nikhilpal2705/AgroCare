@@ -4,6 +4,7 @@ import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Pests;
+import com.agrocare.agrocare.pojo.PestRequest;
 import com.agrocare.agrocare.service.common.CommonService;
 import com.agrocare.agrocare.service.user.PestService;
 import com.agrocare.agrocare.service.user.UserService;
@@ -71,7 +72,7 @@ public class PestController {
 
     // Add a pest . . .
     @PostMapping(value = "/pest")
-    public ResponseEntity<CustomResponse> createPest(@RequestBody Pests pests, HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> createPest(@RequestBody PestRequest pests, HttpServletRequest request) {
         try {
             return new ResponseEntity<>(pestService.savePest(pests, request), HttpStatus.OK);
         } catch (Exception err) {
