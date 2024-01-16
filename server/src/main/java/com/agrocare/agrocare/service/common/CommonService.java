@@ -4,7 +4,9 @@ import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.model.Users;
+import com.agrocare.agrocare.pojo.CropResponse;
 import com.agrocare.agrocare.pojo.CustomResponse;
+import com.agrocare.agrocare.pojo.PestResponse;
 import com.agrocare.agrocare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,16 +37,19 @@ public class CommonService {
         return new CustomResponse(userRepo.findAll());
     }
 
-    public Map<String, Object> getCorpAndPestFromCrop(Crops crop) {
-        return Map.of(
-                "crop", crop,
-                "pests", crop.getPests()
-//                "crop", List.of(crop),
-        );
+    public CropResponse cropResponse(Crops crop) {
+        return new CropResponse(crop.getId(), crop.getUserId(), crop.getPests(),
+                crop.getCropName(), crop.getCropType(), crop.getCropVariety(),
+                crop.getFieldName(), crop.getFieldSize(), crop.getStatus(),
+                crop.getPlantingDate(), crop.getHarvestDate(),
+                crop.getCreatedAt(), crop.getUpdatedAt());
     }
 
-    public Map<String, Object> getCorpAndPestFromPest(Pests pests) {
-        return Map.of("crop", pests.getCropId(),
-                "pests", pests);
+    public PestResponse pestResponse(Pests pests) {
+        return new PestResponse(pests.getId(), pests.getUserId(),
+                pests.getCrop(), pests.getPestName(),
+                pests.getPestiside(), pests.getStatus(),
+                pests.getState(), pests.getDate(),
+                pests.getCreatedAt(), pests.getUpdatedAt());
     }
 }

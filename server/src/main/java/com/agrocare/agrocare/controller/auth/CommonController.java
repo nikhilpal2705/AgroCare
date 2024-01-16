@@ -3,8 +3,10 @@ package com.agrocare.agrocare.controller.auth;
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
+import com.agrocare.agrocare.pojo.CropResponse;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Users;
+import com.agrocare.agrocare.pojo.PestResponse;
 import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.repository.PestRepository;
 import com.agrocare.agrocare.service.common.CommonService;
@@ -81,7 +83,7 @@ public class CommonController {
 //
 //            Pests pests = new Pests();
 //            pests.setUserId(5);
-//            pests.setCropId(crops);
+//            pests.setCrop(crops);
 //            pests.setPestName("Pest Name");
 //            pests.setPestiside("Pestiside");
 //            pests.setStatus(Constants.Status.ACTIVE);
@@ -91,7 +93,7 @@ public class CommonController {
 //
 //            Pests pests1 = new Pests();
 //            pests1.setUserId(5);
-//            pests1.setCropId(crops);
+//            pests1.setCrop(crops);
 //            pests1.setPestName("11Pest Name");
 //            pests1.setPestiside("11Pestiside");
 //            pests1.setStatus(Constants.Status.ACTIVE);
@@ -101,11 +103,9 @@ public class CommonController {
 //            crops.setPests(List.of(pests, pests1));
 //
 //            System.out.println("crops 11111111111111: " + crops.getCropName());
-//            System.out.println("crops 11111111111111: " + crops);
 //            Crops save = cropRepository.save(crops);
-//            System.out.println("save 11111111111111: " + save);
 
-//            Crops crop = cropRepository.findById(1).get();
+            Crops crop = cropRepository.findById(1).get();
 //            List<Pests> pests = crop.getPests();
 //
 //
@@ -115,19 +115,52 @@ public class CommonController {
 //            for (Pests pest : pests) {
 //                System.out.println("pest 11111111111111: " + pest.getPestName());
 //            }
-//
-//
+
+
 //            Pests pests1 = pestRepository.findById(1).get();
 //            System.out.println("pests1 11111111111111: " + pests1.getPestName());
 //            System.out.println("pests1 11111111111111: " + pests1.getCropId().getCropName());
 
-//            return new ResponseEntity<>(new CustomResponse(commonService.getCorpAndPestFromCrop(crop)),
+//            return new ResponseEntity<>(new CustomResponse(crop),
 //                    HttpStatus.OK);
 
-//            pestRepository.deleteById(1);
-            cropRepository.deleteById(1);
 
-            return new ResponseEntity<>(new CustomResponse("Test to delete"),
+//            @Transactional
+//            public void deleteCropWithCheck(Long cropId) throws Exception {
+//                Crop crop = cropRepository.findById(cropId).orElse(null);
+//
+//                if (crop != null) {
+//                    if (crop.getPests().isEmpty()) {
+//                        cropRepository.delete(crop);
+//                    } else {
+//                        throw new Exception("Cannot delete crop with associated pests");
+//                    }
+//                } else {
+//                    throw new EntityNotFoundException("Crop not found");
+//                }
+//            }
+
+
+//            pestRepository.deleteById(1);
+//            cropRepository.deleteById(1);
+
+
+//            Pests pests = this.pestRepository.findById(1).get();
+//            PestResponse corpAndPestFromPest = commonService.pestResponse(pests);
+//
+//            return new ResponseEntity<>(new CustomResponse(corpAndPestFromPest),
+//                    HttpStatus.OK);
+
+
+
+
+
+
+
+
+
+
+            return new ResponseEntity<>(new CustomResponse("Testing ,.,. . "),
                     HttpStatus.OK);
 
         } catch (Exception err) {
