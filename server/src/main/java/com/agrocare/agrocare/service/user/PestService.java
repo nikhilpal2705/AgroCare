@@ -44,9 +44,16 @@ public class PestService {
         return new CustomResponse(pest);
     }
 
+    public Pests findPestById(int pestId) {
+        return this.pestRepository.findById(pestId)
+                .orElseThrow(() -> new RuntimeException(Constants.Messages.PEST_NOT_FOUND + pestId));
+    }
+
     public CustomResponse updatePest(int pestId, Pests pest) {
-        this.getPest(pestId);
-        pest.setId(pestId);
+        Pests checkPest = this.findPestById(pestId);
+        pest.setId(checkPest.getId());
+        pest.setCrop(checkPest.getCrop());
+        pest.setUser(checkPest.getUser());
         return new CustomResponse(true, this.pestRepository.save(pest), Constants.Messages.PEST_UPDATED_SUCCESS);
     }
 }
