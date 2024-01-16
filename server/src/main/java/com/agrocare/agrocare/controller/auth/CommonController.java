@@ -7,8 +7,10 @@ import com.agrocare.agrocare.pojo.CropResponse;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.PestResponse;
+import com.agrocare.agrocare.pojo.UserResponse;
 import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.repository.PestRepository;
+import com.agrocare.agrocare.repository.UserRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +40,9 @@ public class CommonController {
 
     @Autowired
     private PestRepository pestRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping(value = "/register")
     public ResponseEntity<CustomResponse> registerUser(@RequestBody Users user) {
@@ -71,7 +77,7 @@ public class CommonController {
 
 
 //            Crops crops = new Crops();
-//            crops.setUserId(5);
+//            crops.setUser(userRepository.findById(1).get());
 //            crops.setCropName("Crop Name");
 //            crops.setCropType("Crop Type");
 //            crops.setCropVariety("Crop Variety");
@@ -82,7 +88,7 @@ public class CommonController {
 //            crops.setStatus(Constants.Status.ACTIVE);
 //
 //            Pests pests = new Pests();
-//            pests.setUserId(5);
+//            pests.setUser(userRepository.findById(1).get());
 //            pests.setCrop(crops);
 //            pests.setPestName("Pest Name");
 //            pests.setPestiside("Pestiside");
@@ -92,7 +98,7 @@ public class CommonController {
 //
 //
 //            Pests pests1 = new Pests();
-//            pests1.setUserId(5);
+//            pests1.setUser(userRepository.findById(1).get());
 //            pests1.setCrop(crops);
 //            pests1.setPestName("11Pest Name");
 //            pests1.setPestiside("11Pestiside");
@@ -105,7 +111,7 @@ public class CommonController {
 //            System.out.println("crops 11111111111111: " + crops.getCropName());
 //            Crops save = cropRepository.save(crops);
 
-            Crops crop = cropRepository.findById(1).get();
+//            Crops crop = cropRepository.findById(1).get();
 //            List<Pests> pests = crop.getPests();
 //
 //
@@ -117,12 +123,9 @@ public class CommonController {
 //            }
 
 
-//            Pests pests1 = pestRepository.findById(1).get();
-//            System.out.println("pests1 11111111111111: " + pests1.getPestName());
-//            System.out.println("pests1 11111111111111: " + pests1.getCropId().getCropName());
-
-//            return new ResponseEntity<>(new CustomResponse(crop),
-//                    HttpStatus.OK);
+//            Pests pests = pestRepository.findById(1).get();
+//            System.out.println("pests 11111111111111: " + pests.getPestName());
+//            System.out.println("pests 11111111111111: " + pests.getCrop().getCropName());
 
 
 //            @Transactional
@@ -152,15 +155,9 @@ public class CommonController {
 //                    HttpStatus.OK);
 
 
+            Users user = userRepository.findById(1).get();
 
-
-
-
-
-
-
-
-            return new ResponseEntity<>(new CustomResponse("Testing ,.,. . "),
+            return new ResponseEntity<>(new CustomResponse(commonService.userResponse(user)),
                     HttpStatus.OK);
 
         } catch (Exception err) {

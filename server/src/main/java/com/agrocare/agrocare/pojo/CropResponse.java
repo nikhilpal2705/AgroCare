@@ -1,6 +1,7 @@
 package com.agrocare.agrocare.pojo;
 
 import com.agrocare.agrocare.model.Pests;
+import com.agrocare.agrocare.model.Users;
 import lombok.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @ToString
 public class CropResponse {
     private int id;
-    private int userId;
+    private Users user;
     private List<Pests> pests;
     private String cropName;
     private String cropType;

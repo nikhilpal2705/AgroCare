@@ -14,9 +14,9 @@ public class PestService {
     private PestRepository pestRepository;
 
     public CustomResponse savePest(Pests pest) {
-        if (pest.getUserId() == Constants.NullCheck.INT) {
-            throw new RuntimeException(Constants.Messages.USER_ID_NOT_AVAILABLE);
-        }
+//        if (pest.getUserId() == Constants.NullCheck.INT) {
+//            throw new RuntimeException(Constants.Messages.USER_ID_NOT_AVAILABLE);
+//        }
         pestRepository.save(pest);
         return new CustomResponse(true, Constants.Messages.PEST_ADDED_SUCCESS);
     }
