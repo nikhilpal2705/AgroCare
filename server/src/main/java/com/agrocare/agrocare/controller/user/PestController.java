@@ -96,9 +96,9 @@ public class PestController {
 
     // Update a pest . . .
     @PutMapping(value = "/pest/{pestId}")
-    public ResponseEntity<CustomResponse> updatePest(@PathVariable("pestId") int pestId, @RequestBody Pests pest) {
+    public ResponseEntity<CustomResponse> updatePest(@PathVariable("pestId") int pestId, @RequestBody PestRequest pest, HttpServletRequest request) {
         try {
-            return new ResponseEntity<>(pestService.updatePest(pestId, pest), HttpStatus.OK);
+            return new ResponseEntity<>(pestService.updatePest(pestId, pest, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.PEST_UPDATING_ERROR),
