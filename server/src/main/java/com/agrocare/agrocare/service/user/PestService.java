@@ -57,11 +57,12 @@ public class PestService {
                 .orElseThrow(() -> new RuntimeException(Constants.Messages.PEST_NOT_FOUND + pestId));
     }
 
-    public CustomResponse updatePest(int pestId, Pests pest) {
-        Pests checkPest = this.findPestById(pestId);
-        pest.setId(checkPest.getId());
-        pest.setCrop(checkPest.getCrop());
-        pest.setUser(checkPest.getUser());
-        return new CustomResponse(true, this.pestRepository.save(pest), Constants.Messages.PEST_UPDATED_SUCCESS);
+    public CustomResponse updatePest(int pestId, PestRequest pestRequest, HttpServletRequest request) {
+        this.findPestById(pestId);
+        Pests updatePest = new Pests(pestId,commonService.getUserFromHeader(request),
+                cropService.findCropById(pestRequest.getCropId()),
+                pestRequest.getPestName(), pestRequest.getPestiside(), pestRequest.getStatus(),
+                pestRequest.getState(), pestRequest.getDate());
+        return new CustomResponse(true, this.pestRepository.save(updatePest), Constants.Messages.PEST_UPDATED_SUCCESS);
     }
 }

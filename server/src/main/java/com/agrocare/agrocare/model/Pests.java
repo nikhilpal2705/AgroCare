@@ -75,4 +75,15 @@ public class Pests {
         this.state = state;
         this.date = date;
     }
+
+    public Pests(int id, Users user, Crops crop, String pestName, String pestiside, int status, int state, String date) {
+        this.id = id;
+        this.user = user;
+        this.crop = crop;
+        this.pestName = pestName;
+        this.pestiside = pestiside;
+        this.status = status;
+        this.state = state;
+        this.date = date;
+    }
 }
