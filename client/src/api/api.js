@@ -65,7 +65,6 @@ const api = {
     list: async ({ entity, params = {} }) => {
         try {
             const response = await axios.get(ACCESS_URL + entity, { params: params });
-            console.log(`🙈 🙉 🙊 ~ list: ~ response : `, response)
             successHandler(response, {
                 notifyOnSuccess: false,
                 notifyOnFailed: false,
