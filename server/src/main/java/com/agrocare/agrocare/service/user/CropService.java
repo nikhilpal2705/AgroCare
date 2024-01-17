@@ -6,6 +6,7 @@ import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import com.agrocare.agrocare.helper.Constants;
 
@@ -29,7 +30,8 @@ public class CropService {
             this.cropRepository.deleteById(cropId);
             return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS);
         } else {
-            return new CustomResponse(true, Constants.Messages.CROP_CONNECTED_WITH_PESTS);
+//            return new CustomResponse(false, Constants.Messages.CROP_CONNECTED_WITH_PESTS);
+            throw new DuplicateKeyException(Constants.Messages.CROP_CONNECTED_WITH_PESTS);
         }
     }
 

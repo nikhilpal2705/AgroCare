@@ -12,7 +12,10 @@ import lombok.*;
 public class PestResponse {
     private int id;
     private Users user;
+    private int userId;
     private Crops crop;
+    private int cropId;
+    private String cropName;
     private String pestName;
     private String pestiside;
     private int status;
@@ -20,17 +23,4 @@ public class PestResponse {
     private String date;
     private String createdAt;
     private String updatedAt;
-
-    public PestResponse(int id, Users user, String pestName, String pestiside, int status, int state, String date,
-            String createdAt, String updatedAt) {
-        this.id = id;
-        this.user = user;
-        this.pestName = pestName;
-        this.pestiside = pestiside;
-        this.status = status;
-        this.state = state;
-        this.date = date;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 }
