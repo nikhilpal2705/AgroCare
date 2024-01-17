@@ -53,8 +53,8 @@ public class CommonService {
     }
 
     public PestResponse pestResponse(Pests pests) {
-        return new PestResponse(pests.getId(), pests.getUser(),
-                pests.getCrop(), pests.getPestName(),
+        return new PestResponse(pests.getId(), pests.getUser(), pests.getUser().getId(),
+                pests.getCrop(), pests.getCrop().getId(), pests.getCrop().getCropName(), pests.getPestName(),
                 pests.getPestiside(), pests.getStatus(),
                 pests.getState(), pests.getDate(),
                 pests.getCreatedAt(), pests.getUpdatedAt());
@@ -79,11 +79,11 @@ public class CommonService {
     public List<PestResponse> pestListCustomResponse(List<Pests> pests) {
         List<PestResponse> pestResponseList = new ArrayList<>();
         for (Pests pest : pests) {
-            pestResponseList.add(new PestResponse(pest.getId(), pest.getUser(),
-                    pest.getCrop(), pest.getPestName(),
-                    pest.getPestiside(), pest.getStatus(),
-                    pest.getState(), pest.getDate(),
-                    pest.getCreatedAt(), pest.getUpdatedAt()));
+            pestResponseList.add(new PestResponse(pest.getId(), null, pest.getUser().getId(),
+                    pest.getCrop(), pest.getCrop().getId(), pest.getCrop().getCropName(),
+                    pest.getPestName(),pest.getPestiside(), pest.getStatus(),
+                    pest.getState(), pest.getDate(),pest.getCreatedAt(),
+                    pest.getUpdatedAt()));
         }
         return pestResponseList;
     }

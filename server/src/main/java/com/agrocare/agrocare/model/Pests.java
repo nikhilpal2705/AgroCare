@@ -27,12 +27,12 @@ public class Pests {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user")
     @JsonIgnore
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name = "cropId")
+    @JoinColumn(name = "crop")
     @JsonIgnore
     private Crops crop;
 
