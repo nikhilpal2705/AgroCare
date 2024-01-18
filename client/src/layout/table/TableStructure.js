@@ -34,7 +34,7 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          const date = dayjs(record[key]).format(dateFormat);
+          const date = record[key] ? dayjs(record[key]).format(dateFormat) : '';
           return (
             <Tag bordered={false} color={field.color}>
               {date}

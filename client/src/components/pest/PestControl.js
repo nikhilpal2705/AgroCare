@@ -28,7 +28,6 @@ const PestControl = () => {
     fields,
     entity: 'pest',
     ENTITY_TITLE: 'Pest',
-    dataSource: [],
   }
   return (
     <>
