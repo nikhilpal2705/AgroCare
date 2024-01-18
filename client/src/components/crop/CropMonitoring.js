@@ -33,6 +33,7 @@ const CropMonitoring = () => {
       hasFeedback: true,
     },
     harvestDate: {
+      label: 'Harvest Date',
       type: 'date',
     },
 
