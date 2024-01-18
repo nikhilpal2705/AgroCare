@@ -41,7 +41,6 @@ const CropMonitoring = () => {
     fields,
     entity: 'crop',
     ENTITY_TITLE: 'Crop',
-    dataSource: [],
   }
   return (
     <>
