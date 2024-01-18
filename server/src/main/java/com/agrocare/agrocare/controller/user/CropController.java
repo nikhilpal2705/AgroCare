@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -80,9 +79,6 @@ public class CropController extends UserService {
     public ResponseEntity<CustomResponse> deleteCrop(@PathVariable("cropId") int cropId) {
         try {
             return new ResponseEntity<>(cropService.deleteCrop(cropId), HttpStatus.OK);
-        } catch (DuplicateKeyException err) {
-            logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_DELETED_ERROR),
@@ -93,7 +89,7 @@ public class CropController extends UserService {
     // Update a crop . . .
     @PutMapping(value = "/crop/{cropId}")
     public ResponseEntity<CustomResponse> updateCrop(@PathVariable("cropId") int cropId, @RequestBody Crops crops,
-                                                     HttpServletRequest request) {
+            HttpServletRequest request) {
         try {
             return new ResponseEntity<>(cropService.updateCrop(cropId, crops, request), HttpStatus.OK);
         } catch (Exception err) {
