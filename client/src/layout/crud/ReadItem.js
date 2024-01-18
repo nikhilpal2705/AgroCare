@@ -31,7 +31,8 @@ export default function ReadItem({ config }) {
 
   useEffect(() => {
     const list = readColumns.map(props => {
-      const value = props.isDate ? dayjs(valueByString(currentResult, props.dataIndex)).format('DD-MM-YYYY') : valueByString(currentResult, props.dataIndex);
+      const fieldValue = valueByString(currentResult, props.dataIndex)
+      const value = props.isDate ? (fieldValue ? dayjs(fieldValue).format('DD-MM-YYYY') : '---') : fieldValue;
       return {
         propsKey: props.dataIndex,
         label: props.title,
