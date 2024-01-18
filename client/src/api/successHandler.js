@@ -6,7 +6,16 @@ const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFa
     const message = response.data && data.message;
     const successText = message
 
-    if (options.notifyOnSuccess) {
+    if (data.result === false) {
+      notification.config({
+        duration: 3,
+        maxCount: 2,
+      });
+      notification.warning({
+        message: `Request failed`,
+        description: successText,
+      });
+    } else if (options.notifyOnSuccess) {
       notification.config({
         duration: 2,
         maxCount: 2,
