@@ -37,6 +37,7 @@ public class Constants {
         String USER_NOT_FOUND_BY_USERNAME = "User Not Found with username !! ";
         String INVALID_USER_ID = "Invalid User Id !!";
         String CROP_CONNECTED_WITH_PESTS = "Crop connected with pests";
+        String PASSWORD_UPDATED = "Password updated successfully";
     }
 
     public interface NullCheck {
