@@ -39,6 +39,7 @@ public class Constants {
         String CROP_CONNECTED_WITH_PESTS = "Crop connected with pests";
         String PASSWORD_UPDATED = "Password updated successfully";
         String PROFILE_UPDATED = "Profile updated successfully";
+        String ERROR_FETCHING_DASHBOARD_DETAILS = "Error while fetching dashboard details";
     }
 
     public interface NullCheck {
