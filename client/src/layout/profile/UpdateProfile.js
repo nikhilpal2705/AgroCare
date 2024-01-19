@@ -17,7 +17,7 @@ const UpdateProfile = ({ config }) => {
   const { updatePanel } = profileContextAction;
   const dispatch = useDispatch();
   const { ENTITY_NAME } = config;
-  const entity = COMMON_BASE_URL + 'password';
+  const entity = COMMON_BASE_URL + "profile";
 
   const currentUser = useSelector(selectCurrentUser);
   const [form] = Form.useForm();

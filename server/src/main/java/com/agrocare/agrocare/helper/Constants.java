@@ -38,6 +38,7 @@ public class Constants {
         String INVALID_USER_ID = "Invalid User Id !!";
         String CROP_CONNECTED_WITH_PESTS = "Crop connected with pests";
         String PASSWORD_UPDATED = "Password updated successfully";
+        String PROFILE_UPDATED = "Profile updated successfully";
     }
 
     public interface NullCheck {
