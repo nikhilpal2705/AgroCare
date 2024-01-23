@@ -40,6 +40,9 @@ public class Constants {
         String PASSWORD_UPDATED = "Password updated successfully";
         String PROFILE_UPDATED = "Profile updated successfully";
         String ERROR_FETCHING_DASHBOARD_DETAILS = "Error while fetching dashboard details";
+        String ERROR_WHILE_ADDING_CROP_MONITOR_DATA = "Error while adding crop monitor data";
+        String CROP_MONITOR_ADDED_SUCCESS = "Crop monitor added successfully";
+        String CROP_MONITORING_ALREADY_EXISTS = "Crop monitoring already exists for ";
     }
 
     public interface NullCheck {

@@ -37,6 +37,10 @@ public class Crops {
     @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Pests> pests = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private CropMonitor cropMonitor;
+
     @JsonProperty("cropName")
     @Column(name = "cropName", nullable = false)
     private String cropName;
