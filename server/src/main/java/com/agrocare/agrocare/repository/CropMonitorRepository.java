@@ -17,4 +17,6 @@ public interface CropMonitorRepository extends JpaRepository<CropMonitor, Intege
     @Modifying
     @Query("DELETE FROM CropMonitor cm WHERE cm.id = :cropMonitorId")
     void deleteMonitorById(@Param("cropMonitorId") int cropMonitorId);
+
+    Object countByUser(Users user);
 }
