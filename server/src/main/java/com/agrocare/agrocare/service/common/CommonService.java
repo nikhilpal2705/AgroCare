@@ -2,13 +2,11 @@ package com.agrocare.agrocare.service.common;
 
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.helper.Constants;
+import com.agrocare.agrocare.model.CropMonitor;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.model.Users;
-import com.agrocare.agrocare.pojo.CropResponse;
-import com.agrocare.agrocare.pojo.CustomResponse;
-import com.agrocare.agrocare.pojo.PestResponse;
-import com.agrocare.agrocare.pojo.UserResponse;
+import com.agrocare.agrocare.pojo.*;
 import com.agrocare.agrocare.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +84,20 @@ public class CommonService {
                     pest.getUpdatedAt()));
         }
         return pestResponseList;
+    }
+
+    public CropMonitorResponse cropMonitorResponse(CropMonitor cropMonitorById) {
+        return new CropMonitorResponse(cropMonitorById.getId(), cropMonitorById.getUser().getId(),
+                cropMonitorById.getCrop().getId(), cropMonitorById.getCrop().getCropName(),
+                cropMonitorById.getCrop(), cropMonitorById.getTotalStock(), cropMonitorById.getAvailableStock(),
+                cropMonitorById.getCreatedAt(), cropMonitorById.getUpdatedAt());
+    }
+
+    public List<CropMonitorResponse> cropMonitorListCustomResponse(List<CropMonitor> allByUser) {
+        List<CropMonitorResponse> cropMonitorResponseList = new ArrayList<>();
+        for (CropMonitor cropMonitor : allByUser) {
+            cropMonitorResponseList.add(this.cropMonitorResponse(cropMonitor));
+        }
+        return cropMonitorResponseList;
     }
 }
