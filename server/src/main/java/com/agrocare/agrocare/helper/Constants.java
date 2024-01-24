@@ -49,6 +49,8 @@ public class Constants {
         String CROP_MONITOR_UPDATED_SUCCESS = "Crop monitor updated successfully";
         String ERROR_WHILE_DELETING_CROP_MONITOR_DATA = "Error while deleting crop monitor data";
         String CROP_MONITOR_DELETED_SUCCESS = "Crop monitor deleted successfully";
+        String CROP_CONNECTED_WITH_PESTS_AND_CROP_MONITOR = "Crop connected with pests and crop monitor";
+        String CROP_CONNECTED_WITH_CROP_MONITOR = "Crop connected with crop monitor";
     }
 
     public interface NullCheck {
