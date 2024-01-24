@@ -25,12 +25,24 @@ public class CropService {
     }
 
     public CustomResponse deleteCrop(int cropId) {
-        if (this.findCropById(cropId).getPests().isEmpty()) {
-            this.cropRepository.deleteById(cropId);
-            return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS);
-        } else {
-           return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_PESTS);
+        Crops crop = this.findCropById(cropId);
+        // Check if crop is connected with pests or crop monitor
+        if (crop.getCropMonitor() != null && !crop.getPests().isEmpty()) {
+            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_PESTS_AND_CROP_MONITOR);
         }
+
+        // Check if crop is connected with crop monitor
+        if (crop.getCropMonitor() != null) {
+            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_CROP_MONITOR);
+        }
+
+        // Check if crop is connected with pests
+        if (!crop.getPests().isEmpty()) {
+            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_PESTS);
+        }
+
+        this.cropRepository.deleteById(cropId);
+        return new CustomResponse(true, Constants.Messages.CROP_DELETED_SUCCESS);
     }
 
     public Crops findCropById(int cropId) {
