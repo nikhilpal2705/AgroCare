@@ -2,6 +2,7 @@ package com.agrocare.agrocare.service.user;
 
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
+import com.agrocare.agrocare.repository.CropMonitorRepository;
 import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.repository.PestRepository;
 import com.agrocare.agrocare.service.common.CommonService;
@@ -24,11 +25,15 @@ public class DashboardService {
     @Autowired
     private PestRepository pestRepository;
 
+    @Autowired
+    private CropMonitorRepository cropMonitorRepository;
+
     public CustomResponse getDashboardDetails(HttpServletRequest request) {
         Users user = commonService.getUserFromHeader(request);
         Map<String, Object> response = Map.of(
                 "cropCount", this.cropRepository.countByUser(user),
-                "pestCount", this.pestRepository.countByUser(user)
+                "pestCount", this.pestRepository.countByUser(user),
+                "cropMonitorCount", this.cropMonitorRepository.countByUser(user)
         );
 
         return new CustomResponse(response);
