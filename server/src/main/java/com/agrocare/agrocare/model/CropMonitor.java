@@ -59,4 +59,12 @@ public class CropMonitor {
         this.totalStock = totalStock;
         this.availableStock = availableStock;
     }
+
+    public CropMonitor(int id, Users user, Crops crop, int totalStock, int availableStock) {
+        this.id = id;
+        this.user = user;
+        this.crop = crop;
+        this.totalStock = totalStock;
+        this.availableStock = availableStock;
+    }
 }

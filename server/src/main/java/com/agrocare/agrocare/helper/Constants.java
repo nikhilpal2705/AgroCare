@@ -43,6 +43,12 @@ public class Constants {
         String ERROR_WHILE_ADDING_CROP_MONITOR_DATA = "Error while adding crop monitor data";
         String CROP_MONITOR_ADDED_SUCCESS = "Crop monitor added successfully";
         String CROP_MONITORING_ALREADY_EXISTS = "Crop monitoring already exists for ";
+        String ERROR_WHILE_FETCHING_CROP_MONITOR_DATA = "Error while fetching crop monitor data";
+        String CROP_MONITOR_NOT_FOUND = "Crop monitor not found !! ";
+        String ERROR_WHILE_UPDATING_CROP_MONITOR_DATA = "Error while updating crop monitor data";
+        String CROP_MONITOR_UPDATED_SUCCESS = "Crop monitor updated successfully";
+        String ERROR_WHILE_DELETING_CROP_MONITOR_DATA = "Error while deleting crop monitor data";
+        String CROP_MONITOR_DELETED_SUCCESS = "Crop monitor deleted successfully";
     }
 
     public interface NullCheck {

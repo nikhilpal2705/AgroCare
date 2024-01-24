@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class CropMonitorRequest {
+    private int id;
     private int userId;
     private int cropId;
     private int totalStock;
