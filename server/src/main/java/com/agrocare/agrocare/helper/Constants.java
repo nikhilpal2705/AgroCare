@@ -51,6 +51,14 @@ public class Constants {
         String INVENTORY_DELETED_SUCCESS = "Inventory deleted successfully";
         String CROP_CONNECTED_WITH_PESTS_AND_INVENTORY = "Crop connected with pests and inventory";
         String CROP_CONNECTED_WITH_INVENTORY = "Crop connected with inventory";
+        String ERROR_WHILE_ADDING_IRRIGATION = "Error while adding irrigation";
+        String IRRIGATION_ADDED_SUCCESS = "Irrigation added successfully";
+        String ERROR_WHILE_FETCHING_IRRIGATION = "Error while fetching irrigation";
+        String IRRIGATION_NOT_FOUND = "Irrigation not found !! ";
+        String ERROR_WHILE_DELETING_IRRIGATION_DATA = "Error while deleting irrigation data";
+        String IRRIGATION_DELETED_SUCCESS = "Irrigation deleted successfully";
+        String ERROR_WHILE_UPDATING_IRRIGATION_DATA = "Error while updating irrigation data";
+        String IRRIGATION_UPDATED_SUCCESS = "Irrigation updated successfully";
     }
 
     public interface NullCheck {

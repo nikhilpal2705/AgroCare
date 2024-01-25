@@ -2,10 +2,7 @@ package com.agrocare.agrocare.service.common;
 
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.model.Inventory;
-import com.agrocare.agrocare.model.Crops;
-import com.agrocare.agrocare.model.Pests;
-import com.agrocare.agrocare.model.Users;
+import com.agrocare.agrocare.model.*;
 import com.agrocare.agrocare.pojo.*;
 import com.agrocare.agrocare.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -79,8 +76,8 @@ public class CommonService {
         for (Pests pest : pests) {
             pestResponseList.add(new PestResponse(pest.getId(), null, pest.getUser().getId(),
                     pest.getCrop(), pest.getCrop().getId(), pest.getCrop().getCropName(),
-                    pest.getPestName(),pest.getPestiside(), pest.getStatus(),
-                    pest.getState(), pest.getDate(),pest.getCreatedAt(),
+                    pest.getPestName(), pest.getPestiside(), pest.getStatus(),
+                    pest.getState(), pest.getDate(), pest.getCreatedAt(),
                     pest.getUpdatedAt()));
         }
         return pestResponseList;
@@ -99,5 +96,20 @@ public class CommonService {
             inventoryResponseList.add(this.inventoryResponse(inventory));
         }
         return inventoryResponseList;
+    }
+
+    public IrrigationResponse irrigationResponse(Irrigation irrigation) {
+        return new IrrigationResponse(irrigation.getId(), irrigation.getCrop().getId(),
+                irrigation.getCrop().getCropName(), irrigation.getCrop(),
+                irrigation.getScheduleDate(), irrigation.getStatus(),
+                irrigation.getCreatedAt(), irrigation.getUpdatedAt());
+    }
+
+    public List<IrrigationResponse> irrigationListCustomResponse(List<Irrigation> allByUser) {
+        List<IrrigationResponse> irrigationResponses = new ArrayList<>();
+        for (Irrigation irrigation : allByUser) {
+            irrigationResponses.add(this.irrigationResponse(irrigation));
+        }
+        return irrigationResponses;
     }
 }
