@@ -1,8 +1,9 @@
-import { Divider, Row, Col, Spin, Tooltip } from 'antd';
+import { Divider, Row, Col, Spin, Tooltip, Tag } from 'antd';
 
 export default function SummaryCard({
   title,
   tagContent,
+  tagColor,
   prefix,
   isLoading = false,
 }) {
@@ -12,7 +13,7 @@ export default function SummaryCard({
       xs={{ span: 24 }}
       sm={{ span: 12 }}
       md={{ span: 12 }}
-      lg={{ span: 12 }}
+      lg={{ span: 8 }}
     >
       <div
         className="whiteBox shadow"
@@ -60,7 +61,19 @@ export default function SummaryCard({
                 <Spin />
               ) : (
                 <Tooltip title={tagContent}>
+                  <Tag
+                    color={tagColor}
+                    style={{
+                      margin: '0 auto',
+                      justifyContent: 'center',
+                      maxWidth: '110px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
                   {tagContent}
+                  </Tag>
                 </Tooltip>
               )}
             </Col>

@@ -1,7 +1,9 @@
-import { Row, Layout } from 'antd';
+import { Row, Col, Tag } from 'antd';
 import api from 'api/api';
 import useFetch from 'hooks/useFetch';
 import SummaryCard from './SummaryCard';
+import RecentTable from './RecentTable';
+import { tagColor } from 'helper/statusTagColor';
 const Dashboard = () => {
   const { result, isLoading } = useFetch(() =>
     api.get({ entity: 'user/dashboard' })
@@ -20,6 +22,12 @@ const Dashboard = () => {
       entity: 'Pests',
       title: 'Pests Count',
     },
+    {
+      result: result ? result.pestCount : 0,
+      isLoading: isLoading,
+      entity: 'Inventory',
+      title: 'Inventory Count',
+    },
   ];
 
   const cards = entityData.map((data, index) => {
@@ -29,7 +37,7 @@ const Dashboard = () => {
         key={index}
         title={data?.entity}
         tagColor={
-          data?.entity
+          data?.entity === 'Crops' ? 'cyan' : data?.entity === 'Pests' ? 'purple' : 'green'
         }
         prefix={'Count'}
         isLoading={isLoading}
@@ -38,12 +46,50 @@ const Dashboard = () => {
     );
   });
 
+  const dataTableColumns = [
+    {
+      title: 'Crop Name',
+      dataIndex: ['crop', 'cropName'],
+    },
+    {
+      title: 'Scheduled Date',
+      dataIndex: 'scheduledDate',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      render: (status) => {
+        return <Tag color={tagColor(status)?.color}>{status}</Tag>;
+      },
+    },
+  ];
+
   return (
-    <Layout className="site-layout">
+    <>
       <Row gutter={[32, 32]}>
         {cards}
       </Row>
-    </Layout>
+
+      <div className="space30"></div>
+      <Row gutter={[32, 32]}>
+        <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 24 }}>
+          <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <h3
+              style={{
+                color: '#22075e',
+                fontSize: 'large',
+                marginBottom: 5,
+                padding: '0 20px 20px',
+                textTransform: 'capitalize',
+              }}>
+              {'Upcoming Irrigation'}
+            </h3>
+
+            <RecentTable entity={'dashboard-irrigation'} dataTableColumns={dataTableColumns} />
+          </div>
+        </Col>
+      </Row>
+    </>
   )
 }
 export default Dashboard

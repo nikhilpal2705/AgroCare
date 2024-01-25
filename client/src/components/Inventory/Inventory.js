@@ -13,12 +13,12 @@ const Inventory = () => {
             required: true,
         },
         totalStock: {
-            label: 'Total Stock',
+            label: 'Total Stock (Kg.)',
             type: 'number',
             required: true,
         },
         availableStock: {
-            label: 'Available Stock',
+            label: 'Available Stock (Kg.)',
             type: 'number',
         },
         updatedAt: {
