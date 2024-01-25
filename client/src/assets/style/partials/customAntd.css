@@ -6,6 +6,13 @@
   background: #fff;
 }
 
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
 }

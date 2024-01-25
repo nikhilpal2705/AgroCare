@@ -53,62 +53,60 @@ const About = () => {
         title="AgroCare"
         subTitle="Your Agriculture Companion"
         extra={
-          <>
-            <p>
-              AgroCare is a comprehensive platform designed to assist and enhance the agricultural experience.
-            </p>
-            <Content
-              className="whiteBox shadow layoutPadding"
-              style={{
-                margin: '40px auto',
-                width: '100%',
-                maxWidth: '1100px',
-              }}
-            >
-              <h4>Developers</h4>
-              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '25px' }}>
-                <div style={{ marginRight: '50px' }}>
-                  <DeveloperInfo
-                    name="Nikhil Suryavanshi"
-                    email="nsuryavanshi.dev@gmail.com"
-                    linkedin="https://www.linkedin.com/in/nikhilpal2705"
-                  />
-                </div>
-                <div style={{ marginLeft: '50px' }}>
-                  <DeveloperInfo
-                    name="Jitendra Bakolia"
-                    email="jitendrabakolia.dev@gmail.com"
-                    linkedin="https://www.linkedin.com/in/jitendrabakolia"
-                  />
-                </div>
-              </div>
-            </Content>
-
-            <Content
-              className="whiteBox shadow layoutPadding"
-              style={{
-                margin: '40px auto',
-                width: '100%',
-                maxWidth: '1100px',
-              }}
-            >
-              <p>
-                Explore our GitHub repository for the AgroCare app to get involved, contribute, or customize the application based on your requirements.
-              </p>
-              <Button
-                type="primary"
-                shape="round"
-                icon={<GithubFilled />}
-                size="large"
-                href="https://github.com/nikhilpal2705/AgroCare"
-                target="_blank"
-              >
-                GitHub
-              </Button>
-            </Content>
-          </>
+          <p>
+            AgroCare is a comprehensive platform designed to assist and enhance the agricultural experience.
+          </p>
         }
       />
+
+      <Content
+        className="whiteBox shadow layoutPadding centered-content"
+        style={{
+          width: '100%',
+          maxWidth: '1100px',
+        }}
+      >
+        <h3>Developers</h3>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '25px' }}>
+          <div style={{ marginRight: '50px' }}>
+            <DeveloperInfo
+              name="Nikhil Suryavanshi"
+              email="nsuryavanshi.dev@gmail.com"
+              linkedin="https://www.linkedin.com/in/nikhilpal2705"
+            />
+          </div>
+          <div style={{ marginLeft: '50px' }}>
+            <DeveloperInfo
+              name="Jitendra Bakolia"
+              email="jitendrabakolia.dev@gmail.com"
+              linkedin="https://www.linkedin.com/in/jitendrabakolia"
+            />
+          </div>
+        </div>
+      </Content>
+
+      <Content
+        className="whiteBox shadow layoutPadding centered-content"
+        style={{
+          margin: '40px auto',
+          width: '100%',
+          maxWidth: '1100px',
+        }}
+      >
+        <p>
+          Explore our GitHub repository for the AgroCare app to get involved, contribute, or customize the application based on your requirements.
+        </p>
+        <Button
+          type="primary"
+          shape="round"
+          icon={<GithubFilled />}
+          size="large"
+          href="https://github.com/nikhilpal2705/AgroCare"
+          target="_blank"
+        >
+          GitHub
+        </Button>
+      </Content>
     </Layout>
   );
 };
