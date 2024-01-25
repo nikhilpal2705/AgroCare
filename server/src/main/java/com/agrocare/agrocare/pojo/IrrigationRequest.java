@@ -1,6 +1,5 @@
 package com.agrocare.agrocare.pojo;
 
-
 import com.agrocare.agrocare.helper.Constants;
 import lombok.*;
 
@@ -13,6 +12,6 @@ public class IrrigationRequest {
     private int id;
     private int userId;
     private int cropId;
-    private String scheduleDate;
+    private String scheduledDate;
     private int status = Constants.Status.INACTIVE;
 }

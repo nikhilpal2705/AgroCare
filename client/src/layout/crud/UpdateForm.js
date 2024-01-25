@@ -19,7 +19,7 @@ export default function UpdateForm({ config, formElements, withUpload = false })
 
   useEffect(() => {
     const handleDateFormats = (newValues) => {
-      const dateFields = ['plantingDate', 'harvestDate', 'date'];
+      const dateFields = ['plantingDate', 'harvestDate', 'date', 'scheduledDate'];
       const dateFormat = dateFields.reduce((acc, field) => {
         if (newValues[field]) {
           acc[field] = dayjs(newValues[field]);

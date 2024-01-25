@@ -101,7 +101,7 @@ public class CommonService {
     public IrrigationResponse irrigationResponse(Irrigation irrigation) {
         return new IrrigationResponse(irrigation.getId(), irrigation.getCrop().getId(),
                 irrigation.getCrop().getCropName(), irrigation.getCrop(),
-                irrigation.getScheduleDate(), irrigation.getStatus(),
+                irrigation.getScheduledDate(), irrigation.getStatus(),
                 irrigation.getCreatedAt(), irrigation.getUpdatedAt());
     }
 

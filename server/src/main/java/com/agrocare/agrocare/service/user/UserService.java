@@ -54,7 +54,7 @@ public class UserService {
         Users user = commonService.getUserFromHeader(request);
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
-        return new CustomResponse(true,Constants.Messages.PASSWORD_UPDATED);
+        return new CustomResponse(true, Constants.Messages.PASSWORD_UPDATED);
     }
 
     public CustomResponse updateProfile(Users user, HttpServletRequest request) {

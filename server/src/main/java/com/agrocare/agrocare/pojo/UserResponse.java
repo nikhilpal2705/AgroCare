@@ -19,7 +19,7 @@ public class UserResponse {
     private Collection<?> authorities;
     private int status;
     private boolean accountNonExpired;
-    private boolean accountNonLocked ;
+    private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
     private List<Crops> crops;
