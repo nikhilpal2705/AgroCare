@@ -1,3 +1,4 @@
+import Inventory from 'components/Inventory/Inventory';
 import PageLoader from 'components/common/PageLoader';
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
@@ -38,6 +39,10 @@ function PrivateAppRoutes() {
     {
       path: '/pest-control',
       element: <PestControl />,
+    },
+    {
+      path: '/inventory',
+      element: <Inventory />,
     },
     {
       path: '/profile',

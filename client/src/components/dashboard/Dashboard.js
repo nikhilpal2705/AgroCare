@@ -23,7 +23,7 @@ const Dashboard = () => {
   ];
 
   const cards = entityData.map((data, index) => {
-    const { result, entity, isLoading } = data;
+    const { result, isLoading } = data;
     return (
       <SummaryCard
         key={index}

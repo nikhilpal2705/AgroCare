@@ -2,7 +2,7 @@ package com.agrocare.agrocare.service.common;
 
 import com.agrocare.agrocare.configuration.jwt.JwtHelper;
 import com.agrocare.agrocare.helper.Constants;
-import com.agrocare.agrocare.model.CropMonitor;
+import com.agrocare.agrocare.model.Inventory;
 import com.agrocare.agrocare.model.Crops;
 import com.agrocare.agrocare.model.Pests;
 import com.agrocare.agrocare.model.Users;
@@ -86,18 +86,18 @@ public class CommonService {
         return pestResponseList;
     }
 
-    public CropMonitorResponse cropMonitorResponse(CropMonitor cropMonitorById) {
-        return new CropMonitorResponse(cropMonitorById.getId(), cropMonitorById.getUser().getId(),
-                cropMonitorById.getCrop().getId(), cropMonitorById.getCrop().getCropName(),
-                cropMonitorById.getCrop(), cropMonitorById.getTotalStock(), cropMonitorById.getAvailableStock(),
-                cropMonitorById.getCreatedAt(), cropMonitorById.getUpdatedAt());
+    public InventoryResponse inventoryResponse(Inventory inventoryById) {
+        return new InventoryResponse(inventoryById.getId(), inventoryById.getUser().getId(),
+                inventoryById.getCrop().getId(), inventoryById.getCrop().getCropName(),
+                inventoryById.getCrop(), inventoryById.getTotalStock(), inventoryById.getAvailableStock(),
+                inventoryById.getCreatedAt(), inventoryById.getUpdatedAt());
     }
 
-    public List<CropMonitorResponse> cropMonitorListCustomResponse(List<CropMonitor> allByUser) {
-        List<CropMonitorResponse> cropMonitorResponseList = new ArrayList<>();
-        for (CropMonitor cropMonitor : allByUser) {
-            cropMonitorResponseList.add(this.cropMonitorResponse(cropMonitor));
+    public List<InventoryResponse> inventoryListCustomResponse(List<Inventory> allByUser) {
+        List<InventoryResponse> inventoryResponseList = new ArrayList<>();
+        for (Inventory inventory : allByUser) {
+            inventoryResponseList.add(this.inventoryResponse(inventory));
         }
-        return cropMonitorResponseList;
+        return inventoryResponseList;
     }
 }

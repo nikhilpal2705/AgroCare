@@ -25,6 +25,7 @@ const CropMonitoring = () => {
     },
     fieldSize: {
       type: 'string',
+      label: 'Field Size',
     },
     plantingDate: {
       type: 'date',
