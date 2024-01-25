@@ -48,6 +48,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <FilterOutlined />,
       label: <Link to={'/inventory'}>Inventory</Link>,
     },
+    {
+      key: 'irrigation',
+      icon: <FilterOutlined />,
+      label: <Link to={'/irrigation'}>Irrigation</Link>,
+    },
   ];
   return (
     <Sider

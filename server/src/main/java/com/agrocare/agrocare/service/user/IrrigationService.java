@@ -2,7 +2,6 @@ package com.agrocare.agrocare.service.user;
 
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.model.Crops;
-import com.agrocare.agrocare.model.Inventory;
 import com.agrocare.agrocare.model.Irrigation;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
@@ -35,8 +34,9 @@ public class IrrigationService {
     public CustomResponse saveIrrigation(IrrigationRequest irrigationRequest, HttpServletRequest request) {
         Irrigation irrigation = new Irrigation(this.commonService.getUserFromHeader(request),
                 this.cropService.findCropById(irrigationRequest.getCropId()),
-                irrigationRequest.getScheduleDate(), irrigationRequest.getStatus());
-        return new CustomResponse(true, commonService.irrigationResponse(this.irrigationRepository.save(irrigation)), Constants.Messages.IRRIGATION_ADDED_SUCCESS);
+                irrigationRequest.getScheduledDate(), irrigationRequest.getStatus());
+        return new CustomResponse(true, commonService.irrigationResponse(this.irrigationRepository.save(irrigation)),
+                Constants.Messages.IRRIGATION_ADDED_SUCCESS);
     }
 
     public CustomResponse getIrrigation(int irrigationId, HttpServletRequest request) {
@@ -45,7 +45,8 @@ public class IrrigationService {
     }
 
     public CustomResponse getIrrigationList(HttpServletRequest request) {
-        List<Irrigation> allByUser = this.irrigationRepository.findAllByUser(this.commonService.getUserFromHeader(request));
+        List<Irrigation> allByUser = this.irrigationRepository
+                .findAllByUser(this.commonService.getUserFromHeader(request));
         return new CustomResponse(commonService.irrigationListCustomResponse(allByUser));
     }
 
@@ -56,15 +57,17 @@ public class IrrigationService {
         return new CustomResponse(true, Constants.Messages.IRRIGATION_DELETED_SUCCESS);
     }
 
-    public CustomResponse updateIrrigation(int irrigationId, IrrigationRequest irrigationRequest, HttpServletRequest request) {
+    public CustomResponse updateIrrigation(int irrigationId, IrrigationRequest irrigationRequest,
+            HttpServletRequest request) {
         System.out.println(irrigationId);
         Users userFromHeader = this.commonService.getUserFromHeader(request);
         Irrigation irrigation = this.findById(irrigationId);
         Crops crop = this.cropService.findCropById(irrigationRequest.getCropId());
         Irrigation updateIrrigation = new Irrigation(irrigation.getId(), userFromHeader, crop,
-                irrigationRequest.getScheduleDate(), irrigationRequest.getStatus());
+                irrigationRequest.getScheduledDate(), irrigationRequest.getStatus());
 
-        return new CustomResponse(true, this.commonService.irrigationResponse(this.irrigationRepository.save(updateIrrigation)),
+        return new CustomResponse(true,
+                this.commonService.irrigationResponse(this.irrigationRepository.save(updateIrrigation)),
                 Constants.Messages.IRRIGATION_UPDATED_SUCCESS);
     }
 }

@@ -1,8 +1,9 @@
-import Inventory from 'components/Inventory/Inventory';
-import PageLoader from 'components/common/PageLoader';
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-const Profile =  lazy(() => import('components/profile/Profile'));
+const Inventory = lazy(() => import('components/Inventory/Inventory'));
+const Irrigation = lazy(() => import('components/Irrigation/Irrigation'));
+const PageLoader = lazy(() => import('components/common/PageLoader'));
+const Profile = lazy(() => import('components/profile/Profile'));
 const Dashboard = lazy(() => import('components/dashboard/Dashboard'));
 const CropMonitoring = lazy(() => import('components/crop/CropMonitoring'));
 const Layout = lazy(() => import('layout/main/MainLayout'));
@@ -43,6 +44,10 @@ function PrivateAppRoutes() {
     {
       path: '/inventory',
       element: <Inventory />,
+    },
+    {
+      path: '/irrigation',
+      element: <Irrigation />,
     },
     {
       path: '/profile',

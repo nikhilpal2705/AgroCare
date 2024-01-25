@@ -36,9 +36,9 @@ public class Irrigation {
     @JsonIgnore
     private Crops crop;
 
-    @JsonProperty("scheduleDate")
-    @Column(name = "scheduleDate", nullable = false)
-    private String scheduleDate;
+    @JsonProperty("scheduledDate")
+    @Column(name = "scheduledDate", nullable = false)
+    private String scheduledDate;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
@@ -54,18 +54,18 @@ public class Irrigation {
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
 
-    public Irrigation(Users user, Crops crop, String scheduleDate, int status) {
+    public Irrigation(Users user, Crops crop, String scheduledDate, int status) {
         this.user = user;
         this.crop = crop;
-        this.scheduleDate = scheduleDate;
+        this.scheduledDate = scheduledDate;
         this.status = status;
     }
 
-    public Irrigation(int id, Users user, Crops crop, String scheduleDate, int status) {
+    public Irrigation(int id, Users user, Crops crop, String scheduledDate, int status) {
         this.id = id;
         this.user = user;
         this.crop = crop;
-        this.scheduleDate = scheduleDate;
+        this.scheduledDate = scheduledDate;
         this.status = status;
     }
 }

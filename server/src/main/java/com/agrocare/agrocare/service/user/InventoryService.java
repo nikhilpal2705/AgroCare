@@ -34,15 +34,18 @@ public class InventoryService {
     }
 
     public CustomResponse saveInventory(InventoryRequest inventoryRequest, HttpServletRequest request) {
-        // Fetching user from header . . . and crop from cropId . . . at last creating inventory object . . .
+        // Fetching user from header . . . and crop from cropId . . . at last creating
+        // inventory object . . .
         Inventory inventory = new Inventory(this.commonService.getUserFromHeader(request),
-                this.cropService.findCropById(inventoryRequest.getCropId()), inventoryRequest.getTotalStock(), inventoryRequest.getAvailableStock());
+                this.cropService.findCropById(inventoryRequest.getCropId()), inventoryRequest.getTotalStock(),
+                inventoryRequest.getAvailableStock());
 
         // Saving inventory . . .
         Inventory savedInventory = this.inventoryRepository.save(inventory);
 
         // Returning response . . .
-        InventoryResponse inventoryResponse = new InventoryResponse(savedInventory.getId(), savedInventory.getCrop().getId(),
+        InventoryResponse inventoryResponse = new InventoryResponse(savedInventory.getId(),
+                savedInventory.getCrop().getId(),
                 savedInventory.getCrop().getId(), savedInventory.getCrop().getCropName(),
                 savedInventory.getCrop(), savedInventory.getTotalStock(), savedInventory.getAvailableStock(),
                 savedInventory.getCreatedAt(), savedInventory.getUpdatedAt());
@@ -51,7 +54,8 @@ public class InventoryService {
     }
 
     public CustomResponse getInventoryList(HttpServletRequest request) {
-        List<Inventory> allByUser = this.inventoryRepository.findAllByUser(this.commonService.getUserFromHeader(request));
+        List<Inventory> allByUser = this.inventoryRepository
+                .findAllByUser(this.commonService.getUserFromHeader(request));
         return new CustomResponse(commonService.inventoryListCustomResponse(allByUser));
     }
 
@@ -61,7 +65,8 @@ public class InventoryService {
         return new CustomResponse(commonService.inventoryResponse(inventoryById));
     }
 
-    public CustomResponse updateInventory(int inventoryId, InventoryRequest inventoryRequest, HttpServletRequest request) {
+    public CustomResponse updateInventory(int inventoryId, InventoryRequest inventoryRequest,
+            HttpServletRequest request) {
         System.out.println(inventoryId);
         Users userFromHeader = this.commonService.getUserFromHeader(request);
         Crops cropById = this.cropService.findCropById(inventoryRequest.getCropId());
@@ -69,7 +74,8 @@ public class InventoryService {
         Inventory updatedInventory = new Inventory(inventoryById.getId(), userFromHeader, cropById,
                 inventoryRequest.getTotalStock(), inventoryRequest.getAvailableStock());
 
-        return new CustomResponse(true, this.inventoryRepository.save(updatedInventory), Constants.Messages.INVENTORY_UPDATED_SUCCESS);
+        return new CustomResponse(true, this.inventoryRepository.save(updatedInventory),
+                Constants.Messages.INVENTORY_UPDATED_SUCCESS);
     }
 
     @Transactional
