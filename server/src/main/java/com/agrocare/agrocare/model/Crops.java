@@ -39,7 +39,7 @@ public class Crops {
 
     @JsonIgnore
     @OneToOne(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private CropMonitor cropMonitor;
+    private Inventory inventory;
 
     @JsonProperty("cropName")
     @Column(name = "cropName", nullable = false)

@@ -43,6 +43,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <FilterOutlined />,
       label: <Link to={'/pest-control'}>Pest Control</Link>,
     },
+    {
+      key: 'inventory',
+      icon: <FilterOutlined />,
+      label: <Link to={'/inventory'}>Inventory</Link>,
+    },
   ];
   return (
     <Sider

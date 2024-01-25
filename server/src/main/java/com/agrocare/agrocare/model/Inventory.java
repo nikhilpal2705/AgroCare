@@ -17,8 +17,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "crop_monitor")
-public class CropMonitor {
+@Table(name = "inventory")
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,14 +53,14 @@ public class CropMonitor {
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
 
-    public CropMonitor(Users user, Crops crop, int totalStock, int availableStock) {
+    public Inventory(Users user, Crops crop, int totalStock, int availableStock) {
         this.user = user;
         this.crop = crop;
         this.totalStock = totalStock;
         this.availableStock = availableStock;
     }
 
-    public CropMonitor(int id, Users user, Crops crop, int totalStock, int availableStock) {
+    public Inventory(int id, Users user, Crops crop, int totalStock, int availableStock) {
         this.id = id;
         this.user = user;
         this.crop = crop;
