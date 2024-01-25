@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Layout } from 'antd';
-import { LogoutOutlined, UserOutlined, CustomerServiceOutlined } from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/auth/selectors';
@@ -51,9 +51,9 @@ const Header = () => {
       ),
     },
     {
-      icon: <CustomerServiceOutlined />,
-      key: 'contact',
-      label: <Link to={'/contact-us'}>Coutact Us</Link>,
+      icon: <InfoCircleOutlined />,
+      key: 'about',
+      label: <Link to={'/about'}>About Us</Link>,
     },
 
     {
