@@ -61,11 +61,11 @@ public class InventoryService {
         return new CustomResponse(commonService.inventoryResponse(inventoryById));
     }
 
-    public CustomResponse updateInventory(InventoryRequest inventoryRequest, HttpServletRequest request) {
+    public CustomResponse updateInventory(int inventoryId, InventoryRequest inventoryRequest, HttpServletRequest request) {
+        System.out.println(inventoryId);
         Users userFromHeader = this.commonService.getUserFromHeader(request);
         Crops cropById = this.cropService.findCropById(inventoryRequest.getCropId());
-        Inventory inventoryById = this.findById(inventoryRequest.getId());
-
+        Inventory inventoryById = this.findById(inventoryId);
         Inventory updatedInventory = new Inventory(inventoryById.getId(), userFromHeader, cropById,
                 inventoryRequest.getTotalStock(), inventoryRequest.getAvailableStock());
 
