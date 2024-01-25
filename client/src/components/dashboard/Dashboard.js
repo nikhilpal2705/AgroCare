@@ -65,7 +65,13 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
+    <div
+      style={{
+        margin: '40px auto',
+        width: '100%',
+        maxWidth: '100%',
+        flex: 'none',
+      }}>
       <Row gutter={[32, 32]}>
         {cards}
       </Row>
@@ -77,9 +83,9 @@ const Dashboard = () => {
             <h3
               style={{
                 color: '#22075e',
-                fontSize: 'large',
+                fontSize: 'medium',
                 marginBottom: 5,
-                padding: '0 20px 20px',
+                padding: '10px 20px 20px',
                 textTransform: 'capitalize',
               }}>
               {'Upcoming Irrigation'}
@@ -89,7 +95,7 @@ const Dashboard = () => {
           </div>
         </Col>
       </Row>
-    </>
+    </div>
   )
 }
 export default Dashboard
