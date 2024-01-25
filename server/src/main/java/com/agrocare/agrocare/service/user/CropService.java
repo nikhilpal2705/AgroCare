@@ -28,12 +28,12 @@ public class CropService {
         Crops crop = this.findCropById(cropId);
         // Check if crop is connected with pests or crop monitor
         if (crop.getInventory() != null && !crop.getPests().isEmpty()) {
-            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_PESTS_AND_CROP_MONITOR);
+            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_PESTS_AND_INVENTORY);
         }
 
         // Check if crop is connected with crop monitor
         if (crop.getInventory() != null) {
-            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_CROP_MONITOR);
+            return new CustomResponse(true, false, Constants.Messages.CROP_CONNECTED_WITH_INVENTORY);
         }
 
         // Check if crop is connected with pests

@@ -30,7 +30,7 @@ public class InventoryService {
 
     public Inventory findById(int inventoryId) {
         return this.inventoryRepository.findById(inventoryId)
-                .orElseThrow(() -> new RuntimeException(Constants.Messages.CROP_MONITOR_NOT_FOUND + inventoryId));
+                .orElseThrow(() -> new RuntimeException(Constants.Messages.INVENTORY_NOT_FOUND + inventoryId));
     }
 
     public CustomResponse saveInventory(InventoryRequest inventoryRequest, HttpServletRequest request) {
@@ -47,7 +47,7 @@ public class InventoryService {
                 savedInventory.getCrop(), savedInventory.getTotalStock(), savedInventory.getAvailableStock(),
                 savedInventory.getCreatedAt(), savedInventory.getUpdatedAt());
 
-        return new CustomResponse(true, inventoryResponse, Constants.Messages.CROP_MONITOR_ADDED_SUCCESS);
+        return new CustomResponse(true, inventoryResponse, Constants.Messages.INVENTORY_ADDED_SUCCESS);
     }
 
     public CustomResponse getInventoryList(HttpServletRequest request) {
@@ -69,7 +69,7 @@ public class InventoryService {
         Inventory updatedInventory = new Inventory(inventoryById.getId(), userFromHeader, cropById,
                 inventoryRequest.getTotalStock(), inventoryRequest.getAvailableStock());
 
-        return new CustomResponse(true, this.inventoryRepository.save(updatedInventory), Constants.Messages.CROP_MONITOR_UPDATED_SUCCESS);
+        return new CustomResponse(true, this.inventoryRepository.save(updatedInventory), Constants.Messages.INVENTORY_UPDATED_SUCCESS);
     }
 
     @Transactional
@@ -77,6 +77,6 @@ public class InventoryService {
         commonService.getUserFromHeader(request);
         this.findById(inventoryId);
         inventoryRepository.deleteMonitorById(inventoryId);
-        return new CustomResponse(true, Constants.Messages.CROP_MONITOR_DELETED_SUCCESS);
+        return new CustomResponse(true, Constants.Messages.INVENTORY_DELETED_SUCCESS);
     }
 }
