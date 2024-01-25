@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+const About = lazy(() => import('components/About/About'));
 const Inventory = lazy(() => import('components/Inventory/Inventory'));
 const Irrigation = lazy(() => import('components/Irrigation/Irrigation'));
 const PageLoader = lazy(() => import('components/common/PageLoader'));
@@ -52,6 +53,10 @@ function PrivateAppRoutes() {
     {
       path: '/profile',
       element: <Profile />,
+    },
+    {
+      path: '/about',
+      element: <About />,
     },
     {
       path: '*',
