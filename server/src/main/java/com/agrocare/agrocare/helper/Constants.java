@@ -40,17 +40,17 @@ public class Constants {
         String PASSWORD_UPDATED = "Password updated successfully";
         String PROFILE_UPDATED = "Profile updated successfully";
         String ERROR_FETCHING_DASHBOARD_DETAILS = "Error while fetching dashboard details";
-        String ERROR_WHILE_ADDING_CROP_MONITOR_DATA = "Error while adding crop monitor data";
-        String CROP_MONITOR_ADDED_SUCCESS = "Crop monitor added successfully";
-        String CROP_MONITORING_ALREADY_EXISTS = "Crop monitoring already exists for ";
-        String ERROR_WHILE_FETCHING_CROP_MONITOR_DATA = "Error while fetching crop monitor data";
-        String CROP_MONITOR_NOT_FOUND = "Crop monitor not found !! ";
-        String ERROR_WHILE_UPDATING_CROP_MONITOR_DATA = "Error while updating crop monitor data";
-        String CROP_MONITOR_UPDATED_SUCCESS = "Crop monitor updated successfully";
-        String ERROR_WHILE_DELETING_CROP_MONITOR_DATA = "Error while deleting crop monitor data";
-        String CROP_MONITOR_DELETED_SUCCESS = "Crop monitor deleted successfully";
-        String CROP_CONNECTED_WITH_PESTS_AND_CROP_MONITOR = "Crop connected with pests and crop monitor";
-        String CROP_CONNECTED_WITH_CROP_MONITOR = "Crop connected with crop monitor";
+        String ERROR_WHILE_ADDING_INVENTORY_DATA = "Error while adding inventory data";
+        String INVENTORY_ADDED_SUCCESS = "Inventory added successfully";
+        String INVENTORY_ALREADY_EXISTS = "Inventory already exists for ";
+        String ERROR_WHILE_FETCHING_INVENTORY_DATA = "Error while fetching inventory data";
+        String INVENTORY_NOT_FOUND = "Inventory not found !! ";
+        String ERROR_WHILE_UPDATING_INVENTORY_DATA = "Error while updating inventory data";
+        String INVENTORY_UPDATED_SUCCESS = "Inventory updated successfully";
+        String ERROR_WHILE_DELETING_INVENTORY_DATA = "Error while deleting inventory data";
+        String INVENTORY_DELETED_SUCCESS = "Inventory deleted successfully";
+        String CROP_CONNECTED_WITH_PESTS_AND_INVENTORY = "Crop connected with pests and inventory";
+        String CROP_CONNECTED_WITH_INVENTORY = "Crop connected with inventory";
     }
 
     public interface NullCheck {

@@ -34,7 +34,7 @@ public class InventoryController {
             return new ResponseEntity<>(inventoryService.getInventoryList(request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_CROP_MONITOR_DATA),
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_INVENTORY_DATA),
                     HttpStatus.BAD_REQUEST);
         }
     }
@@ -46,38 +46,38 @@ public class InventoryController {
             return new ResponseEntity<>(inventoryService.getInventory(inventoryId, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_CROP_MONITOR_DATA),
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_INVENTORY_DATA),
                     HttpStatus.BAD_REQUEST);
         }
     }
 
     // Add a inventory data . . .
     @PostMapping(value = "/inventory")
-    public ResponseEntity<CustomResponse> createInventory(@RequestBody InventoryRequest InventoryRequest, HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> createInventory(@RequestBody InventoryRequest inventoryRequest, HttpServletRequest request) {
         try {
-            System.out.println("InventoryRequest: " + InventoryRequest);
-            return new ResponseEntity<>(inventoryService.saveInventory(InventoryRequest, request), HttpStatus.OK);
+            System.out.println("inventoryRequest: " + inventoryRequest);
+            return new ResponseEntity<>(inventoryService.saveInventory(inventoryRequest, request), HttpStatus.OK);
         } catch (DataIntegrityViolationException err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.CROP_MONITORING_ALREADY_EXISTS
-                    + this.cropService.findCropById(InventoryRequest.getCropId()).getCropName()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVENTORY_ALREADY_EXISTS
+                    + this.cropService.findCropById(inventoryRequest.getCropId()).getCropName()), HttpStatus.BAD_REQUEST);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_ADDING_CROP_MONITOR_DATA),
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_ADDING_INVENTORY_DATA),
                     HttpStatus.BAD_REQUEST);
         }
     }
 
     // Update a inventory . . .
     @PutMapping(value = "/inventory/{inventoryId}")
-    public ResponseEntity<CustomResponse> updateInventory(@PathVariable("inventoryId") int inventoryId, @RequestBody InventoryRequest InventoryRequest,
+    public ResponseEntity<CustomResponse> updateInventory(@PathVariable("inventoryId") int inventoryId, @RequestBody InventoryRequest inventoryRequest,
                                                             HttpServletRequest request) {
         try {
             System.out.println("inventoryId: " + inventoryId);
-            return new ResponseEntity<>(inventoryService.updateInventory(InventoryRequest, request), HttpStatus.OK);
+            return new ResponseEntity<>(inventoryService.updateInventory(inventoryRequest, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_UPDATING_CROP_MONITOR_DATA),
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_UPDATING_INVENTORY_DATA),
                     HttpStatus.BAD_REQUEST);
         }
     }
@@ -89,7 +89,7 @@ public class InventoryController {
             return new ResponseEntity<>(inventoryService.deleteInventory(inventoryId, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
-            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_DELETING_CROP_MONITOR_DATA),
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_DELETING_INVENTORY_DATA),
                     HttpStatus.BAD_REQUEST);
         }
     }
