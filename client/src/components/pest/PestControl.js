@@ -19,9 +19,11 @@ const PestControl = () => {
     },
     pestiside: {
       type: 'string',
+      label: 'Pesticide',
     },
     date: {
       type: 'date',
+      label: 'Detection Date',
     },
   };
   let config = {
