@@ -11,7 +11,7 @@ export default function SummaryCard({
     <Col
       className="gutter-row"
       xs={{ span: 24 }}
-      sm={{ span: 12 }}
+      sm={{ span: 24 }}
       md={{ span: 12 }}
       lg={{ span: 8 }}
     >
@@ -72,7 +72,7 @@ export default function SummaryCard({
                       textOverflow: 'ellipsis',
                     }}
                   >
-                  {tagContent}
+                    {tagContent}
                   </Tag>
                 </Tooltip>
               )}
