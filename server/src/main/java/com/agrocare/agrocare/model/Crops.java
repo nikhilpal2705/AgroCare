@@ -41,6 +41,10 @@ public class Crops {
     @OneToOne(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Inventory inventory;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Irrigation> irrigations = new ArrayList<>();
+
     @JsonProperty("cropName")
     @Column(name = "cropName", nullable = false)
     private String cropName;
