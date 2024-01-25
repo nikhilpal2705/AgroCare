@@ -74,7 +74,7 @@ public class InventoryController {
                                                             HttpServletRequest request) {
         try {
             System.out.println("inventoryId: " + inventoryId);
-            return new ResponseEntity<>(inventoryService.updateInventory(inventoryRequest, request), HttpStatus.OK);
+            return new ResponseEntity<>(inventoryService.updateInventory(inventoryId, inventoryRequest, request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_UPDATING_INVENTORY_DATA),
