@@ -101,7 +101,7 @@ const Dashboard = () => {
                 padding: '10px 20px 20px',
                 textTransform: 'capitalize',
               }}>
-              {'Upcoming Irrigation'}
+              {'Upcoming Irrigation' + ' (This Month)'}
             </h3>
 
             <RecentTable entity={'dashboard-irrigation'} dataTableColumns={dataTableColumns} params={params} />

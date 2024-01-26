@@ -58,11 +58,11 @@ public class Crops {
     private String cropVariety;
 
     @JsonProperty("fieldName")
-    @Column(name = "fieldName", nullable = false)
+    @Column(name = "fieldName")
     private String fieldName;
 
     @JsonProperty("fieldSize")
-    @Column(name = "fieldSize", nullable = false)
+    @Column(name = "fieldSize")
     private String fieldSize;
 
     @JsonProperty("status")
