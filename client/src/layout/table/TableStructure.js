@@ -53,42 +53,20 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
           );
         },
       },
-      stringWithColor: {
-        title: field.label ? translate(field.label) : translate(key),
-        dataIndex: keyIndex,
-        render: (text, record) => {
-          return (
-            <Tag bordered={false} color={record.color}>
-              {text}
-            </Tag>
-          );
-        },
-      },
       tag: {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          return (
-            <Tag bordered={false} color={field.color}>
-              {record[key] && record[key]}
-            </Tag>
-          );
-        },
-      },
-      selectwithfeedback: {
-        title: field.label ? translate(field.label) : translate(key),
-        dataIndex: keyIndex,
-        render: (text, record) => {
-          if (field.renderAsTag) {
+          if (field.tagWithColor) {
             const selectedOption = field.options.find((x) => x.value === record[key]);
 
             return (
-              <Tag bordered={false} color={selectedOption?.color}>
-                {record[key] && translate(record[key])}
+              <Tag bordered={true} color={selectedOption?.color}>
+                {translate(selectedOption.label)}
               </Tag>
             );
-          } else return record[key] && translate(record[key]);
-        },
+          } else return record[key];
+        }
       },
       select: {
         title: field.label ? translate(field.label) : translate(key),
@@ -99,25 +77,10 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
 
             return (
               <Tag bordered={false} color={selectedOption?.color}>
-                {record[key] && record[key]}
+                {record[key]}
               </Tag>
             );
-          } else return record[key] && record[key];
-        },
-      },
-      selectWithTranslation: {
-        title: field.label ? translate(field.label) : translate(key),
-        dataIndex: keyIndex,
-        render: (_, record) => {
-          if (field.renderAsTag) {
-            const selectedOption = field.options.find((x) => x.value === record[key]);
-
-            return (
-              <Tag bordered={false} color={selectedOption?.color}>
-                {record[key] && translate(record[key])}
-              </Tag>
-            );
-          } else return record[key] && translate(record[key]);
+          } else return record[key];
         },
       },
       array: {

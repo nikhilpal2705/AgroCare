@@ -42,7 +42,7 @@ public class Irrigation {
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
-    private int status = Constants.Status.INACTIVE;
+    private int status = Constants.Status.PENDING;
 
     @CreatedDate
     @JsonProperty("createdAt")

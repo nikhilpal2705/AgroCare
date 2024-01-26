@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { selectCurrentItem } from '../../redux/crud/selectors';
+import { tagColor } from 'helper/statusTagColor';
+import getLabel from 'helper/getLabel';
 
 const generateColumns = (fields) => {
   let columns = [];
@@ -20,6 +22,8 @@ const valueByString = (obj, string, divider = '|') =>
   string.split(divider).map(key => key.split('.').reduce((o, x) => o?.[x], obj)).join(' ');
 
 export default function ReadItem({ config }) {
+  const translate = getLabel();
+
   const { fields } = config;
 
   const readColumns = useMemo(() => {
@@ -48,7 +52,7 @@ export default function ReadItem({ config }) {
         <Row key={item.propsKey} gutter={12}>
           <Col className="gutter-row" span={8}><p>{item.label}</p></Col>
           <Col className="gutter-row" span={2}><p> : </p></Col>
-          <Col className="gutter-row" span={14}><p>{item.value}</p></Col>
+          <Col className="gutter-row" span={14}><p>{item.label == 'Status' || item.label == 'status' ? translate(tagColor(item.value)?.label) : item.value}</p></Col>
         </Row>
       ))}
     </div>

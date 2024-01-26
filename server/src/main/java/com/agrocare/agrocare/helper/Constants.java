@@ -8,6 +8,8 @@ public class Constants {
         int ACTIVE = 1;
         int INACTIVE = 2;
         int DELETE = 3;
+        int PENDING = 4;
+        int COMPLETED = 5;
     }
 
     public interface Messages {
