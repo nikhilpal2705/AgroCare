@@ -97,10 +97,6 @@ export const auth = {
     let data = await api.put({ entity, jsonData });
 
     if (data.success === true) {
-      dispatch({
-        type: actionTypes.REQUEST_SUCCESS,
-        payload: data.result,
-      });
       const userData = {
         jwtToken: data.result.jwtToken,
         isAdmin: false,
@@ -116,6 +112,10 @@ export const auth = {
         if (key !== 'jwtToken') {
           Cookies.set(key, userData[key], cookieOptions);
         }
+      });
+      dispatch({
+        type: actionTypes.REQUEST_SUCCESS,
+        payload: userData,
       });
     }
   }

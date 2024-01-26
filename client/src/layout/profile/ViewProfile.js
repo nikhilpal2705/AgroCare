@@ -50,13 +50,13 @@ const ViewProfile = ({ config }) => {
       <Row align="middle">
         <Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
           <Avatar
-            className="last left pad5"
+            className="last"
             // src={srcImgProfile}
             size={96}
             style={{ color: '#f56a00', backgroundColor: '#fde3cf', fontSize: '48px' }}
             alt={`${currentUser?.name}`}
           >
-            {currentUser?.name.charAt(0).toUpperCase()}
+            {currentUser?.name?.charAt(0).toUpperCase()}
           </Avatar>
         </Col>
         <Col xs={{ span: 24 }} sm={{ span: 18 }}>
