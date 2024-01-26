@@ -72,6 +72,11 @@ const Dashboard = () => {
     },
   ];
 
+  const params = {
+    start: dayjs().format('YYYY-MM-DD'),
+    end: dayjs().endOf('month').format('YYYY-MM-DD')
+  }
+
   return (
     <div
       style={{
@@ -96,10 +101,10 @@ const Dashboard = () => {
                 padding: '10px 20px 20px',
                 textTransform: 'capitalize',
               }}>
-              {'This Month Irrigation'}
+              {'Upcoming Irrigation'}
             </h3>
 
-            <RecentTable entity={'dashboard-irrigation'} dataTableColumns={dataTableColumns} />
+            <RecentTable entity={'dashboard-irrigation'} dataTableColumns={dataTableColumns} params={params} />
           </div>
         </Col>
       </Row>

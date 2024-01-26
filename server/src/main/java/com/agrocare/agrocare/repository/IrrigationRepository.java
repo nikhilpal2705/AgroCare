@@ -13,7 +13,7 @@ import java.util.List;
 public interface IrrigationRepository extends JpaRepository<Irrigation, Integer> {
     List<Irrigation> findAllByUser(Users userFromHeader);
 
-    @Query(value = "SELECT * FROM irrigation WHERE user = :userId AND DATE(scheduledDate) BETWEEN DATE(:startDate )AND DATE(:endDate)", nativeQuery = true)
+    @Query(value = "SELECT * FROM irrigation WHERE user = :userId AND DATE(scheduledDate) BETWEEN DATE(:startDate )AND DATE(:endDate) ORDER BY scheduledDate ASC", nativeQuery = true)
     List<Irrigation> findIrrigationsInDateRange(@Param("userId") int userId,
             @Param("startDate") String startDate,
             @Param("endDate") String endDate);
