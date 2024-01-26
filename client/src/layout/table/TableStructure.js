@@ -62,7 +62,7 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
 
             return (
               <Tag bordered={true} color={selectedOption?.color}>
-                {translate(selectedOption.label)}
+                {selectedOption && translate(selectedOption?.label)}
               </Tag>
             );
           } else return record[key];

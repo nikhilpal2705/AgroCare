@@ -25,8 +25,8 @@ const Irrigation = () => {
             tagWithColor: true,
             required: true,
             options: [
-                { value: constant.Status.PENDING, label: 'pending', color: 'magenta' },
-                { value: constant.Status.COMPLETED, label: 'completed', color: 'green' },
+                { value: constant.Status.PENDING, label: 'Pending', color: 'magenta' },
+                { value: constant.Status.COMPLETED, label: 'Completed', color: 'green' },
             ],
         },
     };

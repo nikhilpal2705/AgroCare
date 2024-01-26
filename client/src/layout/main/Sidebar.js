@@ -3,11 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 import logo from 'assets/images/logo.png';
 import {
-  DashboardOutlined,
-  FilterOutlined,
   MenuOutlined,
 } from '@ant-design/icons';
 import useResponsive from 'hooks/useResponsive';
+import { FaBoxes, FaBug, FaLeaf, FaTachometerAlt, FaWater } from 'react-icons/fa';
 
 const { Sider } = Layout;
 export default function Navigation() {
@@ -30,27 +29,27 @@ function Sidebar({ collapsible, isMobile = false }) {
   const items = [
     {
       key: 'dashboard',
-      icon: <DashboardOutlined />,
+      icon: <FaTachometerAlt />,
       label: <Link to={'/dashboard'}>Dashboard</Link>,
     },
     {
       key: 'crop-monitoring',
-      icon: <FilterOutlined />,
+      icon: <FaLeaf />,
       label: <Link to={'/crop-monitoring'}>Crop Monitoring</Link>,
     },
     {
       key: 'pest-control',
-      icon: <FilterOutlined />,
+      icon: <FaBug />,
       label: <Link to={'/pest-control'}>Pest Control</Link>,
     },
     {
       key: 'inventory',
-      icon: <FilterOutlined />,
+      icon: <FaBoxes />,
       label: <Link to={'/inventory'}>Inventory</Link>,
     },
     {
       key: 'irrigation',
-      icon: <FilterOutlined />,
+      icon: <FaWater />,
       label: <Link to={'/irrigation'}>Irrigation</Link>,
     },
   ];

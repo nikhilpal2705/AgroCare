@@ -1,8 +1,8 @@
 import * as constant from "helper/constant";
 
 const colors = [
-  { value: constant.Status.PENDING, label: 'pending', color: 'magenta', icon: '⏳' },
-  { value: constant.Status.COMPLETED, label: 'completed', color: 'green', icon: '✅' },
+  { value: constant.Status.PENDING, label: 'Pending', color: 'magenta', icon: '⏳' },
+  { value: constant.Status.COMPLETED, label: 'Completed', color: 'green', icon: '✅' },
 ];
 
 
