@@ -22,7 +22,7 @@ export default function RecentTable({ ...props }) {
   return (
     <Table
       columns={dataTableColumns}
-      rowKey={(item) => item._id}
+      rowKey={(item) => item.id}
       dataSource={isSuccess && firstFiveItems()}
       pagination={false}
       loading={isLoading}

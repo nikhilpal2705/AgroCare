@@ -1,8 +1,10 @@
 package com.agrocare.agrocare.service.user;
 
+import com.agrocare.agrocare.model.Irrigation;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.repository.InventoryRepository;
+import com.agrocare.agrocare.repository.IrrigationRepository;
 import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.repository.PestRepository;
 import com.agrocare.agrocare.service.common.CommonService;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,6 +30,9 @@ public class DashboardService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    @Autowired
+    private IrrigationRepository irrigationRepository;
+
     public CustomResponse getDashboardDetails(HttpServletRequest request) {
         Users user = commonService.getUserFromHeader(request);
         Map<String, Object> response = Map.of(
@@ -35,5 +41,11 @@ public class DashboardService {
                 "inventoryCount", this.inventoryRepository.countByUser(user));
 
         return new CustomResponse(response);
+    }
+
+    public CustomResponse getIrrigationList(HttpServletRequest request) {
+        List<Irrigation> allByUser = this.irrigationRepository
+                .findAllByUser(this.commonService.getUserFromHeader(request));
+        return new CustomResponse(commonService.irrigationListCustomResponse(allByUser));
     }
 }

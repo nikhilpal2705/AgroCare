@@ -4,6 +4,7 @@ import useFetch from 'hooks/useFetch';
 import SummaryCard from './SummaryCard';
 import RecentTable from './RecentTable';
 import { tagColor } from 'helper/statusTagColor';
+import dayjs from 'dayjs';
 const Dashboard = () => {
   const { result, isLoading } = useFetch(() =>
     api.get({ entity: 'user/dashboard' })
@@ -54,13 +55,16 @@ const Dashboard = () => {
     {
       title: 'Scheduled Date',
       dataIndex: 'scheduledDate',
+      render: (scheduledDate) => {
+        return dayjs(scheduledDate).format('DD-MM-YYYY');
+      },
     },
     {
       title: 'Status',
       dataIndex: 'status',
-      render: (status) => {
-        return <Tag color={tagColor(status)?.color}>{status}</Tag>;
-      },
+      // render: (status) => {
+      //   return <Tag color={tagColor(status)?.color}>{status}</Tag>;
+      // },
     },
   ];
 
