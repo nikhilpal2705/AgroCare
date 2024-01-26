@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { EyeOutlined, EditOutlined, DeleteOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Table } from 'antd';
 import { useCrudContext } from 'contexts/crud';
@@ -11,7 +11,7 @@ import { crud } from '../../redux/crud/actions';
 
 export default function DataTable({ config }) {
   const translate = getLabel();
-  let { fields, entity } = config;
+  const { fields, entity } = config;
   const { crudContextAction } = useCrudContext();
   const { panel, modal, readBox, editBox } = crudContextAction;
   const items = [
@@ -39,7 +39,7 @@ export default function DataTable({ config }) {
     dispatch(crud.currentItem({ data: record }));
     readBox.open();
     panel.open();
-  }
+  };
 
   function handleEdit(record) {
     dispatch(crud.currentItem({ data: record }));
@@ -94,30 +94,24 @@ export default function DataTable({ config }) {
 
   const dispatch = useDispatch();
 
-  const dispatcher = () => {
+  const dispatcher = useCallback(() => {
     dispatch(crud.list({ entity }));
-  };
+  }, [dispatch, entity]);
+
   const { result: listResult, isLoading: listIsLoading } = useSelector(selectListItems);
   const { items: dataSource } = listResult;
-  const [, setTableData] = useState(dataSource);
 
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
-    total: dataSource.length,
     showSizeChanger: false,
-    pageSizeOptions: ['10', '20', '30', '40'],
+    pageSizeOptions: ['5', '10', '20', '30', '40'],
+    // total: 0,
   });
 
   const handleDataTableLoad = useCallback((pagination) => {
-    const { current, pageSize } = pagination;
-    const start = (current - 1) * pageSize;
-    const end = start + pageSize;
-    setTableData(dataSource.slice(start, end));
-    // Update the total
-    setPagination({ ...pagination, total: dataSource.length });
+    setPagination({ ...pagination });
   }, [dataSource]);
-
 
   useEffect(() => {
     const controller = new AbortController();
@@ -125,7 +119,14 @@ export default function DataTable({ config }) {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [dispatcher]);
+
+  useEffect(() => {
+    setPagination((pagination) => ({
+      ...pagination,
+      current: dataSource.length <= pagination.pageSize ? 1 : pagination.current,
+    }));
+  }, [dataSource]);
 
   return (
     <>
