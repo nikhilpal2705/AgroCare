@@ -12,6 +12,7 @@ import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class InventoryService {
 
     public CustomResponse getInventoryList(HttpServletRequest request) {
         List<Inventory> allByUser = this.inventoryRepository
-                .findAllByUser(this.commonService.getUserFromHeader(request));
+                .findAllByUser(this.commonService.getUserFromHeader(request), Sort.by(Sort.Direction.DESC, "id"));
         return new CustomResponse(commonService.inventoryListCustomResponse(allByUser));
     }
 
