@@ -1,5 +1,7 @@
 import DynamicForm from 'layout/crud/DynamicForm';
 import CrudLayout from 'layout/crud/CrudLayout';
+import * as constant from "helper/constant";
+
 const Irrigation = () => {
 
     const fields = {
@@ -16,6 +18,16 @@ const Irrigation = () => {
             label: 'Scheduled Date',
             type: 'date',
             required: true,
+        },
+        status: {
+            type: 'tag',
+            label: 'Status',
+            tagWithColor: true,
+            required: true,
+            options: [
+                { value: constant.Status.PENDING, label: 'pending', color: 'magenta' },
+                { value: constant.Status.COMPLETED, label: 'completed', color: 'green' },
+            ],
         },
     };
     let config = {

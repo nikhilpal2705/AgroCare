@@ -5,7 +5,10 @@ import SummaryCard from './SummaryCard';
 import RecentTable from './RecentTable';
 import { tagColor } from 'helper/statusTagColor';
 import dayjs from 'dayjs';
+import getLabel from 'helper/getLabel';
 const Dashboard = () => {
+  const translate = getLabel();
+
   const { result, isLoading } = useFetch(() =>
     api.get({ entity: 'user/dashboard' })
   );
@@ -62,9 +65,10 @@ const Dashboard = () => {
     {
       title: 'Status',
       dataIndex: 'status',
-      // render: (status) => {
-      //   return <Tag color={tagColor(status)?.color}>{status}</Tag>;
-      // },
+      render: (status) => {
+        const selectedTag = tagColor(status)
+        return <Tag color={selectedTag?.color}>{translate(selectedTag.label)}</Tag>;
+      },
     },
   ];
 
@@ -92,7 +96,7 @@ const Dashboard = () => {
                 padding: '10px 20px 20px',
                 textTransform: 'capitalize',
               }}>
-              {'Upcoming Irrigation'}
+              {'This Month Irrigation'}
             </h3>
 
             <RecentTable entity={'dashboard-irrigation'} dataTableColumns={dataTableColumns} />

@@ -42,13 +42,10 @@ function FormElement({ field, setFeedback, feedback }) {
     boolean: <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />,
     date: <DatePicker placeholder={translate('select_date')} style={{ width: '100%' }} format={'DD-MM-YYYY'} />,
     select: renderSelect(field.options, commonSelectProps, translate),
-    selectwithfeedback: renderSelect(field.options, commonSelectProps, translate, setFeedback),
-    color: renderSelect(field.options, commonSelectProps, translate),
-    tag: renderSelect(field.options, commonSelectProps, translate, true),
+    tag: renderSelect(field.options, commonSelectProps, translate, null, true),
     array: renderSelect(field.options, { ...commonSelectProps, mode: 'multiple' }, translate),
     country: renderSelect(countryList.map(item => ({ value: item.value, label: translate(item.label) })), commonSelectProps, translate),
     async: <SelectAsync entity={field.entity} displayLabels={field.displayLabels} outputValue={field.outputValue} />,
-    currency: <InputNumber className="moneyInput" min={0} controls={false} addonBefore={'$'} />
   };
 
   const fieldType = {
@@ -81,14 +78,21 @@ function FormElement({ field, setFeedback, feedback }) {
   );
 }
 
-function renderSelect(options, props, translate, onChange = null) {
+function renderSelect(options, props, translate, onChange = null, isTag = false) {
   return (
     <Select {...props} onChange={onChange}>
       {options?.map(option => (
         <Select.Option key={uniqueId()} value={option.value}>
-          {translate(option.label)}
+          {isTag ? (
+            <Tag bordered={true} color={option.color}>
+              {translate(option.label)}
+            </Tag>
+          ) : (
+            translate(option.label)
+          )}
         </Select.Option>
       ))}
     </Select>
   );
 }
+
