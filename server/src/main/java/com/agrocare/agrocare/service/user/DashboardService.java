@@ -43,9 +43,12 @@ public class DashboardService {
         return new CustomResponse(response);
     }
 
-    public CustomResponse getIrrigationList(HttpServletRequest request) {
-        List<Irrigation> allByUser = this.irrigationRepository
-                .findAllByUser(this.commonService.getUserFromHeader(request));
-        return new CustomResponse(commonService.irrigationListCustomResponse(allByUser));
+    public CustomResponse getIrrigationList(HttpServletRequest request, String start, String end) {
+        int userId = commonService.getUserFromHeader(request).getId();
+
+        List<Irrigation> allByUserAndDateRange = this.irrigationRepository
+                .findIrrigationsInDateRange(userId, start, end);
+
+        return new CustomResponse(commonService.irrigationListCustomResponse(allByUserAndDateRange));
     }
 }
