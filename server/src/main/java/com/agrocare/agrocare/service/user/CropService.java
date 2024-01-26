@@ -6,6 +6,7 @@ import com.agrocare.agrocare.repository.CropRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.agrocare.agrocare.helper.Constants;
 
@@ -51,7 +52,7 @@ public class CropService {
     }
 
     public CustomResponse getCrops(int userId) {
-        return new CustomResponse(this.cropRepository.findAllByUserId(userId));
+        return new CustomResponse(this.cropRepository.findAllByUserId(userId, Sort.by(Sort.Direction.DESC, "id")));
     }
 
     public CustomResponse getCrop(int cropId) {
