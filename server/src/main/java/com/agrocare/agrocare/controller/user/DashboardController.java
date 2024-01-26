@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -35,9 +36,11 @@ public class DashboardController {
     }
 
     @GetMapping(value = "/dashboard-irrigation")
-    public ResponseEntity<CustomResponse> getUpcomingIrrigation(HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> getUpcomingIrrigation(@RequestParam(name = "start") String start,
+            @RequestParam(name = "end") String end,
+            HttpServletRequest request) {
         try {
-            return new ResponseEntity<>(dashboardService.getIrrigationList(request), HttpStatus.OK);
+            return new ResponseEntity<>(dashboardService.getIrrigationList(request, start, end), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_IRRIGATION),

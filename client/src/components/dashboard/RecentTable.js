@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 
 import api from 'api/api';
+import dayjs from 'dayjs';
 import useFetch from 'hooks/useFetch';
 
 export default function RecentTable({ ...props }) {
@@ -10,8 +11,16 @@ export default function RecentTable({ ...props }) {
     ...dataTableColumns,
   ];
 
+  const startOfMonth = dayjs().startOf('month').format('YYYY-MM-DD');
+  const endOfMonth = dayjs().endOf('month').format('YYYY-MM-DD');
+  
+  const params = {
+    start: startOfMonth,
+    end: endOfMonth
+  }
+
   const asyncList = () => {
-    return api.list({ entity });
+    return api.list({ entity, params });
   };
   const { result, isLoading, isSuccess } = useFetch(asyncList);
   const firstFiveItems = () => {
