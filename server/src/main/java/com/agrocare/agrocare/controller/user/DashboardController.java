@@ -24,12 +24,23 @@ public class DashboardController {
     private DashboardService dashboardService;
 
     @GetMapping(value = "/dashboard")
-    public ResponseEntity<CustomResponse> getCrop(HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> getDashboardDetails(HttpServletRequest request) {
         try {
             return new ResponseEntity<>(dashboardService.getDashboardDetails(request), HttpStatus.OK);
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_FETCHING_DASHBOARD_DETAILS),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/dashboard-irrigation")
+    public ResponseEntity<CustomResponse> getUpcomingIrrigation(HttpServletRequest request) {
+        try {
+            return new ResponseEntity<>(dashboardService.getIrrigationList(request), HttpStatus.OK);
+        } catch (Exception err) {
+            logger.info("Error: " + err.getMessage());
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_IRRIGATION),
                     HttpStatus.BAD_REQUEST);
         }
     }
