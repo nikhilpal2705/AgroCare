@@ -17,7 +17,7 @@ COPY server/src /app/server/src
 RUN mvn clean package -DskipTests
 
 # Stage 3: Create final image
-FROM maven:3.8.4-openjdk-17
+FROM openjdk:17-jdk-alpine
 
 VOLUME /tmp
 
