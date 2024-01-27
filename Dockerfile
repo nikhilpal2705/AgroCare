@@ -8,8 +8,7 @@ COPY client/ .
 RUN npm run build
 
 # Stage 2: Build Spring Boot server
-FROM eclipse-temurin:17-jdk-alpine AS server_builder
-
+FROM maven:3.8.4-openjdk-17 AS server_builder
 WORKDIR /app/server
 COPY server/pom.xml .
 RUN mvn dependency:go-offline
@@ -18,12 +17,15 @@ COPY server/src /app/server/src
 RUN mvn clean package -DskipTests
 
 # Stage 3: Create final image
-FROM eclipse-temurin:17-jdk-alpine
+FROM maven:3.8.4-openjdk-17
 
 VOLUME /tmp
 
 # Copy the Spring Boot JAR from the server_builder stage
 COPY --from=server_builder /app/server/target/*.jar app.jar
+
+# Copy .env file to the resources directory
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 
 # Copy the React.js build artifacts to a directory in the Spring Boot JAR
 WORKDIR /app/static

@@ -8,7 +8,6 @@ import com.agrocare.agrocare.configuration.jwt_pojo.JwtResponse;
 import com.agrocare.agrocare.configuration.jwt_pojo.UserResponse;
 import com.agrocare.agrocare.model.Users;
 import com.agrocare.agrocare.service.user.UserService;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/auth")
 public class LoginController {
-    Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
 
     @Autowired
     private UserDetailsService userDetailsService;
