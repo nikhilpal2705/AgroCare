@@ -9,6 +9,7 @@ import com.agrocare.agrocare.repository.PestRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class PestService {
 
     public CustomResponse getPests(int userId) {
         List<PestResponse> pestResponses = this.commonService
-                .pestListCustomResponse(this.pestRepository.findAllByUserId(userId));
+                .pestListCustomResponse(this.pestRepository.findAllByUserId(userId, Sort.by(Sort.Direction.DESC, "id")));
         return new CustomResponse(pestResponses);
     }
 

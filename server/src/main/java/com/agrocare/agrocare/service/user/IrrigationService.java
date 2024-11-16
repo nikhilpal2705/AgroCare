@@ -10,6 +10,7 @@ import com.agrocare.agrocare.repository.IrrigationRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class IrrigationService {
 
     public CustomResponse getIrrigationList(HttpServletRequest request) {
         List<Irrigation> allByUser = this.irrigationRepository
-                .findAllByUser(this.commonService.getUserFromHeader(request));
+                .findAllByUser(this.commonService.getUserFromHeader(request), Sort.by(Sort.Direction.DESC, "id"));
         return new CustomResponse(commonService.irrigationListCustomResponse(allByUser));
     }
 
