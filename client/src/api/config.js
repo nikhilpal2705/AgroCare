@@ -1,5 +1,5 @@
-export const BASE_URL = "http://localhost:9000"
-export const PORT = "9000"
+export const PORT = process.env.SERVER_PORT
+export const BASE_URL = process.env.DOMAIN_NAME_URL + ":" + process.env.SERVER_PORT
 export const HOME_BASE_URL = BASE_URL + "/"
 export const AUTH_BASE_URL = BASE_URL + "/auth/"
 export const ADMIN_BASE_URL = BASE_URL + "/admin/"
