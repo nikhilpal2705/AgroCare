@@ -1,11 +1,12 @@
 package com.agrocare.agrocare.configuration.jwt;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +19,19 @@ import java.util.function.Function;
 @Component
 public class JwtHelper {
 
-    // Load environment variables from .env file
-    Dotenv dotenv = Dotenv.configure().directory("src/main/resources").load();
+    @Value("${JWT_SECRET}")
+    private String jwtSecret;
 
     // JWT token validity duration (in seconds)
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
-    // Secret key for signing and verifying JWT tokens
-    private final Key secretKey = Keys.hmacShaKeyFor(dotenv.get("JWT_SECRET").getBytes());
+    private Key secretKey;
+
+    @PostConstruct
+    public void init() {
+        // Initialize secretKey with the loaded JWT_SECRET
+        secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+    }
 
     // Retrieve username from JWT token
     public String getUsernameFromToken(String token) {

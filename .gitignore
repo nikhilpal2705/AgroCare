@@ -21,12 +21,6 @@ client/coverage
 # production
 client/build
 
-# misc
-client/.DS_Store
-client/.env.local
-client/.env.development.local
-client.env.test.local
-client.env.production.local
 
 client/npm-debug.log*
 client/yarn-debug.log*
@@ -71,6 +65,5 @@ server/.vscode/
 
 ## Required ignore file
 client/src/config
-server/src/main/resources/.env
 .vscode/
 .env

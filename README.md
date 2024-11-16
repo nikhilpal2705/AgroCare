@@ -12,7 +12,7 @@ AgroCare is a full-stack web application. It leverages React.js for the frontend
 The source code has been provided for download. Please download all the necessary files before proceeding.
 
 ### Config Setup
-1. Navigate to `server/src/main/resources`.
+1. Navigate to `server/`.
 2. Create a `.env` file.
 3. Copy all the lines from `.env.example` file.
 4. Paste the copied lines into the `.env` file and configure the settings as required.
