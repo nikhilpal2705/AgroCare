@@ -1,0 +1,51 @@
+services:
+  - type: mysql
+    name: mysql
+    env: mysql
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: ${DATABASE_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - name: mysql
+        mountPath: /var/lib/mysql
+    networks:
+      - app_network
+
+  - type: web
+    name: app
+    env: node
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SERVER_PORT
+        value: ${SERVER_PORT}
+      - key: DATABASE_NAME
+        value: ${DATABASE_NAME}
+      - key: DATABASE_HOST
+        value: mysql:3306
+      - key: DATABASE_USERNAME
+        value: ${DATABASE_USERNAME}
+      - key: DATABASE_PASSWORD
+        value: ${DATABASE_PASSWORD}
+      - key: HIBERNATE_DDL
+        value: ${HIBERNATE_DDL}
+      - key: JWT_SECRET
+        value: ${JWT_SECRET}
+    ports:
+      - "3003:3003"
+      - "9000:9000"
+    dependsOn:
+      - mysql
+    networks:
+      - app_network
+
+networks:
+  - app_network
+
+volumes:
+  - name: mysql
+    persistent: true
