@@ -3,6 +3,7 @@ package com.agrocare.agrocare.configuration.security;
 import com.agrocare.agrocare.configuration.jwt.JwtAuthenticationEntryPoint;
 import com.agrocare.agrocare.configuration.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -60,12 +61,18 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
+    @Value("${DOMAIN_NAME_URL}")
+    private String domainName;
+
+    @Value("${CLIENT_PORT}")
+    private String clientPort;
+
     @Bean
     CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Allowed origins (replace with your actual origins):
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3003", "http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList(domainName + ":" + clientPort));
 
         // Allowed methods:
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
