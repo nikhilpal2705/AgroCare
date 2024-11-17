@@ -35,6 +35,9 @@ services:
       SHOW_SQL: ${SHOW_SQL}
       HIBERNATE_DDL: ${HIBERNATE_DDL}
       JWT_SECRET: ${JWT_SECRET}
+    env_file:
+      - ./client/.env 
+      - ./server/.env
     networks:
       - app_network
 
