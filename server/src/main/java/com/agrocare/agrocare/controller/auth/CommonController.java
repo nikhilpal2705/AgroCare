@@ -49,4 +49,15 @@ public class CommonController {
         }
     }
 
+    @GetMapping(value = "/test", produces = "application/json")
+    public ResponseEntity<CustomResponse> testServer() {
+        try {
+            return new ResponseEntity<>(new CustomResponse(true, Constants.Messages.SERVER_RUNNING), HttpStatus.OK);
+        } catch (Exception err) {
+            logger.info("Error: " + err.getMessage());
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.INTERNAL_SERVER_ERROR),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

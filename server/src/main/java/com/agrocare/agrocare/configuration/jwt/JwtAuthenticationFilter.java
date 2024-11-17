@@ -36,12 +36,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         // Log incoming request method and URI
-        logger.info("Incoming Request: Method = {}, URI = {}", request.getMethod(), request.getRequestURI());
 
-        // Authorization Header
         String requestHeader = request.getHeader("Authorization");
-        logger.info("Authorization Header: {}", requestHeader);
-
         String username = null;
         String token = null;
 
@@ -49,43 +45,47 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = requestHeader.substring(7); // Remove "Bearer " prefix
             try {
                 username = this.jwtHelper.getUsernameFromToken(token);
-                logger.info("Extracted Username from Token: {}", username);
             } catch (IllegalArgumentException e) {
                 logger.error("Error while fetching the username from token.", e);
             } catch (ExpiredJwtException e) {
-                logger.warn("JWT token is expired.", e);
+                logger.warn("JWT token is expired.");
             } catch (MalformedJwtException e) {
-                logger.error("Invalid JWT token.", e);
+                logger.error("Invalid JWT token.");
             } catch (Exception e) {
                 logger.error("Unexpected error while processing JWT token.", e);
             }
-        } else {
-            logger.warn("Invalid Authorization Header. No Bearer token found.");
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            // Fetch user details from username
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            logger.info("UserDetails loaded for username: {}", username);
 
-            Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
-            if (validateToken) {
-                // Set the authentication context
+            if (this.jwtHelper.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                logger.info("Authentication successful for user: {}", username);
-            } else {
-                logger.warn("JWT token validation failed for user: {}", username);
             }
-
-        } else {
-            logger.warn("Username is null or already authenticated.");
         }
 
-        // Proceed to the next filter in the chain
         filterChain.doFilter(request, response);
+
+        int status = response.getStatus();
+        String statusColor;
+
+        if (status >= 200 && status < 300) { // Success
+            statusColor = "\u001B[32m"; // Green
+        } else if (status >= 400 && status < 500) { // Client error
+            statusColor = "\u001B[33m"; // Yellow
+        } else if (status >= 500) { // Server error
+            statusColor = "\u001B[31m"; // Red
+        } else { // Other statuses
+            statusColor = "\u001B[34m"; // Blue
+        }
+
+        // Reset color
+        String resetColor = "\u001B[0m";
+
+        logger.info("{} {} {}{}{}", request.getMethod(), request.getRequestURI(), statusColor, status, resetColor);
+
     }
 }

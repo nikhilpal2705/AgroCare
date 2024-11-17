@@ -11,6 +11,7 @@ public class Constants {
     }
 
     public interface Messages {
+        String SERVER_RUNNING = "Server Running and Working OK";
         String DUPLICATE_EMAIL = "Email already in use.";
         String INCORRECT_PASSWORD = "Password is incorrect.";
         String REGISTRATION_SUCCESS = "Registration successful! Please log in.";
