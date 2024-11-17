@@ -37,11 +37,18 @@ RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
 # Set up Nginx to serve the frontend build files with dynamic port
 RUN echo "server {\
-    listen {{PORT}};\
-    location / {\
-    root /app/frontend;\
-    try_files \$uri \$uri/ /index.html;\
-    }\
+        listen {{PORT}};\
+        location / {\
+            root /app/frontend;\
+            try_files \$uri \$uri/ /index.html;\
+        }\
+        location /api/ {\
+            proxy_pass http://localhost:{{SERVER_PORT}}/;\
+            proxy_set_header Host \$host;\
+            proxy_set_header X-Real-IP \$remote_addr;\
+            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\
+            proxy_set_header X-Forwarded-Proto \$scheme;\
+        }\
     }" > /etc/nginx/sites-available/default
 
 # Expose ports for frontend and backend (use ENV variables if needed)
@@ -49,5 +56,6 @@ EXPOSE ${PORT} ${SERVER_PORT}
 
 # Ensure Nginx starts in the background and the Java app runs concurrently
 CMD sed -i "s|{{PORT}}|${PORT}|g" /etc/nginx/sites-available/default && \
+    sed -i "s|{{SERVER_PORT}}|${SERVER_PORT}|g" /etc/nginx/sites-available/default && \
     /app/wait-for-it.sh ${DATABASE_HOST} -- java -jar app.jar & \
     nginx -g "daemon off;"

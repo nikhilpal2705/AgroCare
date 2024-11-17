@@ -6,11 +6,12 @@ import RecentTable from './RecentTable';
 import { tagColor } from 'helper/statusTagColor';
 import dayjs from 'dayjs';
 import getLabel from 'helper/getLabel';
+import { USER_BASE_URL } from 'api/config';
 const Dashboard = () => {
   const translate = getLabel();
 
   const { result, isLoading } = useFetch(() =>
-    api.get({ entity: 'user/dashboard' })
+    api.get({ entity: USER_BASE_URL + 'dashboard' })
   );
 
   const entityData = [
