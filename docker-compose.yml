@@ -8,7 +8,7 @@ services:
     ports:
       - "3307:3306" # Expose MySQL on port 3306
     volumes:
-      - mysql:/var/lib/mysql   # Persist MySQL data
+      - mysql:/var/lib/mysql # Persist MySQL data
     networks:
       - app_network
 
@@ -17,16 +17,22 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3003:3003" # Frontend
-      - "9000:9000" # Backend
+      - "${PORT}:${PORT}" # Frontend
+      - "${SERVER_PORT}:${SERVER_PORT}" # Backend
     depends_on:
       - mysql
     environment:
+      # Client
+      PORT: ${PORT}
+      REACT_APP_SERVER_BASE_URL: ${REACT_APP_SERVER_BASE_URL}
+      # Server
+      CLIENT_BASE_URL: ${CLIENT_BASE_URL}
       SERVER_PORT: ${SERVER_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_HOST: mysql:3306
-      DATABASE_USERNAME: ${DATABASE_USERNAME}   # Use root username
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      SHOW_SQL: ${SHOW_SQL}
       HIBERNATE_DDL: ${HIBERNATE_DDL}
       JWT_SECRET: ${JWT_SECRET}
     networks:
@@ -37,4 +43,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql:  # Declaring the volume to persist data
+  mysql: # Declaring the volume to persist data

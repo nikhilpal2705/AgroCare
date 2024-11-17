@@ -35,17 +35,17 @@ RUN chmod +x /app/wait-for-it.sh
 # Install Nginx for serving the frontend build
 RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
-# Set up Nginx to serve the frontend build files
+# Set up Nginx to serve the frontend build files with dynamic port
 RUN echo "server {\
-    listen 3003;\
+    listen ${PORT};\
     location / {\
     root /app/frontend;\
     try_files \$uri \$uri/ /index.html;\
     }\
     }" > /etc/nginx/sites-available/default
 
-# Expose ports for frontend (3003) and backend (9000)
-EXPOSE 3003 9000
+# Expose ports for frontend and backend (use ENV variables if needed)
+EXPOSE ${PORT} ${SERVER_PORT}
 
 # Ensure Nginx starts in the background and the Java app runs concurrently
-CMD /app/wait-for-it.sh mysql:3306 -- java -jar app.jar & nginx -g "daemon off;"
+CMD /app/wait-for-it.sh ${DATABASE_HOST} -- java -jar app.jar & nginx -g "daemon off;"

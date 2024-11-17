@@ -1,5 +1,4 @@
-export const PORT = process.env.SERVER_PORT
-export const BASE_URL = process.env.DOMAIN_NAME_URL + ":" + process.env.SERVER_PORT
+export const BASE_URL = process.env.REACT_APP_SERVER_BASE_URL
 export const HOME_BASE_URL = BASE_URL + "/"
 export const AUTH_BASE_URL = BASE_URL + "/auth/"
 export const ADMIN_BASE_URL = BASE_URL + "/admin/"
