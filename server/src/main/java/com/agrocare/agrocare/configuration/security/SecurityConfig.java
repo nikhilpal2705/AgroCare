@@ -61,18 +61,15 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
-    @Value("${DOMAIN_NAME_URL}")
-    private String domainName;
-
-    @Value("${CLIENT_PORT}")
-    private String clientPort;
+    @Value("${CLIENT_BASE_URL}")
+    private String clientBaseUrl;
 
     @Bean
     CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Allowed origins (replace with your actual origins):
-        configuration.setAllowedOrigins(Arrays.asList(domainName + ":" + clientPort));
+        configuration.setAllowedOrigins(Arrays.asList(clientBaseUrl));
 
         // Allowed methods:
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
