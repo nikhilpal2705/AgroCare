@@ -24,7 +24,6 @@ services:
     environment:
       # Client
       PORT: ${PORT}
-      REACT_APP_SERVER_BASE_URL: ${REACT_APP_SERVER_BASE_URL}
       # Server
       CLIENT_BASE_URL: ${CLIENT_BASE_URL}
       SERVER_PORT: ${SERVER_PORT}
