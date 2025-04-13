@@ -1,47 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from 'assets/images/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from '../../redux/auth/selectors';
 import { auth } from '../../redux/auth/actions';
 import Loader from 'components/common/Loader';
+import { Form, Button, Input, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import useLanguage from 'helper/getLabel';
+import AuthLayout from 'layout/auth/AuthLayout';
 
 const Login = () => {
+    const translate = useLanguage();
     const navigate = useNavigate()
     const { isLoading, isSuccess } = useSelector(selectAuth);
     const dispatch = useDispatch();
 
-    let [validated, setValidated] = useState(false);
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-        remember: false,
-    });
 
-
-    // Update form data as per fields . . . 
-    function updateFormData(event) {
-        const { name, value, type, checked } = event.target;
-        // Update data as per fields requirement . . .
-        setFormData((data) => {
-            return {
-                ...data,
-                [name]: type === "checkbox" ? checked : value,
-            };
-        })
-
-    }
-    async function handleLogin(e) {
-        e.preventDefault();
-        const form = e.currentTarget;
-        // If the form is not valid, stop the propagation.
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
-            setValidated(true);
-            return;
-        }
-        // If the form is valid, proceed with the registration.
+    async function handleLogin(formData) {
         dispatch(auth.login({ loginData: formData }));
     }
 
@@ -50,71 +25,83 @@ const Login = () => {
     }, [isSuccess, navigate]);
 
     return (
-        <Loader isLoading={isLoading}>
-            <Container className="h-100">
-                <Row className="justify-content-sm-center h-100">
-                    <Col xs={12} lg={5}>
-                        <div className="text-center my-2">
-                            <img src={logo} alt="logo" width="50%" />
-                        </div>
-                        <div className="card shadow-lg mb-5">
-                            <div className="card-body p-5">
-                                <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
-                                <Form noValidate validated={validated} autoComplete="on" onSubmit={handleLogin}>
-                                    <Form.Group className="mb-3" controlId="email">
-                                        <Form.Label>Email address</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="Enter email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={updateFormData}
-                                            required
-                                        />
-                                        <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
-                                    </Form.Group>
+        <AuthLayout AUTH_TITLE="Sign In">
+            <Loader isLoading={isLoading}>
+                <Form
+                    layout="vertical"
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    onFinish={handleLogin}
+                >
 
-                                    <Form.Group className="mb-3" controlId="password">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Password"
-                                            name="password"
-                                            value={formData.password}
-                                            onChange={updateFormData}
-                                            required
-                                        />
+                    <Form.Item
+                        label={translate('email')}
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Email!',
 
-                                        <Form.Control.Feedback type="invalid">Password is required</Form.Control.Feedback>
-                                    </Form.Group>
+                            },
+                            {
+                                type: 'email',
+                                message: 'Invalid email!',
 
-                                    <Form.Group className="mb-3 d-flex align-items-center" controlId="remember">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label="Remember Me"
-                                            name="remember"
-                                            value={formData.remember}
-                                            onChange={updateFormData}
-                                        />
-                                    </Form.Group>
+                            },
+                        ]}
+                    >
+                        <Input
+                            prefix={<UserOutlined className="site-form-item-icon" />}
+                            placeholder={'Email'}
+                            type="email"
+                            size="large"
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label={translate('password')}
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Password!',
 
-                                    <div className="form-group m-0">
-                                        <Button variant="primary" type="submit">
-                                            Login
-                                        </Button>
-                                    </div>
-                                </Form>
-                            </div>
-                            <div className="card-footer py-3 border-0">
-                                <div className="text-center">
-                                    Don't have an account? <Link to="/register" className="text-dark">Create One</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </Loader>
+                            },
+                        ]}
+                    >
+                        <Input.Password
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            placeholder={'Password'}
+                            size="large"
+                        />
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Form.Item name="remember" valuePropName="checked" noStyle>
+                            <Checkbox>{translate('Remember me')}</Checkbox>
+                        </Form.Item>
+
+                        {/* <Link to="/forgetpassword" className="login-form-forgot" style={{ marginLeft: '0px' }}>{translate('Forgot password')}</Link> */}
+                    </Form.Item>
+
+
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="login-form-button"
+                            loading={isLoading}
+                            size="large"
+                        >
+                            Log in
+                        </Button>
+                        Or <Link to="/register">Register Now!</Link>
+                    </Form.Item>
+                </Form>
+            </Loader>
+        </AuthLayout>
     );
 };
 
