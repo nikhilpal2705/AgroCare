@@ -1,5 +1,4 @@
 import 'assets/style/app.css';
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import { lazy } from 'react';
 import { BrowserRouter } from 'react-router-dom';

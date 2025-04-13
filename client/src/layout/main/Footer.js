@@ -5,7 +5,7 @@ function Footer() {
     <footer>
       <small>
         &copy; {new Date().getFullYear()} made with{' '}
-        <FaHeart style={{ color: 'red' }} /> by -{' '}
+        <FaHeart /> by -{' '}
         Team AgroCare
       </small>
     </footer>
