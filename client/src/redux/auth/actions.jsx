@@ -3,7 +3,7 @@ import * as actionTypes from './types';
 import * as authService from 'api/auth.service';
 import Cookies from 'js-cookie';
 const cookieOptions = {
-  secure: process.env.NODE_ENV === 'production', // Adjust based on environment
+  secure: import.meta.env.PROD,
   sameSite: 'Lax',
   httpOnly: false,
   domain: window.location.hostname,

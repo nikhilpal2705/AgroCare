@@ -1,69 +1,48 @@
-#dbconnection
-.vscode
+# Environment files
+.env
 
-#Package
-client/package-lock.json
+# Editor settings
+.vscode/
+.idea/
 
-#folder
-build/
+# OS artifacts
+.DS_Store
 
-#Client
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Generic logs
+*.log
 
-# dependencies
+# Client artifacts
 client/node_modules/
+client/package-lock.json
+client/dist/
+client/coverage/
+client/build/
 client/.pnp
 client/.pnp.js
-
-# testing
-client/coverage
-
-# production
-client/build
-
-
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
+client/src/config
 
-
-#server
-server/server/HELP.md
+# Server artifacts
 server/target/
-server/!.mvn/wrapper/maven-wrapper.jar
-server/!**/src/main/**/target/
-server/!**/src/test/**/target/
+server/.github/java-upgrade/
+server/build/
+server/dist/
+server/nbbuild/
+server/nbdist/
+server/nbproject/private/
+server/.nb-gradle/
 
-### STS ###
+# Java IDE metadata
 server/.apt_generated
 server/.classpath
 server/.factorypath
 server/.project
-server/.settings
+server/.settings/
 server/.springBeans
 server/.sts4-cache
-
-### IntelliJ IDEA ###
-server/.idea
+server/.idea/
 server/*.iws
 server/*.iml
 server/*.ipr
-
-### NetBeans ###
-server/nbproject/private/
-server/nbbuild/
-server/dist/
-server/nbdist/
-server/.nb-gradle/
-server/build/
-server/!**/src/main/**/build/
-server/!**/src/test/**/build/
-
-### VS Code ###
-server/.vscode/
-
-
-## Required ignore file
-client/src/config
-.vscode/
-.env
