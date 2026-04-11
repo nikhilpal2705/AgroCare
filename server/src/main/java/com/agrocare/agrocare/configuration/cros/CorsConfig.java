@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    @Value("${CLIENT_BASE_URL}")
+    @Value("${CLIENT_BASE_URL:http://localhost:3000}")
     private String clientBaseUrl;
 
     @Override

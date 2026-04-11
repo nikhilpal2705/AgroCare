@@ -11,6 +11,35 @@ AgroCare is a full-stack web application. It leverages React.js for the frontend
 ## How to Use
 The source code has been provided for download. Please download all the necessary files before proceeding.
 
+## Deploy On Render (Docker)
+Use a single Render Web Service pointing to this repository and the root `Dockerfile`.
+
+### Render Settings
+- Runtime: Docker
+- Health check path: use `/` or any existing backend endpoint in your app
+- Do not set a fixed service port; Render injects `PORT` automatically
+
+### Required Environment Variables (Render)
+- `SERVER_PORT=8080` (internal Spring Boot port used by Nginx proxy)
+- `DATABASE_HOST=<db-host>`
+- `DATABASE_PORT=<db-port>`
+- `DATABASE_NAME=<db-name>`
+- `DATABASE_USERNAME=<db-user>`
+- `DATABASE_PASSWORD=<db-password>`
+- `JWT_SECRET=<at-least-64-char-secret>`
+- `CLIENT_BASE_URL=https://<your-render-service>.onrender.com`
+
+### Optional Environment Variables (Render)
+- `DATABASE_URL=jdbc:mysql://<host>:<port>/<db-name>?createDatabaseIfNotExist=true`
+- `SHOW_SQL=false`
+- `HIBERNATE_DDL=update`
+- `API_BASE_URL=/api` (for frontend runtime override; defaults to `/api`)
+
+### Notes
+- Frontend runtime config is injected at container startup from Render env vars.
+- Backend reads Render env vars directly and still supports local `.env` files.
+- In production, frontend and backend are served from the same host with Nginx reverse proxy (`/api` -> Spring Boot).
+
 ### Config Setup
 1. Navigate to `server/`.
 2. Create a `.env` file.

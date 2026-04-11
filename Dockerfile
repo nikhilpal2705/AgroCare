@@ -1,61 +1,39 @@
-# --- Stage 1: Build the frontend ---
-FROM node:18-alpine as frontend-build
+# --- Stage 1: Build frontend ---
+FROM node:22-alpine AS frontend-build
 
 WORKDIR /frontend
 COPY client/package*.json ./
 RUN npm install
-COPY client/ .
-RUN npm run build  # This will build the production frontend
+COPY client/ ./
+RUN npm run build
 
-# --- Stage 2: Package the backend ---
-FROM maven:3.8-openjdk-17 as backend-build
+# --- Stage 2: Build backend ---
+FROM eclipse-temurin:25-jdk AS backend-build
 
 WORKDIR /backend
-COPY server/pom.xml .
+COPY server/.mvn ./.mvn
+COPY server/mvnw ./mvnw
+COPY server/pom.xml ./pom.xml
 COPY server/src ./src
-RUN mvn package -DskipTests
+RUN chmod +x ./mvnw && ./mvnw -q -Dmaven.test.skip=true clean package
 
-# --- Stage 3: Final image with both frontend and backend ---
-FROM openjdk:17-jdk-slim
+# --- Stage 3: Runtime image ---
+FROM eclipse-temurin:25-jdk
 
 WORKDIR /app
 
-# Copy backend JAR file
-COPY --from=backend-build /backend/target/agrocare-*.jar app.jar
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nginx gettext-base \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy frontend build files
-COPY --from=frontend-build /frontend/build /app/frontend
-
-# Copy the wait-for-it.sh script
+COPY --from=backend-build /backend/target/agrocare-*.jar /app/app.jar
+COPY --from=frontend-build /frontend/dist /app/frontend
 COPY wait-for-it.sh /app/wait-for-it.sh
+COPY docker/nginx.conf.template /app/nginx.conf.template
+COPY docker/entrypoint.sh /app/entrypoint.sh
 
-# Ensure wait-for-it.sh has execute permissions
-RUN chmod +x /app/wait-for-it.sh
+RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh
 
-# Install Nginx for serving the frontend build
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+EXPOSE 10000
 
-# Set up Nginx to serve the frontend build files with dynamic port
-RUN echo "server {\
-        listen {{PORT}};\
-        location / {\
-            root /app/frontend;\
-            try_files \$uri \$uri/ /index.html;\
-        }\
-        location /api/ {\
-            proxy_pass http://localhost:{{SERVER_PORT}}/;\
-            proxy_set_header Host \$host;\
-            proxy_set_header X-Real-IP \$remote_addr;\
-            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\
-            proxy_set_header X-Forwarded-Proto \$scheme;\
-        }\
-    }" > /etc/nginx/sites-available/default
-
-# Expose ports for frontend and backend (use ENV variables if needed)
-EXPOSE ${PORT} ${SERVER_PORT}
-
-# Ensure Nginx starts in the background and the Java app runs concurrently
-CMD sed -i "s|{{PORT}}|${PORT}|g" /etc/nginx/sites-available/default && \
-    sed -i "s|{{SERVER_PORT}}|${SERVER_PORT}|g" /etc/nginx/sites-available/default && \
-    /app/wait-for-it.sh ${DATABASE_HOST} -- java -jar app.jar & \
-    nginx -g "daemon off;"
+ENTRYPOINT ["/app/entrypoint.sh"]

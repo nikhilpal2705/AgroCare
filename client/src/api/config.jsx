@@ -1,5 +1,12 @@
-export const BASE_URL = import.meta.env.DEV ? import.meta.env.VITE_SERVER_BASE_URL : window.location.origin
-export const API_BASE_URL = import.meta.env.DEV ? BASE_URL : BASE_URL + "/api"
+const runtimeConfig = typeof window !== "undefined" ? window.__APP_CONFIG__ || {} : {};
+
+export const BASE_URL = import.meta.env.DEV
+	? import.meta.env.VITE_SERVER_BASE_URL
+	: runtimeConfig.CLIENT_BASE_URL || runtimeConfig.RENDER_EXTERNAL_URL || window.location.origin;
+
+export const API_BASE_URL = import.meta.env.DEV
+	? BASE_URL
+	: runtimeConfig.API_BASE_URL || BASE_URL + "/api";
 export const HOME_BASE_URL = API_BASE_URL + "/"
 export const AUTH_BASE_URL = API_BASE_URL + "/auth/"
 export const ADMIN_BASE_URL = API_BASE_URL + "/admin/"

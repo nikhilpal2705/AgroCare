@@ -61,7 +61,7 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
-    @Value("${CLIENT_BASE_URL}")
+    @Value("${CLIENT_BASE_URL:http://localhost:3000}")
     private String clientBaseUrl;
 
     @Bean
