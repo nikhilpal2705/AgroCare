@@ -42,9 +42,17 @@ Use a single Render Web Service pointing to this repository and the root `Docker
 
 ### Config Setup
 1. Navigate to `server/`.
-2. Create a `.env` file.
-3. Copy all the lines from `.env.example` file.
-4. Paste the copied lines into the `.env` file and configure the settings as required.
+2. Create or update the root `.env` file.
+3. Populate it with the values required for your local setup.
+
+### Local Docker Development
+Use the dedicated development compose file for automatic frontend and backend reloads while editing source files. Make sure the root `.env` file is present and populated, since the dev compose file reads its values directly:
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+This setup mounts the `client/` and `server/` folders into separate containers, runs Vite and Spring Boot dev mode, and avoids manual image rebuilds for code changes. Rebuild only when dependencies or Dockerfiles change.
 
 ### For Frontend
 To install node packages:
