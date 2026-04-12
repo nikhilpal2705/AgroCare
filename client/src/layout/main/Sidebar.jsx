@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
-import logo from 'assets/images/logo.png';
+import logo from '/images/agrocare-logo.svg';
 import {
   MenuOutlined,
 } from '@ant-design/icons';
@@ -115,6 +115,7 @@ function MobileSidebar() {
         contentWrapperStyle={{
           boxShadow: 'none',
         }}
+        maskStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.28)' }}
         style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
         placement="left"
         closable={false}

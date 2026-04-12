@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 import { useCrudContext } from 'contexts/crud';
-import { Button, Form } from 'antd';
-import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
+import { Form } from 'antd';
 import Loader from 'components/common/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { crud } from '../../redux/crud/actions';
 import { selectCreatedItem } from '../../redux/crud/selectors';
 
-export default function CreateForm({ config, formElements, withUpload = false }) {
+export default function CreateForm({ config, formElements, withUpload = false, form }) {
   const { entity } = config;
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector(selectCreatedItem);
   const { crudContextAction } = useCrudContext();
   const { panel, addBox } = crudContextAction;
-  const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue) => {
     if (withUpload && fieldsValue.file) {
@@ -46,12 +44,6 @@ export default function CreateForm({ config, formElements, withUpload = false })
     <Loader isLoading={isLoading}>
       <Form form={form} layout="vertical" onFinish={onSubmit}>
         {formElements}
-        <Form.Item style={{ display: 'inline-block', paddingRight: '5px' }}>
-          <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>Submit</Button>
-        </Form.Item>
-        <Form.Item style={{ display: 'inline-block', paddingLeft: '5px' }}>
-          <Button onClick={handleCancel} icon={<CloseCircleOutlined />}>Cancel</Button>
-        </Form.Item>
       </Form>
     </Loader>
   );

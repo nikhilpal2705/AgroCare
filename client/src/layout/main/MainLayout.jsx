@@ -11,33 +11,37 @@ const MainLayout = ({ children }) => {
   const { isMobile } = useResponsive();
   const isNavMenuClose = false
   return (
-    <Layout hasSider>
+    <Layout hasSider style={{ minHeight: '100vh', background: 'transparent' }}>
       <Sidebar />
       {isMobile ? (
-        <Layout style={{ marginLeft: 0 }}>
+        <Layout style={{ marginLeft: 0, minHeight: '100vh', background: 'transparent' }}>
           <Header />
           <Content
             style={{
-              margin: '5px auto 30px',
+              margin: '5px auto 0',
               overflow: 'initial',
               width: '100%',
-              padding: '0 25px',
+              padding: '0 16px',
               maxWidth: 'none',
+              minHeight: 'calc(100vh - 85px)',
+              background: 'transparent',
             }}
           >
             {children}
           </Content>
         </Layout>
       ) : (
-        <Layout style={{ marginLeft: isNavMenuClose ? 100 : 220 }}>
+        <Layout style={{ marginLeft: isNavMenuClose ? 100 : 220, minHeight: '100vh', background: 'transparent' }}>
           <Header />
           <Content
             style={{
-              margin: '5px auto 30px',
+              margin: '5px auto 0',
               overflow: 'initial',
               width: '100%',
-              padding: '0 25px',
-              maxWidth: isNavMenuClose ? 1200 : 1100,
+              padding: '0 16px',
+              maxWidth: isNavMenuClose ? 1280 : 1240,
+              minHeight: 'calc(100vh - 85px)',
+              background: 'transparent',
             }}
           >
             {children}

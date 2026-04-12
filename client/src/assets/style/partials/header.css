@@ -4,7 +4,7 @@
 }
 
 .notification::-webkit-scrollbar-thumb {
-  background: #1b98f5;
+  background: #2f9d62;
   border-radius: 4px;
 }
 
@@ -21,8 +21,8 @@
 }
 
 .headerIcon.ant-avatar :hover {
-  background: #fff;
-  box-shadow: 0px 0px 10px 4px rgba(150, 190, 238, 0.3);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0px 0px 10px 4px rgba(47, 157, 98, 0.28);
   cursor: pointer;
 }
 

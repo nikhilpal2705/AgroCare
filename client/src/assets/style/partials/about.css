@@ -1,0 +1,181 @@
+.about-page {
+  width: 100%;
+  padding: 28px 0 40px;
+}
+
+.about-shell {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.about-hero-card,
+.about-dev-section,
+.about-repo-card {
+  border-radius: 26px;
+  border: 1px solid rgba(32, 55, 45, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 46px rgba(21, 46, 36, 0.06);
+}
+
+.about-hero-card {
+  padding: 28px;
+}
+
+.about-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #e8f4eb;
+  color: #2c6d48;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.about-hero-card h1 {
+  margin: 14px 0 8px;
+  color: #20372d;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+}
+
+.about-hero-card p {
+  margin: 0;
+  max-width: 60ch;
+  color: #5f6f67;
+  line-height: 1.65;
+}
+
+.about-dev-section {
+  padding: 24px;
+}
+
+.about-dev-header h2 {
+  margin: 0;
+  color: #20372d;
+  font-size: 1.3rem;
+}
+
+.about-dev-header p {
+  margin: 6px 0 0;
+  color: #6a7a72;
+}
+
+.about-dev-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.about-dev-card {
+  border: 1px solid rgba(32, 55, 45, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 20px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.about-dev-avatar {
+  color: #2f9d62;
+  background: #dff4e6;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.about-dev-card h3 {
+  margin: 12px 0 6px;
+  color: #20372d;
+  font-size: 1.06rem;
+}
+
+.about-dev-card p {
+  margin: 0;
+  color: #6a7a72;
+}
+
+.about-dev-actions {
+  margin-top: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-dev-actions .ant-btn {
+  min-width: 124px;
+}
+
+.about-repo-card {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.about-repo-card h3 {
+  margin: 0;
+  color: #20372d;
+}
+
+.about-repo-card p {
+  margin: 8px 0 0;
+  color: #5f6f67;
+  max-width: 62ch;
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 18px 0 28px;
+  }
+
+  .about-shell {
+    gap: 14px;
+  }
+
+  .about-hero-card,
+  .about-dev-section,
+  .about-repo-card {
+    border-radius: 22px;
+  }
+
+  .about-hero-card,
+  .about-dev-section,
+  .about-repo-card {
+    padding: 18px;
+  }
+
+  .about-dev-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-dev-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .about-dev-actions .ant-btn {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 10px;
+  }
+
+  .about-repo-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .about-repo-card .ant-btn {
+    width: 100%;
+  }
+}

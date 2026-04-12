@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { generate as uniqueId } from 'shortid';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Col, Row, Form, Input } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
 
 import { auth } from '../../redux/auth/actions';
 import { selectCurrentUser } from '../../redux/auth/selectors';
@@ -44,44 +42,23 @@ const UpdateProfile = ({ config }) => {
 
   return (
     <>
-      <PageHeader
-        onBack={() => updatePanel.close()}
-        title={ENTITY_NAME}
-        ghost={false}
-        extra={[
-          <Button
-            onClick={() => updatePanel.close()}
-            key={uniqueId()}
-            icon={<CloseCircleOutlined />}
-          >
-            {translate('Close')}
-          </Button>,
-          <Button
-            key={uniqueId()}
-            onClick={() => {
-              handleSubmit();
-              updatePanel.close();
-            }}
-            type="primary"
-            icon={<SaveOutlined />}
-            htmlType="submit"
-          >
-            {translate('Save')}
-          </Button>,
-        ]}
-        style={{
-          padding: '20px 0',
-        }}
-      />
-      <Row align="start">
-        <Col xs={{ span: 24 }} sm={{ span: 6 }} md={{ span: 4 }}></Col>
-        <Col xs={{ span: 16 }}>
+      <div className="profile-card profile-form-shell">
+        <div className="profile-form-header">
+          <div>
+            <h1>{ENTITY_NAME}</h1>
+            <p>Update your profile details with the latest information.</p>
+          </div>
+        </div>
+
+        <Row align="start">
+          <Col xs={{ span: 24 }}>
           <Form
             form={form}
             onFinish={onSubmit}
             labelAlign="left"
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 12 }}
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+            className="profile-edit-form"
           >
             <Form.Item
               label={translate('Name')}
@@ -108,9 +85,18 @@ const UpdateProfile = ({ config }) => {
             >
               <Input autoComplete="off" />
             </Form.Item>
+            <div className="profile-form-actions">
+              <Button onClick={() => updatePanel.close()} icon={<CloseCircleOutlined />}>
+                {translate('Close')}
+              </Button>
+              <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+                {translate('Save')}
+              </Button>
+            </div>
           </Form>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };

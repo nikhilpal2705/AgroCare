@@ -1,5 +1,5 @@
-import { notification } from 'antd';
 import * as constant from "helper/constant";
+import { showError } from './notificationBridge';
 
 const errorHandler = (error) => {
   const { response } = error;
@@ -8,11 +8,7 @@ const errorHandler = (error) => {
     const message = response.data && response.data.message;
     const errorText = message
     const { status } = response;
-    notification.config({
-      duration: 4,
-      maxCount: 2,
-    });
-    notification.error({
+    showError({
       message: `Request error ${status}`,
       description: errorText,
     });
@@ -22,14 +18,9 @@ const errorHandler = (error) => {
     }
     return response.data;
   } else {
-    notification.config({
-      duration: 5,
-      maxCount: 1,
-    });
-
     if (navigator.onLine) {
       // Code to execute when there is internet connection
-      notification.error({
+      showError({
         message: 'Problem connecting to server',
         description: 'Cannot connect to the server, Try again later',
       });
@@ -40,7 +31,7 @@ const errorHandler = (error) => {
       };
     } else {
       // Code to execute when there is no internet connection
-      notification.error({
+      showError({
         message: 'No internet connection',
         description: 'Cannot connect to the Internet, Check your internet network',
       });

@@ -1,113 +1,91 @@
 import React from 'react';
-import { Result, Avatar, Layout, Button } from 'antd';
+import { Avatar, Button } from 'antd';
 import { MailFilled, LinkedinFilled, GithubFilled } from '@ant-design/icons';
-import { Content } from 'antd/lib/layout/layout';
+
+const developers = [
+  {
+    name: 'Nikhil Suryavanshi',
+    email: 'nsuryavanshi.dev@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/nikhilpal2705',
+  },
+  {
+    name: 'Jitendra Bakolia',
+    email: 'jitendrabakolia.dev@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/jitendrabakolia',
+  },
+];
+
 const DeveloperInfo = ({ name, email, linkedin }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
-    <Avatar
-      className="last"
-      src={null}
-      style={{
-        cursor: 'default',
-        color: '#f56a00',
-        backgroundColor: '#fde3cf',
-        fontSize: '40px'
-      }}
-      size={96}
-    >
+  <article className="about-dev-card">
+    <Avatar className="about-dev-avatar" src={null} size={88}>
       {name.charAt(0)?.toUpperCase()}
     </Avatar>
-    <div style={{ textAlign: 'center', marginTop: '10px' }}>
-      <h5>{name}</h5>
-      <p>Full Stack Developer</p>
-      <Button
-        type="primary"
-        shape="round"
-        icon={<MailFilled />}
-        size=""
-        href={`mailto:${email}`}
-        style={{ marginBottom: '8px' }} // Add margin-bottom to Email button
-      >
+
+    <h3>{name}</h3>
+    <p>Full Stack Developer</p>
+
+    <div className="about-dev-actions">
+      <Button type="primary" shape="round" icon={<MailFilled />} href={`mailto:${email}`}>
         Email
       </Button>
-      <Button
-        type="primary"
-        shape="round"
-        icon={<LinkedinFilled />}
-        size=""
-        href={linkedin}
-        target="_blank"
-        style={{ marginLeft: '8px' }}
-      >
+      <Button shape="round" icon={<LinkedinFilled />} href={linkedin} target="_blank">
         LinkedIn
       </Button>
     </div>
-  </div>
+  </article>
 );
 
 const About = () => {
   return (
-    <Layout className="site-layout">
-      <Result
-        status="info"
-        title="AgroCare"
-        subTitle="Your Agriculture Companion"
-        extra={
+    <section className="about-page">
+      <div className="about-shell">
+        <section className="about-hero-card">
+          <span className="about-kicker">ABOUT AGROCARE</span>
+          <h1>AgroCare</h1>
           <p>
-            AgroCare is a comprehensive platform designed to assist and enhance the agricultural experience.
+            Your agriculture companion. AgroCare helps teams manage crops, irrigation, inventory,
+            and pest control in one focused workspace.
           </p>
-        }
-      />
+        </section>
 
-      <Content
-        className="whiteBox shadow layoutPadding centered-content"
-        style={{
-          width: '100%',
-          maxWidth: '1100px',
-        }}
-      >
-        <h3>Developers</h3>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '25px' }}>
-          <div style={{ marginRight: '50px' }}>
-            <DeveloperInfo
-              name="Nikhil Suryavanshi"
-              email="nsuryavanshi.dev@gmail.com"
-              linkedin="https://www.linkedin.com/in/nikhilpal2705"
-            />
-          </div>
-          <div style={{ marginLeft: '50px' }}>
-            <DeveloperInfo
-              name="Jitendra Bakolia"
-              email="jitendrabakolia.dev@gmail.com"
-              linkedin="https://www.linkedin.com/in/jitendrabakolia"
-            />
-          </div>
-        </div>
-      </Content>
+        <section className="about-dev-section">
+          <header className="about-dev-header">
+            <h2>Developers</h2>
+            <p>The people building and maintaining AgroCare.</p>
+          </header>
 
-      <Content
-        className="whiteBox shadow layoutPadding centered-content"
-        style={{
-          margin: '40px auto',
-          width: '100%',
-          maxWidth: '1100px',
-        }}
-      >
-        <p>
-          Explore our GitHub repository for the AgroCare app to get involved, contribute, or customize the application based on your requirements.
-        </p>
-        <Button
-          type="primary"
-          shape="round"
-          icon={<GithubFilled />}
-          size="large"
-          href="https://github.com/nikhilpal2705/AgroCare"
-          target="_blank"
-        >
-          GitHub
-        </Button>
-      </Content>
-    </Layout>
+          <div className="about-dev-grid">
+            {developers.map((developer) => (
+              <DeveloperInfo
+                key={developer.email}
+                name={developer.name}
+                email={developer.email}
+                linkedin={developer.linkedin}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="about-repo-card">
+          <div>
+            <h3>Open Source Repository</h3>
+            <p>
+              Explore the codebase, raise issues, and contribute improvements to AgroCare.
+            </p>
+          </div>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<GithubFilled />}
+            size="large"
+            href="https://github.com/nikhilpal2705/AgroCare"
+            target="_blank"
+          >
+            View on GitHub
+          </Button>
+        </section>
+      </div>
+    </section>
   );
 };
 

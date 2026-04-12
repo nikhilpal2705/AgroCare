@@ -2,7 +2,7 @@ import { useCrudContext } from 'contexts/crud';
 import { Drawer } from 'antd';
 
 
-export default function SidePanel({ config, children }) {
+export default function SidePanel({ config, children, footer }) {
   const { state, crudContextAction } = useCrudContext();
   const { isPanelClose } = state;
   const { panel } = crudContextAction;
@@ -18,6 +18,7 @@ export default function SidePanel({ config, children }) {
       onClose={collapsePanel}
       open={!isPanelClose}
       width={450}
+      footer={footer}
     >
       <div className="sidePanelContent">
         {children}

@@ -2,6 +2,9 @@
 @import './partials/core.css';
 @import './partials/rest.css';
 @import './partials/auth.css';
+@import './partials/home.css';
+@import './partials/about.css';
+@import './partials/profile.css';
 @import './partials/navigation.css';
 @import './partials/header.css';
 @import './partials/sidePanel.css';
