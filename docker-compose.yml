@@ -33,8 +33,8 @@ services:
       SHOW_SQL: ${SHOW_SQL}
       HIBERNATE_DDL: ${HIBERNATE_DDL}
       JWT_SECRET: ${JWT_SECRET}
-      DB_POOL_MIN_IDLE: ${DB_POOL_MIN_IDLE:-5}
-      DB_POOL_MAX_SIZE: ${DB_POOL_MAX_SIZE:-10}
+      DB_POOL_MIN_IDLE: ${DB_POOL_MIN_IDLE:-1}
+      DB_POOL_MAX_SIZE: ${DB_POOL_MAX_SIZE:-3}
       DB_POOL_AUTO_COMMIT: ${DB_POOL_AUTO_COMMIT:-true}
     env_file:
       - ./.env
