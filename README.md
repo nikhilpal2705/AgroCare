@@ -4,7 +4,7 @@
 AgroCare is a full-stack web application. It leverages React.js for the frontend and Spring Boot for the backend.
 
 ## Pre-requisites
-- [JDK 17 or above](https://www.oracle.com/java/technologies/downloads/)
+- [JDK 25 or above](https://www.oracle.com/java/technologies/downloads/) (latest LTS)
 - [Node.js v18 or above](https://nodejs.org/en/download/)
 - [MySQL Database](https://dev.mysql.com/downloads/)
 

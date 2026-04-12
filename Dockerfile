@@ -28,7 +28,7 @@ RUN apt-get update \
 
 COPY --from=backend-build /backend/target/agrocare-*.jar /app/app.jar
 COPY --from=frontend-build /frontend/dist /app/frontend
-COPY wait-for-it.sh /app/wait-for-it.sh
+COPY docker/wait-for-it.sh /app/wait-for-it.sh
 COPY docker/nginx.conf.template /app/nginx.conf.template
 COPY docker/entrypoint.sh /app/entrypoint.sh
 
