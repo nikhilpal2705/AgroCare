@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
 import Cookies from 'js-cookie';
+import { Authorities } from 'helper/constant';
 
 const AUTH_INITIAL_STATE = {
   current: {},
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,
+  isAdmin: false,
 };
 
 const current = Cookies.get('jwtToken')
@@ -20,6 +22,7 @@ const userData = current ? {
   isLoggedIn: true,
   isLoading: false,
   isSuccess: true,
+  isAdmin: current.authority === Authorities.ADMIN,
 }
   : AUTH_INITIAL_STATE;
 

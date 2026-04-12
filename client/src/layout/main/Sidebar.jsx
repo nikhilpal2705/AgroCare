@@ -5,8 +5,10 @@ import logo from '/images/agrocare-logo.svg';
 import {
   MenuOutlined,
 } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 import useResponsive from 'hooks/useResponsive';
-import { FaBoxes, FaBug, FaLeaf, FaTachometerAlt, FaWater, FaHome } from 'react-icons/fa';
+import { FaBoxes, FaBug, FaLeaf, FaTachometerAlt, FaWater, FaHome, FaUsers } from 'react-icons/fa';
+import { selectAuth } from 'redux/auth/selectors';
 
 const { Sider } = Layout;
 export default function Navigation() {
@@ -18,6 +20,7 @@ function Sidebar({ collapsible, isMobile = false }) {
   const location = useLocation();
   const isNavMenuClose = false
   const [currentPath, setCurrentPath] = useState(location.pathname.slice(1));
+  const { isAdmin } = useSelector(selectAuth);
 
   useEffect(() => {
     if (location)
@@ -26,7 +29,25 @@ function Sidebar({ collapsible, isMobile = false }) {
       }
   }, [location, currentPath]);
 
-  const items = [
+  const adminItems = [
+    {
+      key: 'dashboard',
+      icon: <FaTachometerAlt />,
+      label: <Link to={'/dashboard'}>Dashboard</Link>,
+    },
+    {
+      key: 'users',
+      icon: <FaUsers />,
+      label: <Link to={'/users'}>Farmers</Link>,
+    },
+    {
+      key: 'admins',
+      icon: <FaUsers />,
+      label: <Link to={'/admins'}>Admins</Link>,
+    },
+  ];
+
+  const userItems = [
     {
       key: 'dashboard',
       icon: <FaTachometerAlt />,
@@ -58,6 +79,8 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/irrigation'}>Irrigation</Link>,
     },
   ];
+
+  const items = isAdmin ? adminItems : userItems;
   return (
     <Sider
       collapsible={collapsible}

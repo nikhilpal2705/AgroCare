@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,
+  isAdmin: false,
   };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +25,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
+        isAdmin: action.payload?.isAdmin || false,
       };
 
     case actionTypes.REGISTER_SUCCESS:
@@ -42,6 +44,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
+        isAdmin: action.payload?.isAdmin || false,
       };
     case actionTypes.RESET_ACTION:
       return INITIAL_STATE;

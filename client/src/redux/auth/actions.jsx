@@ -2,6 +2,7 @@ import api, { setHeader } from 'api/api';
 import * as actionTypes from './types';
 import * as authService from 'api/auth.service';
 import Cookies from 'js-cookie';
+import { Authorities } from 'helper/constant';
 const cookieOptions = {
   secure: import.meta.env.PROD,
   sameSite: 'Lax',
@@ -9,6 +10,8 @@ const cookieOptions = {
   domain: window.location.hostname,
   path: '/',
 };
+
+const getIsAdmin = (authority) => authority === Authorities.ADMIN;
 
 export const auth = {
   resetAction: () => async (dispatch) => {
@@ -21,13 +24,14 @@ export const auth = {
       const data = await authService.login({ loginData });
 
       if (data.success === true) {
+        const authority = data.result.user.authorities[0]?.authority;
         const userData = {
           jwtToken: data.result.jwtToken,
-          isAdmin: false,
+          isAdmin: getIsAdmin(authority),
           name: data.result.user.name,
           email: data.result.user.email,
           userId: data.result.user.id,
-          authority: data.result.user.authorities[0]?.authority
+          authority,
         };
 
         if (loginData.remember) {
@@ -99,11 +103,11 @@ export const auth = {
     if (data.success === true) {
       const userData = {
         jwtToken: data.result.jwtToken,
-        isAdmin: false,
+        isAdmin: getIsAdmin(data.result.user.authorities[0]?.authority),
         name: data.result.user.name,
         email: data.result.user.email,
         userId: data.result.user.id,
-        authority: data.result.user.authorities[0]?.authority
+        authority: data.result.user.authorities[0]?.authority,
       };
 
       Cookies.set('jwtToken', userData.jwtToken, cookieOptions);
