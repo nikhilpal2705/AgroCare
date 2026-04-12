@@ -113,6 +113,13 @@ public class Users implements UserDetails {
         return list;
     }
 
+    /**
+     * Get the raw authority string (e.g., "ADMIN", "USER")
+     */
+    public String getAuthorityString() {
+        return this.authorities;
+    }
+
     // @Override
     // public Collection<? extends GrantedAuthority> getAuthorities() {
     // return List.of(new SimpleGrantedAuthority(this.role));

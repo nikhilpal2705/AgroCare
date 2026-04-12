@@ -14,5 +14,7 @@ public interface AlertRepository extends JpaRepository<Alert, Integer> {
 
     List<Alert> findAllByUserAndIsRead(Users user, boolean isRead, Sort sort);
 
+    long countByUser(Users user);
+
     long countByUserAndIsRead(Users user, boolean isRead);
 }

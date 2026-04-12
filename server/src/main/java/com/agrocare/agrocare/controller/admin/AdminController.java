@@ -1,14 +1,19 @@
 package com.agrocare.agrocare.controller.admin;
 
+import com.agrocare.agrocare.pojo.CreateAdminRequest;
+import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.service.admin.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/admin")
-public class AdminController extends AdminService {
+public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping(value = "/")
     public ResponseEntity<String> index() {
@@ -16,8 +21,29 @@ public class AdminController extends AdminService {
     }
 
     @GetMapping(value = "/dashboard")
-    public ResponseEntity<String> dashboard() {
-        return ResponseEntity.ok("Hello Admin Dashboard");
+    public ResponseEntity<CustomResponse> dashboard() {
+        return ResponseEntity.ok(adminService.getDashboard());
+    }
+
+    @GetMapping(value = "/users")
+    public ResponseEntity<CustomResponse> users() {
+        return ResponseEntity.ok(adminService.getUsers());
+    }
+
+    @GetMapping(value = "/admins")
+    public ResponseEntity<CustomResponse> admins() {
+        return ResponseEntity.ok(adminService.getAdmins());
+    }
+
+    /**
+     * INTERNAL USE ONLY: Create a new admin user via Admin Dashboard
+     * Only accessible by existing admins
+     * Frontend: Called from AdminCreateUser component
+     */
+    @PostMapping(value = "/manage/admins")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<CustomResponse> createAdminUser(@RequestBody CreateAdminRequest request) {
+        return ResponseEntity.ok(adminService.createAdmin(request));
     }
 
 }

@@ -93,12 +93,6 @@ const UpdateProfile = ({ config }) => {
               <Select
                 options={[
                   { label: 'English', value: 'en' },
-                  { label: 'Hindi', value: 'hi' },
-                  { label: 'Marathi', value: 'mr' },
-                  { label: 'Gujarati', value: 'gu' },
-                  { label: 'Tamil', value: 'ta' },
-                  { label: 'Kannada', value: 'kn' },
-                  { label: 'Telugu', value: 'te' },
                 ]}
               />
             </Form.Item>

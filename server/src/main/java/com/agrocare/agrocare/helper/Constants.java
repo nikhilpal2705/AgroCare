@@ -2,6 +2,11 @@ package com.agrocare.agrocare.helper;
 
 public class Constants {
     // HttpStatus interface
+    public interface Authorities {
+        String USER = "USER";
+        String ADMIN = "ADMIN";
+    }
+
     public interface Status {
         int ACTIVE = 1;
         int INACTIVE = 2;
