@@ -44,30 +44,13 @@ export default function AuthLayout({ children, AUTH_TITLE }) {
             {/* Logo only on small screens */}
             {isMobile && (
               <>
-                <Link to="/" style={{ display: 'block' }}>
-                  <img
-                    src={logo}
-                    alt="AgroCare"
-                    style={{
-                      margin: '0px auto 0px',
-                      display: 'block',
-                      cursor: 'pointer',
-                    }}
-                    height={100}
-                    width={280}
-                  />
-                  <div
-                    style={{
-                      textAlign: 'center',
-                      marginTop: 8,
-                      fontWeight: 800,
-                      fontSize: 34,
-                      lineHeight: 1.1,
-                      letterSpacing: 0.4,
-                      color: '#1f1f1f',
-                    }}
-                  >
-                    AgroCare
+                <Link to="/" className="auth-brand-link" style={{ display: 'block' }}>
+                  <div className="auth-brand-card">
+                    <img src={logo} alt="AgroCare Logo" className="auth-brand-logo" />
+                    <div className="auth-brand-text-wrap">
+                      <span className="auth-brand-title">AgroCare</span>
+                      <span className="auth-brand-subtitle">Smart Farm Console</span>
+                    </div>
                   </div>
                 </Link>
                 <div className="space10" />

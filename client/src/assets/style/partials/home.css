@@ -1,6 +1,6 @@
 .home-landing {
   min-height: 100vh;
-  padding: 32px 24px 48px;
+  padding: 24px 24px 48px;
   background:
     radial-gradient(circle at top left, rgba(180, 234, 201, 0.32), transparent 30%),
     radial-gradient(circle at top right, rgba(255, 245, 217, 0.7), transparent 28%),
@@ -10,6 +10,7 @@
 .home-shell {
   width: min(1180px, 100%);
   margin: 0 auto;
+  padding: 4px 0 0;
 }
 
 .home-nav {
@@ -17,23 +18,54 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 4px 0 26px;
+  padding: 0 2px 16px;
 }
 
 .home-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.6rem;
-  font-weight: 700;
+  gap: 8px;
   color: #20372d;
-  letter-spacing: -0.03em;
+}
+
+.home-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(32, 55, 45, 0.08);
+  box-shadow: 0 6px 14px rgba(21, 46, 36, 0.07);
 }
 
 .home-brand-logo {
-  width: 38px;
-  height: 38px;
+  width: 24px;
+  height: 24px;
   display: block;
+}
+
+.home-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.home-brand-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #20372d;
+}
+
+.home-brand-subtitle {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5f6f67;
+  margin-top: 2px;
 }
 
 .home-nav-actions {
@@ -63,8 +95,8 @@
 }
 
 .home-chip {
-  padding: 8px 14px;
-  min-height: 38px;
+  padding: 6px 14px;
+  min-height: 34px;
 }
 
 .home-chip:hover,
@@ -98,7 +130,7 @@
 .home-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
-  gap: 18px;
+  gap: 16px;
 }
 
 .home-panel {
@@ -109,7 +141,7 @@
 }
 
 .home-panel-primary {
-  padding: 28px;
+  padding: 28px 28px 24px;
 }
 
 .home-kicker {
@@ -210,13 +242,13 @@
 }
 
 .home-panel-stack {
-  padding: 16px;
+  padding: 18px;
   display: grid;
   gap: 12px;
 }
 
 .home-highlight-card {
-  padding: 18px;
+  padding: 16px;
 }
 
 .home-highlight-card h3 {
@@ -227,19 +259,80 @@
 
 .home-highlight-card p {
   color: #5f6f67;
-  line-height: 1.55;
+  line-height: 1.45;
+  font-size: 0.89rem;
+}
+
+.home-highlight-points {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.home-highlight-points li {
+  position: relative;
+  padding-left: 14px;
+  color: #4a5f55;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.home-highlight-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.56em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2f9d62;
 }
 
 .home-quote-card {
-  padding: 16px 18px;
+  padding: 14px 16px;
   background: #fff8e8;
   border-color: rgba(199, 154, 58, 0.16);
 }
 
+.home-quote-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #5f4c2a;
+}
+
 .home-quote-card p {
   color: #5f4c2a;
-  font-weight: 600;
-  font-size: 0.96rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.home-quote-points {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 3px;
+}
+
+.home-quote-points li {
+  position: relative;
+  padding-left: 14px;
+  color: #6d5b33;
+  font-size: 0.81rem;
+}
+
+.home-quote-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b3882d;
 }
 
 .home-benefits-grid {
@@ -328,6 +421,23 @@
   line-height: 1.55;
 }
 
+.home-footer-note {
+  margin-top: 16px;
+  padding: 6px 2px 0;
+  text-align: center;
+}
+
+.home-footer-note small {
+  color: #6a7a72;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+.home-footer-heart {
+  color: #2f9d62;
+  font-size: 0.82rem;
+}
+
 @media (max-width: 1100px) {
   .home-hero-grid,
   .home-benefits-grid,
@@ -345,15 +455,29 @@
     padding: 20px 14px 34px;
   }
 
+  .home-shell {
+    padding-top: 0;
+  }
+
   .home-nav {
     align-items: flex-start;
     flex-direction: column;
+    padding: 2px 0 14px;
   }
 
   .home-brand {
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+
+  .home-brand-title {
+    font-size: 1.45rem;
+  }
+
+  .home-brand-subtitle {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
   }
 
   .home-nav-actions {
@@ -366,7 +490,7 @@
 
   .home-nav-actions .home-chip {
     width: 100%;
-    min-height: 42px;
+    min-height: 38px;
     box-sizing: border-box;
   }
 
