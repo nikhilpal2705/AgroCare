@@ -16,7 +16,7 @@ services:
       retries: 20
 
   backend:
-    image: maven:3.9.11-eclipse-temurin-21
+    image: maven:3.9.11-eclipse-temurin-25
     working_dir: /workspace/server
     command: sh -c "mvn spring-boot:run"
     env_file:
