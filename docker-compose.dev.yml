@@ -1,0 +1,64 @@
+services:
+  mysql:
+    image: mysql:8.3.0
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    image: maven:3.9.11-eclipse-temurin-21
+    working_dir: /workspace/server
+    command: sh -c "mvn spring-boot:run"
+    env_file:
+      - ./.env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      CLIENT_BASE_URL: ${CLIENT_BASE_URL}
+      SHOW_SQL: ${SHOW_SQL}
+      HIBERNATE_DDL: ${HIBERNATE_DDL}
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - ./server:/workspace/server
+      - server_m2:/root/.m2
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    image: node:22-alpine
+    working_dir: /workspace/client
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port ${PORT}"
+    env_file:
+      - ./.env
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      VITE_SERVER_BASE_URL: ${VITE_SERVER_BASE_URL}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./client:/workspace/client
+      - client_node_modules:/workspace/client/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  mysql:
+  server_m2:
+  client_node_modules:
