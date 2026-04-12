@@ -17,13 +17,37 @@ const PestControl = () => {
       entity: 'crop',
       required: true,
     },
-    pestiside: {
+    pesticide: {
       type: 'string',
-      label: 'Pesticide',
+      label: 'Pesticide Used',
+    },
+    severity: {
+      type: 'select',
+      label: 'Severity Level',
+      options: [
+        { label: 'Low', value: 'low' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'High', value: 'high' },
+      ],
+    },
+    imageUrl: {
+      type: 'string',
+      label: 'Image URL',
+      placeholder: 'Paste image URL or upload link',
+    },
+    treatmentPlan: {
+      type: 'textarea',
+      label: 'Treatment Plan',
+      placeholder: 'Describe the treatment steps taken or recommended',
     },
     date: {
       type: 'date',
       label: 'Detection Date',
+    },
+    recheckDate: {
+      type: 'date',
+      label: 'Recheck Date',
+      placeholder: 'When to reassess treatment effectiveness',
     },
   };
   let config = {

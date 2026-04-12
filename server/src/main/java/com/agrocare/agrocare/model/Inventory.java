@@ -43,6 +43,26 @@ public class Inventory {
     @Column(name = "availableStock", nullable = false)
     private int availableStock;
 
+    @JsonProperty("category")
+    @Column(name = "category")
+    private String category; // seeds, fertilizer, pesticide, tools
+
+    @JsonProperty("supplier")
+    @Column(name = "supplier")
+    private String supplier;
+
+    @JsonProperty("costPerUnit")
+    @Column(name = "costPerUnit")
+    private Double costPerUnit;
+
+    @JsonProperty("expiryDate")
+    @Column(name = "expiryDate")
+    private String expiryDate;
+
+    @JsonProperty("minimumThreshold")
+    @Column(name = "minimumThreshold", nullable = false)
+    private int minimumThreshold = 10;
+
     @CreatedDate
     @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)

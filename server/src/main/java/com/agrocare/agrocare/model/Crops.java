@@ -77,6 +77,18 @@ public class Crops {
     @Column(name = "harvestDate")
     private String harvestDate;
 
+    @JsonProperty("cropStage")
+    @Column(name = "cropStage")
+    private String cropStage; // seedling, vegetative, flowering, fruiting, maturity
+
+    @JsonProperty("expectedYield")
+    @Column(name = "expectedYield")
+    private Double expectedYield; // in kg
+
+    @JsonProperty("diseaseHistory")
+    @Column(name = "diseaseHistory", columnDefinition = "TEXT")
+    private String diseaseHistory; // JSON array of past diseases
+
     @CreatedDate
     @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)

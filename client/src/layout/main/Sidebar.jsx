@@ -6,7 +6,7 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 import useResponsive from 'hooks/useResponsive';
-import { FaBoxes, FaBug, FaLeaf, FaTachometerAlt, FaWater } from 'react-icons/fa';
+import { FaBoxes, FaBug, FaLeaf, FaTachometerAlt, FaWater, FaHome } from 'react-icons/fa';
 
 const { Sider } = Layout;
 export default function Navigation() {
@@ -31,6 +31,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       key: 'dashboard',
       icon: <FaTachometerAlt />,
       label: <Link to={'/dashboard'}>Dashboard</Link>,
+    },
+    {
+      key: 'farm',
+      icon: <FaHome />,
+      label: <Link to={'/farm'}>Farm Profile</Link>,
     },
     {
       key: 'crop-monitoring',

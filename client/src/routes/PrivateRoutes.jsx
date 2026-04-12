@@ -11,6 +11,7 @@ const Layout = lazy(() => import('layout/main/MainLayout'));
 const NotFound = lazy(() => import('components/common/NotFound'));
 const Logout = lazy(() => import('components/auth/Logout'));
 const PestControl = lazy(() => import('components/pest/PestControl'));
+const FarmProfile = lazy(() => import('components/farm/Farm'));
 
 function PrivateAppRoutes() {
   let element = useRoutes([
@@ -49,6 +50,10 @@ function PrivateAppRoutes() {
     {
       path: '/irrigation',
       element: <Irrigation />,
+    },
+    {
+      path: '/farm',
+      element: <FarmProfile />,
     },
     {
       path: '/profile',

@@ -31,18 +31,10 @@ public class PestController {
 
     // Fetch all pests . . .
     @GetMapping(value = "/pest")
-    public ResponseEntity<CustomResponse> getPests(@RequestParam(name = "userId") int userId,
-            HttpServletRequest request) {
+    public ResponseEntity<CustomResponse> getPests(HttpServletRequest request) {
         try {
             Users userFromHeader = commonService.getUserFromHeader(request);
-            if (userId == Constants.NullCheck.INT) {
-                return new ResponseEntity<>(new CustomResponse(Constants.Messages.INVALID_USER_ID),
-                        HttpStatus.BAD_REQUEST);
-            }
-            if (userFromHeader.getId() != userId) {
-                throw new UsernameNotFoundException(Constants.Messages.USER_ID_NOT_AVAILABLE);
-            }
-            return new ResponseEntity<>(pestService.getPests(userId), HttpStatus.OK);
+            return new ResponseEntity<>(pestService.getPests(userFromHeader.getId()), HttpStatus.OK);
         } catch (UsernameNotFoundException err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(err.getMessage()), HttpStatus.BAD_REQUEST);

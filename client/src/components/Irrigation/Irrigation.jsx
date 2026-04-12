@@ -29,6 +29,30 @@ const Irrigation = () => {
                 { value: constant.Status.COMPLETED, label: 'Completed', color: 'green' },
             ],
         },
+        waterVolume: {
+            label: 'Water Volume (liters)',
+            type: 'number',
+            placeholder: 'Total water applied',
+        },
+        waterMethod: {
+            label: 'Irrigation Method',
+            type: 'select',
+            options: [
+                { label: 'Drip', value: 'drip' },
+                { label: 'Flood', value: 'flood' },
+                { label: 'Sprinkler', value: 'sprinkler' },
+            ],
+        },
+        pumpRuntime: {
+            label: 'Pump Runtime (hours)',
+            type: 'number',
+            placeholder: 'Total hours pump ran',
+        },
+        irrigationCost: {
+            label: 'Cost (currency units)',
+            type: 'number',
+            placeholder: 'Cost of this irrigation event',
+        },
     };
     let config = {
         fields,

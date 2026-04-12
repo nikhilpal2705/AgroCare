@@ -37,7 +37,25 @@ const CropMonitoring = () => {
       label: 'Harvest Date',
       type: 'date',
     },
-
+    cropStage: {
+      type: 'select',
+      label: 'Current Crop Stage',
+      options: [
+        { label: 'Seedling', value: 'seedling' },
+        { label: 'Vegetative', value: 'vegetative' },
+        { label: 'Flowering', value: 'flowering' },
+        { label: 'Fruiting', value: 'fruiting' },
+        { label: 'Maturity', value: 'maturity' },
+      ],
+    },
+    expectedYield: {
+      type: 'number',
+      label: 'Expected Yield (kg)',
+    },
+    diseaseHistory: {
+      type: 'textarea',
+      label: 'Disease History Notes',
+    },
   };
   let config = {
     fields,

@@ -7,6 +7,25 @@ import { generate as uniqueId } from 'shortid';
 export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
   let columns = [];
 
+  const withNoWrap = (column) => ({
+    ...column,
+    onHeaderCell: () => ({
+      style: {
+        whiteSpace: 'nowrap',
+      },
+    }),
+    onCell: (...args) => {
+      const existingCell = typeof column.onCell === 'function' ? column.onCell(...args) : {};
+      return {
+        ...existingCell,
+        style: {
+          ...(existingCell.style || {}),
+          whiteSpace: 'nowrap',
+        },
+      };
+    },
+  });
+
   Object.keys(fields).forEach((key) => {
     let field = fields[key];
     const keyIndex = field.dataIndex ? field.dataIndex : [key];
@@ -119,8 +138,8 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
 
     if (!field.disableForTable) {
       Object.keys(component).includes(type)
-        ? columns.push(component[type])
-        : columns.push(defaultComponent);
+        ? columns.push(withNoWrap(component[type]))
+        : columns.push(withNoWrap(defaultComponent));
     }
   });
 

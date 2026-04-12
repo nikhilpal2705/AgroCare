@@ -60,6 +60,20 @@ public class Constants {
         String IRRIGATION_DELETED_SUCCESS = "Irrigation deleted successfully";
         String ERROR_WHILE_UPDATING_IRRIGATION_DATA = "Error while updating irrigation data";
         String IRRIGATION_UPDATED_SUCCESS = "Irrigation updated successfully";
+        String FARM_ADDED_SUCCESS = "Farm added successfully";
+        String FARM_ADDED_ERROR = "Error while adding farm";
+        String FARM_FETCH_ERROR = "Error while fetching farms";
+        String FARM_UPDATED_SUCCESS = "Farm updated successfully";
+        String FARM_UPDATING_ERROR = "Error while updating farm";
+        String FARM_DELETED_SUCCESS = "Farm deleted successfully";
+        String FARM_DELETED_ERROR = "Error while deleting farm";
+        String FARM_NOT_FOUND = "Farm not found !!";
+        String ALERT_FETCH_ERROR = "Error while fetching alerts";
+        String ALERT_MARKED_READ = "Alert marked as read";
+        String ALERT_UPDATE_ERROR = "Error while updating alert";
+        String ALERT_DELETED_SUCCESS = "Alert deleted successfully";
+        String ALERT_DELETED_ERROR = "Error while deleting alert";
+        String ALERT_NOT_FOUND = "Alert not found !!";
     }
 
     public interface NullCheck {
