@@ -24,9 +24,9 @@
   gap: 3px;
   padding: 8px 6px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid var(--ag-border);
-  box-shadow: 0 8px 20px rgba(23, 55, 41, 0.08);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .sidebar-brand-logo {
