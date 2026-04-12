@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseCircleOutlined, SaveOutlined } from '@ant-design/icons';
-import { Button, Col, Row, Form, Input } from 'antd';
+import { Button, Col, Row, Form, Input, Select } from 'antd';
 
 import { auth } from '../../redux/auth/actions';
 import { selectCurrentUser } from '../../redux/auth/selectors';
@@ -84,6 +84,23 @@ const UpdateProfile = ({ config }) => {
               ]}
             >
               <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              label="Preferred Language"
+              name="preferredLanguage"
+              rules={[{ required: true }]}
+            >
+              <Select
+                options={[
+                  { label: 'English', value: 'en' },
+                  { label: 'Hindi', value: 'hi' },
+                  { label: 'Marathi', value: 'mr' },
+                  { label: 'Gujarati', value: 'gu' },
+                  { label: 'Tamil', value: 'ta' },
+                  { label: 'Kannada', value: 'kn' },
+                  { label: 'Telugu', value: 'te' },
+                ]}
+              />
             </Form.Item>
             <div className="profile-form-actions">
               <Button onClick={() => updatePanel.close()} icon={<CloseCircleOutlined />}>

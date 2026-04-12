@@ -3,6 +3,9 @@ package com.agrocare.agrocare.controller.user;
 import com.agrocare.agrocare.helper.Constants;
 import com.agrocare.agrocare.pojo.CustomResponse;
 import com.agrocare.agrocare.service.user.DashboardService;
+import com.agrocare.agrocare.service.user.AlertService;
+import com.agrocare.agrocare.model.Users;
+import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +27,12 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
+    @Autowired
+    private AlertService alertService;
+
+    @Autowired
+    private CommonService commonService;
+
     @GetMapping(value = "/dashboard")
     public ResponseEntity<CustomResponse> getDashboardDetails(HttpServletRequest request) {
         try {
@@ -44,6 +53,18 @@ public class DashboardController {
         } catch (Exception err) {
             logger.info("Error: " + err.getMessage());
             return new ResponseEntity<>(new CustomResponse(Constants.Messages.ERROR_WHILE_FETCHING_IRRIGATION),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/dashboard-alerts")
+    public ResponseEntity<CustomResponse> getUnreadAlerts(HttpServletRequest request) {
+        try {
+            Users user = commonService.getUserFromHeader(request);
+            return new ResponseEntity<>(alertService.getUnreadAlerts(user), HttpStatus.OK);
+        } catch (Exception err) {
+            logger.info("Error: " + err.getMessage());
+            return new ResponseEntity<>(new CustomResponse(Constants.Messages.ALERT_FETCH_ERROR),
                     HttpStatus.BAD_REQUEST);
         }
     }

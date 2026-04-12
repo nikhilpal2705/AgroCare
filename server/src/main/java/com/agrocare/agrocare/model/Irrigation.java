@@ -44,6 +44,22 @@ public class Irrigation {
     @Column(name = "status", nullable = false)
     private int status = Constants.Status.PENDING;
 
+    @JsonProperty("waterVolume")
+    @Column(name = "waterVolume")
+    private Double waterVolume; // in liters or cubic meters
+
+    @JsonProperty("waterMethod")
+    @Column(name = "waterMethod")
+    private String waterMethod; // drip, flood, sprinkler
+
+    @JsonProperty("pumpRuntime")
+    @Column(name = "pumpRuntime")
+    private Double pumpRuntime; // in hours
+
+    @JsonProperty("irrigationCost")
+    @Column(name = "irrigationCost")
+    private Double irrigationCost; // in currency units
+
     @CreatedDate
     @JsonProperty("createdAt")
     @Column(name = "createdAt", nullable = false, updatable = false)

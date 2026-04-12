@@ -50,7 +50,7 @@ public class CommonService {
     public PestResponse pestResponse(Pests pests) {
         return new PestResponse(pests.getId(), pests.getUser(), pests.getUser().getId(),
                 pests.getCrop(), pests.getCrop().getId(), pests.getCrop().getCropName(), pests.getPestName(),
-                pests.getPestiside(), pests.getStatus(),
+                pests.getPesticide(), pests.getStatus(),
                 pests.getState(), pests.getDate(),
                 pests.getCreatedAt(), pests.getUpdatedAt());
     }
@@ -76,7 +76,7 @@ public class CommonService {
         for (Pests pest : pests) {
             pestResponseList.add(new PestResponse(pest.getId(), null, pest.getUser().getId(),
                     pest.getCrop(), pest.getCrop().getId(), pest.getCrop().getCropName(),
-                    pest.getPestName(), pest.getPestiside(), pest.getStatus(),
+                    pest.getPestName(), pest.getPesticide(), pest.getStatus(),
                     pest.getState(), pest.getDate(), pest.getCreatedAt(),
                     pest.getUpdatedAt()));
         }

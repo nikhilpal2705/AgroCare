@@ -137,7 +137,7 @@ export default function DataTable({ config }) {
         pagination={pagination}
         loading={listIsLoading}
         onChange={handleDataTableLoad}
-        scroll={{ x: true }}
+          scroll={{ x: 'max-content' }}
       />
     </>
   );

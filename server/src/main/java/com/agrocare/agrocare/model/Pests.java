@@ -40,9 +40,25 @@ public class Pests {
     @Column(name = "pestName", nullable = false)
     private String pestName;
 
-    @JsonProperty("pestiside")
-    @Column(name = "pestiside", nullable = false)
-    private String pestiside;
+    @JsonProperty("pesticide")
+    @Column(name = "pesticide", nullable = false)
+    private String pesticide;
+
+    @JsonProperty("severity")
+    @Column(name = "severity")
+    private String severity; // low, medium, high
+
+    @JsonProperty("imageUrl")
+    @Column(name = "imageUrl")
+    private String imageUrl; // URL to uploaded pest/disease image
+
+    @JsonProperty("treatmentPlan")
+    @Column(name = "treatmentPlan", columnDefinition = "TEXT")
+    private String treatmentPlan; // Recommended treatment steps
+
+    @JsonProperty("recheckDate")
+    @Column(name = "recheckDate")
+    private String recheckDate; // When to check if treatment worked
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
@@ -66,23 +82,23 @@ public class Pests {
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
 
-    public Pests(Users user, Crops crop, String pestName, String pestiside, int status, int state, String date) {
+    public Pests(Users user, Crops crop, String pestName, String pesticide, int status, int state, String date) {
         this.user = user;
         this.crop = crop;
         this.pestName = pestName;
-        this.pestiside = pestiside;
+        this.pesticide = pesticide;
         this.status = status;
         this.state = state;
         this.date = date;
     }
 
-    public Pests(int id, Users user, Crops crop, String pestName, String pestiside, int status, int state,
+    public Pests(int id, Users user, Crops crop, String pestName, String pesticide, int status, int state,
             String date) {
         this.id = id;
         this.user = user;
         this.crop = crop;
         this.pestName = pestName;
-        this.pestiside = pestiside;
+        this.pesticide = pesticide;
         this.status = status;
         this.state = state;
         this.date = date;

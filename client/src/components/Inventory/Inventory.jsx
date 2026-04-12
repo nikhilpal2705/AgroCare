@@ -12,6 +12,16 @@ const Inventory = () => {
             entity: 'crop',
             required: true,
         },
+        category: {
+            label: 'Category',
+            type: 'select',
+            options: [
+                { label: 'Seeds', value: 'seeds' },
+                { label: 'Fertilizer', value: 'fertilizer' },
+                { label: 'Pesticide', value: 'pesticide' },
+                { label: 'Tools', value: 'tools' },
+            ],
+        },
         totalStock: {
             label: 'Total Stock (Kg.)',
             type: 'number',
@@ -20,6 +30,25 @@ const Inventory = () => {
         availableStock: {
             label: 'Available Stock (Kg.)',
             type: 'number',
+        },
+        supplier: {
+            label: 'Supplier Name',
+            type: 'string',
+            placeholder: 'Name of supplier or vendor',
+        },
+        costPerUnit: {
+            label: 'Cost Per Unit (Currency)',
+            type: 'number',
+            placeholder: 'Price per kg or unit',
+        },
+        expiryDate: {
+            label: 'Expiry Date',
+            type: 'date',
+        },
+        minimumThreshold: {
+            label: 'Minimum Threshold (Kg.)',
+            type: 'number',
+            placeholder: 'Alert when stock falls below this',
         },
         updatedAt: {
             label: 'Last Updated',

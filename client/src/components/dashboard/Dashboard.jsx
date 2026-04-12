@@ -1,4 +1,4 @@
-import { Row, Col, Tag } from 'antd';
+import { Row, Col, Tag, Alert, List, Empty } from 'antd';
 import api from 'api/api';
 import useFetch from 'hooks/useFetch';
 import SummaryCard from './SummaryCard';
@@ -12,6 +12,10 @@ const Dashboard = () => {
 
   const { result, isLoading } = useFetch(() =>
     api.get({ entity: USER_BASE_URL + 'dashboard' })
+  );
+
+  const { result: alertsResult, isLoading: alertsLoading } = useFetch(() =>
+    api.get({ entity: USER_BASE_URL + 'dashboard-alerts' })
   );
 
   const entityData = [
@@ -28,10 +32,16 @@ const Dashboard = () => {
       title: 'Pests Count',
     },
     {
-      result: result ? result.pestCount : 0,
+      result: result ? result.inventoryCount : 0,
       isLoading: isLoading,
       entity: 'Inventory',
       title: 'Inventory Count',
+    },
+    {
+      result: result ? result.unreadAlertCount : 0,
+      isLoading: isLoading,
+      entity: 'Alerts',
+      title: 'Unread Alerts',
     },
   ];
 
@@ -42,7 +52,10 @@ const Dashboard = () => {
         key={index}
         title={data?.entity}
         tagColor={
-          data?.entity === 'Crops' ? 'cyan' : data?.entity === 'Pests' ? 'purple' : 'green'
+          data?.entity === 'Crops' ? 'cyan' : 
+          data?.entity === 'Pests' ? 'purple' : 
+          data?.entity === 'Inventory' ? 'green' :
+          data?.entity === 'Alerts' ? 'orange' : 'blue'
         }
         prefix={'Count'}
         isLoading={isLoading}
@@ -78,6 +91,20 @@ const Dashboard = () => {
     end: dayjs().endOf('month').format('YYYY-MM-DD')
   }
 
+  // Convert severity to alert type
+  const getAlertType = (severity) => {
+    switch (severity) {
+      case 'high':
+        return 'error';
+      case 'medium':
+        return 'warning';
+      case 'low':
+        return 'info';
+      default:
+        return 'info';
+    }
+  };
+
   return (
     <div
       style={{
@@ -89,6 +116,48 @@ const Dashboard = () => {
       <Row gutter={[32, 32]}>
         {cards}
       </Row>
+
+      <div className="space30"></div>
+
+      {/* Alerts Section */}
+      {alertsResult && alertsResult.length > 0 && (
+        <Row gutter={[32, 32]}>
+          <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 24 }}>
+            <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+              <h3
+                style={{
+                  color: '#22075e',
+                  fontSize: 'medium',
+                  marginBottom: 5,
+                  padding: '10px 20px 20px',
+                  textTransform: 'capitalize',
+                }}>
+                {'Recent Alerts'}
+              </h3>
+              <List
+                dataSource={alertsResult.slice(0, 5)}
+                renderItem={(alert) => (
+                  <List.Item
+                    style={{
+                      paddingLeft: '20px',
+                      paddingRight: '20px',
+                      borderBottom: '1px solid #f0f0f0',
+                    }}>
+                    <Alert
+                      message={alert.title}
+                      description={alert.description}
+                      type={getAlertType(alert.severity)}
+                      showIcon
+                      style={{ width: '100%' }}
+                    />
+                  </List.Item>
+                )}
+                locale={{ emptyText: <Empty description="No alerts" /> }}
+              />
+            </div>
+          </Col>
+        </Row>
+      )}
 
       <div className="space30"></div>
       <Row gutter={[32, 32]}>
