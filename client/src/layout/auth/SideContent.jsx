@@ -21,32 +21,16 @@ export default function SideContent() {
     >
       <Link
         to="/"
+        className="auth-brand-link"
         style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}
       >
-        <img
-          src={logo}
-          alt="Agro Care"
-          style={{
-            margin: '0 auto',
-            display: 'block',
-            cursor: 'pointer',
-          }}
-          height={100}
-          width={280}
-        />
-        <Text
-          className="auth-brand-text"
-          style={{
-            display: 'block',
-            marginTop: 8,
-            fontWeight: 800,
-            fontSize: 36,
-            lineHeight: 1.1,
-            letterSpacing: 0.4,
-          }}
-        >
-          AgroCare
-        </Text>
+        <div className="auth-brand-card">
+          <img src={logo} alt="AgroCare Logo" className="auth-brand-logo" />
+          <div className="auth-brand-text-wrap">
+            <span className="auth-brand-title">AgroCare</span>
+            <span className="auth-brand-subtitle">Smart Farm Console</span>
+          </div>
+        </div>
       </Link>
       <Title level={2} style={{ fontSize: 28, marginBottom: 8, textAlign: 'center' }}>
         Companion App for Agriculture

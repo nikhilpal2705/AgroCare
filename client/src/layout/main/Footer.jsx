@@ -1,14 +1,10 @@
-import { FaHeart } from 'react-icons/fa';
-
 function Footer() {
   return (
-    <footer>
-      <small>
-        &copy; {new Date().getFullYear()} made with{' '}
-        <FaHeart /> by -{' '}
-        Team AgroCare
-      </small>
-    </footer>
+    <footer className="home-footer-note">
+          <small>
+            &copy; {new Date().getFullYear()} Crafted with <span className="home-footer-heart">♥</span> by Team AgroCare.
+          </small>
+        </footer>
   );
 }
 

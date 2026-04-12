@@ -73,8 +73,14 @@ function Sidebar({ collapsible, isMobile = false }) {
       }}
       theme={'light'}
     >
-      <div className="logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50px' }}>
-        <img src={logo} alt="Logo" style={{ height: '50px' }} />
+      <div className="logo">
+        <div className="sidebar-brand">
+          <img src={logo} alt="AgroCare Logo" className="sidebar-brand-logo" />
+          <div className="sidebar-brand-text">
+            <span className="sidebar-brand-title">AgroCare</span>
+            <span className="sidebar-brand-subtitle">Smart Farm Console</span>
+          </div>
+        </div>
       </div>
       <Menu
         items={items}
