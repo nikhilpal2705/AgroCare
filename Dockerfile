@@ -11,6 +11,7 @@ RUN npm run build
 FROM eclipse-temurin:25-jdk AS backend-build
 
 WORKDIR /backend
+ENV MAVEN_OPTS="--sun-misc-unsafe-memory-access=allow"
 COPY server/.mvn ./.mvn
 COPY server/mvnw ./mvnw
 COPY server/pom.xml ./pom.xml
