@@ -26,7 +26,7 @@ services:
     environment:
       SERVER_PORT: ${SERVER_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_HOST: mysql
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
@@ -34,6 +34,9 @@ services:
       SHOW_SQL: ${SHOW_SQL}
       HIBERNATE_DDL: ${HIBERNATE_DDL}
       JWT_SECRET: ${JWT_SECRET}
+      DB_POOL_MIN_IDLE: ${DB_POOL_MIN_IDLE:-5}
+      DB_POOL_MAX_SIZE: ${DB_POOL_MAX_SIZE:-10}
+      DB_POOL_AUTO_COMMIT: ${DB_POOL_AUTO_COMMIT:-true}
     volumes:
       - ./server:/workspace/server
       - server_m2:/root/.m2
