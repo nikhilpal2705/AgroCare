@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="AgroCare favicon">
+  <circle cx="41" cy="18" r="8" fill="#8edb1d" opacity="0.95"/>
+  <path d="M10 49 C10 36, 20 26, 32 26 C44 26, 54 36, 54 49" fill="none" stroke="#4aa60f" stroke-width="6" stroke-linecap="round"/>
+  <path d="M32 48 C27 40, 20 35, 13 33 C15 41, 22 46, 32 48 Z" fill="#70bf13"/>
+  <path d="M32 48 C37 40, 44 35, 51 33 C49 41, 42 46, 32 48 Z" fill="#4aa60f"/>
+  <path d="M32 36 L32 50" stroke="#ddf6be" stroke-width="2" stroke-linecap="round"/>
+  <path d="M32 42 L26 38" stroke="#ddf6be" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M32 42 L38 38" stroke="#ddf6be" stroke-width="1.7" stroke-linecap="round"/>
+</svg>

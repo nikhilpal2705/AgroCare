@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^6.1.1",
-    "@ant-design/pro-layout": "^7.22.7",
+    "@ant-design/pro-layout": "^7.20.0",
     "@reduxjs/toolkit": "^2.11.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -45,8 +45,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.27.1",
     "@vitejs/plugin-react": "^6.0.1",
     "vite": "^8.0.8"
+  },
+  "overrides": {
+    "path-to-regexp": "8.4.2"
   }
 }
