@@ -33,15 +33,14 @@ const ProfileLayout = ({ config }) => {
         <ProfileContextProvider>
             <Layout className="site-layout">
                 <Content
-                    className="whiteBox shadow layoutPadding"
+                    className="profile-page"
                     style={{
-                        margin: '40px auto',
                         width: '100%',
-                        maxWidth: '1100px',
                     }}
                 >
-
-                    <Profile config={config} />
+                    <div className="profile-shell">
+                        <Profile config={config} />
+                    </div>
 
                 </Content>
             </Layout>

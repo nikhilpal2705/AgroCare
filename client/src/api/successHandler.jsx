@@ -1,4 +1,4 @@
-import { notification } from 'antd';
+import { showError, showSuccess, showWarning } from './notificationBridge';
 
 const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFailed: true }) => {
   const { data } = response;
@@ -7,20 +7,12 @@ const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFa
     const successText = message
 
     if (data.result === false) {
-      notification.config({
-        duration: 3,
-        maxCount: 2,
-      });
-      notification.warning({
+      showWarning({
         message: `Request failed`,
         description: successText,
       });
     } else if (options.notifyOnSuccess) {
-      notification.config({
-        duration: 2,
-        maxCount: 2,
-      });
-      notification.success({
+      showSuccess({
         message: `Request success`,
         description: successText,
       });
@@ -30,11 +22,7 @@ const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFa
     const errorText = message
     const { status } = response;
     if (options.notifyOnFailed) {
-      notification.config({
-        duration: 4,
-        maxCount: 2,
-      });
-      notification.error({
+      showError({
         message: `Request error ${status}`,
         description: errorText,
       });

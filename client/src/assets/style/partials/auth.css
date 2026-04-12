@@ -26,6 +26,10 @@
   color: #4f5d75 !important;
 }
 
+.sideContent .auth-brand-text {
+  color: #1f1f1f !important;
+}
+
 .auth-content-wrapper {
   padding: 100px 30px 30px;
 }

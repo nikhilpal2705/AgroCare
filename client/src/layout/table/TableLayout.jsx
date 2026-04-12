@@ -44,6 +44,7 @@ function TableLayout({ config }) {
         onBack={() => window.history.back()}
         title={ENTITY_TITLE + ' List'}
         ghost={false}
+        className="responsive-page-header"
         extra={[
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}

@@ -16,7 +16,7 @@ const Header = () => {
           size="large"
           className="last"
           src={null}
-          style={{ color: '#f56a00', backgroundColor: '#f9fafc' }}
+          style={{ color: '#2c6d48', backgroundColor: 'rgba(255, 255, 255, 0.88)' }}
         >
           {currentUser?.name?.charAt(0)?.toUpperCase()}
         </Avatar>
@@ -70,7 +70,7 @@ const Header = () => {
     <Header
       style={{
         padding: '20px',
-        background: '#f9fafc',
+        background: 'transparent',
         display: ' flex',
         flexDirection: ' row-reverse',
         justifyContent: ' flex-start',
@@ -89,8 +89,8 @@ const Header = () => {
           className="last"
           src={null}
           style={{
-            color: '#f56a00',
-            backgroundColor: '#fde3cf',
+            color: '#2c6d48',
+            backgroundColor: 'rgba(255, 255, 255, 0.88)',
             float: 'right',
             cursor: 'pointer',
           }}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Layout, Row, Col, Divider, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 import SideContent from './SideContent';
-import logo from 'assets/images/logo.png';
+import logo from '/images/agrocare-logo.svg';
 import Footer from 'layout/main/Footer';
 import useResponsive from 'hooks/useResponsive';
 
@@ -30,7 +31,7 @@ export default function AuthLayout({ children, AUTH_TITLE }) {
           lg={{ span: 12, order: 2 }}
           style={{
             minHeight: '100vh',
-            background: isMobile ? 'transparent' : '#FFF',
+            background: isMobile ? 'transparent' : 'rgba(255, 255, 255, 0.45)',
           }}
         >
           <Content
@@ -43,26 +44,42 @@ export default function AuthLayout({ children, AUTH_TITLE }) {
             {/* Logo only on small screens */}
             {isMobile && (
               <>
-                <img
-                  src={logo}
-                  alt="AgroCare"
-                  style={{
-                    margin: '0px auto 0px',
-                    display: 'block',
-                  }}
-                  height={100}
-                  width={280}
-                />
+                <Link to="/" style={{ display: 'block' }}>
+                  <img
+                    src={logo}
+                    alt="AgroCare"
+                    style={{
+                      margin: '0px auto 0px',
+                      display: 'block',
+                      cursor: 'pointer',
+                    }}
+                    height={100}
+                    width={280}
+                  />
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      marginTop: 8,
+                      fontWeight: 800,
+                      fontSize: 34,
+                      lineHeight: 1.1,
+                      letterSpacing: 0.4,
+                      color: '#1f1f1f',
+                    }}
+                  >
+                    AgroCare
+                  </div>
+                </Link>
                 <div className="space10" />
               </>
             )}
 
             <div
               style={isMobile ? {
-                background: '#FFF',
+                background: 'rgba(255, 255, 255, 0.88)',
                 padding: '24px',
                 borderRadius: '8px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                boxShadow: '0 18px 46px rgba(21, 46, 36, 0.06)',
               } : {}}
             >
               <Title level={1}>{AUTH_TITLE}</Title>

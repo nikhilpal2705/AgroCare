@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 24 64 50" role="img" aria-label="AgroCare logo">
+  <circle cx="58" cy="33" r="9" fill="#8edb1d" opacity="0.95"/>
+  <path d="M22 68 C22 52, 34 40, 50 40 C66 40, 78 52, 78 68" fill="none" stroke="#4aa60f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M50 67 C44 56, 36 49, 26 45 C29 56, 37 64, 50 67 Z" fill="#70bf13"/>
+  <path d="M50 67 C56 56, 64 49, 74 45 C71 56, 63 64, 50 67 Z" fill="#4aa60f"/>
+  <path d="M50 52 L50 70" stroke="#ddf6be" stroke-width="2" stroke-linecap="round"/>
+  <path d="M50 59 L43 55" stroke="#ddf6be" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M50 59 L57 55" stroke="#ddf6be" stroke-width="1.7" stroke-linecap="round"/>
+</svg>
