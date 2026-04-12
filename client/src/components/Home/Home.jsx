@@ -2,19 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined, CloudOutlined, SafetyCertificateOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import logo from '/images/agrocare-logo.svg';
+import Footer from 'layout/main/Footer';
 
 const highlights = [
   {
     title: 'Crop Monitoring',
-    text: 'Watch crop health trends and growth insights in one place.',
+    text: 'Manage crop records with core lifecycle data in one place.',
+    points: ['Crop name, type, variety', 'Sowing and harvest dates'],
   },
   {
     title: 'Irrigation Scheduling',
-    text: 'Plan watering cycles with confidence and reduce water waste.',
+    text: 'Schedule irrigation tasks linked to crops and monthly planning.',
+    points: ['Crop-linked irrigation entries', 'Upcoming irrigation visibility'],
   },
   {
     title: 'Inventory & Pest Ops',
-    text: 'Manage stock and stay ahead of pest risks with timely actions.',
+    text: 'Track stock and pest actions together for cleaner field operations.',
+    points: ['Inventory quantity updates', 'Pest and pesticide logs'],
   },
 ];
 
@@ -66,8 +70,13 @@ const Home = () => {
       <div className="home-shell">
         <header className="home-nav">
           <div className="home-brand">
-            <img src={logo} alt="AgroCare" className="home-brand-logo" />
-            <span>AgroCare</span>
+            <span className="home-brand-mark">
+              <img src={logo} alt="AgroCare" className="home-brand-logo" />
+            </span>
+            <span className="home-brand-text">
+              <span className="home-brand-title">AgroCare</span>
+              <span className="home-brand-subtitle">Smart Farm Console</span>
+            </span>
           </div>
 
           <div className="home-nav-actions">
@@ -114,11 +123,21 @@ const Home = () => {
               <div key={item.title} className="home-highlight-card">
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
+                <ul className="home-highlight-points">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
               </div>
             ))}
 
             <div className="home-quote-card">
-              <p>"Teams can move from field updates to action in minutes, not hours."</p>
+              <h3>Unified Farm Dashboard</h3>
+              <p>See crop, irrigation, inventory, and pest activity in one workflow.</p>
+              <ul className="home-quote-points">
+                <li>Module-wise operational overview</li>
+                <li>Faster day-to-day field decisions</li>
+              </ul>
             </div>
           </aside>
         </div>
@@ -148,6 +167,8 @@ const Home = () => {
             ))}
           </div>
         </section>
+
+        <Footer />
       </div>
     </section>
   );

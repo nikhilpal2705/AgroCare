@@ -188,6 +188,18 @@
   margin: 70px auto;
 }
 
+.app-footer-note small {
+  color: #6a7a72;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+.app-footer-heart {
+  color: #2f9d62;
+  font-size: 0.86rem;
+  vertical-align: middle;
+}
+
 @media only screen and (min-width: 1100px) {
   .hidden-lg {
     display: none;
