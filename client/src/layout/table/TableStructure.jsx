@@ -91,15 +91,15 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
         title: field.label ? translate(field.label) : translate(key),
         dataIndex: keyIndex,
         render: (_, record) => {
-          if (field.renderAsTag) {
-            const selectedOption = field.options.find((x) => x.value === record[key]);
+          const selectedOption = field.options?.find((option) => option.value === record[key]);
 
+          if (field.renderAsTag) {
             return (
               <Tag bordered={false} color={selectedOption?.color}>
-                {record[key]}
+                {selectedOption?.label || record[key]}
               </Tag>
             );
-          } else return record[key];
+          } else return selectedOption?.label || record[key];
         },
       },
       array: {
@@ -145,4 +145,3 @@ export function dataForTable({ fields, translate, dateFormat = 'DD-MM-YYYY' }) {
 
   return columns;
 }
-
