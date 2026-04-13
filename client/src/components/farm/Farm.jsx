@@ -9,19 +9,26 @@ const FarmProfile = () => {
             type: 'string',
             required: true,
         },
+        gpsLatitude: {
+            label: 'Farm Location',
+            readLabel: 'GPS Latitude',
+            type: 'geolocation',
+            longitudeFieldName: 'gpsLongitude',
+            addressFieldName: 'address',
+            searchPlaceholder: 'Search village, town, or landmark',
+            disableForTable: true,
+        },
         address: {
             label: 'Farm Address',
             type: 'string',
         },
-        gpsLatitude: {
-            label: 'GPS Latitude',
-            type: 'number',
-            placeholder: 'e.g., 18.5204',
-        },
         gpsLongitude: {
             label: 'GPS Longitude',
+            readLabel: 'GPS Longitude',
             type: 'number',
             placeholder: 'e.g., 73.8567',
+            disableForForm: true,
+            disableForTable: true,
         },
         totalAreaHectares: {
             label: 'Total Area (Hectares)',
@@ -43,6 +50,14 @@ const FarmProfile = () => {
 
     let config = {
         fields,
+        readFieldOrder: [
+            'farmName',
+            'address',
+            'totalAreaHectares',
+            'irrigationSource',
+            'gpsLatitude',
+            'gpsLongitude',
+        ],
         entity: 'farm',
         ENTITY_TITLE: 'Farm',
     };

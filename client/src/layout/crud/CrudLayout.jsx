@@ -44,7 +44,7 @@ function CrudPanel({ config, createForm, updateForm, withUpload }) {
     }
 
     return (
-        <SidePanel config={config} footer={footer}>
+        <SidePanel config={config} footer={footer} onClose={handleCancel}>
             {content}
         </SidePanel>
     )
