@@ -19,8 +19,14 @@ public class CropService {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private FarmService farmService;
+
     public CustomResponse saveCrop(Crops crop, HttpServletRequest request) {
         crop.setUser(commonService.getUserFromHeader(request));
+        if (crop.getFarmId() != null) {
+            crop.setFarm(farmService.findFarmById(crop.getFarmId()));
+        }
         cropRepository.save(crop);
         return new CustomResponse(true, Constants.Messages.CROP_ADDED_SUCCESS);
     }
@@ -65,6 +71,9 @@ public class CropService {
         this.getCrop(cropId);
         crops.setId(cropId);
         crops.setUser(commonService.getUserFromHeader(request));
+        if (crops.getFarmId() != null) {
+            crops.setFarm(farmService.findFarmById(crops.getFarmId()));
+        }
         return new CustomResponse(true, this.cropRepository.save(crops), Constants.Messages.CROP_UPDATED_SUCCESS);
     }
 

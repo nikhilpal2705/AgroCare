@@ -42,9 +42,19 @@ public class CommonService {
     public CropResponse cropResponse(Crops crop) {
         return new CropResponse(crop.getId(), crop.getUser(), crop.getPests(),
                 crop.getCropName(), crop.getCropType(), crop.getCropVariety(),
-                crop.getFieldName(), crop.getFieldSize(), crop.getStatus(),
+                getFarmName(crop), getFarmSize(crop), crop.getStatus(),
                 crop.getPlantingDate(), crop.getHarvestDate(),
                 crop.getCreatedAt(), crop.getUpdatedAt());
+    }
+
+    private String getFarmName(Crops crop) {
+        return crop.getFarm() != null ? crop.getFarm().getFarmName() : null;
+    }
+
+    private String getFarmSize(Crops crop) {
+        return crop.getFarm() != null && crop.getFarm().getTotalAreaHectares() != null
+                ? String.valueOf(crop.getFarm().getTotalAreaHectares())
+                : null;
     }
 
     public PestResponse pestResponse(Pests pests) {

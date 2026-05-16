@@ -30,11 +30,6 @@ const PestControl = () => {
         { label: 'High', value: 'high' },
       ],
     },
-    imageUrl: {
-      type: 'string',
-      label: 'Image URL',
-      placeholder: 'Paste image URL or upload link',
-    },
     treatmentPlan: {
       type: 'textarea',
       label: 'Treatment Plan',
