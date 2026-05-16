@@ -72,7 +72,7 @@ INSERT INTO users (
 ) VALUES (
     'Administrator',                                                    -- Admin name (edit this)
     'admin@agrocare.local',                                             -- Admin email (edit this)
-    '$2a$10$slYQmyNdGzin7olVgsCD.OPST9/PgBkqquzi.Ye5SYpway3dH7jq6',   -- Password hash for default password Admin@123 (EDIT THIS!)
+    '$2b$10$aaQcqbDpYQkNJfRn1aVQjeT4neVghVVFFhUD3E/hDbp3hocTjHZ7m',     -- Password hash for default password Admin@123 (EDIT THIS!)
     'ADMIN',                                                            -- Authority (do NOT change)
     1,                                                                  -- Status: ACTIVE
     true,                                                               -- accountNonExpired
