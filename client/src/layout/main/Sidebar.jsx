@@ -69,14 +69,14 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/pest-control'}>Pest Control</Link>,
     },
     {
-      key: 'inventory',
-      icon: <FaBoxes />,
-      label: <Link to={'/inventory'}>Inventory</Link>,
-    },
-    {
       key: 'irrigation',
       icon: <FaWater />,
       label: <Link to={'/irrigation'}>Irrigation</Link>,
+    },
+    {
+      key: 'inventory',
+      icon: <FaBoxes />,
+      label: <Link to={'/inventory'}>Inventory</Link>,
     },
   ];
 

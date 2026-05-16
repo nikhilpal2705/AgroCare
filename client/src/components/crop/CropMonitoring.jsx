@@ -19,13 +19,14 @@ const CropMonitoring = () => {
       label: 'Crop Variety',
       required: true,
     },
-    fieldName: {
-      type: 'string',
-      label: 'Field Name',
-    },
-    fieldSize: {
-      type: 'string',
-      label: 'Field Size',
+    farmId: {
+      type: 'async',
+      label: 'Farm',
+      displayLabels: ['farmName'],
+      outputValue: 'id',
+      dataIndex: ['farm', 'farmName'],
+      entity: 'farm',
+      required: true,
     },
     plantingDate: {
       type: 'date',
@@ -51,10 +52,6 @@ const CropMonitoring = () => {
     expectedYield: {
       type: 'number',
       label: 'Expected Yield (kg)',
-    },
-    diseaseHistory: {
-      type: 'textarea',
-      label: 'Disease History Notes',
     },
   };
   let config = {

@@ -45,6 +45,11 @@ public class Crops {
     @OneToMany(mappedBy = "crop", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Irrigation> irrigations = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "farm")
+    @JsonProperty("farm")
+    private Farm farm;
+
     @JsonProperty("cropName")
     @Column(name = "cropName", nullable = false)
     private String cropName;
@@ -57,13 +62,9 @@ public class Crops {
     @Column(name = "cropVariety", nullable = false)
     private String cropVariety;
 
-    @JsonProperty("fieldName")
-    @Column(name = "fieldName")
-    private String fieldName;
-
-    @JsonProperty("fieldSize")
-    @Column(name = "fieldSize")
-    private String fieldSize;
+    @Transient
+    @JsonProperty("farmId")
+    private Integer farmId;
 
     @JsonProperty("status")
     @Column(name = "status", nullable = false)
@@ -98,5 +99,13 @@ public class Crops {
     @JsonProperty("updatedAt")
     @Column(name = "updatedAt", nullable = false)
     private String updatedAt = String.valueOf(new Date().toInstant());
+
+    public Integer getFarmId() {
+        return farm != null ? farm.getId() : farmId;
+    }
+
+    public void setFarmId(Integer farmId) {
+        this.farmId = farmId;
+    }
 
 }
