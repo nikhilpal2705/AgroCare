@@ -3,12 +3,17 @@ import api from 'api/api';
 import useFetch from 'hooks/useFetch';
 import SummaryCard from './SummaryCard';
 import RecentTable from './RecentTable';
+import DashboardCharts from './DashboardCharts';
 import { tagColor } from 'helper/statusTagColor';
 import dayjs from 'dayjs';
 import getLabel from 'helper/getLabel';
 import { USER_BASE_URL } from 'api/config';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 const Dashboard = () => {
   const translate = getLabel();
+  const navigate = useNavigate();
+  const alertsSectionRef = useRef(null);
 
   const { result, isLoading } = useFetch(() =>
     api.get({ entity: USER_BASE_URL + 'dashboard' })
@@ -18,30 +23,47 @@ const Dashboard = () => {
     api.get({ entity: USER_BASE_URL + 'dashboard-alerts' })
   );
 
+  const chartParams = {
+    start: dayjs().subtract(7, 'day').format('YYYY-MM-DD'),
+    end: dayjs().add(7, 'day').format('YYYY-MM-DD'),
+  };
+
+  const { result: chartIrrigationResult, isLoading: chartIrrigationLoading } = useFetch(() =>
+    api.list({ entity: 'dashboard-irrigation', params: chartParams })
+  );
+
+  const { result: cropsResult, isLoading: cropsLoading } = useFetch(() =>
+    api.list({ entity: 'crop' })
+  );
+
   const entityData = [
     {
       result: result ? result.cropCount : 0,
       isLoading: isLoading,
       entity: 'Crops',
       title: 'Crops Count',
+      onClick: () => navigate('/crop-monitoring'),
     },
     {
       result: result ? result.pestCount : 0,
       isLoading: isLoading,
       entity: 'Pests',
       title: 'Pests Count',
+      onClick: () => navigate('/pest-control'),
     },
     {
       result: result ? result.inventoryCount : 0,
       isLoading: isLoading,
       entity: 'Inventory',
       title: 'Inventory Count',
+      onClick: () => navigate('/inventory'),
     },
     {
       result: result ? result.unreadAlertCount : 0,
       isLoading: isLoading,
       entity: 'Alerts',
       title: 'Unread Alerts',
+      onClick: undefined,
     },
   ];
 
@@ -60,6 +82,8 @@ const Dashboard = () => {
         prefix={'Count'}
         isLoading={isLoading}
         tagContent={result}
+        onClick={data.onClick}
+        showPointer={data?.entity !== 'Alerts'}
       />
     );
   });
@@ -119,11 +143,22 @@ const Dashboard = () => {
 
       <div className="space30"></div>
 
+      <Row gutter={[32, 32]}>
+        <DashboardCharts
+          irrigationData={chartIrrigationResult}
+          cropsData={cropsResult}
+          irrigationLoading={chartIrrigationLoading}
+          cropsLoading={cropsLoading}
+        />
+      </Row>
+
+      <div className="space30"></div>
+
       {/* Alerts Section */}
       {alertsResult && alertsResult.length > 0 && (
         <Row gutter={[32, 32]}>
           <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 24 }}>
-            <div className="whiteBox shadow pad20" style={{ height: '100%' }}>
+            <div ref={alertsSectionRef} className="whiteBox shadow pad20" style={{ height: '100%' }}>
               <h3
                 style={{
                   color: '#22075e',

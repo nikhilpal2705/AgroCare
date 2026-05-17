@@ -29,7 +29,7 @@ public class PestService {
     public CustomResponse savePest(PestRequest pest, HttpServletRequest request) {
         Pests newPest = new Pests(commonService.getUserFromHeader(request),
                 cropService.findCropById(pest.getCropId()),
-                pest.getPestName(), pest.getPestiside(), pest.getStatus(),
+            pest.getPestName(), pest.getPesticide(), pest.getStatus(),
                 pest.getState(), pest.getDate());
         pestRepository.save(newPest);
         return new CustomResponse(true, Constants.Messages.PEST_ADDED_SUCCESS);
@@ -61,7 +61,7 @@ public class PestService {
         this.findPestById(pestId);
         Pests updatePest = new Pests(pestId, commonService.getUserFromHeader(request),
                 cropService.findCropById(pestRequest.getCropId()),
-                pestRequest.getPestName(), pestRequest.getPestiside(), pestRequest.getStatus(),
+                pestRequest.getPestName(), pestRequest.getPesticide(), pestRequest.getStatus(),
                 pestRequest.getState(), pestRequest.getDate());
         return new CustomResponse(true, this.pestRepository.save(updatePest), Constants.Messages.PEST_UPDATED_SUCCESS);
     }

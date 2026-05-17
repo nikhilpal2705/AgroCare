@@ -13,7 +13,7 @@ public class PestRequest {
     private int userId;
     private int cropId;
     private String pestName;
-    private String pestiside;
+    private String pesticide;
     private int status = Constants.Status.ACTIVE;
     private int state;
     private String date;

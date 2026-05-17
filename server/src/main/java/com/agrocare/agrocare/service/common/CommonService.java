@@ -40,11 +40,27 @@ public class CommonService {
     }
 
     public CropResponse cropResponse(Crops crop) {
-        return new CropResponse(crop.getId(), crop.getUser(), crop.getPests(),
+        return new CropResponse(crop.getId(),
                 crop.getCropName(), crop.getCropType(), crop.getCropVariety(),
+                crop.getFarmId(), getFarmSummary(crop),
                 getFarmName(crop), getFarmSize(crop), crop.getStatus(),
                 crop.getPlantingDate(), crop.getHarvestDate(),
+                crop.getCropStage(), crop.getExpectedYield(),
                 crop.getCreatedAt(), crop.getUpdatedAt());
+    }
+
+    public List<CropResponse> cropListCustomResponse(List<Crops> crops) {
+        List<CropResponse> cropResponses = new ArrayList<>();
+        for (Crops crop : crops) {
+            cropResponses.add(this.cropResponse(crop));
+        }
+        return cropResponses;
+    }
+
+    private CropResponse.FarmSummary getFarmSummary(Crops crop) {
+        return crop.getFarm() != null
+                ? new CropResponse.FarmSummary(crop.getFarm().getId(), crop.getFarm().getFarmName())
+                : null;
     }
 
     private String getFarmName(Crops crop) {
@@ -110,7 +126,7 @@ public class CommonService {
 
     public IrrigationResponse irrigationResponse(Irrigation irrigation) {
         return new IrrigationResponse(irrigation.getId(), irrigation.getCrop().getId(),
-                irrigation.getCrop().getCropName(), irrigation.getCrop(),
+                irrigation.getCrop().getCropName(), this.cropResponse(irrigation.getCrop()),
                 irrigation.getScheduledDate(), irrigation.getStatus(),
                 irrigation.getCreatedAt(), irrigation.getUpdatedAt());
     }

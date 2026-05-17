@@ -58,13 +58,14 @@ public class CropService {
     }
 
     public CustomResponse getCrops(int userId) {
-        return new CustomResponse(this.cropRepository.findAllByUserId(userId, Sort.by(Sort.Direction.DESC, "id")));
+        return new CustomResponse(commonService.cropListCustomResponse(
+                this.cropRepository.findAllByUserId(userId, Sort.by(Sort.Direction.DESC, "id"))));
     }
 
     public CustomResponse getCrop(int cropId) {
         Crops crop = this.cropRepository.findById(cropId)
                 .orElseThrow(() -> new RuntimeException(Constants.Messages.CROP_NOT_FOUND + cropId));
-        return new CustomResponse(crop);
+        return new CustomResponse(commonService.cropResponse(crop));
     }
 
     public CustomResponse updateCrop(int cropId, Crops crops, HttpServletRequest request) {
