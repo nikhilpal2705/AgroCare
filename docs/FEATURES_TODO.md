@@ -5,18 +5,18 @@
 ### Existing Modules — Improvements Required
 
 #### 1. Dashboard Enhancement
-- [ ] Fix inventory count mapping (currently shows pest count)
-- [ ] Add real-time alerts widget (low stock, pending irrigation, high pest risk)
+- [x] Fix inventory count mapping (currently shows pest count)
+- [x] Add real-time alerts widget (low stock, pending irrigation, high pest risk)
 - [ ] Show today's tasks and upcoming deadlines
 - [ ] Add simple charts: irrigation trend, crop health score
 - [ ] Quick action buttons for urgent tasks
-- [ ] **Backend:** Create dashboard aggregation service with alerts
-- [ ] **Frontend:** Redesign with alert badges and KPI cards
+- [x] **Backend:** Create dashboard aggregation service with alerts
+- [x] **Frontend:** Redesign with alert badges and KPI cards
 
 #### 2. Crop Monitoring Enhancement
-- [ ] Add crop stage tracking (seedling, vegetative, flowering, fruiting, maturity)
+- [x] Add crop stage tracking (seedling, vegetative, flowering, fruiting, maturity)
 - [ ] Expected yield field with harvest prediction
-- [ ] Field/plot association
+- [x] Field/plot association
 - [ ] Fertilizer schedule linked to crop stage
 - [ ] Disease history timeline
 - [ ] Add geolocation/field boundary mapping
@@ -41,7 +41,7 @@
 - [ ] Missed irrigation alerts
 - [ ] Water cost calculation
 - [ ] **Backend:** Add irrigation analytics (water usage, cost per crop)
-- [ ] **Frontend:** Add method selector and water volume input fields
+- [x] **Frontend:** Add method selector and water volume input fields
 
 #### 5. Inventory Enhancement
 - [ ] Add input category (seeds/fertilizer/pesticide/tools)
@@ -51,21 +51,21 @@
 - [ ] Minimum stock threshold with reorder alerts
 - [ ] Consumption forecast based on crop stage
 - [ ] **Backend:** Create inventory alert service with threshold logic
-- [ ] **Frontend:** Add category dropdown, expiry date field, supplier info form
+- [x] **Frontend:** Add category dropdown, expiry date field, supplier info form
 
 #### 6. Farm/User Profile Enhancement
-- [ ] Separate farm profile from user profile
-- [ ] Farm name, address, GPS coordinates
+- [x] Separate farm profile from user profile
+- [x] Farm name, address, GPS coordinates
 - [ ] Total farm area and primary crops
 - [ ] Land parcel/plot definitions
-- [ ] Irrigation source (well, canal, pond, borehole)
+- [x] Irrigation source (well, canal, pond, borehole)
 - [ ] Preferred language setting
-- [ ] Notification preferences (SMS/email/WhatsApp)
-- [ ] **Backend:** Create farm entity and extend user-farm relationship
-- [ ] **Frontend:** Add farm profile section with map integration
+- [ ] Notification preferences for in-app alerts
+- [x] **Backend:** Create farm entity and extend user-farm relationship
+- [x] **Frontend:** Add farm profile section with map integration
 
 #### 7. API Standardization
-- [ ] Unify user extraction: all endpoints should get user from JWT token (not query params)
+- [x] Unify user extraction: all endpoints should get user from JWT token (not query params)
 - [ ] Add consistent error response contracts
 - [ ] Implement standard pagination for list endpoints
 - [ ] Add audit logging (created_by, updated_by, timestamps)
@@ -89,13 +89,10 @@
 ### New Module 2: Farm Task & Labor Management
 - [ ] **Task Types:** Spraying, irrigation, harvesting, weeding, fertilizing
 - [ ] Create tasks linked to crops and schedules
-- [ ] Assign to workers with deadline
-- [ ] Worker registration with skills, availability, wage rates
-- [ ] Attendance tracking (QR code or manual)
-- [ ] Task completion status and photos
-- [ ] Wage calculation (hourly/daily/piecemeal)
-- [ ] **Backend:** Task, worker, and attendance service
-- [ ] **Frontend:** Task board (list/calendar view), worker directory, attendance UI
+- [ ] Set deadline and priority
+- [ ] Task completion status
+- [ ] **Backend:** Task service
+- [ ] **Frontend:** Task board (list/calendar view)
 
 ### New Module 3: Farm Finance Ledger & Profit Calculation
 - [ ] **Expense Categories:** Seeds, fertilizer, pesticide, labor, fuel, equipment
@@ -115,10 +112,8 @@
 - [ ] Show current best price in nearby markets
 - [ ] Alert user to price spikes
 - [ ] **Produce Listing:** Create sale inventory (quantity, expected harvest date)
-- [ ] Buyer matching (if B2B market available)
-- [ ] Order tracking and payment status
-- [ ] **Backend:** Market price service, seller listing service
-- [ ] **Frontend:** Mandi rates dashboard, create listing form, sale history
+- [ ] **Backend:** Market price service
+- [ ] **Frontend:** Mandi rates dashboard
 
 ---
 
@@ -129,7 +124,6 @@
 - [ ] **ML Model:** Train/integrate model for:
   - [ ] Leaf disease detection (powdery mildew, blight, rust, etc.)
   - [ ] Pest identification from images
-  - [ ] Crop stage estimation
 - [ ] **Backend:** Image processing service, ML model inference API
 - [ ] **Frontend:** Add image analysis button with loading state and results display
 - [ ] Confidence scores and treatment recommendations
@@ -151,7 +145,6 @@
 
 ### New AI Module 3: Smart Irrigation Scheduler
 - [ ] **Weather Integration:** Fetch rainfall forecast
-- [ ] **Soil Data:** Integrate soil moisture sensors (optional IoT)
 - [ ] **Algorithm:** Calculate water need using:
   - [ ] Crop type and growth stage
   - [ ] Weather forecast (rainfall, temperature, humidity)
@@ -164,9 +157,7 @@
 
 ### New AI Module 4: Soil Health & Fertilizer Recommendation
 - [ ] **Soil Test Upload:** Store soil lab reports (NPK, pH, micronutrients, OM)
-- [ ] **Nutrient Deficiency Detection:** ML model to:
-  - [ ] Predict deficiency from visual symptoms + soil test
-  - [ ] Recommend fertilizer blend
+- [ ] Recommend fertilizer blend from crop type, soil test, and crop stage
 - [ ] **Fertilizer Library:** Database of local fertilizers with NPK ratios
 - [ ] **Application Schedule:** Recommend timing based on crop stage
 - [ ] Cost-benefit analysis (ROI for fertilizer)
@@ -178,9 +169,6 @@
   - [ ] Trained on agricultural best practices
   - [ ] Answers: "When to plant rice?" "How to treat blight?" "What fertilizer for low pH?"
   - [ ] Multi-language support
-- [ ] **Feedback Analysis:**
-  - [ ] Parse farmer notes and extract issues
-  - [ ] Link to actionable recommendations
 - [ ] **Trend Analysis:**
   - [ ] Yield trends per field (improving/declining)
   - [ ] Soil health improvement (year-over-year)
@@ -191,10 +179,9 @@
   - [ ] Expense spikes
   - [ ] Yield drops (investigate cause)
 - [ ] **Forecasting:**
-  - [ ] Next season's expected rainfall
   - [ ] Price forecast for selling
   - [ ] Pesticide need forecast
-- [ ] **Technology:** Local small model or open-source LLM for Q&A, time-series analysis service for trends
+- [ ] **Technology:** Local small model or open-source LLM for Q&A
 - [ ] **Backend:** `/api/ai/chat`, `/api/ai/predict`, analytics services
 - [ ] **Frontend:** Chat assistant, insight cards, trend charts, anomaly alerts
 
@@ -209,44 +196,11 @@
 - [ ] **Backend:** Rotation recommendation engine
 - [ ] **Frontend:** Rotation suggestion card with reasoning
 
-### New Module 7: Equipment & Maintenance Management
-- [ ] Register farm assets: tractors, pumps, implements, tools
-- [ ] Track usage: hours, maintenance history, repair costs
-- [ ] **Maintenance Scheduler:** Recommend service based on:
-  - [ ] Usage hours
-  - [ ] Last service date
-  - [ ] Seasonal requirements
-- [ ] Fuel/oil consumption tracking
-- [ ] Resale value estimation
-- [ ] **Backend:** Equipment service with maintenance alerts
-- [ ] **Frontend:** Equipment registry, service log, maintenance calendar
-
-### New Module 8: Government Subsidy & Scheme Tracker
-- [ ] **Scheme Database:** Central DB of agricultural schemes by region/state
-- [ ] **Eligibility Checker:** Pre-filter schemes by farm type, crops, area
-- [ ] **Document Checklist:** Required docs per scheme
-- [ ] **Application Status Tracker:** Manual status updates or API integration
-- [ ] Deadline reminders
-- [ ] **Backend:** Scheme service with eligibility logic
-- [ ] **Frontend:** Scheme explorer, application tracker, document checklist
-
-### New Module 9: Document Vault & Digital Records
-- [ ] Upload and organize:
-  - [ ] Land ownership/lease documents
-  - [ ] Soil test reports
-  - [ ] Insurance policies
-  - [ ] Purchase bills and invoices
-  - [ ] Scheme application proofs
-- [ ] Full-text search across documents
-- [ ] Document expiry alerts (insurance, certifications)
-- [ ] **Backend:** File storage service (AWS S3 or local), document indexing
-- [ ] **Frontend:** Document upload, browser, search interface
-
 ---
 
 ## Phase 4: Connectivity & Accessibility (Weeks 23-28)
 
-### New Module 13: Offline-First + Sync Engine
+### New Module 7: Offline-First + Sync Engine
 - [ ] **Local Storage:** Store crops, irrigation, inventory, tasks locally
 - [ ] **IndexedDB:** For larger datasets
 - [ ] **Sync Service:** Auto-sync when network available
@@ -254,179 +208,19 @@
 - [ ] **Backend:** Sync API with change tracking (updated_at timestamps)
 - [ ] **Frontend:** Service worker, offline indicator, manual sync button
 
-### New Module 14: Multi-Language & Voice Input
+### New Module 8: Multi-Language Support
 - [ ] **Languages:** Hindi, Marathi, Gujarati, Tamil, Kannada, Telugu (configurable)
 - [ ] **Translation:** UI labels, help text, alerts
-- [ ] **Voice Input:** Speech-to-text for:
-  - [ ] Quick expense/task logging
-  - [ ] Voice notes per crop/field
-- [ ] **Text-to-Speech:** Read alerts and recommendations aloud
-- [ ] **Backend:** i18n setup, voice API integration (Google Speech-to-Text)
-- [ ] **Frontend:** Language selector, voice button, TTS on alerts
-
-### New Module 15: WhatsApp/SMS Integration
-- [ ] **Notification Hub:** Send critical alerts via:
-  - [ ] SMS (for low-end phones)
-  - [ ] WhatsApp (for smartphones)
-  - [ ] In-app notifications
-- [ ] **Message Templates:** Customizable alerts per event
-- [ ] **Opt-in:** User preference management
-- [ ] **Backend:** Notification service (Twilio or local SMS gateway)
-- [ ] **Frontend:** Notification preference settings
-
----
-
-## AI & ML Features — Reference Catalog
-
-### AI Module 1: Image Recognition & Disease Detection
-- [ ] **Technology:** TensorFlow Lite or ONNX for mobile/edge inference
-- [ ] **Training Data:** Publicly available crop disease datasets
-- [ ] **Models to Build/Integrate:**
-  - [ ] Leaf disease classifier (tomato, wheat, rice, etc.)
-  - [ ] Pest identification (insects, aphids, beetles, etc.)
-  - [ ] Crop stage estimator
-  - [ ] Weed vs crop identification
-- [ ] **Features:**
-  - [ ] Real-time camera feed analysis
-  - [ ] Photo gallery upload
-  - [ ] Confidence score threshold
-  - [ ] Treatment recommendation lookup
-- [ ] **Deployment:** Run on-device (TensorFlow Lite) for offline capability
-- [ ] **Backend API:** `/api/ai/analyze-image` (crop disease, pest, stage)
-
-### AI Module 2: Predictive Analytics Engine
-- [ ] **Yield Prediction Model:**
-  - [ ] Inputs: crop type, field size, weather history, fertility, irrigation, variety
-  - [ ] Output: Expected yield (kg/ha) with confidence
-  - [ ] Retraining: Monthly with actual harvest data
-- [ ] **Pest Risk Scoring:**
-  - [ ] Inputs: crop stage, weather (humidity, temp), pest history
-  - [ ] Output: Risk level (low/medium/high) + recommended action
-- [ ] **Disease Risk Prediction:**
-  - [ ] Inputs: weather (rain, humidity), crop stage, soil health
-  - [ ] Output: Disease risk + preventive treatment window
-- [ ] **Market Price Prediction:**
-  - [ ] Inputs: historical prices, seasonal trends, supply
-  - [ ] Output: Best selling window forecast
-- [ ] **Algorithms:** Random Forest or Gradient Boosting (scikit-learn or XGBoost)
-- [ ] **Backend API:** `/api/ai/predict` (with prediction type parameter)
-
-### AI Module 3: Recommender System
-- [ ] **Fertilizer Recommendation:**
-  - [ ] Inputs: soil test (NPK, pH), crop type, soil type, irrigation
-  - [ ] Output: Recommended fertilizer + application schedule + cost
-- [ ] **Pesticide Recommendation:**
-  - [ ] Inputs: pest/disease detected, crop type, region
-  - [ ] Output: Recommended product + dosage + safety info
-- [ ] **Crop Recommendation:**
-  - [ ] Inputs: soil type, water availability, market price, farm history
-  - [ ] Output: 3 best crops by profit + why
-- [ ] **Irrigation Schedule Recommendation:**
-  - [ ] Inputs: crop stage, soil moisture, weather forecast, field size
-  - [ ] Output: Next irrigation date/time + duration + water amount
-- [ ] **Algorithms:** Content-based filtering or hybrid recommendation
-- [ ] **Backend API:** `/api/ai/recommend` (with context parameters)
-
-### AI Module 4: Natural Language Processing (NLP)
-- [ ] **Question Answering Chatbot:**
-  - [ ] Trained on agricultural best practices
-  - [ ] Answers: "When to plant rice?" "How to treat blight?" "What fertilizer for low pH?"
-  - [ ] Multi-language support
-- [ ] **Feedback Analysis:**
-  - [ ] Parse farmer notes and extract issues
-  - [ ] Link to actionable recommendations
-- [ ] **Technology:** LLM API (OpenAI/Hugging Face) or local small model
-- [ ] **Backend API:** `/api/ai/chat` for Q&A
-
-### AI Module 5: Time Series Analytics
-- [ ] **Trend Analysis:**
-  - [ ] Yield trends per field (improving/declining)
-  - [ ] Soil health improvement (year-over-year)
-  - [ ] Weather pattern shifts (dry/wet seasons)
-  - [ ] Cost trends per crop
-- [ ] **Anomaly Detection:**
-  - [ ] Unusual irrigation patterns (too much/little)
-  - [ ] Expense spikes
-  - [ ] Yield drops (investigate cause)
-- [ ] **Forecasting:**
-  - [ ] Next season's expected rainfall
-  - [ ] Price forecast for selling
-  - [ ] Pesticide need forecast
-- [ ] **Backend:** Time series database (InfluxDB) + analysis service
-- [ ] **Frontend:** Trend charts, anomaly alerts, seasonal forecasts
-
----
-
-## Infrastructure & DevOps Enhancements
-
-### Backend Infrastructure
-- [ ] [ ] **Database:** Partition large tables (Crop, Pest, Irrigation by user_id or date)
-- [ ] [ ] **Search:** Add Elasticsearch for document vault and alert search
-- [ ] [ ] **Cache:** Redis for session, weather cache, recommendation cache
-- [ ] [ ] **Job Queue:** Background jobs for weather fetch, ML inference, report generation
-- [ ] [ ] **File Storage:** S3 or MinIO for images, soil reports, documents
-- [ ] [ ] **Logging & Monitoring:** ELK stack or DataDog for performance tracking
-
-### Deployment
-- [ ] [ ] **Docker:** Containerize backend and frontend separately
-- [ ] [ ] **Kubernetes:** Multi-environment setup (dev, staging, prod)
-- [ ] [ ] **CI/CD:** GitHub Actions or Jenkins for automated testing and deployment
-- [ ] [ ] **Mobile:** React Native or Flutter wrapper for iOS/Android
-- [ ] [ ] **Progressive Web App (PWA):** Offline support via service workers
-
----
-
-## Security & Compliance
-
-- [ ] [ ] End-to-end encryption for sensitive documents
-- [ ] [ ] Role-based access control (RBAC): farmer, extension officer, admin
-- [ ] [ ] Data privacy: GDPR compliance for EU users
-- [ ] [ ] Two-factor authentication (2FA) via SMS/email
-- [ ] [ ] Audit trail: track all data changes
-- [ ] [ ] Regular security audits and penetration testing
-
----
-
-## Testing & Quality Assurance
-
-- [ ] [ ] Unit tests for all business logic (>80% coverage)
-- [ ] [ ] Integration tests for API endpoints
-- [ ] [ ] E2E tests for critical user flows (registration → crop → irrigation)
-- [ ] [ ] Performance testing under load
-- [ ] [ ] Accessibility testing (WCAG 2.1 AA)
-- [ ] [ ] User acceptance testing (UAT) with pilot farmers
-
----
-
-## Documentation & Community
-
-- [ ] [ ] User guide (PDF + video tutorials)
-- [ ] [ ] Admin guide for extension officers
-- [ ] [ ] API documentation (Swagger/OpenAPI)
-- [ ] [ ] Developer guide for contributors
-- [ ] [ ] FAQ and troubleshooting
-- [ ] [ ] Community forum or Telegram group for farmers
-
----
-
-## Success Metrics
-
-- [ ] [ ] User adoption: 1000+ active farmers in 6 months
-- [ ] [ ] Feature usage: >70% using at least 3 modules
-- [ ] [ ] NPS score: >50 (farmer satisfaction)
-- [ ] [ ] AI recommendation accuracy: >75% farmer acceptance rate
-- [ ] [ ] Cost savings: Farmers report average 15-20% input cost reduction
-- [ ] [ ] Yield improvement: 10-15% yield increase for active users
-- [ ] [ ] System uptime: >99.5%
+- [ ] **Backend:** i18n setup
+- [ ] **Frontend:** Language selector
 
 ---
 
 ## Notes
 
-- **MVP Focus:** Modules 1-7 (existing improvements + farm management + weather = weeks 1-6)
+- **MVP Focus:** Complete Phase 1 first, then add weather, tasks, finance, and market prices from Phase 2.
 - **Prioritize Farmers First:** Every feature must have clear ROI (money/time saved)
 - **Regional Customization:** Support local crops, markets, schemes per region
 - **Data Portability:** Export farmer data (CSV/JSON) for backup or switching
 - **Continuous Learning:** Build feedback loop to improve ML models monthly
 - **AI Docs:** `docs/FEATURES_AI_IMPLEMENTATION.md` is the detailed free-implementation guide for Phase 3 AI work; `docs/FEATURES_TODO.md` stays the main roadmap.
-
