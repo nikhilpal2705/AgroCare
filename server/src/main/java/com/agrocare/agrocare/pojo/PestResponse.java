@@ -17,7 +17,7 @@ public class PestResponse {
     private int cropId;
     private String cropName;
     private String pestName;
-    private String pestiside;
+    private String pesticide;
     private int status;
     private int state;
     private String date;

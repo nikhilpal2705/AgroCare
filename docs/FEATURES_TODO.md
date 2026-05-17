@@ -8,8 +8,8 @@
 - [x] Fix inventory count mapping (currently shows pest count)
 - [x] Add real-time alerts widget (low stock, pending irrigation, high pest risk)
 - [ ] Show today's tasks and upcoming deadlines
-- [ ] Add simple charts: irrigation trend, crop health score
-- [ ] Quick action buttons for urgent tasks
+- [x] Add simple charts: irrigation trend, crop health score
+- [x] Quick action buttons for urgent tasks
 - [x] **Backend:** Create dashboard aggregation service with alerts
 - [x] **Frontend:** Redesign with alert badges and KPI cards
 
@@ -24,7 +24,7 @@
 - [ ] **Frontend:** Add stage selector dropdown and date-based schedule UI
 
 #### 3. Pest Control Enhancement
-- [ ] Fix typo: "pestiside" → "pesticide"
+- [x] Fix typo: "pestiside" → "pesticide"
 - [ ] Add severity level (low/medium/high) with color coding
 - [ ] Image upload for pest/disease photos
 - [ ] Treatment plan and recommended pesticide with dosage
@@ -59,7 +59,6 @@
 - [ ] Total farm area and primary crops
 - [ ] Land parcel/plot definitions
 - [x] Irrigation source (well, canal, pond, borehole)
-- [ ] Preferred language setting
 - [ ] Notification preferences for in-app alerts
 - [x] **Backend:** Create farm entity and extend user-farm relationship
 - [x] **Frontend:** Add farm profile section with map integration

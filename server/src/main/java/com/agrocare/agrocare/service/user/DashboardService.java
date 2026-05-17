@@ -11,8 +11,12 @@ import com.agrocare.agrocare.repository.AlertRepository;
 import com.agrocare.agrocare.service.common.CommonService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +67,35 @@ public class DashboardService {
      * Get upcoming irrigation tasks
      */
     public CustomResponse getIrrigationList(HttpServletRequest request, String start, String end) {
-        int userId = commonService.getUserFromHeader(request).getId();
+        Users user = commonService.getUserFromHeader(request);
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
 
         List<Irrigation> allByUserAndDateRange = this.irrigationRepository
-                .findIrrigationsInDateRange(userId, start, end);
+                .findAllByUser(user, Sort.by(Sort.Direction.DESC, "scheduledDate"))
+                .stream()
+                .filter(irrigation -> isScheduledInRange(irrigation, startDate, endDate))
+                .toList();
 
         return new CustomResponse(commonService.irrigationListCustomResponse(allByUserAndDateRange));
+    }
+
+    private boolean isScheduledInRange(Irrigation irrigation, LocalDate startDate, LocalDate endDate) {
+        LocalDate scheduledDate = parseScheduledDate(irrigation.getScheduledDate());
+        return scheduledDate != null
+                && !scheduledDate.isBefore(startDate)
+                && !scheduledDate.isAfter(endDate);
+    }
+
+    private LocalDate parseScheduledDate(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+
+        try {
+            return Instant.parse(value).atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (Exception ignored) {
+            return LocalDate.parse(value.substring(0, Math.min(value.length(), 10)));
+        }
     }
 }
