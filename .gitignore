@@ -4,6 +4,7 @@
 # Editor settings
 .vscode/
 .idea/
+.github/
 
 # OS artifacts
 .DS_Store
