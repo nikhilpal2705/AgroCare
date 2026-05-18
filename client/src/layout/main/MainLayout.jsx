@@ -35,11 +35,11 @@ const MainLayout = ({ children }) => {
           <Header />
           <Content
             style={{
-              margin: '5px auto 0',
+              margin: '5px 0 0',
               overflow: 'initial',
               width: '100%',
               padding: '0 16px',
-              maxWidth: isNavMenuClose ? 1280 : 1240,
+              maxWidth: 'none',
               minHeight: 'calc(100vh - 85px)',
               background: 'transparent',
             }}

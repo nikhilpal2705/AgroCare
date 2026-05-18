@@ -7,7 +7,7 @@
 #### 1. Dashboard Enhancement
 - [x] Fix inventory count mapping (currently shows pest count)
 - [x] Add real-time alerts widget (low stock, pending irrigation, high pest risk)
-- [ ] Show today's tasks and upcoming deadlines
+- [x] Show today's tasks and upcoming deadlines
 - [x] Add simple charts: irrigation trend, crop health score
 - [x] Quick action buttons for urgent tasks
 - [x] **Backend:** Create dashboard aggregation service with alerts
