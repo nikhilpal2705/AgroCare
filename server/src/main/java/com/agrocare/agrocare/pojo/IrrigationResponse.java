@@ -14,6 +14,10 @@ public class IrrigationResponse {
     private CropResponse crop;
     private String scheduledDate;
     private int status;
+    private Double waterVolume;
+    private String waterMethod;
+    private Double pumpRuntime;
+    private Double irrigationCost;
     private String createdAt;
     private String updatedAt;
 }

@@ -36,6 +36,10 @@ public class IrrigationService {
         Irrigation irrigation = new Irrigation(this.commonService.getUserFromHeader(request),
                 this.cropService.findCropById(irrigationRequest.getCropId()),
                 irrigationRequest.getScheduledDate(), irrigationRequest.getStatus());
+        irrigation.setWaterVolume(irrigationRequest.getWaterVolume());
+        irrigation.setWaterMethod(irrigationRequest.getWaterMethod());
+        irrigation.setPumpRuntime(irrigationRequest.getPumpRuntime());
+        irrigation.setIrrigationCost(irrigationRequest.getIrrigationCost());
         return new CustomResponse(true, commonService.irrigationResponse(this.irrigationRepository.save(irrigation)),
                 Constants.Messages.IRRIGATION_ADDED_SUCCESS);
     }
@@ -66,6 +70,10 @@ public class IrrigationService {
         Crops crop = this.cropService.findCropById(irrigationRequest.getCropId());
         Irrigation updateIrrigation = new Irrigation(irrigation.getId(), userFromHeader, crop,
                 irrigationRequest.getScheduledDate(), irrigationRequest.getStatus());
+        updateIrrigation.setWaterVolume(irrigationRequest.getWaterVolume());
+        updateIrrigation.setWaterMethod(irrigationRequest.getWaterMethod());
+        updateIrrigation.setPumpRuntime(irrigationRequest.getPumpRuntime());
+        updateIrrigation.setIrrigationCost(irrigationRequest.getIrrigationCost());
 
         return new CustomResponse(true,
                 this.commonService.irrigationResponse(this.irrigationRepository.save(updateIrrigation)),

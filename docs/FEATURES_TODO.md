@@ -15,60 +15,60 @@
 
 #### 2. Crop Monitoring Enhancement
 - [x] Add crop stage tracking (seedling, vegetative, flowering, fruiting, maturity)
-- [ ] Expected yield field with harvest prediction
+- [x] Expected yield field with harvest prediction
 - [x] Field/plot association
-- [ ] Fertilizer schedule linked to crop stage
-- [ ] Disease history timeline
-- [ ] Add geolocation/field boundary mapping
-- [ ] **Backend:** Create crop stage service and yield calculation logic
-- [ ] **Frontend:** Add stage selector dropdown and date-based schedule UI
+- [x] Fertilizer schedule linked to crop stage
+- [x] Disease history timeline
+- [x] Add geolocation/field boundary mapping
+- [x] **Backend:** Create crop stage service and yield calculation logic
+- [x] **Frontend:** Add stage selector dropdown and date-based schedule UI
 
 #### 3. Pest Control Enhancement
 - [x] Fix typo: "pestiside" → "pesticide"
-- [ ] Add severity level (low/medium/high) with color coding
-- [ ] Image upload for pest/disease photos
-- [ ] Treatment plan and recommended pesticide with dosage
-- [ ] Recheck date scheduling
-- [ ] Pesticide safety warnings (toxicity, wait period)
-- [ ] Pest identification guide/reference
-- [ ] **Backend:** Create pest severity service and treatment recommendation engine
-- [ ] **Frontend:** Add image upload component and severity dropdown
+- [x] Add severity level (low/medium/high) with color coding
+- [x] Image upload / URL for pest/disease photos
+- [x] Treatment plan and recommended pesticide with dosage
+- [x] Recheck date scheduling
+- [x] Pesticide safety warnings (toxicity, wait period)
+- [x] Pest identification guide/reference
+- [x] **Backend:** Create pest severity service and treatment recommendation engine
+- [x] **Frontend:** Add image upload / URL component and severity dropdown
 
 #### 4. Irrigation Enhancement
-- [ ] Add water volume applied (liters/hour)
-- [ ] Irrigation method (drip/flood/sprinkler)
-- [ ] Pump runtime tracking
-- [ ] Missed irrigation alerts
-- [ ] Water cost calculation
-- [ ] **Backend:** Add irrigation analytics (water usage, cost per crop)
+- [x] Add water volume applied (liters/hour)
+- [x] Irrigation method (drip/flood/sprinkler)
+- [x] Pump runtime tracking
+- [x] Missed irrigation alerts
+- [x] Water cost calculation
+- [x] **Backend:** Add irrigation analytics (water usage, cost per crop)
 - [x] **Frontend:** Add method selector and water volume input fields
 
 #### 5. Inventory Enhancement
-- [ ] Add input category (seeds/fertilizer/pesticide/tools)
-- [ ] Supplier name and contact
-- [ ] Cost per unit tracking
-- [ ] Expiry date with countdown alerts
-- [ ] Minimum stock threshold with reorder alerts
-- [ ] Consumption forecast based on crop stage
-- [ ] **Backend:** Create inventory alert service with threshold logic
+- [x] Add input category (seeds/fertilizer/pesticide/tools)
+- [x] Supplier name and contact
+- [x] Cost per unit tracking
+- [x] Expiry date with countdown alerts
+- [x] Minimum stock threshold with reorder alerts
+- [x] Consumption forecast based on crop stage
+- [x] **Backend:** Create inventory alert service with threshold logic
 - [x] **Frontend:** Add category dropdown, expiry date field, supplier info form
 
 #### 6. Farm/User Profile Enhancement
 - [x] Separate farm profile from user profile
 - [x] Farm name, address, GPS coordinates
-- [ ] Total farm area and primary crops
-- [ ] Land parcel/plot definitions
+- [x] Total farm area and primary crops
+- [x] Land parcel/plot definitions
 - [x] Irrigation source (well, canal, pond, borehole)
-- [ ] Notification preferences for in-app alerts
+- [x] Notification preferences for in-app alerts
 - [x] **Backend:** Create farm entity and extend user-farm relationship
 - [x] **Frontend:** Add farm profile section with map integration
 
 #### 7. API Standardization
 - [x] Unify user extraction: all endpoints should get user from JWT token (not query params)
-- [ ] Add consistent error response contracts
-- [ ] Implement standard pagination for list endpoints
-- [ ] Add audit logging (created_by, updated_by, timestamps)
-- [ ] **Backend:** Refactor pest and other controllers for consistency
+- [x] Add consistent error response contracts
+- [x] Implement standard pagination for list endpoints
+- [x] Add audit logging (created_by, updated_by, timestamps)
+- [x] **Backend:** Refactor pest and other controllers for consistency
 
 ---
 

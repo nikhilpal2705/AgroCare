@@ -24,11 +24,18 @@ const PestControl = () => {
     severity: {
       type: 'select',
       label: 'Severity Level',
+      renderAsTag: true,
       options: [
-        { label: 'Low', value: 'low' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'High', value: 'high' },
+        { label: 'Low', value: 'low', color: 'green' },
+        { label: 'Medium', value: 'medium', color: 'orange' },
+        { label: 'High', value: 'high', color: 'red' },
       ],
+    },
+    imageUrl: {
+      type: 'string',
+      label: 'Pest/Disease Photo URL',
+      placeholder: 'Image URL for visual inspection reference',
+      disableForTable: true,
     },
     treatmentPlan: {
       type: 'textarea',

@@ -37,10 +37,11 @@ const Irrigation = () => {
         waterMethod: {
             label: 'Irrigation Method',
             type: 'select',
+            renderAsTag: true,
             options: [
-                { label: 'Drip', value: 'drip' },
-                { label: 'Flood', value: 'flood' },
-                { label: 'Sprinkler', value: 'sprinkler' },
+                { label: 'Drip', value: 'drip', color: 'cyan' },
+                { label: 'Flood', value: 'flood', color: 'blue' },
+                { label: 'Sprinkler', value: 'sprinkler', color: 'geekblue' },
             ],
         },
         pumpRuntime: {

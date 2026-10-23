@@ -21,6 +21,7 @@ public class CropResponse {
     private String harvestDate;
     private String cropStage;
     private Double expectedYield;
+    private String diseaseHistory;
     private String createdAt;
     private String updatedAt;
 

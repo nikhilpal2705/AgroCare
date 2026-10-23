@@ -45,7 +45,7 @@ public class CommonService {
                 crop.getFarmId(), getFarmSummary(crop),
                 getFarmName(crop), getFarmSize(crop), crop.getStatus(),
                 crop.getPlantingDate(), crop.getHarvestDate(),
-                crop.getCropStage(), crop.getExpectedYield(),
+                crop.getCropStage(), crop.getExpectedYield(), crop.getDiseaseHistory(),
                 crop.getCreatedAt(), crop.getUpdatedAt());
     }
 
@@ -76,7 +76,8 @@ public class CommonService {
     public PestResponse pestResponse(Pests pests) {
         return new PestResponse(pests.getId(), pests.getUser(), pests.getUser().getId(),
                 pests.getCrop(), pests.getCrop().getId(), pests.getCrop().getCropName(), pests.getPestName(),
-                pests.getPesticide(), pests.getStatus(),
+                pests.getPesticide(), pests.getSeverity(), pests.getImageUrl(),
+                pests.getTreatmentPlan(), pests.getRecheckDate(), pests.getStatus(),
                 pests.getState(), pests.getDate(),
                 pests.getCreatedAt(), pests.getUpdatedAt());
     }
@@ -102,7 +103,8 @@ public class CommonService {
         for (Pests pest : pests) {
             pestResponseList.add(new PestResponse(pest.getId(), null, pest.getUser().getId(),
                     pest.getCrop(), pest.getCrop().getId(), pest.getCrop().getCropName(),
-                    pest.getPestName(), pest.getPesticide(), pest.getStatus(),
+                    pest.getPestName(), pest.getPesticide(), pest.getSeverity(), pest.getImageUrl(),
+                    pest.getTreatmentPlan(), pest.getRecheckDate(), pest.getStatus(),
                     pest.getState(), pest.getDate(), pest.getCreatedAt(),
                     pest.getUpdatedAt()));
         }
@@ -113,6 +115,9 @@ public class CommonService {
         return new InventoryResponse(inventoryById.getId(), inventoryById.getUser().getId(),
                 inventoryById.getCrop().getId(), inventoryById.getCrop().getCropName(),
                 inventoryById.getCrop(), inventoryById.getTotalStock(), inventoryById.getAvailableStock(),
+                inventoryById.getCategory(), inventoryById.getSupplier(),
+                inventoryById.getCostPerUnit(), inventoryById.getExpiryDate(),
+                inventoryById.getMinimumThreshold(),
                 inventoryById.getCreatedAt(), inventoryById.getUpdatedAt());
     }
 
@@ -128,6 +133,8 @@ public class CommonService {
         return new IrrigationResponse(irrigation.getId(), irrigation.getCrop().getId(),
                 irrigation.getCrop().getCropName(), this.cropResponse(irrigation.getCrop()),
                 irrigation.getScheduledDate(), irrigation.getStatus(),
+                irrigation.getWaterVolume(), irrigation.getWaterMethod(),
+                irrigation.getPumpRuntime(), irrigation.getIrrigationCost(),
                 irrigation.getCreatedAt(), irrigation.getUpdatedAt());
     }
 

@@ -13,5 +13,9 @@ public class IrrigationRequest {
     private int userId;
     private int cropId;
     private String scheduledDate;
-    private int status = Constants.Status.INACTIVE;
+    private int status = Constants.Status.PENDING;
+    private Double waterVolume;
+    private String waterMethod;
+    private Double pumpRuntime;
+    private Double irrigationCost;
 }

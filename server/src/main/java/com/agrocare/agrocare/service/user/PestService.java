@@ -31,6 +31,10 @@ public class PestService {
                 cropService.findCropById(pest.getCropId()),
             pest.getPestName(), pest.getPesticide(), pest.getStatus(),
                 pest.getState(), pest.getDate());
+        newPest.setSeverity(pest.getSeverity());
+        newPest.setImageUrl(pest.getImageUrl());
+        newPest.setTreatmentPlan(pest.getTreatmentPlan());
+        newPest.setRecheckDate(pest.getRecheckDate());
         pestRepository.save(newPest);
         return new CustomResponse(true, Constants.Messages.PEST_ADDED_SUCCESS);
     }
@@ -63,6 +67,10 @@ public class PestService {
                 cropService.findCropById(pestRequest.getCropId()),
                 pestRequest.getPestName(), pestRequest.getPesticide(), pestRequest.getStatus(),
                 pestRequest.getState(), pestRequest.getDate());
+        updatePest.setSeverity(pestRequest.getSeverity());
+        updatePest.setImageUrl(pestRequest.getImageUrl());
+        updatePest.setTreatmentPlan(pestRequest.getTreatmentPlan());
+        updatePest.setRecheckDate(pestRequest.getRecheckDate());
         return new CustomResponse(true, this.pestRepository.save(updatePest), Constants.Messages.PEST_UPDATED_SUCCESS);
     }
 }

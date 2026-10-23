@@ -15,11 +15,12 @@ const Inventory = () => {
         category: {
             label: 'Category',
             type: 'select',
+            renderAsTag: true,
             options: [
-                { label: 'Seeds', value: 'seeds' },
-                { label: 'Fertilizer', value: 'fertilizer' },
-                { label: 'Pesticide', value: 'pesticide' },
-                { label: 'Tools', value: 'tools' },
+                { label: 'Seeds', value: 'seeds', color: 'green' },
+                { label: 'Fertilizer', value: 'fertilizer', color: 'blue' },
+                { label: 'Pesticide', value: 'pesticide', color: 'volcano' },
+                { label: 'Tools', value: 'tools', color: 'purple' },
             ],
         },
         totalStock: {

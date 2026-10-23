@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class InventoryResponse {
-
     private int id;
     private int userId;
     private int cropId;
@@ -17,7 +16,11 @@ public class InventoryResponse {
     private Crops crop;
     private int totalStock;
     private int availableStock;
+    private String category;
+    private String supplier;
+    private Double costPerUnit;
+    private String expiryDate;
+    private Integer minimumThreshold;
     private String createdAt;
     private String updatedAt;
-
 }

@@ -40,18 +40,19 @@ public class InventoryService {
         Inventory inventory = new Inventory(this.commonService.getUserFromHeader(request),
                 this.cropService.findCropById(inventoryRequest.getCropId()), inventoryRequest.getTotalStock(),
                 inventoryRequest.getAvailableStock());
+        inventory.setCategory(inventoryRequest.getCategory());
+        inventory.setSupplier(inventoryRequest.getSupplier());
+        inventory.setCostPerUnit(inventoryRequest.getCostPerUnit());
+        inventory.setExpiryDate(inventoryRequest.getExpiryDate());
+        if (inventoryRequest.getMinimumThreshold() != null) {
+            inventory.setMinimumThreshold(inventoryRequest.getMinimumThreshold());
+        }
 
         // Saving inventory . . .
         Inventory savedInventory = this.inventoryRepository.save(inventory);
 
         // Returning response . . .
-        InventoryResponse inventoryResponse = new InventoryResponse(savedInventory.getId(),
-                savedInventory.getCrop().getId(),
-                savedInventory.getCrop().getId(), savedInventory.getCrop().getCropName(),
-                savedInventory.getCrop(), savedInventory.getTotalStock(), savedInventory.getAvailableStock(),
-                savedInventory.getCreatedAt(), savedInventory.getUpdatedAt());
-
-        return new CustomResponse(true, inventoryResponse, Constants.Messages.INVENTORY_ADDED_SUCCESS);
+        return new CustomResponse(true, commonService.inventoryResponse(savedInventory), Constants.Messages.INVENTORY_ADDED_SUCCESS);
     }
 
     public CustomResponse getInventoryList(HttpServletRequest request) {
@@ -74,8 +75,15 @@ public class InventoryService {
         Inventory inventoryById = this.findById(inventoryId);
         Inventory updatedInventory = new Inventory(inventoryById.getId(), userFromHeader, cropById,
                 inventoryRequest.getTotalStock(), inventoryRequest.getAvailableStock());
+        updatedInventory.setCategory(inventoryRequest.getCategory());
+        updatedInventory.setSupplier(inventoryRequest.getSupplier());
+        updatedInventory.setCostPerUnit(inventoryRequest.getCostPerUnit());
+        updatedInventory.setExpiryDate(inventoryRequest.getExpiryDate());
+        if (inventoryRequest.getMinimumThreshold() != null) {
+            updatedInventory.setMinimumThreshold(inventoryRequest.getMinimumThreshold());
+        }
 
-        return new CustomResponse(true, this.inventoryRepository.save(updatedInventory),
+        return new CustomResponse(true, commonService.inventoryResponse(this.inventoryRepository.save(updatedInventory)),
                 Constants.Messages.INVENTORY_UPDATED_SUCCESS);
     }
 

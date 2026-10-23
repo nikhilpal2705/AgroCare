@@ -14,6 +14,10 @@ public class PestRequest {
     private int cropId;
     private String pestName;
     private String pesticide;
+    private String severity;
+    private String imageUrl;
+    private String treatmentPlan;
+    private String recheckDate;
     private int status = Constants.Status.ACTIVE;
     private int state;
     private String date;

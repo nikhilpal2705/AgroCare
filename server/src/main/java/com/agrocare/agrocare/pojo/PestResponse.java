@@ -18,6 +18,10 @@ public class PestResponse {
     private String cropName;
     private String pestName;
     private String pesticide;
+    private String severity;
+    private String imageUrl;
+    private String treatmentPlan;
+    private String recheckDate;
     private int status;
     private int state;
     private String date;

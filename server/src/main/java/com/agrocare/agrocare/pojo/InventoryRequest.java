@@ -13,4 +13,9 @@ public class InventoryRequest {
     private int cropId;
     private int totalStock;
     private int availableStock;
+    private String category;
+    private String supplier;
+    private Double costPerUnit;
+    private String expiryDate;
+    private Integer minimumThreshold;
 }
