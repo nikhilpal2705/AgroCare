@@ -46,7 +46,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "^7.27.1",
     "@vitejs/plugin-react": "^6.0.1",
     "vite": "^8.0.8"
   },
