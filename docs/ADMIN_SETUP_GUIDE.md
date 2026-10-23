@@ -8,8 +8,8 @@ This guide covers how to create and manage admin users in AgroCare for developme
 
 ## Quick Start
 
-1. Edit [server/src/main/resources/db/migration/V001__init_admin.sql](server/src/main/resources/db/migration/V001__init_admin.sql) with your admin name, email, and BCrypt password hash.
-2. Start the backend with `cd server && ./mvnw spring-boot:run`.
+1. Edit [server/src/main/resources/db/migration/V001__init_admin.sql](../server/src/main/resources/db/migration/V001__init_admin.sql) with your admin name, email, and BCrypt password hash.
+2. Start the backend with `cd server && MAVEN_OPTS="--sun-misc-unsafe-memory-access=allow" ./mvnw spring-boot:run`.
 3. Flyway runs the migration automatically and creates the first admin.
 4. Login with that account and create additional admins from the admin dashboard.
 
@@ -78,7 +78,7 @@ The SQL migration now runs automatically when the application starts:
 
 ```bash
 # Query the database
-mysql -u root -p agrocare_db
+mysql -u root -p agrocare
 SELECT id, name, email, authorities, enabled FROM users WHERE authorities='ADMIN';
 ```
 
@@ -164,14 +164,14 @@ After the first admin is logged in:
 ### "Admin user already exists" Error
 ```bash
 # Delete existing admin and retry
-mysql -u root -p agrocare_db -e "DELETE FROM users WHERE authorities='ADMIN';"
+mysql -u root -p agrocare -e "DELETE FROM users WHERE authorities='ADMIN';"
 ```
 
 ### "Email already exists" Error
 ```bash
 # Use a different email address OR
 # Update existing user
-mysql -u root -p agrocare_db
+mysql -u root -p agrocare
 UPDATE users SET name='New Name' WHERE email='admin@agrocare.local';
 ```
 
@@ -179,7 +179,7 @@ UPDATE users SET name='New Name' WHERE email='admin@agrocare.local';
 ```bash
 # Ensure you have database write permissions
 # Use admin credentials:
-mysql -h localhost -u admin -p agrocare_db < server/src/main/resources/db/migration/V001__init_admin.sql
+mysql -h localhost -u root -p agrocare < server/src/main/resources/db/migration/V001__init_admin.sql
 ```
 
 ### "Cannot login" after SQL setup
@@ -198,23 +198,27 @@ mysql -h localhost -u admin -p agrocare_db < server/src/main/resources/db/migrat
 
 ## Environment Variables
 
-### Development
+### Development (`.env` or `application.properties`)
 ```properties
-# application.properties
-DATABASE_URL=jdbc:mysql://localhost:3306/agrocare_db
-DATABASE_USER=root
-DATABASE_PASSWORD=root
-JWT_SECRET=your_dev_secret_key
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+DATABASE_NAME=agrocare
+DATABASE_USERNAME=root
+DATABASE_PASSWORD=
+JWT_SECRET=your_dev_secret_key_at_least_64_characters_long
 ```
 
-### Production (Azure)
+### Production (Render / Docker / Cloud)
 ```properties
-# application.properties or Azure Key Vault
-SPRING_DATASOURCE_URL=jdbc:mysql://myserver.mysql.database.azure.com/agrocare_db?useSSL=true
-SPRING_DATASOURCE_USERNAME=admin@myserver
-SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}  # From Key Vault
-JWT_SECRET=${JWT_SECRET}                    # From Key Vault
-ADMIN_TEMP_PASSWORD=${ADMIN_PASSWORD}       # For V001__init_admin.sql
+# Render Environment Variables (or production cloud secrets)
+SERVER_PORT=8080
+DATABASE_HOST=your-db-host.com
+DATABASE_PORT=3306
+DATABASE_NAME=agrocare
+DATABASE_USERNAME=your-db-user
+DATABASE_PASSWORD=your-secure-db-password
+JWT_SECRET=your_production_secret_key_at_least_64_characters_long
+CLIENT_BASE_URL=https://your-service.onrender.com
 ```
 
 ---

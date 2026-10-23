@@ -470,10 +470,10 @@ External APIs (ALL FREE)
 └── Your database (MySQL already running)
 
 Hosting (ALL FREE)
-├── Backend: GitHub Actions + local server (or free tier: Heroku, Railway)
-├── ML Service: Python script on same server (CPU inference)
+├── Backend & Frontend: Render Web Service (Multi-stage Dockerfile) or local Docker Compose
+├── ML Service: Python FastAPI microservice (CPU inference)
 ├── Docker: Free
-└── Database: MySQL (already have)
+└── Database: MySQL (managed or self-hosted)
 
 Models Storage
 ├── TensorFlow Lite (.tflite): 100MB max, store in repo
@@ -541,7 +541,9 @@ uvicorn main:app --port 8001 --reload
 
 ---
 
-## File Structure
+## File Structure (Phase 3 Target Architecture)
+
+> **Architecture Context**: This structure defines the Phase 3 planned architecture. Phase 1 (Core Farm Management) is currently live using Spring Boot and Vite React. Phase 3 attaches the Python ML microservice alongside the Spring Boot server.
 
 ```
 AgroCare/

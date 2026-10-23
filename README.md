@@ -55,29 +55,28 @@ docker compose -f docker-compose.dev.yml up
 This setup mounts the `client/` and `server/` folders into separate containers, runs Vite and Spring Boot dev mode, and avoids manual image rebuilds for code changes. Rebuild only when dependencies or Dockerfiles change.
 
 ### For Frontend
-To install node packages:
+To install dependencies:
 ```bash
 cd client
 npm install
 ```
 
-To run the node server:
+To run the Vite development server:
 ```bash
-npm start
+npm run dev
+# or: npm start
 ```
 
 ### For Backend
 **Method 1: Run directly**
 ```bash
 cd server
-./mvnw spring-boot:run
+MAVEN_OPTS="--sun-misc-unsafe-memory-access=allow" ./mvnw spring-boot:run
 ```
 **Method 2: Run by creating JAR File**
 ```bash
 cd server
-./mvnw clean package
-```
-```bash
+MAVEN_OPTS="--sun-misc-unsafe-memory-access=allow" ./mvnw clean package
 java -jar target/agrocare-0.0.1-SNAPSHOT.jar
 ```
 **Method 3: Run on Debian/Ubuntu Based Distro**
@@ -90,6 +89,14 @@ sudo apt-get install maven
 cd server
 mvn spring-boot:run
 ```
+
+## Documentation
+
+Comprehensive guides and architectural specifications are maintained in the [`docs/`](docs/) directory:
+- **[Admin User Setup Guide](docs/ADMIN_SETUP_GUIDE.md)**: Setting up the initial administrator via Flyway migration, database configuration, and security practices.
+- **[Features & Development Roadmap](docs/FEATURES_TODO.md)**: Complete development roadmap tracking MVP features, Phase 1 implementations, Phase 2 smart features, and upcoming milestones.
+- **[AI Implementation Blueprint](docs/FEATURES_AI_IMPLEMENTATION.md)**: Free, open-source architecture for crop disease detection, yield prediction, irrigation scheduling, and pest risk modeling.
+- **[Backend Architecture & Guide](server/HELP.md)**: Spring Boot module layout, Java 25 configuration, and test instructions.
 
 ## Screenshots
 | Register | Sign In |
