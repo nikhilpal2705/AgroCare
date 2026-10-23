@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Layout from 'layout/main/MainLayout';
-import NotFound from 'components/common/NotFound';
 import PageLoader from 'components/common/PageLoader';
+
+const Layout = lazy(() => import('layout/main/MainLayout'));
 const Profile = lazy(() => import('components/profile/Profile'));
 const Logout = lazy(() => import('components/auth/Logout'));
 const About = lazy(() => import('components/About/About'));
@@ -13,8 +13,8 @@ const AdminList = lazy(() => import('components/admin/AdminAdmins'));
 
 const AdminRoutes = () => {
   return (
-    <Layout>
-      <Suspense fallback={<PageLoader />}>
+    <Suspense fallback={<PageLoader />}>
+      <Layout>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
@@ -25,8 +25,8 @@ const AdminRoutes = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   );
 };
 
